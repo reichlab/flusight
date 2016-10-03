@@ -1,0 +1,61 @@
+<style lang="scss" scoped>
+.brand {
+    font-size: 20px;
+    color: #00d1b2;
+    .thick {
+        font-family: "Open Sans Extrabold";
+        color: #aaa;
+        font-weight: bold;
+    }
+}
+</style>
+
+<template>
+    <nav class="nav has-shadow">
+        <div class="nav-left">
+            <a class="nav-item is-brand" href="#">
+                <span class="brand title"><i class="fa fa-bar-chart"></i> {{ title }} | <span class="thick">reichlab</span></span>
+            </a>
+        </div>
+
+        <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+
+        <div class="nav-right nav-menu">
+            <span class="nav-item">
+                <a class="button is-small is-primary is-outlined">
+                    <span class="icon is-small">
+                        <i class="fa fa-question"></i>
+                    </span>
+                    <span>Help</span>
+                </a>
+                <a class="button is-info is-small is-outlined">
+                    <span class="icon is-small">
+                        <i class="fa fa-twitter"></i>
+                    </span>
+                    <span>Tweet</span>
+               </a>
+               <a class="button is-dark is-small is-outlined" href="https://github.com/reichlab/flusight">
+                   <span class="icon is-small">
+                       <i class="fa fa-github"></i>
+                   </span>
+                   <span>Source</span>
+               </a>
+           </span>
+       </div>
+   </nav>
+</template>
+
+<script>
+  export default {
+
+    data () {
+      return {
+        title: 'flusight'
+      }
+    }
+  }
+</script>

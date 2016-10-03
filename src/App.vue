@@ -1,50 +1,56 @@
+<style lang="scss">
+
+$accent: rgb(24, 128, 126);
+
+::selection {
+    background: $accent;
+    color: white;
+}
+
+::-moz-selection {
+    background: $accent;
+    color: white;
+}
+</style>
+
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-    <p>
-      <i>flusight</i> is under development. Come back later.
-    </p>
-  </div>
+    <div id="fakeLoader"></div>
+
+    <navbar></navbar>
+
+    <selectors></selectors>
+
+    <div class="section">
+        <div id="app" class="container">
+            <panels></panels>
+        </div>
+    </div>
+
+    <foot></foot>
 </template>
 
 <script>
-import Hello from './components/Hello'
+  import Navbar from './components/Navbar'
+  import Panels from './components/Panels'
+  import Selectors from './components/Selectors'
+  import Foot from './components/Foot'
 
-export default {
-  components: {
-    Hello
+  // import Papa from 'papaparse'
+  var $ = window.jQuery = require('jquery')
+  require('./assets/fakeLoader.min.js')
+
+  export default {
+    components: {
+      Navbar,
+      Panels,
+      Selectors,
+      Foot
+    },
+    ready() {
+      $("#fakeLoader").fakeLoader({
+        spinner:"spinner6",
+        bgColor:"#18807e"
+      })
+    }
   }
-}
 </script>
-
-<style>
-html {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#app {
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
-}
-
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
-
-.logo {
-  width: 100px;
-  height: 100px
-}
-</style>

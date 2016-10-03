@@ -10,8 +10,16 @@
     "deploy": "gh-pages-deploy"
   },
   "dependencies": {
+    "babel-runtime": "^6.0.0",
+    "bulma": "^0.2.1",
+    "font-awesome": "^4.6.3",
+    "hint.css": "^2.4.0",
+    "jquery": "^1.11.1",
+    "metrics-graphics": "^2.10.1",
+    "pace-progress": "^1.0.2",
+    "papaparse": "^4.1.2",
     "vue": "^1.0.21",
-    "babel-runtime": "^6.0.0"
+    "vue-d3": "^0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -31,7 +39,9 @@
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.12.0",
     "json-loader": "^0.5.4",
+    "node-sass": "^3.10.1",
     "ora": "^0.2.0",
+    "sass-loader": "^4.0.2",
     "shelljs": "^0.6.0",
     "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^1.2.0",
