@@ -34,6 +34,7 @@ $accent: rgb(24, 128, 126);
   import Panels from './components/Panels'
   import Selectors from './components/Selectors'
   import Foot from './components/Foot'
+  import store from './vuex/store'
 
   // import Papa from 'papaparse'
   var $ = window.jQuery = require('jquery')
@@ -46,6 +47,7 @@ $accent: rgb(24, 128, 126);
       Selectors,
       Foot
     },
+    store,
     ready() {
       $("#fakeLoader").fakeLoader({
         spinner:"spinner6",
