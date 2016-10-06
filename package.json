@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
+    "parse": "node build/parse.js",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
   },
