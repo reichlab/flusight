@@ -25,10 +25,10 @@
                             <p class="heading">Region</p>
                             <p class="control title">
                                 <span class="select is-medium">
-                                    <select>
-                                        <option>National</option>
-                                        <option>Subregion A</option>
-                                        <option>Subregion B</option>
+                                    <select :value="selectedRegion" @change="updateRegion">
+                                        <option v-for="region in regions">
+                                            {{ region }}
+                                        </option>
                                     </select>
                                 </span>
                             </p>
@@ -37,9 +37,10 @@
                             <p class="heading">Season</p>
                             <p class="control title">
                                 <span class="select is-medium">
-                                    <select>
-                                        <option>2015-2016</option>
-                                        <option>2014-2015</option>
+                                    <select :value="selectedSeason" @change="updateSeason">
+                                        <option v-for="season in seasons">
+                                            {{ season }}
+                                        </option>
                                     </select>
                                 </span>
                             </p>
@@ -48,9 +49,10 @@
                             <p class="heading">Prediction Model</p>
                             <p class="control title">
                                 <span class="select is-medium">
-                                    <select>
-                                        <option>Model A</option>
-                                        <option>Model B</option>
+                                    <select :value="selectedModel" @change="updateModel">
+                                        <option v-for="model in models">
+                                            {{ model }}
+                                        </option>
                                     </select>
                                 </span>
                             </p>
@@ -63,4 +65,35 @@
 </template>
 
 <script>
+  import {
+    selectedModel,
+    selectedSeason,
+    selectedRegion,
+    models,
+    seasons,
+    regions
+  } from '../vuex/getters'
+  import {
+    updateModel,
+    updateRegion,
+    updateSeason
+  } from '../vuex/actions'
+
+  export default {
+    vuex: {
+      getters: {
+        selectedRegion,
+        selectedSeason,
+        selectedModel,
+        models,
+        seasons,
+        regions
+      },
+      actions: {
+        updateSeason,
+        updateModel,
+        updateRegion
+      }
+    }
+  }
 </script>

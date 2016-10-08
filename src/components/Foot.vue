@@ -8,11 +8,20 @@
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                <a href="https://github.com/reichlab/flusight"><strong>flusight</strong></a> by <a href="https://reichlab.github.io">Reichlab</a>. The source code is licensed <a href="https://opensource.org/licenses/GPL-3.0">GPLv3</a>.
+                <a v-bind:href="metadata.sourceUrl"><strong>flusight</strong></a> by <a v-bind:href="metadata.parentUrl">Reichlab</a>. The source code is licensed <a v-bind:href="metadata.licenseUrl">GPLv3</a>.
            </div>
         </div>
     </footer>
 </template>
 
 <script>
+  import { metadata } from '../vuex/getters'
+
+  export default {
+    vuex: {
+      getters: {
+        metadata
+      }
+    }
+  }
 </script>

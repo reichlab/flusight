@@ -35,13 +35,6 @@ path.mg-confidence-band {
   import 'metrics-graphics'
 
   export default {
-
-    data () {
-      return {
-        title: 'flusight'
-      }
-    },
-
     ready() {
       // Geneate random data
       let data = [[], []]

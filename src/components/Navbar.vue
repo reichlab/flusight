@@ -14,7 +14,7 @@
     <nav class="nav has-shadow">
         <div class="nav-left">
             <a class="nav-item is-brand" href="#">
-                <span class="brand title"><i class="fa fa-bar-chart"></i> {{ title }} | <span class="thick">reichlab</span></span>
+                <span class="brand title"><i class="fa fa-bar-chart"></i> {{ metadata.title }} | <span class="thick">{{ metadata.parent }}</span></span>
             </a>
         </div>
 
@@ -38,7 +38,7 @@
                     </span>
                     <span>Tweet</span>
                </a>
-               <a class="button is-dark is-small is-outlined" href="https://github.com/reichlab/flusight">
+               <a class="button is-dark is-small is-outlined" v-bind:href="metadata.sourceUrl">
                    <span class="icon is-small">
                        <i class="fa fa-github"></i>
                    </span>
@@ -50,11 +50,12 @@
 </template>
 
 <script>
-  export default {
+  import { metadata } from '../vuex/getters'
 
-    data () {
-      return {
-        title: 'flusight'
+  export default {
+    vuex: {
+      getters: {
+        metadata
       }
     }
   }
