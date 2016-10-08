@@ -10,6 +10,11 @@ h1 {
     }
 }
 
+#map {
+    position: relative;
+    height: 325px;
+}
+
 path.mg-confidence-band {
     fill: #05b378 !important;
     opacity: 0.2 !important;
@@ -20,9 +25,8 @@ path.mg-confidence-band {
 <template>
     <div class="columns">
         <div class="column is-one-third">
-            <figure class="image is-4by3">
-                <img src="../assets/geo-choropleth.png">
-            </figure>
+            <div id="map">
+            </div>
         </div>
         <div class="column">
             <div id="chart">
@@ -33,10 +37,19 @@ path.mg-confidence-band {
 
 <script>
   import 'metrics-graphics'
+  import 'topojson'
+  import Datamap from 'datamaps/dist/datamaps.usa.js'
 
   export default {
     ready() {
       // Geneate random data
+      var map = new Datamap({
+        element: document.getElementById('map'),
+        scope: 'usa',
+        fills: {
+          defaultFill: 'rgba(24, 128, 126, 0.9)'
+        }
+      });
       let data = [[], []]
       for (let i = 0; i < 50; i++) {
         data[0].push({'x': i, 'value': Math.random()})

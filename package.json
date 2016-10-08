@@ -13,12 +13,14 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "bulma": "^0.2.1",
+    "datamaps": "^0.5.8",
     "font-awesome": "^4.6.3",
     "hint.css": "^2.4.0",
     "jquery": "^1.11.1",
     "metrics-graphics": "^2.10.1",
     "pace-progress": "^1.0.2",
     "papaparse": "^4.1.2",
+    "topojson": "^1.6.27",
     "vue": "^1.0.21",
     "vue-d3": "^0.1.0",
     "vuex": "^1.0.0"
