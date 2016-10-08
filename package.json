@@ -21,7 +21,7 @@
     "papaparse": "^4.1.2",
     "vue": "^1.0.21",
     "vue-d3": "^0.1.0",
-    "vuex": "^2.0.0"
+    "vuex": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
