@@ -6,6 +6,7 @@
 const path = require('path')
 const ora = require('ora')
 const old2new = require('../scripts/old2new')
+const delphiAPI = require('../scripts/delphi_epidata')
 
 var spinner = ora("Reading files...")
 spinner.start()
