@@ -5,6 +5,7 @@
 
 const path = require('path')
 const ora = require('ora')
+const old2new = require('../scripts/old2new')
 
 var spinner = ora("Reading files...")
 spinner.start()

@@ -1,22 +1,6 @@
-// Convert old format submission file to new format
-// Pipe in the old content and it spits the new content on stdout
-// e.g.
-// cat 'old.csv' | node old2new.js
+// Module for converting old format (wide) submission file to new format (long)
 
 const Papa = require('papaparse')
-
-let input = ''
-
-process.stdin.resume()
-process.stdin.setEncoding('utf8')
-
-process.stdin.on('data', (chunk) => {
-  input += chunk
-})
-
-process.stdin.on('end', () => {
-  process.stdout.write(transform(input))
-})
 
 const transform = (oldFormat) => {
   let data = Papa.parse(oldFormat, {
@@ -181,3 +165,6 @@ const transform = (oldFormat) => {
 
   return Papa.unparse(output)
 }
+
+
+exports.transform = transform
