@@ -36,7 +36,6 @@ $accent: rgb(24, 128, 126);
   import Foot from './components/Foot'
   import store from './vuex/store'
 
-  // import Papa from 'papaparse'
   var $ = window.jQuery = require('jquery')
   require('./assets/fakeLoader.min.js')
 

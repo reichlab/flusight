@@ -30,20 +30,21 @@ path.mg-confidence-band {
         </div>
         <div class="column">
             <div id="chart">
+                <svg width="500" height="200">
+                </svg>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import 'metrics-graphics'
   import 'topojson'
   import Datamap from 'datamaps/dist/datamaps.usa.js'
 
   export default {
     ready() {
       // Geneate random data
-      var map = new Datamap({
+      let map = new Datamap({
         element: document.getElementById('map'),
         scope: 'usa',
         fills: {
@@ -66,27 +67,11 @@ path.mg-confidence-band {
           'upper': val + ind * 0.2 + ind * 0.1
         })
       }
-
-      MG.data_graphic({
-        title: "Sample Chart",
-        description: "Sample plot",
-        data: data,
-        full_width: true,
-        height: 300,
-        right: 50,
-        target: '#chart',
-        x_accessor: 'x',
-        y_accessor: 'value',
-        show_tooltips: false,
-        missing_is_hidden: true,
-        area: false,
-        baselines: [{'value': 0.3, 'label': "A horizontal marker"}],
-        markers: [{'x': 14, 'label': 'A vertical marker'}],
-        legend: ['Actual','Predictions'],
-        show_confidence_band: ['lower', 'upper'],
-        animate_on_load: true,
-        aggregate_rollover: true
-      })
+      let svg = d3.select('svg'),
+          margin = {top: 20, right: 20, bottom: 20, left: 20},
+          width = svg.attr('width') - margin.left - margin.right,
+          height = svg.attr('height') - margin.top - margin.bottom,
+          g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     }
   }
 </script>
