@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Visualization Data",
+  "description": "Complete set of information for visualization",
+  "type": "array",
+  "items": {
+    "title": "Region",
+    "description": "The region identifiers like 'National', 'Region I' etc.",
+    "type": "object",
+    "properties": {
+      "states": {
+        "description": "List of states covered in the region",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "seasons": {
+        "type": "array",
+        "description": "The flu season",
+        "items": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "description": "Identifying string, e.g. '2015-2016'"
+            },
+            "actual": {
+              "type": "array",
+              "description": "Array of {date, value} pairs for actual flu data",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "week": {
+                    "type": "number",
+                    "decription": "Week number in the season"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "models": {
+              "type": "array",
+              "description": "A list of all model predictions",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "string",
+                    "description": "Name of the model"
+                  },
+                  "predictions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "week": {
+                          "type": "number",
+                          "description": "Starting week number for prediction"
+                        },
+                        "onsetWeek": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for onset week"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "peakWeek": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for peak week"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "peakPercent": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for peak percent"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "oneWk": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for 1 wk ahead"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "twoWk": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for 2 wks ahead"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "threeWk": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for 3 wks ahead"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        },
+                        "fourWk": {
+                          "type": "object",
+                          "properties": {
+                            "point": {
+                              "type": "number",
+                              "description": "Point prediction for 4 wks ahead"
+                            },
+                            "low": {
+                              "type": "number",
+                              "description": "Lower confidence level (90%)"
+                            },
+                            "high": {
+                              "type": "number",
+                              "description": "Higher confidence level (90%)"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
