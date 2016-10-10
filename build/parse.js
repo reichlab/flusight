@@ -6,11 +6,11 @@
 const path = require('path')
 const ora = require('ora')
 const old2new = require('../scripts/old2new')
-const delphiAPI = require('../scripts/delphi_epidata')
+const delphiWrapper = require('../scripts/delphiWrapper')
 
 var spinner = ora("Reading files...")
 spinner.start()
 
-console.log("Not implemented")
+console.log('Not implemented')
 
 spinner.stop()
