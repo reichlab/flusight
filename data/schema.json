@@ -13,7 +13,9 @@
         "type": "array",
         "items": {
           "type": "string"
-        }
+        },
+        "minItems": 4,
+        "uniqueItems": true
       },
       "seasons": {
         "type": "array",
@@ -38,8 +40,10 @@
                   "value": {
                     "type": "number"
                   }
-                }
-              }
+                },
+                "required": ["week", "value"]
+              },
+              "minItems": 10
             },
             "models": {
               "type": "array",
@@ -75,7 +79,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "peakWeek": {
                           "type": "object",
@@ -92,7 +97,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "peakPercent": {
                           "type": "object",
@@ -109,7 +115,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "oneWk": {
                           "type": "object",
@@ -126,7 +133,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "twoWk": {
                           "type": "object",
@@ -143,7 +151,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "threeWk": {
                           "type": "object",
@@ -160,7 +169,8 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         },
                         "fourWk": {
                           "type": "object",
@@ -177,17 +187,32 @@
                               "type": "number",
                               "description": "Higher confidence level (90%)"
                             }
-                          }
+                          },
+                          "required": ["point", "low", "high"]
                         }
-                      }
-                    }
+                      },
+                      "required": ["week", "onsetWeek", "peakWeek",
+                                   "peakPercent", "oneWk", "twoWK",
+                                   "threeWk", "fourWk"]
+                    },
+                    "minItems": 5,
+                    "uniqueItems": true
                   }
-                }
-              }
+                },
+                "required": ["identifier", "predictions"]
+              },
+              "minItems": 2,
+              "uniqueItems": true
             }
-          }
-        }
+          },
+          "required": ["identifier", "actual", "models"]
+        },
+        "minItems": 2,
+        "uniqueItems": true
       }
-    }
-  }
+    },
+    "required": ["states", "seasons"]
+  },
+  "minItems": 3,
+  "uniqueItems": true
 }
