@@ -5,12 +5,12 @@
 
 const path = require('path')
 const ora = require('ora')
-const old2new = require('../scripts/old2new')
-const delphiWrapper = require('../scripts/delphiWrapper')
+const generateData = require('../scripts/generateData')
 
-var spinner = ora("Reading files...")
+var spinner = ora("Parsing files...\n\n")
 spinner.start()
 
-console.log('Not implemented')
-
-spinner.stop()
+generateData.generate('./data/', () => {
+  spinner.stop()
+  console.log('All done')
+})

@@ -2,6 +2,8 @@
 
 const Papa = require('papaparse')
 
+// Take old format csv content as string input
+// Return new format csv content as string output
 const transform = (oldFormat) => {
   let data = Papa.parse(oldFormat, {
     dynamicTyping: true
