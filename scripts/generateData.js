@@ -47,7 +47,7 @@ const filterCache = (data, region) => {
 }
 
 // Generate json data using submissions files in the given dir
-const generate = (directory, callback) => {
+const generate = (directory, outputFile, spinner) => {
 
   // Look for seasons
   let seasons = getSubDirectories(directory)
@@ -103,9 +103,13 @@ const generate = (directory, callback) => {
     })
   }
 
-  console.log(util.inspect(output, false, null))
+  fs.writeFile(outputFile, JSON.stringify(output, null, 2), (err) => {
+    if (err) {
+      return console.log(err)
+    }
 
-  callback()
+    spinner.stop()
+  })
 }
 
 exports.generate = generate

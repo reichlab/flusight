@@ -1,0 +1,3898 @@
+[
+  {
+    "id": "nat",
+    "subId": "US National",
+    "region": "National",
+    "states": [
+      "AK",
+      "AL",
+      "AR",
+      "AZ",
+      "CA",
+      "CO",
+      "CT",
+      "DC",
+      "DE",
+      "FL",
+      "GA",
+      "HI",
+      "IA",
+      "ID",
+      "IL",
+      "IN",
+      "KS",
+      "KY",
+      "LA",
+      "MA",
+      "MD",
+      "ME",
+      "MI",
+      "MN",
+      "MO",
+      "MS",
+      "MT",
+      "NC",
+      "ND",
+      "NE",
+      "NH",
+      "NJ",
+      "NM",
+      "NV",
+      "NY",
+      "OH",
+      "OK",
+      "OR",
+      "PA",
+      "RI",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "UT",
+      "VA",
+      "VT",
+      "WA",
+      "WI",
+      "WV",
+      "WY"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs1",
+    "subId": "HHS Region 1",
+    "region": "Region 1 [CT, MA, ME, NH, RI, VT]",
+    "states": [
+      "CT",
+      "MA",
+      "ME",
+      "NH",
+      "RI",
+      "VT"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs2",
+    "subId": "HHS Region 2",
+    "region": "Region 2 [NJ, NY]",
+    "states": [
+      "NJ",
+      "NY"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs3",
+    "subId": "HHS Region 3",
+    "region": "Region 3 [DE, MD, PA, VA, WV]",
+    "states": [
+      "DE",
+      "MD",
+      "PA",
+      "VA",
+      "WV"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs4",
+    "subId": "HHS Region 4",
+    "region": "Region 4 [AL, FL, GA, KY, MS, NC, SC, TN]",
+    "states": [
+      "AL",
+      "FL",
+      "GA",
+      "KY",
+      "MS",
+      "NC",
+      "SC",
+      "TN"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs5",
+    "subId": "HHS Region 5",
+    "region": "Region 5 [IL, IN, MI, MN, OH, WI]",
+    "states": [
+      "IL",
+      "IN",
+      "MI",
+      "MN",
+      "OH",
+      "WI"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs6",
+    "subId": "HHS Region 6",
+    "region": "Region 6 [AR, LA, NM, OK, TX]",
+    "states": [
+      "AR",
+      "LA",
+      "NM",
+      "OK",
+      "TX"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs7",
+    "subId": "HHS Region 7",
+    "region": "Region 7 [IA, KS, MO, NE]",
+    "states": [
+      "IA",
+      "KS",
+      "MO",
+      "NE"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs8",
+    "subId": "HHS Region 8",
+    "region": "Region 8 [CO, MT, ND, SD, UT, WY]",
+    "states": [
+      "CO",
+      "MT",
+      "ND",
+      "SD",
+      "UT",
+      "WY"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs9",
+    "subId": "HHS Region 9",
+    "region": "Region 9 [AZ, CA, HI, NV]",
+    "states": [
+      "AZ",
+      "CA",
+      "HI",
+      "NV"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hhs10",
+    "subId": "HHS Region 10",
+    "region": "Region 10 [AK, ID, OR, WA]",
+    "states": [
+      "AK",
+      "ID",
+      "OR",
+      "WA"
+    ],
+    "seasons": [
+      {
+        "id": "2014-2015",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201401
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201402
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2015-2016",
+        "actual": [],
+        "models": [
+          {
+            "id": "model-a",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          },
+          {
+            "id": "model-b",
+            "predictions": [
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201501
+              },
+              {
+                "onsetWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakWeek": {
+                  "point": 51,
+                  "low": 42,
+                  "high": 19
+                },
+                "peakPercent": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "oneWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "twoWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "threeWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "fourWk": {
+                  "point": 1.5,
+                  "low": 1.2,
+                  "high": 11.9
+                },
+                "week": 201502
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
