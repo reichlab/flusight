@@ -4,10 +4,13 @@
   "description": "Complete set of information for visualization",
   "type": "array",
   "items": {
-    "title": "Region",
-    "description": "The region identifiers like 'National', 'Region I' etc.",
+    "description": "Data for each region",
     "type": "object",
     "properties": {
+      "name": {
+        "type": "string",
+        "description": "Name of the region"
+      },
       "states": {
         "description": "List of states covered in the region",
         "type": "array",
