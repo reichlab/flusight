@@ -7,9 +7,17 @@
     "description": "Data for each region",
     "type": "object",
     "properties": {
+      "id": {
+        "type": "string",
+        "description": "Identifier like 'nat', 'hhs1' etc."
+      },
+      "subId": {
+        "type": "string",
+        "description": "Name used in submission files"
+      },
       "region": {
         "type": "string",
-        "description": "Name of the region"
+        "description": "Name of the region to be shown in ui"
       },
       "states": {
         "description": "List of states covered in the region",
@@ -26,7 +34,7 @@
         "items": {
           "type": "object",
           "properties": {
-            "identifier": {
+            "id": {
               "type": "string",
               "description": "Identifying string, e.g. '2015-2016'"
             },
@@ -54,7 +62,7 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "identifier": {
+                  "id": {
                     "type": "string",
                     "description": "Name of the model"
                   },
@@ -202,19 +210,19 @@
                     "uniqueItems": true
                   }
                 },
-                "required": ["identifier", "predictions"]
+                "required": ["id", "predictions"]
               },
               "minItems": 2,
               "uniqueItems": true
             }
           },
-          "required": ["identifier", "actual", "models"]
+          "required": ["id", "actual", "models"]
         },
         "minItems": 2,
         "uniqueItems": true
       }
     },
-    "required": ["states", "seasons"]
+    "required": ["id", "subId", "region", "states", "seasons"]
   },
   "minItems": 3,
   "uniqueItems": true
