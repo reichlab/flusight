@@ -7,7 +7,7 @@
     "description": "Data for each region",
     "type": "object",
     "properties": {
-      "name": {
+      "region": {
         "type": "string",
         "description": "Name of the region"
       },
