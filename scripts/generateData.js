@@ -2,7 +2,6 @@
 
 const delphiWrapper = require('./delphiWrapper')
 const meta = require('./meta')
-const old2new = require('./old2new')
 const new2json = require('./new2json')
 const fs = require('fs')
 const path = require('path')
@@ -16,9 +15,10 @@ const getSubDirectories = (directory) => {
   })
 }
 
-// Return all files (parsing to integer names)
+// Return all files (parsing to integer names) excluding .old files
 const getIntFiles = (directory) => {
-  return fs.readdirSync(directory).map(file => parseInt(file.split()[0]))
+  let newFiles = fs.readdirSync(directory).filter(f => !f.endsWith('.old'))
+  return newFiles.map(file => parseInt(file.split()[0]))
 }
 
 // Filter data returned from new2json according to region
@@ -47,14 +47,10 @@ const filterCache = (data, region) => {
 }
 
 // Generate json data using submissions files in the given dir
-const generate = (directory, outputFile, spinner) => {
+const generate = (directory, outputFile) => {
 
   // Look for seasons
   let seasons = getSubDirectories(directory)
-
-  // Ignore 'old' directory
-  let oldIndex = seasons.indexOf('old')
-  if (oldIndex > -1) seasons.splice(oldIndex, 1)
 
   // Bootstrap output
   let output = meta.regions
@@ -67,7 +63,11 @@ const generate = (directory, outputFile, spinner) => {
     console.log('No seasons found !')
     process.exit(1)
   } else {
+    console.log('Found ' + seasons.length + ' seasons:')
+    seasons.map(s => console.log(s))
+    console.log('')
     output.forEach((val, idx) => {
+      console.log('Parsing region: ' + val.region)
       val.seasons = seasons.map(s => {
         // Get models for each season
         let modelsDir = getSubDirectories(path.join(directory, s))
@@ -108,7 +108,7 @@ const generate = (directory, outputFile, spinner) => {
       return console.log(err)
     }
 
-    spinner.stop()
+    console.log('\nAll done! JSON saved at ' + outputFile)
   })
 }
 

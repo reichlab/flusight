@@ -3,10 +3,15 @@
 // Specifically, tranform ../data and ../config.yaml
 // and create static assets in ../src/assets for ingestion
 
-const path = require('path')
-const ora = require('ora')
 const generateData = require('../scripts/generateData')
+const convertOld = require('../scripts/convertOld')
 
-var spinner = ora("Parsing files...").start()
+console.log('Parsing files...\n')
 
-generateData.generate('./data/', './src/assets/data.json', spinner)
+let dataDirectory = './data',
+    outputFile = './src/assets/data.json'
+
+convertOld.convert(
+  dataDirectory,
+  () => generateData.generate(dataDirectory, outputFile)
+)

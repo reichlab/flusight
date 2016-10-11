@@ -36,10 +36,6 @@ const getRange = (bins) => {
   return [rangeLow, rangeHigh]
 }
 
-const groupByRegion = (output) => {
-  
-}
-
 // Take new format csv content as string input (and other metadata)
 // Return the container with new data
 const transform = (newFormatData, season, modelName, week, container) => {
