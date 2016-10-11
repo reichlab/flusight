@@ -17,7 +17,9 @@ const getSubDirectories = (directory) => {
 
 // Return all files (parsing to integer names) excluding .old files
 const getIntFiles = (directory) => {
-  let newFiles = fs.readdirSync(directory).filter(f => !f.endsWith('.old'))
+  let newFiles = fs.readdirSync(directory)
+      .filter(f => !f.endsWith('.old'))
+      .filter(f => f.endsWith('.csv'))
   return newFiles.map(file => parseInt(file.split()[0]))
 }
 
