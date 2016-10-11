@@ -22,11 +22,11 @@ const getRange = (bins) => {
     if (!rangeHigh) highAccu += bins[len - i - 1][2]
 
     if (lowAccu > 0.05) {
-      rangeLow = bins[i][1]
+      rangeLow = bins[i][0]
     }
 
     if (highAccu > 0.05) {
-      rangeHigh = bins[len - i - 1][0]
+      rangeHigh = bins[len - i - 1][1]
     }
 
     if (rangeHigh & rangeLow) {
