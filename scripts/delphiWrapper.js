@@ -4,7 +4,7 @@
 const delphiAPI = require('./delphi_epidata')
 const meta = require('./meta')
 
-const regionIdentifiers = Object.keys(meta.regions)
+const regionIdentifiers = meta.regions.map(x => x.id)
 
 // Return weighted ili % for all regions for given range
 // Range accepted as epiweek number (like 201501)

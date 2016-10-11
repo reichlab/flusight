@@ -2,6 +2,7 @@
 // A file is supposed to contain data for one season, model and epidemic week
 
 const Papa = require('papaparse')
+const meta = require('./meta')
 
 // Return low and high (90%) confidence values for given bins and values
 const getRange = (bins) => {
@@ -35,16 +36,14 @@ const getRange = (bins) => {
   return [rangeLow, rangeHigh]
 }
 
-const getLastTarget = (accumulator) => {
-  accumulator.range = getRange(accumulator.bins)
-  delete accumulator.bins
-  return accumulator
+const groupByRegion = (output) => {
+  
 }
 
-// Take new format csv content as string input
-// Return an object with predictions for regions
-const transform = (newFormat) => {
-  let data = Papa.parse(newFormat, {
+// Take new format csv content as string input (and other metadata)
+// Return the container with new data
+const transform = (newFormatData, season, modelName, week, container) => {
+  let data = Papa.parse(newFormatData, {
     dynamicTyping: true
   })
 
@@ -52,6 +51,7 @@ const transform = (newFormat) => {
   data = data.data
   data.splice(0, 1)
 
+  // Create output data structure
   let output = []
 
   // Hot start last target accumulator
@@ -67,7 +67,11 @@ const transform = (newFormat) => {
     if ((data[i][2] == "Point") || (i == (data.length - 1))) {
       // Whenever we reach another point prediction or at end,
       // pack up last data and push to output
-      output.push(getLastTarget(accumulator))
+      let range = getRange(accumulator.bins)
+      accumulator.low = range[0]
+      accumulator.high = range[1]
+      delete accumulator.bins
+      output.push(accumulator)
       // Reset accumulator
       accumulator = {
         region: data[i][0],

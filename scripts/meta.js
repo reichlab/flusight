@@ -12,53 +12,74 @@ const states = ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
                 'SC', 'SD', 'TN', 'TX', 'UT', // 40-44
                 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'] // 45-50
 
-// List of HHS region objects
-const regions = {
-  nat: {
-    name: 'National',
-    states: [...Array(states.length).keys()]
+// HHS region objects
+const regions = [
+  {
+    id: 'nat',
+    subId: 'US National',
+    region: 'National',
+    states: [...Array(states.length).keys()].map(i => states[i])
   },
-  hhs1: {
-    name: 'Region 1 [CT, MA, ME, NH, RI, VT]',
-    states: [6, 19, 21, 30, 39, 46]
+  {
+    id: 'hhs1',
+    subId: 'HHS Region 1',
+    region: 'Region 1 [CT, MA, ME, NH, RI, VT]',
+    states: [6, 19, 21, 30, 39, 46].map(i => states[i])
   },
-  hhs2: {
-    name: 'Region 2 [NJ, NY]',
-    states: [31, 34]
+  {
+    id: 'hhs2',
+    subId: 'HHS Region 2',
+    region: 'Region 2 [NJ, NY]',
+    states: [31, 34].map(i => states[i])
   },
-  hhs3: {
-    name: 'Region 3 [DE, MD, PA, VA, WV]',
-    states: [8, 20, 38, 45, 49]
+  {
+    id: 'hhs3',
+    subId: 'HHS Region 3',
+    region: 'Region 3 [DE, MD, PA, VA, WV]',
+    states: [8, 20, 38, 45, 49].map(i => states[i])
   },
-  hhs4: {
-    name: 'Region 4 [AL, FL, GA, KY, MS, NC, SC, TN]',
-    states: [1, 9, 10, 17, 25, 27, 40, 42]
+  {
+    id: 'hhs4',
+    subId: 'HHS Region 4',
+    region: 'Region 4 [AL, FL, GA, KY, MS, NC, SC, TN]',
+    states: [1, 9, 10, 17, 25, 27, 40, 42].map(i => states[i])
   },
-  hhs5: {
-    name: 'Region 5 [IL, IN, MI, MN, OH, WI]',
-    states: [14, 15, 22, 23, 35, 48]
+  {
+    id: 'hhs5',
+    subId: 'HHS Region 5',
+    region: 'Region 5 [IL, IN, MI, MN, OH, WI]',
+    states: [14, 15, 22, 23, 35, 48].map(i => states[i])
   },
-  hhs6: {
-    name: 'Region 6 [AR, LA, NM, OK, TX]',
-    states: [2, 18, 32, 36, 43]
+  {
+    id: 'hhs6',
+    subId: 'HHS Region 6',
+    region: 'Region 6 [AR, LA, NM, OK, TX]',
+    states: [2, 18, 32, 36, 43].map(i => states[i])
   },
-  hhs7: {
-    name: 'Region 7 [IA, KS, MO, NE]',
-    states: [12, 16, 24, 29]
+  {
+    id: 'hhs7',
+    subId: 'HHS Region 7',
+    region: 'Region 7 [IA, KS, MO, NE]',
+    states: [12, 16, 24, 29].map(i => states[i])
   },
-  hhs8: {
-    name: 'Region 8 [CO, MT, ND, SD, UT, WY]',
-    states: [5, 26, 28, 41, 44, 50]
+  {
+    id: 'hhs8',
+    subId: 'HHS Region 8',
+    region: 'Region 8 [CO, MT, ND, SD, UT, WY]',
+    states: [5, 26, 28, 41, 44, 50].map(i => states[i])
   },
-  hhs9: {
-    name: 'Region 9 [AZ, CA, HI, NV]',
-    states: [3, 4, 11, 33]
+  {
+    id: 'hhs9',
+    subId: 'HHS Region 9',
+    region: 'Region 9 [AZ, CA, HI, NV]',
+    states: [3, 4, 11, 33].map(i => states[i])
   },
-  hhs10: {
-    name: 'Region 10 [AK, ID, OR, WA]',
-    states: [0, 13, 37, 47]
+  {
+    id: 'hhs10',
+    subId: 'HHS Region 10',
+    region: 'Region 10 [AK, ID, OR, WA]',
+    states: [0, 13, 37, 47].map(i => states[i])
   }
-}
+]
 
-exports.states = states
 exports.regions = regions
