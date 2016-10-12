@@ -24,7 +24,7 @@
                         <div class="level-item">
                             <p class="heading">Region</p>
                             <p class="control title">
-                                <span class="select is-medium">
+                                <span class="select">
                                     <select :value="selectedRegion" @change="updateRegion">
                                         <option v-for="region in regions">
                                             {{ region }}
@@ -36,7 +36,7 @@
                         <div class="level-item">
                             <p class="heading">Season</p>
                             <p class="control title">
-                                <span class="select is-medium">
+                                <span class="select">
                                     <select :value="selectedSeason" @change="updateSeason">
                                         <option v-for="season in seasons">
                                             {{ season }}
@@ -48,7 +48,7 @@
                         <div class="level-item">
                             <p class="heading">Prediction Model</p>
                             <p class="control title">
-                                <span class="select is-medium">
+                                <span class="select">
                                     <select :value="selectedModel" @change="updateModel">
                                         <option v-for="model in models">
                                             {{ model }}
