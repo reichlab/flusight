@@ -13,38 +13,12 @@
 </template>
 
 <script>
-  import 'topojson'
-  import Datamap from 'datamaps/dist/datamaps.usa.js'
+  import Map from '../map'
 
   export default {
     ready() {
-      const d3 = this.$d3
       // Draw map
-      let map = new Datamap({
-        element: document.getElementById('map'),
-        scope: 'usa',
-        setProjection: (element, options) => {
-          let projection = d3.geoAlbersUsa()
-              .scale(500)
-              .translate([element.offsetWidth / 2, element.offsetHeight / 2])
-          return {
-            path: d3.geoPath().projection(projection),
-            projection: projection
-          }
-        },
-        fills: {
-          defaultFill: 'rgba(24, 128, 126, 0.9)'
-        },
-        geographyConfig: {
-          highlightOnHover: false,
-          popupTemplate: (geo, data) => {
-            return ['<div class="hoverinfo">',
-                    '<strong>Region</strong><br>',
-                    'Weighted ILI (%): 0',
-                    '</div>'].join('');
-          }
-        }
-      });
+      let choropleth = new Map(this.$d3, 'map')
     }
   }
 </script>
