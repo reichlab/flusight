@@ -27,3 +27,11 @@ export function seasons (state) {
 export function regions (state) {
   return state.regions
 }
+
+export function chart (state) {
+  return state.chart
+}
+
+export function map (state) {
+  return state.map
+}

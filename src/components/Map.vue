@@ -14,11 +14,21 @@
 
 <script>
   import Map from '../map'
+  import { map } from '../vuex/getters'
+  import { setMap } from '../vuex/actions'
 
   export default {
+    vuex: {
+      getters: {
+        map
+      },
+      actions: {
+        setMap
+      }
+    },
     ready() {
       // Draw map
-      let choropleth = new Map(this.$d3, 'map')
+      this.setMap(new Map(this.$d3, 'map'))
     }
   }
 </script>

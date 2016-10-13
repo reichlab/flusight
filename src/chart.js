@@ -4,15 +4,15 @@ export default class Chart {
   constructor(d3, elementId) {
     this.d3 = d3
     this.elementId = elementId
-    this.render()
   }
 
-  // Draw the chart for first time
-  render() {
+  // Draw axes etc.
+  setup() {
+    // Sugar !!
     let d3 = this.d3
     // Get div dimensions
     let chartDiv = document.getElementById(this.elementId),
-    divWidth = chartDiv.offsetWidth,
+        divWidth = chartDiv.offsetWidth,
         divHeight = 300
 
     // Create blank chart
@@ -25,16 +25,12 @@ export default class Chart {
     let xScale = d3.scaleLinear().range([0, width]),
         yScale = d3.scaleLinear().range([height, 0])
 
-    let line = d3.line()
-      .x(d => xScale(d.week))
-        .y(d => yScale(d.value))
-
     // Add svg
-    let svg = d3.select('#chart').append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+    let svg = d3.select('#' + this.elementId).append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // Test data
     let data = [23, 43, 12, 45, 17, 5, 12, 56, 18,
@@ -64,6 +60,26 @@ export default class Chart {
       .style('text-anchor', 'end')
       .text('Weighted ILI (%)')
 
+    // Set variables
+    this.svg = svg
+    this.xScale = xScale
+    this.yScale = yScale
+    this.data = data
+  }
+
+  // Draw the chart for first time
+  addLine() {
+    let d3 = this.d3,
+        svg = this.svg,
+        xScale = this.xScale,
+        yScale = this.yScale,
+        data = this.data
+
+    // Main line
+    let line = d3.line()
+        .x(d => xScale(d.week))
+        .y(d => yScale(d.value))
+
     svg.append('path')
       .datum(data)
       .attr('class', 'line')
@@ -77,6 +93,45 @@ export default class Chart {
       .attr('cy', d => yScale(d.value))
       .attr('r', 3)
       .attr('class', 'point')
+  }
+
+  // TODO: Implement functions
+
+  // Add actual data
+  // Markers:
+  // + path
+  // + circles
+  // + baseline
+  //   + horizontal line
+  plotActual() {
+
+  }
+
+  // Add prediction
+  // Markers:
+  // + path
+  // + circles
+  // + confidence region
+  //   + alpha-ed color
+  // + peak prediction
+  //   + circle
+  //   + horizontal/vertical bar
+  //   + bar stoppers
+  // + onset prediction
+  //   + horizontal bar around x axis
+  //   + bar stoppers
+  plotPrediction() {
+
+  }
+
+  // Add interactivity
+  // + circles
+  //   + on mouse: scale and show value
+  // + prediction line
+  //   + on mouse: fade others
+  makeInteractive() {
+    let d3 = this.d3
+    this.svg.selectAll('.point')
       .on('mouseover', function(d) {
         d3.select(this)
           .transition()
@@ -87,37 +142,10 @@ export default class Chart {
           .transition()
           .attr("r", 3)
       })
+  }
 
-    let focus = svg.append('g')
-      .attr('class', 'focus')
-        .style('display', 'none')
+  // Add legend
+  addLegend() {
 
-    focus.append('circle')
-      .attr('r', 4.5)
-
-    focus.append('text')
-      .attr('x', 9)
-      .attr('dy', '0.35em')
-
-    focus.append('path')
-      .attr('d', d3.line()
-            .x(d => 1)
-            .y(d => 1)([0]))
-
-    svg.append('rect')
-      .attr('class', 'overlay')
-      .attr('width', width)
-      .attr('height', height)
-      .on('mouseover', () => {
-        focus.style('display', null)
-      })
-      .on('mouseout', () => {
-        focus.style('display', 'none')
-      })
-      .on('mousemove', function() {
-        let x0 = xScale.invert(d3.mouse(this)[0])
-        focus.attr('transform', 'translate(' + xScale(x0) + ',' + 20 + ')')
-        focus.select('text').text('' + parseInt(x0))
-      })
   }
 }

@@ -11,3 +11,11 @@ export const updateSeason = ({ dispatch, state }, e) => {
 export const updateRegion = ({ dispatch, state }, e) => {
   dispatch('UPDATE_REGION', state.regions.indexOf(e.target.value))
 }
+
+export const setChart = ({ dispatch, state }, val) => {
+  dispatch('SET_CHART', val)
+}
+
+export const setMap = ({ dispatch, state }, val) => {
+  dispatch('SET_MAP', val)
+}

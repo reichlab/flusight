@@ -41,11 +41,24 @@ circle.point {
 
 <script>
   import Chart from '../chart'
+  import { chart } from '../vuex/getters'
+  import { setChart } from '../vuex/actions'
 
   export default {
+    vuex: {
+      getters: {
+        chart
+      },
+      actions: {
+        setChart
+      }
+    },
     ready() {
       // Use d3 v4 (vue-d3)
-      let chart = new Chart(this.$d3, 'chart')
+      this.setChart(new Chart(this.$d3, 'chart'))
+      this.chart.setup()
+      this.chart.addLine()
+      this.chart.makeInteractive()
     }
   }
 </script>

@@ -14,6 +14,10 @@ const state = {
     licenseUrl: 'https://opensource.org/licenses/GPL-3.0'
   },
 
+  // D3 stuff
+  chart: null,
+  map: null,
+
   regions: [
     'National',
     'Region 1 [CT, MA, ME, NH, RI, VT]',
@@ -56,6 +60,14 @@ const mutations = {
 
   UPDATE_SEASON (state, val) {
     state.selected.season = val
+  },
+
+  SET_CHART (state, val) {
+    state.chart = val
+  },
+
+  SET_MAP (state, val) {
+    state.map = val
   }
 }
 
