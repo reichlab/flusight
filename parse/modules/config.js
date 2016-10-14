@@ -10,3 +10,5 @@ const fs = require('fs')
 const read = (configFile) => {
   return yaml.safeLoad(fs.readFileSync(configFile, 'utf8'))
 }
+
+exports.read = read

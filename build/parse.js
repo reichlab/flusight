@@ -1,17 +1,16 @@
 // Convert data files for ingestion
-//
-// Specifically, tranform ../data and ../config.yaml
 // and create static assets in ../src/assets for ingestion
 
-const generateData = require('../scripts/generateData')
-const convertOld = require('../scripts/convertOld')
+const parse = require('../parse/parse')
 
 console.log('Parsing files...\n')
 
 let dataDirectory = './data',
+    configFile = './config.yaml',
+    baselineFile = './parse/modules/vendor/wILI_Baseline.csv',
     outputFile = './src/assets/data.json'
 
-convertOld.convert(
-  dataDirectory,
-  () => generateData.generate(dataDirectory, outputFile)
-)
+parse.process(dataDirectory, () => {
+  parse.generate(dataDirectory, configFile, baselineFile, outputFile)
+})
+

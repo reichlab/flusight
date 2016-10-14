@@ -1,10 +1,10 @@
 // Wrapper around delphi-epidata API (https://github.com/undefx/delphi-epidata)
 // for getting actual flu data
 
-const delphiAPI = require('./delphi_epidata')
-const meta = require('./meta')
+const delphiAPI = require('./vendor/delphi_epidata')
+const metadata = require('./metadata')
 
-const regionIdentifiers = meta.regions.map(x => x.id)
+const regionIdentifiers = metadata.regions.map(x => x.id)
 
 // Return weighted ili % for all regions for given range
 // Range accepted as epiweek number (like 201501)
