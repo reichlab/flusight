@@ -38,7 +38,8 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
   // Bootstrap output
   let output = metadata.regions
 
-  // TODO: parse baseline for seasons
+  // Get baseline data
+  let baselineData = baseline.getBaselines(baselineFile)
   // TODO: get acutal data for seasons
 
   // Caches CSVs
@@ -78,7 +79,7 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
         id: season,
         actual: [], // TODO: get these values
         models: models,
-        baseline: 0 // TODO: get these
+        baseline: baselineData[val.subId][season]
       }
     })
   })
