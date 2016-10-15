@@ -59,7 +59,6 @@
   "gh-pages-deploy": {
     "staticpath": "dist",
     "prep": [
-      "parse",
       "build"
     ],
     "noprompt": false
