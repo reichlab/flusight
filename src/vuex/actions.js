@@ -4,16 +4,16 @@ export const initializeData = ({ dispatch, state }, val) => {
   dispatch('INITIALIZE_DATA', val)
 }
 
-export const updateModel = ({ dispatch, state }, e) => {
-  dispatch('UPDATE_MODEL', state.models.indexOf(e.target.value))
+export const updateSelectedModel = ({ dispatch, state }, val) => {
+  dispatch('UPDATE_SELECTED_MODEL', val)
 }
 
-export const updateSeason = ({ dispatch, state }, e) => {
-  dispatch('UPDATE_SEASON', state.seasons.indexOf(e.target.value))
+export const updateSelectedSeason = ({ dispatch, state }, val) => {
+  dispatch('UPDATE_SELECTED_SEASON', val)
 }
 
-export const updateRegion = ({ dispatch, state }, e) => {
-  dispatch('UPDATE_REGION', state.regions.indexOf(e.target.value))
+export const updateSelectedRegion = ({ dispatch, state }, val) => {
+  dispatch('UPDATE_SELECTED_REGION', val)
 }
 
 export const setChart = ({ dispatch, state }, val) => {

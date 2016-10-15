@@ -22,15 +22,15 @@ const state = {
 }
 
 const mutations = {
-  UPDATE_MODEL (state, val) {
+  UPDATE_SELECTED_MODEL (state, val) {
     state.selected.model = val
   },
 
-  UPDATE_REGION (state, val) {
+  UPDATE_SELECTED_REGION (state, val) {
     state.selected.region = val
   },
 
-  UPDATE_SEASON (state, val) {
+  UPDATE_SELECTED_SEASON (state, val) {
     state.selected.season = val
   },
 

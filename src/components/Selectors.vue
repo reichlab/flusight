@@ -25,7 +25,7 @@
                             <p class="heading">Region</p>
                             <p class="control title">
                                 <span class="select">
-                                    <select :value="selectedRegion" @change="updateRegion">
+                                    <select v-model="currentRegion">
                                         <option v-for="region in regions">
                                             {{ region }}
                                         </option>
@@ -37,7 +37,7 @@
                             <p class="heading">Season</p>
                             <p class="control title">
                                 <span class="select">
-                                    <select :value="selectedSeason" @change="updateSeason">
+                                    <select v-model="currentSeason">
                                         <option v-for="season in seasons">
                                             {{ season }}
                                         </option>
@@ -49,7 +49,7 @@
                             <p class="heading">Model</p>
                             <p class="control title">
                                 <span class="select">
-                                    <select :value="selectedModel" @change="updateModel">
+                                    <select v-model="currentModel">
                                         <option v-for="model in models">
                                             {{ model }}
                                         </option>
@@ -57,7 +57,7 @@
                                 </span>
                             </p>
                         </div>
-                        </div>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -74,25 +74,51 @@
     regions
   } from '../vuex/getters'
   import {
-    updateModel,
-    updateRegion,
-    updateSeason
+    updateSelectedModel,
+    updateSelectedRegion,
+    updateSelectedSeason
   } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        selectedRegion,
-        selectedSeason,
         selectedModel,
+        selectedSeason,
+        selectedRegion,
         models,
         seasons,
         regions
       },
       actions: {
-        updateSeason,
-        updateModel,
-        updateRegion
+        updateSelectedSeason,
+        updateSelectedModel,
+        updateSelectedRegion
+      }
+    },
+    computed: {
+      currentRegion: {
+        get() {
+          return this.regions[this.selectedRegion]
+        },
+        set(val) {
+          this.updateSelectedRegion(this.regions.indexOf(val))
+        }
+      },
+      currentSeason: {
+        get() {
+          return this.seasons[this.selectedSeason]
+        },
+        set(val) {
+          this.updateSelectedSeason(this.seasons.indexOf(val))
+        }
+      },
+      currentModel: {
+        get() {
+          return this.models[this.selectedModel]
+        },
+        set(val) {
+          this.updateSelectedModel(this.models.indexOf(val))
+        }
       }
     }
   }

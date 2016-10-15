@@ -5,15 +5,15 @@ export function metadata (state) {
 }
 
 export function selectedModel (state) {
-  return state.models[state.selected.model]
+  return state.selected.model
 }
 
 export function selectedSeason (state) {
-  return state.seasons[state.selected.season]
+  return state.selected.season
 }
 
 export function selectedRegion (state) {
-  return state.regions[state.selected.region]
+  return state.selected.region
 }
 
 export function models (state) {
