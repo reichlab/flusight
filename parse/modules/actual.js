@@ -6,27 +6,58 @@ const metadata = require('./metadata')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
 
-// Return weighted ili % for all regions for given range
-// Range accepted as epiweek number (like 201501)
-// TODO: Manage multiple seasons
-const getActual = (from, to, callback) => {
+/**
+ * Function mapping week number (201523) to season string
+ * @param {number} week week number identifier
+ * @returns {string} string season like 2014-2015
+ */
+const weekToSeason = (week) => {
+  let weekNum = week % 100,
+      year = parseInt(week / 100)
+  if (weekNum > 29) {
+    return [year, year + 1].join('-')
+  } else {
+    return [year - 1, year].join('-')
+  }
+}
 
-  let filterResults = function(result, message, epidata) {
-    let output = {}
-    regionIdentifiers.forEach(id => {
-      output[id] = []
+/**
+ * Get actual epidemic data for given seasons
+ * @param {array} seasons array of string identifier strings
+ * @param {function} callback callback function
+ */
+const getActual = (seasons, callback) => {
+
+  // Get min max epiweek range in seasons
+  let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0]))),
+      lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
+
+  // Request range
+  let start = parseInt(firstYear + '' + 30),
+      end = parseInt(lastYear + '' + 29)
+
+  // Setup container
+  let output = {}
+  regionIdentifiers.forEach(id => {
+    output[id] = {}
+    seasons.map(season => {
+      output[id][season] = []
     })
+  })
 
-    epidata.forEach(data => {
-      output[data['region']].push([data['epiweek'], data['wili']])
+  // Request API
+  delphiAPI.Epidata.fluview((res, message, data) => {
+    data.forEach(d => {
+      output[d['region']][weekToSeason(d['epiweek'])].push({
+        week: d['epiweek'],
+        data: d['wili']
+      })
     })
 
     callback(output)
-  }
-
-  delphiAPI.Epidata.fluview(filterResults,
+  },
                             regionIdentifiers,
-                            [delphiAPI.Epidata.range(from, to)])
+                            [delphiAPI.Epidata.range(start, end)])
 }
 
 exports.getActual = getActual

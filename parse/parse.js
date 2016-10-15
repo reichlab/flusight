@@ -40,62 +40,67 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
 
   // Get baseline data
   let baselineData = baseline.getBaselines(baselineFile)
-  // TODO: get acutal data for seasons
 
-  // Caches CSVs
-  let cachedCSVDumps = []
+  console.log('Gathering actual data for the seasons...')
 
-  // Add seasons to output
-  output.forEach((val, idx) => {
-    console.log('Parsing region: ' + val.region)
-    val.seasons = seasons.map(season => {
-      // Get models for each season
-      let modelsDir = utils.getSubDirectories(path.join(dataDirectory, season))
-      let models = modelsDir.map(model => {
-        // Get prediction weeks for each model
-        let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
+  // Get actual data for seasons
+  actual.getActual(seasons, (actualData) => {
+
+    // Caches CSVs
+    let cachedCSVDumps = []
+
+    // Add seasons to output
+    output.forEach((val, idx) => {
+      console.log('Parsing region: ' + val.region)
+      val.seasons = seasons.map(season => {
+        // Get models for each season
+        let modelsDir = utils.getSubDirectories(path.join(dataDirectory, season))
+        let models = modelsDir.map(model => {
+          // Get prediction weeks for each model
+          let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
+          return {
+            id: model,
+            predictions: weeks.map(week => {
+              let fileName = path.join(dataDirectory, season, model, week + '.csv'),
+                  data = null,
+                  filtered = null
+              // Take from cache to avoid file reads
+              // TODO: change this quirkiness someday
+              if (cachedCSVDumps.indexOf(fileName) > -1) {
+                data = cachedCSVDumps[fileName]
+              } else {
+                data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
+                cachedCSVDumps[fileName] = data
+              }
+              // Take only for the current region
+              filtered = utils.regionFilter(data, val.subId)
+              filtered.week = week
+              return filtered
+            })
+          }
+        })
         return {
-          id: model,
-          predictions: weeks.map(week => {
-            let fileName = path.join(dataDirectory, season, model, week + '.csv'),
-                data = null,
-                filtered = null
-            // Take from cache to avoid file reads
-            // TODO: change this quirkiness someday
-            if (cachedCSVDumps.indexOf(fileName) > -1) {
-              data = cachedCSVDumps[fileName]
-            } else {
-              data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
-              cachedCSVDumps[fileName] = data
-            }
-            // Take only for the current region
-            filtered = utils.regionFilter(data, val.subId)
-            filtered.week = week
-            return filtered
-          })
+          id: season,
+          actual: actualData[val.id][season],
+          models: models,
+          baseline: baselineData[val.subId][season]
         }
       })
-      return {
-        id: season,
-        actual: [], // TODO: get these values
-        models: models,
-        baseline: baselineData[val.subId][season]
-      }
     })
-  })
 
-  let yamlData = config.read(configFile)
-  let outputWithYamlData = {
-    data: output,
-    metadata: yamlData
-  }
-
-  fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), (err) => {
-    if (err) {
-      return console.log(err)
+    let yamlData = config.read(configFile)
+    let outputWithYamlData = {
+      data: output,
+      metadata: yamlData
     }
 
-    console.log('\nAll done! JSON saved at ' + outputFile)
+    fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), (err) => {
+      if (err) {
+        return console.log(err)
+      }
+
+      console.log('\nAll done! JSON saved at ' + outputFile)
+    })
   })
 }
 
