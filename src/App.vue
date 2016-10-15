@@ -35,6 +35,8 @@ $accent: rgb(24, 128, 126);
   import Selectors from './components/Selectors'
   import Foot from './components/Foot'
   import store from './vuex/store'
+  import { initializeData } from './vuex/actions'
+  import jsonData from '!json!./assets/data.json'
 
   var $ = window.jQuery = require('jquery')
   require('./assets/fakeLoader.min.js')
@@ -47,11 +49,18 @@ $accent: rgb(24, 128, 126);
       Foot
     },
     store,
+    vuex: {
+      actions: {
+        initializeData
+      }
+    },
     ready() {
       $("#fakeLoader").fakeLoader({
         spinner:"spinner6",
         bgColor:"#18807e"
       })
+
+      this.initializeData(jsonData)
     }
   }
 </script>

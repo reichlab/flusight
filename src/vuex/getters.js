@@ -17,15 +17,17 @@ export function selectedRegion (state) {
 }
 
 export function models (state) {
-  return state.models
+  // Assuming each region/season has all the models
+  return state.data[0].seasons[0].models.map(m => m.id)
 }
 
 export function seasons (state) {
-  return state.seasons
+  // Assuming each region has all the seasons
+  return state.data[0].seasons.map(s => s.id)
 }
 
 export function regions (state) {
-  return state.regions
+  return state.data.map(d => d.region)
 }
 
 export function chart (state) {

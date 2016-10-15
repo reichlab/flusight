@@ -1,5 +1,9 @@
 // Vuex actions
 
+export const initializeData = ({ dispatch, state }, val) => {
+  dispatch('INITIALIZE_DATA', val)
+}
+
 export const updateModel = ({ dispatch, state }, e) => {
   dispatch('UPDATE_MODEL', state.models.indexOf(e.target.value))
 }

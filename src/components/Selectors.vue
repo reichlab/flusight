@@ -46,7 +46,7 @@
                             </p>
                         </div>
                         <div class="level-item">
-                            <p class="heading">Prediction Model</p>
+                            <p class="heading">Model</p>
                             <p class="control title">
                                 <span class="select">
                                     <select :value="selectedModel" @change="updateModel">
