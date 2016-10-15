@@ -37,3 +37,38 @@ export function chart (state) {
 export function map (state) {
   return state.map
 }
+
+/**
+ * Return data subset as specified in region/season selected
+ */
+export function subData (state) {
+
+  let regionSubset = state.data[selectedRegion(state)]
+  let seasonSubset = regionSubset.seasons[selectedSeason(state)]
+  let modelSubset = seasonSubset.models[selectedModel(state)]
+
+  return {
+    region: regionSubset.subId, // Submission ids are concise
+    actual: seasonSubset.actual,
+    baseline: seasonSubset.baseline,
+    predictions: modelSubset.predictions
+  }
+}
+
+/**
+ * Return actual data for all regions for current selection
+ */
+export function mapData (state) {
+
+  let output = []
+
+  state.data.map(r => {
+    output.push({
+      region: r.subId,
+      states: r.states,
+      actual: r.seasons[selectedSeason(state)].actual
+    })
+  })
+
+  return output.slice(1) // Skip national data
+}
