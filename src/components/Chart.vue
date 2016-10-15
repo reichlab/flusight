@@ -57,7 +57,6 @@ circle.point {
       // Use d3 v4 (vue-d3)
       this.setChart(new Chart(this.$d3, 'chart'))
       this.chart.setup()
-      this.chart.addLine()
       this.chart.makeInteractive()
     }
   }
