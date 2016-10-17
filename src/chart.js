@@ -541,7 +541,6 @@ export default class Chart {
         svg = this.svg
 
     let predictionData = this.subData.predictions[this.pointer]
-    console.log(predictionData.week)
     let startWeek = predictionData.week,
         startData = this.subData.actual.filter(d => d.week == startWeek)[0].data
 
@@ -555,12 +554,12 @@ export default class Chart {
     let names = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
     let weeks = this.getNextWeeks(startWeek)
 
-    names.forEach((item, idx) => {
+    weeks.forEach((item, idx) => {
       data.push({
-        week: weeks[idx],
-        data: predictionData[item].point,
-        low: predictionData[item].low,
-        high: predictionData[item].high
+        week: item,
+        data: predictionData[names[idx]].point,
+        low: predictionData[names[idx]].low,
+        high: predictionData[names[idx]].high
       })
     })
 
@@ -657,7 +656,7 @@ export default class Chart {
     let weeks = []
     for (let i = 0; i < 4; i++) {
       current += 1
-      weeks.push(this.xScale.domain()[current])
+      if (current < this.xScale.domain().length) weeks.push(this.xScale.domain()[current])
     }
     return weeks
   }
