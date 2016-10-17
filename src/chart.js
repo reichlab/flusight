@@ -6,7 +6,9 @@ export default class Chart {
     this.elementId = elementId
   }
 
-  // Draw axes etc.
+  /**
+   * Setup scales, axes, markers etc.
+   */
   setup() {
     // Sugar !!
     let d3 = this.d3
@@ -17,18 +19,16 @@ export default class Chart {
 
     // Create blank chart
     let margin = {
-      top: 10, right: 20, bottom: 30, left: 40
+      top: 10, right: 20, bottom: 50, left: 40
     },
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom
 
     // Initialize values
     let xScale = d3.scalePoint()
-        .range([0, width])
-        .domain([0, 1, 2]),
+        .range([0, width]),
         yScale = d3.scaleLinear()
         .range([height, 0])
-        .domain([0, 1])
 
     // Add svg
     let svg = d3.select('#' + this.elementId).append('svg')
@@ -37,54 +37,280 @@ export default class Chart {
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
+
+    // Save variables
+    this.svg = svg
+    this.xScale = xScale
+    this.yScale = yScale
+    this.height = height
+    this.width = width
+
+    this.setupTimeRect()
+    this.setupAxes()
+    this.setupBaseline()
+    this.setupOnset()
+    this.setupPeak()
+    // Setup prediction after initial plotting
+  }
+
+  // Markers initialization
+  // ----------------------
+
+  /**
+   * Setup axes
+   */
+  setupAxes() {
+    let d3 = this.d3,
+        svg = this.svg,
+        xScale = this.xScale,
+        yScale = this.yScale,
+        width = this.width,
+        height = this.height
+
     let xAxis = d3.axisBottom(xScale)
         .tickValues(xScale.domain().filter((d, i) => !(i % 2)))
 
     let yAxis = d3.axisLeft(yScale)
 
     svg.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', 'translate(0,' + yScale.range()[0] + ')')
+      .attr('class', 'axis axis-x')
+      .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis)
+      .append('text')
+      .attr('class', 'title')
+      .attr('text-anchor', 'end')
+      .attr('transform', 'translate(' + width + ',' + 35 + ')')
+      .text('Epidemic Week')
 
     svg.append('g')
-      .attr('class', 'axis axis--y')
+      .attr('class', 'axis axis-y')
       .call(yAxis)
       .append('text')
-      .attr('class', 'axis-title')
+      .attr('class', 'title')
       .attr('transform', 'rotate(-90)')
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text('Weighted ILI (%)')
+  }
 
-    // Current time rectangle
-    svg.append('rect')
+  /**
+   * Setup current time rectangle
+   */
+  setupTimeRect() {
+    this.svg.append('rect')
       .attr('x', 0)
       .attr('y', 0)
-      .attr('width', 0)
-      .attr('height', height)
+      .attr('width', 50)
+      .attr('height', this.height)
       .attr('class', 'timerect')
+  }
 
-    // Initial baseline
-    svg.append('line')
-      .attr('x1', xScale.range()[0])
-      .attr('y1', yScale.range()[0])
-      .attr('x2', xScale.range()[1])
-      .attr('y2', yScale.range()[0])
+  /**
+   * Setup baseline
+   */
+  setupBaseline() {
+    this.svg.append('line')
+      .attr('x1', 0)
+      .attr('y1', this.height)
+      .attr('x2', this.width)
+      .attr('y2', this.height)
       .attr('class', 'baseline')
+  }
 
-    // Onset markers
+  /**
+   * Setup onset marker
+   * One central circle, two end line markers and a range line
+   */
+  setupOnset() {
+    let group = this.svg.append('g').attr('class', 'onset-group')
 
-    // Peak prediction markers
+    let stp = 10,
+        size = 50,
+        cx = 200,
+        cy = this.height - 15
 
-    // Prediction markers
+    group.append('line')
+      .attr('x1', cx - size / 2)
+      .attr('y1', cy)
+      .attr('x2', cx + size / 2)
+      .attr('y2', cy)
+      .attr('class', 'range onset-range')
+
+    group.append('line')
+      .attr('x1', cx - size / 2)
+      .attr('y1', cy - stp / 2)
+      .attr('x2', cx - size / 2)
+      .attr('y2', cy + stp / 2)
+      .attr('class', 'stopper onset-stopper onset-low')
+
+    group.append('line')
+      .attr('x1', cx + size / 2)
+      .attr('y1', cy - stp / 2)
+      .attr('x2', cx + size / 2)
+      .attr('y2', cy + stp / 2)
+      .attr('class', 'stopper onset-stopper onset-high')
+
+    group.append('rect')
+      .attr('x', cx - 4)
+      .attr('y', cy - 4)
+      .attr('width', 8)
+      .attr('height', 8)
+      .attr('class', 'onset-mark')
+
+    // Effects
+    group.selectAll('.onset-mark')
+      .on('mouseover', function(d) {
+        d3.select(this)
+          .transition()
+          .duration(100)
+          .style('stroke-width', '12')
+      })
+      .on('mouseout', function(d) {
+        d3.select(this)
+          .transition()
+          .duration(300)
+          .style('stroke-width', '6')
+      })
+  }
+
+  /**
+   * Setup peak marker
+   * One central circle, four end line markers and two range lines
+   */
+  setupPeak() {
+    let d3 = this.d3
+    let group = this.svg.append('g').attr('class', 'peak-group')
+
+    let stp = 10,
+        sizeX = 150,
+        sizeY = 100,
+        cx = 500,
+        cy = 50
+
+    group.append('line')
+      .attr('x1', cx - sizeX / 2)
+      .attr('y1', cy)
+      .attr('x2', cx + sizeX / 2)
+      .attr('y2', cy)
+      .attr('class', 'range peak-range peak-range-x')
+
+    group.append('line')
+      .attr('x1', cx)
+      .attr('y1', cy - sizeY / 2)
+      .attr('x2', cx)
+      .attr('y2', cy + sizeY / 2)
+      .attr('class', 'range peak-range peak-range-y')
+
+    group.append('line')
+      .attr('x1', cx - sizeX / 2)
+      .attr('y1', cy - stp / 2)
+      .attr('x2', cx - sizeX / 2)
+      .attr('y2', cy + stp / 2)
+      .attr('class', 'stopper peak-stopper peak-low-x')
+
+    group.append('line')
+      .attr('x1', cx + sizeX / 2)
+      .attr('y1', cy - stp / 2)
+      .attr('x2', cx + sizeX / 2)
+      .attr('y2', cy + stp / 2)
+      .attr('class', 'stopper peak-stopper peak-high-x')
+
+    group.append('line')
+      .attr('x1', cx - stp / 2)
+      .attr('y1', cy - sizeY / 2)
+      .attr('x2', cx + stp / 2)
+      .attr('y2', cy - sizeY / 2)
+      .attr('class', 'stopper peak-stopper peak-low-y')
+
+    group.append('line')
+      .attr('x1', cx - stp / 2)
+      .attr('y1', cy + sizeY / 2)
+      .attr('x2', cx + stp / 2)
+      .attr('y2', cy + sizeY / 2)
+      .attr('class', 'stopper peak-stopper peak-high-y')
+
+    group.append('rect')
+      .attr('x', cx - 4)
+      .attr('y', cy - 4)
+      .attr('width', 8)
+      .attr('height', 8)
+      .attr('class', 'peak-mark')
+
+    // Effects
+    group.selectAll('.peak-mark')
+      .on('mouseover', function(d) {
+        d3.select(this)
+          .transition()
+          .duration(100)
+          .style('stroke-width', '15')
+      })
+      .on('mouseout', function(d) {
+        d3.select(this)
+          .transition()
+          .duration(300)
+          .style('stroke-width', '10')
+      })
+  }
+
+  /**
+   * Setup predictions
+   * Five points (with current), a path joining them and an area
+   */
+  setupPrediction() {
+    let d3 = this.d3,
+        xScale = this.xScale,
+        yScale = this.yScale,
+        svg = this.svg
+
+    svg.selectAll('.prediction-group')
+      .remove()
+
+    let group = svg.append('g').attr('class', 'prediction-group')
+
+    let data = [{'week': 100039, 'data': 2.3, 'low': 2.3, 'high': 2.3},
+                {'week': 100040, 'data': 2.4, 'low': 2.2, 'high': 3.5},
+                {'week': 100041, 'data': 2.5, 'low': 2.1, 'high': 3.56},
+                {'week': 100042, 'data': 2.5, 'low': 2.3, 'high': 3.7},
+                {'week': 100043, 'data': 3.2, 'low': 2.8, 'high': 3.5}]
 
 
-    // Set variables
-    this.svg = svg
-    this.xScale = xScale
-    this.yScale = yScale
+    // Add area
+    let area = d3.area()
+        .x(d => xScale(d.week % 100))
+        .y1(d => yScale(d.low))
+        .y0(d => yScale(d.high))
+
+    group.append('path')
+      .datum(data)
+      .attr('class', 'area-prediction')
+      .attr('d', area)
+
+    // Add line
+    let line = d3.line()
+        .x(d => xScale(d.week % 100))
+        .y(d => yScale(d.data))
+
+    group.append('path')
+      .datum(data)
+      .attr('class', 'line-prediction')
+      .attr('d', line)
+
+    // Add circles
+    let circles = group.selectAll('.point-prediction')
+        .data(data)
+
+    circles.enter().append('circle')
+      .merge(circles)
+      .attr('cx', d => xScale(d.week % 100))
+      .attr('cy', d => yScale(0))
+      .attr('class', 'point-prediction')
+      .attr('r', 0)
+      .transition()
+      .delay((d, i) => (i * 5))
+      .ease(d3.easeQuadOut)
+      .attr('cy', d => yScale(d.data))
+      .attr('r', 3)
   }
 
   // Add actual data
@@ -105,10 +331,10 @@ export default class Chart {
 
     let yAxis = d3.axisLeft(yScale)
 
-    svg.select('.axis--x')
+    svg.select('.axis-x')
       .transition().duration(200).call(xAxis)
 
-    svg.select('.axis--y')
+    svg.select('.axis-y')
       .transition().duration(200).call(yAxis)
 
     // Reset baseline
@@ -123,7 +349,7 @@ export default class Chart {
         .y(d => yScale(d.data))
 
     // Remove old
-    svg.select('.actualline')
+    svg.select('.line-actual')
       .transition()
       .duration(300)
       .style('opacity', 0)
@@ -132,11 +358,11 @@ export default class Chart {
     // Add new
     svg.append('path')
       .datum(subData.actual)
-      .attr('class', 'actualline')
+      .attr('class', 'line-actual')
       .attr('d', line)
 
-
-    let circles = svg.selectAll('.point')
+    // Add circles
+    let circles = svg.selectAll('.point-actual')
         .data(subData.actual)
 
     circles.exit().remove()
@@ -145,7 +371,7 @@ export default class Chart {
       .merge(circles)
       .attr('cx', d => xScale(d.week % 100))
       .attr('cy', d => yScale(0))
-      .attr('class', 'point')
+      .attr('class', 'point-actual')
       .attr('r', 0)
       .transition()
       .delay((d, i) => (i * 5))
@@ -157,6 +383,8 @@ export default class Chart {
 
     // Save for later
     this.subData = subData
+
+    this.setupPrediction()
   }
 
   // Add prediction
@@ -164,7 +392,6 @@ export default class Chart {
   // + path
   // + circles
   // + confidence region
-  //   + alpha-ed color
   // + peak prediction
   //   + circle
   //   + horizontal/vertical bar
@@ -183,33 +410,21 @@ export default class Chart {
   //   + on mouse: fade others
   makeInteractive() {
     let d3 = this.d3
-    this.svg.selectAll('.point')
+
+    // Actual data points
+    this.svg.selectAll('.point-actual')
       .on('mouseover', function(d) {
         d3.select(this)
           .transition()
           .duration(100)
-          .attr("r", 4)
+          .attr('r', 4)
       })
       .on('mouseout', function(d) {
         d3.select(this)
           .transition()
           .duration(300)
-          .attr("r", 2.5)
+          .attr('r', 2.5)
       })
-
-    // this.svg.selectAll('.line')
-    //   .on('mouseover', function(d) {
-    //     d3.select(this)
-    //       .transition()
-    //       .duration(0)
-    //       .style('stroke-width', '3px')
-    //   })
-    //   .on('mouseout', function(d) {
-    //     d3.select(this)
-    //       .transition()
-    //       .duration(400)
-    //       .style('stroke-width', '1.5px')
-    //   })
   }
 
   // Add legend
