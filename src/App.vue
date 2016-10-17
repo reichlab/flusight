@@ -14,6 +14,7 @@ $accent: rgb(24, 128, 126);
 </style>
 
 <template>
+
     <div id="fakeLoader"></div>
 
     <navbar></navbar>
