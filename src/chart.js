@@ -436,10 +436,12 @@ export default class Chart {
         xScale = this.xScale
     let onset = this.subData.predictions[this.pointer].onsetWeek
 
+    let leftMost = xScale(onset.point)
+
     svg.select('.onset-mark')
       .transition()
       .duration(200)
-      .attr('x', xScale(onset.point) - 4)
+      .attr('x', (!leftMost ? 0 : leftMost)  - 4)
 
     svg.select('.onset-range')
       .transition()
@@ -470,11 +472,13 @@ export default class Chart {
     let pw = this.subData.predictions[this.pointer].peakWeek,
         pp = this.subData.predictions[this.pointer].peakPercent
 
+    let leftW = xScale(pw.point),
+        leftP = yScale(pp.point)
     svg.select('.peak-mark')
       .transition()
       .duration(200)
-      .attr('x', xScale(pw.point) - 4)
-      .attr('y', yScale(pp.point) - 4)
+      .attr('x', (!leftW ? 0 : leftW) - 4)
+      .attr('y', (!leftP ? 0 : leftP) - 4)
 
     svg.select('.peak-range-x')
       .transition()
@@ -492,6 +496,7 @@ export default class Chart {
       .attr('y1', yScale(pp.low))
       .attr('y2', yScale(pp.high))
 
+
     svg.select('.peak-low-x')
       .transition()
       .duration(200)
@@ -508,19 +513,20 @@ export default class Chart {
       .attr('y1', yScale(pp.point) - 5)
       .attr('y2', yScale(pp.point) + 5)
 
+    leftW = xScale(pw.point)
     svg.select('.peak-low-y')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.point) - 5)
-      .attr('x2', xScale(pw.point) + 5)
+      .attr('x1', (!leftW ? 0 : leftW) - 5)
+      .attr('x2', (!leftW ? 0 : leftW) + 5)
       .attr('y1', yScale(pp.low))
       .attr('y2', yScale(pp.low))
 
     svg.select('.peak-high-y')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.point) - 5)
-      .attr('x2', xScale(pw.point) + 5)
+      .attr('x1', (!leftW ? 0 : leftW) - 5)
+      .attr('x2', (!leftW ? 0 : leftW) + 5)
       .attr('y1', yScale(pp.high))
       .attr('y2', yScale(pp.high))
   }
