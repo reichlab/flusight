@@ -32,13 +32,7 @@
                     </span>
                     <span>Help</span>
                 </a>
-                <a class="button is-info is-small is-outlined">
-                    <span class="icon is-small">
-                        <i class="fa fa-twitter"></i>
-                    </span>
-                    <span>Tweet</span>
-               </a>
-               <a class="button is-dark is-small is-outlined" v-bind:href="metadata.sourceUrl">
+                <a class="button is-dark is-small is-outlined" v-bind:href="metadata.sourceUrl">
                    <span class="icon is-small">
                        <i class="fa fa-github"></i>
                    </span>
