@@ -19,3 +19,12 @@ export const setChart = ({ dispatch, state }, val) => {
 export const setMap = ({ dispatch, state }, val) => {
   dispatch('SET_MAP', val)
 }
+
+export const stepForward = ({ dispatch, state }, val) => {
+    console.log("hello")
+    state.chart.stepForward()
+}
+
+export const stepBackward = ({ dispatch, state }, val) => {
+  state.chart.stepBackward()
+}

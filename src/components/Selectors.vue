@@ -3,6 +3,13 @@
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+.chart-nav-btn {
+    .icon {
+        margin-left: 0px !important;
+        color: white;
+    }
+}
 </style>
 
 <template>
@@ -57,6 +64,21 @@
                                 </span>
                             </p>
                         </div>
+                        <div class="level-item">
+                            <p class="heading">Navigate</p>
+                            <p class="control title">
+                                <a class="button is-primary chart-nav-btn" v-on:click="stepBackward">
+                                    <span class="icon">
+                                        <i class="fa fa-arrow-left"></i>
+                                    </span>
+                                </a>
+                                <a class="button is-primary chart-nav-btn" v-on:click="stepForward">
+                                    <span class="icon">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </span>
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -78,7 +100,9 @@
   import {
     updateSelectedModel,
     updateSelectedRegion,
-    updateSelectedSeason
+    updateSelectedSeason,
+    stepForward,
+    stepBackward
   } from '../vuex/actions'
 
   export default {
@@ -96,7 +120,9 @@
       actions: {
         updateSelectedSeason,
         updateSelectedModel,
-        updateSelectedRegion
+        updateSelectedRegion,
+        stepForward,
+        stepBackward
       }
     },
     computed: {
@@ -124,6 +150,7 @@
         },
         set(val) {
           this.updateSelectedModel(this.models.indexOf(val))
+          this.chart.plotActual(this.subData)
         }
       }
     }
