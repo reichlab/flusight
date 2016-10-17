@@ -205,8 +205,8 @@ const parseSeries = (series) => {
     if (!range.low) accumulator.low += series[i][2]
     if (!range.high) accumulator.high += series[len - i - 1][2]
 
-    if (accumulator.low > 0.05) range.low = series[i][0]
-    if (accumulator.high > 0.05) range.high = series[len - i - 1][1]
+    if ((accumulator.low > 0.05) && (!range.low)) range.low = series[i][0]
+    if ((accumulator.high > 0.05) && (!range.high)) range.high = series[len - i - 1][1]
   }
 
   return {
