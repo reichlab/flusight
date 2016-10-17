@@ -133,7 +133,7 @@
         set(val) {
           this.updateSelectedRegion(this.regions.indexOf(val))
           this.chart.plotActual(this.subData)
-          this.stepForward()
+          this.chart.stepForward()
         }
       },
       currentSeason: {
@@ -143,7 +143,7 @@
         set(val) {
           this.updateSelectedSeason(this.seasons.indexOf(val))
           this.chart.plotActual(this.subData)
-          this.stepForward()
+          this.chart.stepForward()
         }
       },
       currentModel: {
@@ -153,7 +153,7 @@
         set(val) {
           this.updateSelectedModel(this.models.indexOf(val))
           this.chart.plotActual(this.subData)
-          this.stepForward()
+          this.chart.stepForward()
         }
       }
     }

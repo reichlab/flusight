@@ -21,7 +21,6 @@ export const setMap = ({ dispatch, state }, val) => {
 }
 
 export const stepForward = ({ dispatch, state }, val) => {
-    console.log("hello")
     state.chart.stepForward()
 }
 

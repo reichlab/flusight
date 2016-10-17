@@ -316,7 +316,7 @@ export default class Chart {
         yScale = this.yScale
 
     // Reset scales and axes
-    yScale.domain([0, getSubDataMax(subData)])
+    yScale.domain([0, this.getSubDataMax(subData)])
     // TODO: Intelligently set xscale
     xScale.domain(subData.actual.map(d => d.week % 100))
 
@@ -378,12 +378,11 @@ export default class Chart {
     // Save for later
     this.subData = subData
 
+    // Set pointer in prediction data (start with last)
+    this.pointer = this.subData.predictions.length - 1
+
+    // Hot start: TODO: This can be fixed
     this.setupPrediction()
-  }
-
-  // Add prediction
-  plotPrediction() {
-
   }
 
   // Add interactivity
@@ -414,22 +413,246 @@ export default class Chart {
   addLegend() {
 
   }
-}
 
-// Utility functions
-// ----------------
+  // Marker transition functions
+  // ---------------------------
 
-/**
- * Return maximum value to be displayed (y axis) in the given subset
- */
-const getSubDataMax = (subData) => {
-  let actualMax = Math.max(...subData.actual.map(d => d.data))
-  let predictionHighMax = Math.max(...subData.predictions.map(d => Math.max(...[
-    d.oneWk.high,
-    d.twoWk.high,
-    d.threeWk.high,
-    d.fourWk.high,
-    d.peakPercent.high])))
+  /**
+   * Move time rectangle following the prediction pointer
+   */
+  moveTimeRect() {
+    let xPoint = this.subData.predictions[this.pointer].week % 100
+    this.svg.select('.timerect')
+      .transition()
+      .duration(200)
+      .attr('width', this.xScale(xPoint))
+  }
 
-  return Math.max(...[actualMax, predictionHighMax])
+  /**
+   * Move onset marker
+   */
+  moveOnset() {
+    let svg = this.svg,
+        xScale = this.xScale
+    let onset = this.subData.predictions[this.pointer].onsetWeek
+
+    svg.select('.onset-mark')
+      .transition()
+      .duration(200)
+      .attr('x', xScale(onset.point) - 4)
+
+    svg.select('.onset-range')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(onset.low))
+      .attr('x2', xScale(onset.high))
+
+    svg.select('.onset-low')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(onset.low))
+      .attr('x2', xScale(onset.low))
+
+    svg.select('.onset-high')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(onset.high))
+      .attr('x2', xScale(onset.high))
+  }
+
+  /**
+   * Move peak marker
+   */
+  movePeak() {
+    let svg = this.svg,
+        xScale = this.xScale,
+        yScale = this.yScale
+    let pw = this.subData.predictions[this.pointer].peakWeek,
+        pp = this.subData.predictions[this.pointer].peakPercent
+
+    svg.select('.peak-mark')
+      .transition()
+      .duration(200)
+      .attr('x', xScale(pw.point) - 4)
+      .attr('y', yScale(pp.point) - 4)
+
+    svg.select('.peak-range-x')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.low))
+      .attr('x2', xScale(pw.high))
+      .attr('y1', yScale(pp.point))
+      .attr('y2', yScale(pp.point))
+
+    svg.select('.peak-range-y')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.point))
+      .attr('x2', xScale(pw.point))
+      .attr('y1', yScale(pp.low))
+      .attr('y2', yScale(pp.high))
+
+    svg.select('.peak-low-x')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.low))
+      .attr('x2', xScale(pw.low))
+      .attr('y1', yScale(pp.point) - 5)
+      .attr('y2', yScale(pp.point) + 5)
+
+    svg.select('.peak-high-x')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.high))
+      .attr('x2', xScale(pw.high))
+      .attr('y1', yScale(pp.point) - 5)
+      .attr('y2', yScale(pp.point) + 5)
+
+    svg.select('.peak-low-y')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.point) - 5)
+      .attr('x2', xScale(pw.point) + 5)
+      .attr('y1', yScale(pp.low))
+      .attr('y2', yScale(pp.low))
+
+    svg.select('.peak-high-y')
+      .transition()
+      .duration(200)
+      .attr('x1', xScale(pw.point) - 5)
+      .attr('x2', xScale(pw.point) + 5)
+      .attr('y1', yScale(pp.high))
+      .attr('y2', yScale(pp.high))
+  }
+
+  /**
+   * Move prediction points + area
+   */
+  movePrediction() {
+    let d3 = this.d3,
+        xScale = this.xScale,
+        yScale = this.yScale,
+        svg = this.svg
+
+    let predictionData = this.subData.predictions[this.pointer]
+    console.log(predictionData.week)
+    let startWeek = predictionData.week,
+        startData = this.subData.actual.filter(d => d.week == startWeek)[0].data
+
+    let data = [{
+      week: startWeek % 100,
+      data: startData,
+      low: startData,
+      high: startData
+    }]
+
+    let names = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+    let weeks = this.getNextWeeks(startWeek)
+
+    names.forEach((item, idx) => {
+      data.push({
+        week: weeks[idx],
+        data: predictionData[item].point,
+        low: predictionData[item].low,
+        high: predictionData[item].high
+      })
+    })
+
+    let group = svg.select('.prediction-group')
+
+    // Move circles around
+    let circles = group.selectAll('.point-prediction')
+        .data(data)
+
+    circles.exit().remove()
+
+    circles.enter().append('circle')
+      .merge(circles)
+      .attr('class', 'point-prediction')
+      .transition()
+      .duration(200)
+      .ease(d3.easeQuadOut)
+      .attr('cx', d => xScale(d.week))
+      .attr('cy', d => yScale(d.data))
+      .attr('r', 3)
+
+    let line = d3.line()
+        .x(d => xScale(d.week % 100))
+        .y(d => yScale(d.data))
+
+    group.select('.line-prediction')
+      .datum(data)
+      .transition()
+      .duration(200)
+      .attr('d', line)
+
+    let area = d3.area()
+        .x(d => xScale(d.week % 100))
+        .y1(d => yScale(d.low))
+        .y0(d => yScale(d.high))
+
+    group.select('.area-prediction')
+      .datum(data)
+      .transition()
+      .duration(200)
+      .attr('d', area)
+  }
+
+  /**
+   * Move all prediction specific markers
+   */
+  moveAll() {
+    this.moveTimeRect()
+    this.moveOnset()
+    this.movePeak()
+    this.movePrediction()
+  }
+
+  /**
+   * Increment pointer and redraw
+   */
+  stepForward() {
+    this.pointer = Math.min(this.subData.predictions.length - 1, ++this.pointer)
+    this.moveAll()
+  }
+
+  /**
+   * Decrement pointer and redraw
+   */
+  stepBackward() {
+    this.pointer = Math.max(0, --this.pointer)
+    this.moveAll()
+  }
+
+
+  // Utility functions
+  // ----------------
+
+  /**
+   * Return maximum value to be displayed (y axis) in the given subset
+   */
+  getSubDataMax(subData) {
+    let actualMax = Math.max(...subData.actual.map(d => d.data))
+    let predictionHighMax = Math.max(...subData.predictions.map(d => Math.max(...[
+      d.oneWk.high,
+      d.twoWk.high,
+      d.threeWk.high,
+      d.fourWk.high,
+      d.peakPercent.high])))
+
+    return 1.1 * Math.max(...[actualMax, predictionHighMax])
+  }
+
+  /**
+   * Return next four week numbers for given week
+   */
+  getNextWeeks(currentWeek) {
+    let current = this.xScale.domain().indexOf(currentWeek % 100)
+    let weeks = []
+    for (let i = 0; i < 4; i++) {
+      current += 1
+      weeks.push(this.xScale.domain()[current])
+    }
+    return weeks
+  }
 }

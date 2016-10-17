@@ -248,7 +248,7 @@ const longToJson = (longFormat) => {
       accumulator.high = parsed.high
 
       // If point prediction is NA, use the calculated one
-      if (accumulator.point == '') {
+      if ((accumulator.point == '') || (accumulator.point == 'NA')) {
         accumulator.point = parsed.point
       }
       delete accumulator.bins

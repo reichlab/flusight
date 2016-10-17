@@ -42,11 +42,13 @@ $accent: rgba(24, 129, 127, 0.901961);
     fill: none;
     stroke: $accent;
     stroke-width: 1.5px;
+    opacity: 0.7;
 }
 
 .point-actual {
     stroke: $accent;
     fill: $accent;
+    opacity: 0.7;
 }
 
 .prediction-group {
@@ -57,7 +59,7 @@ $accent: rgba(24, 129, 127, 0.901961);
     .line-prediction {
         fill: none;
         stroke: rgba(43, 131, 186, 1.0);
-        stroke-width: 2.5px;
+        stroke-width: 1.5px;
     }
 
     .point-prediction {
@@ -94,7 +96,7 @@ $accent: rgba(24, 129, 127, 0.901961);
 <script>
   import Chart from '../chart'
   import { chart, subData } from '../vuex/getters'
-  import { setChart } from '../vuex/actions'
+  import { setChart, stepForward } from '../vuex/actions'
 
   export default {
     vuex: {
@@ -111,6 +113,7 @@ $accent: rgba(24, 129, 127, 0.901961);
       this.setChart(new Chart(this.$d3, 'chart'))
       this.chart.setup()
       this.chart.plotActual(this.subData)
+      this.chart.stepForward()
     }
   }
 </script>
