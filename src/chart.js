@@ -37,6 +37,9 @@ export default class Chart {
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
+    svg.append('path')
+      .attr('class', 'line-actual')
+
 
     // Save variables
     this.svg = svg
@@ -317,7 +320,6 @@ export default class Chart {
 
     // Reset scales and axes
     yScale.domain([0, this.getSubDataMax(subData)])
-    // TODO: Intelligently set xscale
     xScale.domain(subData.actual.map(d => d.week % 100))
 
     let xAxis = d3.axisBottom(xScale)
@@ -342,17 +344,10 @@ export default class Chart {
         .x(d => xScale(d.week % 100))
         .y(d => yScale(d.data))
 
-    // Remove old
     svg.select('.line-actual')
-      .transition()
-      .duration(300)
-      .style('opacity', 0)
-      .remove()
-
-    // Add new
-    svg.append('path')
       .datum(subData.actual)
-      .attr('class', 'line-actual')
+      .transition()
+      .duration(200)
       .attr('d', line)
 
     // Add circles
