@@ -53,7 +53,7 @@ export default class Chart {
     this.setupBaseline()
     this.setupOnset()
     this.setupPeak()
-    // Setup prediction after initial plotting
+    this.setupPrediction()
   }
 
   // Markers initialization
@@ -266,12 +266,7 @@ export default class Chart {
         yScale = this.yScale,
         svg = this.svg
 
-    svg.selectAll('.prediction-group')
-      .remove()
-
     let group = svg.append('g').attr('class', 'prediction-group')
-
-    let data = [{'week': 100001, 'data': 0, 'low': 0, 'high': 0}]
 
     // Add area
     let area = d3.area()
@@ -280,9 +275,7 @@ export default class Chart {
         .y0(d => yScale(d.high))
 
     group.append('path')
-      .datum(data)
       .attr('class', 'area-prediction')
-      .attr('d', area)
 
     // Add line
     let line = d3.line()
@@ -290,13 +283,10 @@ export default class Chart {
         .y(d => yScale(d.data))
 
     group.append('path')
-      .datum(data)
       .attr('class', 'line-prediction')
-      .attr('d', line)
 
     // Add circles
     let circles = group.selectAll('.point-prediction')
-        .data(data)
 
     circles.enter().append('circle')
       .merge(circles)
@@ -375,9 +365,6 @@ export default class Chart {
 
     // Set pointer in prediction data (start with last)
     this.pointer = this.subData.predictions.length - 1
-
-    // Hot start: TODO: This can be fixed
-    this.setupPrediction()
   }
 
   // Add interactivity
