@@ -38,19 +38,7 @@ $accent: rgba(24, 129, 127, 0.901961);
     }
 }
 
-.line-actual {
-    fill: none;
-    stroke: $accent;
-    stroke-width: 1.5px;
-    opacity: 0.7;
-}
-
-.point-actual {
-    stroke: $accent;
-    fill: $accent;
-    opacity: 0.7;
-}
-
+// Prediction area, line and dots
 .prediction-group {
     .area-prediction {
         fill: rgba(43, 131, 186, 0.4);
@@ -66,6 +54,22 @@ $accent: rgba(24, 129, 127, 0.901961);
         stroke: rgba(43, 131, 186, 1.0);
         fill: white;
         stroke-width: 1.5px;
+    }
+}
+
+// Actual data
+.actual-group {
+    .line-actual {
+        fill: none;
+        stroke: $accent;
+        stroke-width: 1.5px;
+        opacity: 0.7;
+    }
+
+    .point-actual {
+        stroke: $accent;
+        fill: $accent;
+        opacity: 0.7;
     }
 }
 
