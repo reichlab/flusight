@@ -14,13 +14,14 @@
 
 <script>
   import Map from '../map'
-  import { map } from '../vuex/getters'
+  import { map, mapData } from '../vuex/getters'
   import { setMap } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        map
+        map,
+        mapData
       },
       actions: {
         setMap

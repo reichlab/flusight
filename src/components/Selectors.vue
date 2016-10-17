@@ -71,7 +71,9 @@
     selectedRegion,
     models,
     seasons,
-    regions
+    regions,
+    chart,
+    subData
   } from '../vuex/getters'
   import {
     updateSelectedModel,
@@ -87,7 +89,9 @@
         selectedRegion,
         models,
         seasons,
-        regions
+        regions,
+        chart,
+        subData
       },
       actions: {
         updateSelectedSeason,
@@ -102,6 +106,7 @@
         },
         set(val) {
           this.updateSelectedRegion(this.regions.indexOf(val))
+          this.chart.plotActual(this.subData)
         }
       },
       currentSeason: {
@@ -110,6 +115,7 @@
         },
         set(val) {
           this.updateSelectedSeason(this.seasons.indexOf(val))
+          this.chart.plotActual(this.subData)
         }
       },
       currentModel: {

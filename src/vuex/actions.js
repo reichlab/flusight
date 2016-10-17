@@ -1,9 +1,5 @@
 // Vuex actions
 
-export const initializeData = ({ dispatch, state }, val) => {
-  dispatch('INITIALIZE_DATA', val)
-}
-
 export const updateSelectedModel = ({ dispatch, state }, val) => {
   dispatch('UPDATE_SELECTED_MODEL', val)
 }

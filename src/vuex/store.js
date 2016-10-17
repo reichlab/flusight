@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import jsonData from '!json!../assets/data.json'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ const state = {
   chart: null,
   map: null,
 
+  // Index of dropdown selection
   selected: {
     region: 0,
     season: 0,
@@ -16,9 +18,12 @@ const state = {
   },
 
   // All the data!
-  data: [],
+  data: jsonData.data,
   // All the metadata!
-  metadata: {}
+  metadata: jsonData.metadata,
+
+  // Current epidemic week pointer
+  weekPointer: null
 }
 
 const mutations = {
@@ -40,11 +45,6 @@ const mutations = {
 
   SET_MAP (state, val) {
     state.map = val
-  },
-
-  INITIALIZE_DATA (state, val) {
-    state.data = val.data
-    state.metadata = val.metadata
   }
 }
 

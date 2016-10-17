@@ -1,4 +1,7 @@
 <style lang="scss">
+
+$accent: rgba(24, 129, 127, 0.901961);
+
 .axis {
     font: 10px sans-serif;
 }
@@ -6,19 +9,19 @@
 .axis path,
 .axis line {
     fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+    stroke: #bbb;
+    shape-rendering: geometricPrecision;
 }
 
-.line {
+.actualline {
     fill: none;
-    stroke: steelblue;
+    stroke: $accent;
     stroke-width: 1.5px;
 }
 
 circle.point {
-    stroke: steelblue;
-    fill: steelblue;
+    stroke: $accent;
+    fill: $accent;
 }
 
 .overlay {
@@ -28,7 +31,17 @@ circle.point {
 
 .focus circle {
     fill: none;
-    stroke: steelblue;
+    stroke: $accent;
+}
+
+.baseline {
+    stroke: #353535;
+    stroke-width: 0.5px;
+    stroke-dasharray: 5, 5;
+}
+
+.timerect {
+    fill: rgba(253, 245, 230, 0.59);
 }
 </style>
 
@@ -41,13 +54,14 @@ circle.point {
 
 <script>
   import Chart from '../chart'
-  import { chart } from '../vuex/getters'
+  import { chart, subData } from '../vuex/getters'
   import { setChart } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        chart
+        chart,
+        subData
       },
       actions: {
         setChart
@@ -57,7 +71,7 @@ circle.point {
       // Use d3 v4 (vue-d3)
       this.setChart(new Chart(this.$d3, 'chart'))
       this.chart.setup()
-      this.chart.makeInteractive()
+      this.chart.plotActual(this.subData)
     }
   }
 </script>

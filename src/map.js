@@ -40,4 +40,9 @@ export default class Map {
       }
     })
   }
+
+  update(mapData) {
+    // Update map with given data
+    // TODO: lookout for choropleth absolute max color
+  }
 }
