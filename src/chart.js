@@ -15,7 +15,7 @@ export default class Chart {
     // Get div dimensions
     let chartDiv = document.getElementById(this.elementId),
         divWidth = chartDiv.offsetWidth,
-        divHeight = 300
+        divHeight = 330
 
     // Create blank chart
     let margin = {
@@ -101,7 +101,7 @@ export default class Chart {
     this.svg.append('rect')
       .attr('x', 0)
       .attr('y', 0)
-      .attr('width', 50)
+      .attr('width', 0)
       .attr('height', this.height)
       .attr('class', 'timerect')
   }
@@ -126,8 +126,8 @@ export default class Chart {
     let group = this.svg.append('g').attr('class', 'onset-group')
 
     let stp = 10,
-        size = 50,
-        cx = 200,
+        size = 0,
+        cx = 0,
         cy = this.height - 15
 
     group.append('line')
@@ -183,10 +183,10 @@ export default class Chart {
     let group = this.svg.append('g').attr('class', 'peak-group')
 
     let stp = 10,
-        sizeX = 150,
-        sizeY = 100,
-        cx = 500,
-        cy = 50
+        sizeX = 0,
+        sizeY = 0,
+        cx = 0,
+        cy = 0
 
     group.append('line')
       .attr('x1', cx - sizeX / 2)
@@ -268,12 +268,7 @@ export default class Chart {
 
     let group = svg.append('g').attr('class', 'prediction-group')
 
-    let data = [{'week': 100039, 'data': 2.3, 'low': 2.3, 'high': 2.3},
-                {'week': 100040, 'data': 2.4, 'low': 2.2, 'high': 3.5},
-                {'week': 100041, 'data': 2.5, 'low': 2.1, 'high': 3.56},
-                {'week': 100042, 'data': 2.5, 'low': 2.3, 'high': 3.7},
-                {'week': 100043, 'data': 3.2, 'low': 2.8, 'high': 3.5}]
-
+    let data = [{'week': 100001, 'data': 0, 'low': 0, 'high': 0}]
 
     // Add area
     let area = d3.area()
