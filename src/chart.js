@@ -316,9 +316,8 @@ export default class Chart {
         yScale = this.yScale
 
     // Reset scales and axes
-    yScale.domain([0, d3.max(subData.actual.map(d => d.data))])
+    yScale.domain([0, getSubDataMax(subData)])
     // TODO: Intelligently set xscale
-    //       Use peak max for these
     xScale.domain(subData.actual.map(d => d.week % 100))
 
     let xAxis = d3.axisBottom(xScale)
@@ -383,17 +382,6 @@ export default class Chart {
   }
 
   // Add prediction
-  // Markers:
-  // + path
-  // + circles
-  // + confidence region
-  // + peak prediction
-  //   + circle
-  //   + horizontal/vertical bar
-  //   + bar stoppers
-  // + onset prediction
-  //   + horizontal bar around x axis
-  //   + bar stoppers
   plotPrediction() {
 
   }
@@ -426,4 +414,22 @@ export default class Chart {
   addLegend() {
 
   }
+}
+
+// Utility functions
+// ----------------
+
+/**
+ * Return maximum value to be displayed (y axis) in the given subset
+ */
+const getSubDataMax = (subData) => {
+  let actualMax = Math.max(...subData.actual.map(d => d.data))
+  let predictionHighMax = Math.max(...subData.predictions.map(d => Math.max(...[
+    d.oneWk.high,
+    d.twoWk.high,
+    d.threeWk.high,
+    d.fourWk.high,
+    d.peakPercent.high])))
+
+  return Math.max(...[actualMax, predictionHighMax])
 }
