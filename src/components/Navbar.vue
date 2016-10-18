@@ -26,13 +26,13 @@
 
         <div class="nav-right nav-menu">
             <span class="nav-item">
-                <a class="button is-small is-primary is-outlined">
+                <a class="button is-small is-info">
                     <span class="icon is-small">
                         <i class="fa fa-question"></i>
                     </span>
                     <span>Help</span>
                 </a>
-                <a class="button is-dark is-small is-outlined" v-bind:href="metadata.sourceUrl">
+                <a class="button is-dark is-small" v-bind:href="metadata.sourceUrl">
                    <span class="icon is-small">
                        <i class="fa fa-github"></i>
                    </span>
