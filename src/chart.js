@@ -4,6 +4,7 @@ export default class Chart {
   constructor(d3, elementId) {
     this.d3 = d3
     this.elementId = elementId
+    this.setup()
   }
 
   /**

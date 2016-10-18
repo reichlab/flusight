@@ -100,7 +100,7 @@ $accent: rgba(24, 129, 127, 0.901961);
 <script>
   import Chart from '../chart'
   import { chart, subData } from '../vuex/getters'
-  import { setChart, stepForward, stepBackward } from '../vuex/actions'
+  import { setChart, plotChart, stepForward, stepBackward } from '../vuex/actions'
 
   export default {
     vuex: {
@@ -111,14 +111,14 @@ $accent: rgba(24, 129, 127, 0.901961);
       actions: {
         setChart,
         stepBackward,
-        stepForward
+        stepForward,
+        plotChart
       }
     },
     ready() {
       // Use d3 v4 (vue-d3)
       this.setChart(new Chart(this.$d3, 'chart'))
-      this.chart.setup()
-      this.chart.plotActual(this.subData)
+      this.plotChart(this.subData)
       this.stepForward()
 
       window.addEventListener('keyup', (evt) => {
