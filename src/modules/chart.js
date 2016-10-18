@@ -240,8 +240,8 @@ export default class Chart {
       .attr('class', 'point-actual')
   }
 
-  // Add actual data
-  plotActual(subData) {
+  // plot data
+  plotData(subData) {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,

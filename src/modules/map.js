@@ -9,11 +9,11 @@ export default class Map {
   constructor(d3, elementId) {
     this.d3 = d3
     this.elementId = elementId
-    this.render()
+    this.setup()
   }
 
   // Display the map for the first time
-  render() {
+  setup() {
     this.datamap = new Datamap({
       element: document.getElementById(this.elementId),
       scope: 'usa',
@@ -41,8 +41,12 @@ export default class Map {
     })
   }
 
-  update(mapData) {
+  plotData(mapData) {
     // Update map with given data
     // TODO: lookout for choropleth absolute max color
+
+
+    // Save for movements
+    this.mapData = mapData
   }
 }

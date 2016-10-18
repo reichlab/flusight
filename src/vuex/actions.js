@@ -21,7 +21,11 @@ export const setMap = ({ dispatch, state }, val) => {
 }
 
 export const plotChart = ({ dispatch, state }, val) => {
-  state.chart.plotActual(val)
+  state.chart.plotData(val)
+}
+
+export const plotMap = ({ dispatch, state }, val) => {
+  state.map.plotData(val)
 }
 
 export const stepForward = ({ dispatch, state }, val) => {
