@@ -139,6 +139,7 @@
         set(val) {
           this.updateSelectedRegion(this.regions.indexOf(val))
           this.plotChart(this.chartData)
+          this.plotMap([this.mapData, this.chartData.predictions])
           this.stepForward()
         }
       },
@@ -149,7 +150,7 @@
         set(val) {
           this.updateSelectedSeason(this.seasons.indexOf(val))
           this.plotChart(this.chartData)
-          this.plotMap(this.mapData)
+          this.plotMap([this.mapData, this.chartData.predictions])
           this.stepForward()
         }
       },
@@ -160,6 +161,7 @@
         set(val) {
           this.updateSelectedModel(this.models.indexOf(val))
           this.plotChart(this.chartData)
+          this.plotMap([this.mapData, this.chartData.predictions])
           this.stepForward()
         }
       }

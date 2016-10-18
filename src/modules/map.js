@@ -81,6 +81,9 @@ export default class Map {
         .duration(100)
         .style('fill', this.cmap[colorId])
     })
+
+    // Save data for hover things
+    this.pointerData = data
   }
 
   /**

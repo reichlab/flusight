@@ -142,13 +142,13 @@ export default class Chart {
 
     // Effects
     group.selectAll('.onset-mark')
-      .on('mouseover', function(d) {
+      .on('mouseover', function() {
         d3.select(this)
           .transition()
           .duration(100)
           .style('stroke-width', '12')
       })
-      .on('mouseout', function(d) {
+      .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
@@ -189,13 +189,13 @@ export default class Chart {
 
     // Effects
     group.selectAll('.peak-mark')
-      .on('mouseover', function(d) {
+      .on('mouseover', function() {
         d3.select(this)
           .transition()
           .duration(100)
           .style('stroke-width', '15')
       })
-      .on('mouseout', function(d) {
+      .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
