@@ -39,9 +39,9 @@ export function map (state) {
 }
 
 /**
- * Return data subset as specified in region/season selected
+ * Return data subset for chart as specified in region/season selected
  */
-export function subData (state) {
+export function chartData (state) {
 
   let regionSubset = state.data[selectedRegion(state)]
   let seasonSubset = regionSubset.seasons[selectedSeason(state)]

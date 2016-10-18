@@ -111,14 +111,14 @@ $accent: rgba(24, 129, 127, 0.901961);
 <script>
   import Chart from '../modules/chart'
   import Map from '../modules/map'
-  import { chart, subData, map, mapData } from '../vuex/getters'
+  import { chart, chartData, map, mapData } from '../vuex/getters'
   import { setChart, setMap, plotChart, plotMap, stepForward, stepBackward } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
         chart,
-        subData,
+        chartData,
         map,
         mapData
       },
@@ -135,7 +135,7 @@ $accent: rgba(24, 129, 127, 0.901961);
       // Use d3 v4 (vue-d3)
       this.setChart(new Chart(this.$d3, 'chart'))
       this.setMap(new Map(this.$d3, 'map'))
-      this.plotChart(this.subData)
+      this.plotChart(this.chartData)
       this.plotMap(this.mapData)
 
       this.stepForward()

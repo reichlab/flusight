@@ -27,7 +27,7 @@ export default class Map {
         }
       },
       fills: {
-        defaultFill: 'rgba(24, 128, 126, 0.9)'
+        defaultFill: '#ccc'
       },
       geographyConfig: {
         highlightOnHover: false,
@@ -44,7 +44,6 @@ export default class Map {
   plotData(mapData) {
     // Update map with given data
     // TODO: lookout for choropleth absolute max color
-
 
     // Save for movements
     this.mapData = mapData

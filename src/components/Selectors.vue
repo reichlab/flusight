@@ -95,7 +95,8 @@
     seasons,
     regions,
     chart,
-    subData
+    chartData,
+    mapData
   } from '../vuex/getters'
   import {
     updateSelectedModel,
@@ -103,7 +104,8 @@
     updateSelectedSeason,
     stepForward,
     stepBackward,
-    plotChart
+    plotChart,
+    plotMap
   } from '../vuex/actions'
 
   export default {
@@ -116,7 +118,8 @@
         seasons,
         regions,
         chart,
-        subData
+        chartData,
+        mapData
       },
       actions: {
         updateSelectedSeason,
@@ -124,7 +127,8 @@
         updateSelectedRegion,
         stepForward,
         stepBackward,
-        plotChart
+        plotChart,
+        plotMap
       }
     },
     computed: {
@@ -134,7 +138,7 @@
         },
         set(val) {
           this.updateSelectedRegion(this.regions.indexOf(val))
-          this.plotChart(this.subData)
+          this.plotChart(this.chartData)
           this.stepForward()
         }
       },
@@ -144,7 +148,8 @@
         },
         set(val) {
           this.updateSelectedSeason(this.seasons.indexOf(val))
-          this.plotChart(this.subData)
+          this.plotChart(this.chartData)
+          this.plotMap(this.mapData)
           this.stepForward()
         }
       },
@@ -154,7 +159,7 @@
         },
         set(val) {
           this.updateSelectedModel(this.models.indexOf(val))
-          this.plotChart(this.subData)
+          this.plotChart(this.chartData)
           this.stepForward()
         }
       }

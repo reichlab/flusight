@@ -241,15 +241,15 @@ export default class Chart {
   }
 
   // plot data
-  plotData(subData) {
+  plotData(chartData) {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
         yScale = this.yScale
 
     // Reset scales and axes
-    yScale.domain([0, this.getSubDataMax(subData)])
-    xScale.domain(subData.actual.map(d => d.week % 100))
+    yScale.domain([0, this.getChartDataMax(chartData)])
+    xScale.domain(chartData.actual.map(d => d.week % 100))
 
     let xAxis = d3.axisBottom(xScale)
         .tickValues(xScale.domain().filter((d, i) => !(i % 2)))
@@ -265,8 +265,8 @@ export default class Chart {
     // Reset baseline
     svg.select('.baseline')
       .transition().duration(300)
-      .attr('y1', yScale(subData.baseline))
-      .attr('y2', yScale(subData.baseline))
+      .attr('y1', yScale(chartData.baseline))
+      .attr('y2', yScale(chartData.baseline))
 
 
     // Move actual markers
@@ -277,13 +277,13 @@ export default class Chart {
         .y(d => yScale(d.data))
 
     group.select('.line-actual')
-      .datum(subData.actual)
+      .datum(chartData.actual)
       .transition()
       .duration(200)
       .attr('d', line)
 
     let circles = group.selectAll('.point-actual')
-        .data(subData.actual)
+        .data(chartData.actual)
 
     circles.exit().remove()
 
@@ -298,10 +298,10 @@ export default class Chart {
       .attr('r', 2.5)
 
     // Save for later
-    this.subData = subData
+    this.chartData = chartData
 
     // Set pointer in prediction data (start with last)
-    this.pointer = this.subData.predictions.length - 1
+    this.pointer = this.chartData.predictions.length - 1
   }
 
   // Marker transition functions
@@ -311,7 +311,7 @@ export default class Chart {
    * Move time rectangle following the prediction pointer
    */
   moveTimeRect() {
-    let xPoint = this.subData.predictions[this.pointer].week % 100
+    let xPoint = this.chartData.predictions[this.pointer].week % 100
     this.svg.select('.timerect')
       .transition()
       .duration(200)
@@ -324,7 +324,7 @@ export default class Chart {
   moveOnset() {
     let svg = this.svg,
         xScale = this.xScale
-    let onset = this.subData.predictions[this.pointer].onsetWeek
+    let onset = this.chartData.predictions[this.pointer].onsetWeek
 
     let leftMost = xScale(onset.point)
 
@@ -359,8 +359,8 @@ export default class Chart {
     let svg = this.svg,
         xScale = this.xScale,
         yScale = this.yScale
-    let pw = this.subData.predictions[this.pointer].peakWeek,
-        pp = this.subData.predictions[this.pointer].peakPercent
+    let pw = this.chartData.predictions[this.pointer].peakWeek,
+        pp = this.chartData.predictions[this.pointer].peakPercent
 
     let leftW = xScale(pw.point),
         leftP = yScale(pp.point)
@@ -429,9 +429,9 @@ export default class Chart {
         yScale = this.yScale,
         svg = this.svg
 
-    let predictionData = this.subData.predictions[this.pointer]
+    let predictionData = this.chartData.predictions[this.pointer]
     let startWeek = predictionData.week,
-        startData = this.subData.actual.filter(d => d.week == startWeek)[0].data
+        startData = this.chartData.actual.filter(d => d.week == startWeek)[0].data
 
     let data = [{
       week: startWeek % 100,
@@ -506,7 +506,7 @@ export default class Chart {
    * Increment pointer and redraw
    */
   stepForward() {
-    this.pointer = Math.min(this.subData.predictions.length - 1, ++this.pointer)
+    this.pointer = Math.min(this.chartData.predictions.length - 1, ++this.pointer)
     this.moveAll()
   }
 
@@ -525,9 +525,9 @@ export default class Chart {
   /**
    * Return maximum value to be displayed (y axis) in the given subset
    */
-  getSubDataMax(subData) {
-    let actualMax = Math.max(...subData.actual.map(d => d.data))
-    let predictionHighMax = Math.max(...subData.predictions.map(d => Math.max(...[
+  getChartDataMax(chartData) {
+    let actualMax = Math.max(...chartData.actual.map(d => d.data))
+    let predictionHighMax = Math.max(...chartData.predictions.map(d => Math.max(...[
       d.oneWk.high,
       d.twoWk.high,
       d.threeWk.high,
