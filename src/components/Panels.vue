@@ -136,9 +136,10 @@ $accent: rgba(24, 129, 127, 0.901961);
       this.setChart(new Chart(this.$d3, 'chart'))
       this.setMap(new Map(this.$d3, 'map'))
       this.plotChart(this.chartData)
-      this.plotMap(this.mapData)
+      this.plotMap([this.mapData, this.chartData.predictions])
 
       this.stepForward()
+
 
       window.addEventListener('keyup', (evt) => {
         if (evt.code === 'ArrowRight') {

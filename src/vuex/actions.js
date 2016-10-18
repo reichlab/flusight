@@ -25,13 +25,15 @@ export const plotChart = ({ dispatch, state }, val) => {
 }
 
 export const plotMap = ({ dispatch, state }, val) => {
-  state.map.plotData(val)
+  state.map.plotData(val[0], val[1])
 }
 
 export const stepForward = ({ dispatch, state }, val) => {
   state.chart.stepForward()
+  state.map.stepForward()
 }
 
 export const stepBackward = ({ dispatch, state }, val) => {
   state.chart.stepBackward()
+  state.map.stepBackward()
 }
