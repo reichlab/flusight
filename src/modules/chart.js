@@ -51,10 +51,10 @@ export default class Chart {
     this.setupTimeRect()
     this.setupAxes()
     this.setupBaseline()
-    this.setupOnset()
-    this.setupPeak()
     this.setupActual()
     this.setupPrediction()
+    this.setupOnset()
+    this.setupPeak()
   }
 
   // Markers initialization
@@ -154,10 +154,9 @@ export default class Chart {
       .attr('y2', cy + stp / 2)
       .attr('class', 'stopper onset-stopper onset-high')
 
-    group.append('rect')
-      .attr('width', 8)
-      .attr('height', 8)
-      .attr('y', cy - stp / 2)
+    group.append('circle')
+      .attr('r', 3)
+      .attr('cy', cy)
       .attr('class', 'onset-mark')
 
     // Effects
@@ -166,13 +165,13 @@ export default class Chart {
         d3.select(this)
           .transition()
           .duration(100)
-          .style('stroke-width', '12')
+          .style('stroke-width', '6px')
       })
       .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
-          .style('stroke-width', '6')
+          .style('stroke-width', '4px')
       })
   }
 
@@ -202,9 +201,8 @@ export default class Chart {
     group.append('line')
       .attr('class', 'stopper peak-stopper peak-high-y')
 
-    group.append('rect')
-      .attr('width', 8)
-      .attr('height', 8)
+    group.append('circle')
+      .attr('r', 3)
       .attr('class', 'peak-mark')
 
     // Effects
@@ -213,13 +211,13 @@ export default class Chart {
         d3.select(this)
           .transition()
           .duration(100)
-          .style('stroke-width', '15')
+          .style('stroke-width', '6px')
       })
       .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
-          .style('stroke-width', '10')
+          .style('stroke-width', '4px')
       })
   }
 
@@ -364,12 +362,10 @@ export default class Chart {
         xScale = this.xScale
     let onset = this.chartData.predictions[this.pointer].onsetWeek
 
-    let leftMost = xScale(onset.point)
-
     svg.select('.onset-mark')
       .transition()
       .duration(200)
-      .attr('x', (!leftMost ? 0 : leftMost)  - 4)
+      .attr('cx', xScale(onset.point))
 
     svg.select('.onset-range')
       .transition()
@@ -405,8 +401,8 @@ export default class Chart {
     svg.select('.peak-mark')
       .transition()
       .duration(200)
-      .attr('x', (!leftW ? 0 : leftW) - 4)
-      .attr('y', (!leftP ? 0 : leftP) - 4)
+      .attr('cx', leftW)
+      .attr('cy', leftP)
 
     svg.select('.peak-range-x')
       .transition()

@@ -25,7 +25,7 @@ $accent: rgba(24, 129, 127, 0.901961);
     .onset-mark {
         fill: rgba(52, 152, 219, 1.0);
         stroke: rgba(52, 152, 219, 0.5);
-        stroke-width: 6px;
+        stroke-width: 4px;
     }
 }
 
@@ -34,7 +34,7 @@ $accent: rgba(24, 129, 127, 0.901961);
     .peak-mark {
         fill: rgba(243, 156, 18, 9.0);
         stroke: rgba(243, 156, 18, 0.5);
-        stroke-width: 10;
+        stroke-width: 4px;
     }
     .range {
         stroke-width: 0.5px;
