@@ -77,10 +77,16 @@ $accent: rgba(24, 129, 127, 0.901961);
     }
 }
 
-.baseline {
-    stroke: #353535;
-    stroke-width: 0.5px;
-    stroke-dasharray: 5, 5;
+.baseline-group {
+    .baseline {
+        stroke: #353535;
+        stroke-width: 0.5px;
+        stroke-dasharray: 5, 5;
+    }
+    .title {
+        fill: #444;
+        font-size: 10px;
+    }
 }
 
 .timerect {

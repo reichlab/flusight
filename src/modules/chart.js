@@ -20,7 +20,7 @@ export default class Chart {
 
     // Create blank chart
     let margin = {
-      top: 10, right: 20, bottom: 70, left: 40
+      top: 10, right: 50, bottom: 70, left: 40
     },
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom
@@ -107,12 +107,26 @@ export default class Chart {
    * Setup baseline
    */
   setupBaseline() {
-    this.svg.append('line')
+    let group = this.svg.append('g')
+        .attr('class', 'baseline-group')
+
+    group.append('line')
       .attr('x1', 0)
       .attr('y1', this.height)
       .attr('x2', this.width)
       .attr('y2', this.height)
       .attr('class', 'baseline')
+
+    let text = group.append('text')
+        .attr('class', 'title')
+        .attr('transform', 'translate(' + (this.width + 10) + ', 0)')
+    text.append('tspan')
+      .text('CDC')
+      .attr('x', 0)
+    text.append('tspan')
+      .text('Baseline')
+      .attr('x', 0)
+      .attr('dy', '1em')
   }
 
   /**
@@ -289,6 +303,9 @@ export default class Chart {
       .attr('y1', yScale(chartData.baseline))
       .attr('y2', yScale(chartData.baseline))
 
+    svg.select('.baseline-group .title')
+      .transition().duration(300)
+      .attr('dy', yScale(chartData.baseline))
 
     // Move actual markers
     let group = svg.select('.actual-group')
