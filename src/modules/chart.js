@@ -70,18 +70,17 @@ export default class Chart {
       .attr('transform', 'translate(0,' + height + ')')
       .append('text')
       .attr('class', 'title')
-      .attr('text-anchor', 'end')
-      .attr('transform', 'translate(' + width + ',' + 35 + ')')
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'translate(' + width / 2 + ',' + 45 + ')')
       .text('Epidemic Week')
 
     svg.append('g')
       .attr('class', 'axis axis-y')
       .append('text')
       .attr('class', 'title')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
+      .attr('transform', 'translate(-40 ,' + height / 2 + ') rotate(-90)')
       .attr('dy', '.71em')
-      .style('text-anchor', 'end')
+      .style('text-anchor', 'middle')
       .text('Weighted ILI (%)')
   }
 
