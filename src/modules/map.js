@@ -43,7 +43,7 @@ export default class Map {
     })
 
     this.cmap = colormap({
-      colormap: 'YIGnBu',
+      colormap: 'YIOrRd',
       nshades: 50,
       format: 'rgbaString'
     })
