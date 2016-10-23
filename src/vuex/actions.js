@@ -25,7 +25,9 @@ export const plotChart = ({ dispatch, state }, val) => {
 }
 
 export const plotMap = ({ dispatch, state }, val) => {
-  state.map.plotData(val[0], val[1])
+  state.map.plotData(val[0], val[1], (regionId) => {
+    updateSelectedRegion({ dispatch, state }, regionId)
+  })
 }
 
 export const stepForward = ({ dispatch, state }, val) => {

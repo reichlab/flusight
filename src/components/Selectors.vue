@@ -138,9 +138,6 @@
         },
         set(val) {
           this.updateSelectedRegion(this.regions.indexOf(val))
-          this.plotChart(this.chartData)
-          this.plotMap([this.mapData, this.chartData.predictions])
-          this.stepForward()
         }
       },
       currentSeason: {
@@ -164,6 +161,13 @@
           this.plotMap([this.mapData, this.chartData.predictions])
           this.stepForward()
         }
+      }
+    },
+    watch: {
+      selectedRegion: function() {
+        this.plotChart(this.chartData)
+        this.plotMap([this.mapData, this.chartData.predictions])
+        this.stepForward()
       }
     }
   }

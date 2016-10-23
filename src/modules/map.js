@@ -53,7 +53,7 @@ export default class Map {
    * Plot data on map, iterating only on weeks which are present
    * in the given chart data
    */
-  plotData(mapData, predictions) {
+  plotData(mapData, predictions, clickCallback) {
     let d3 = this.d3
 
     // Save data for movement
@@ -84,6 +84,10 @@ export default class Map {
           .transition()
           .duration(100)
           .style('opacity', '1.0')
+      })
+      .on('click', function() {
+        // Change the region selector
+        clickCallback(getRegionId(getSiblings(this, mapData).region))
       })
   }
 
@@ -166,6 +170,13 @@ export default class Map {
 const getSiblings = (element, mapData) => {
   let stateName = element.getAttribute('class').split(' ')[1]
   return mapData.filter(d => d.states.indexOf(stateName) > -1)[0]
+}
+
+/**
+ * Return id mapping to region selector
+ */
+const getRegionId = (region) => {
+  return parseInt(region.split(' ').pop())
 }
 
 /**
