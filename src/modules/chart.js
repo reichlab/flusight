@@ -20,7 +20,7 @@ export default class Chart {
 
     // Create blank chart
     let margin = {
-      top: 10, right: 20, bottom: 50, left: 40
+      top: 10, right: 20, bottom: 70, left: 40
     },
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom
@@ -29,7 +29,9 @@ export default class Chart {
     let xScale = d3.scalePoint()
         .range([0, width]),
         yScale = d3.scaleLinear()
-        .range([height, 0])
+        .range([height, 0]),
+        xScaleDate = d3.scaleTime()
+        .range([0, width])
 
     // Add svg
     let svg = d3.select('#' + this.elementId).append('svg')
@@ -42,6 +44,7 @@ export default class Chart {
     this.svg = svg
     this.xScale = xScale
     this.yScale = yScale
+    this.xScaleDate = xScaleDate
     this.height = height
     this.width = width
 
@@ -68,10 +71,14 @@ export default class Chart {
     svg.append('g')
       .attr('class', 'axis axis-x')
       .attr('transform', 'translate(0,' + height + ')')
+
+    svg.append('g')
+      .attr('class', 'axis axis-x-date')
+      .attr('transform', 'translate(0,' + (height + 25) + ')')
       .append('text')
       .attr('class', 'title')
       .attr('text-anchor', 'middle')
-      .attr('transform', 'translate(' + width / 2 + ',' + 45 + ')')
+      .attr('transform', 'translate(' + width / 2 + ',' + 40 + ')')
       .text('Epidemic Week')
 
     svg.append('g')
@@ -244,19 +251,34 @@ export default class Chart {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
-        yScale = this.yScale
+        yScale = this.yScale,
+        xScaleDate = this.xScaleDate
 
     // Reset scales and axes
     yScale.domain([0, this.getChartDataMax(chartData)])
     xScale.domain(chartData.actual.map(d => d.week % 100))
 
+    // Week to date parser
+    let dateParser = d3.timeParse('%Y-%U')
+    xScaleDate.domain(d3.extent(chartData.actual.map(d => {
+      let formattedDate = Math.floor(d.week / 100) + '-' + d.week % 100
+      return dateParser(formattedDate)
+    })))
+
     let xAxis = d3.axisBottom(xScale)
         .tickValues(xScale.domain().filter((d, i) => !(i % 2)))
+
+    let xAxisDate = d3.axisBottom(xScaleDate)
+        .ticks(d3.timeMonth)
+        .tickFormat(d3.timeFormat('%b %y'))
 
     let yAxis = d3.axisLeft(yScale)
 
     svg.select('.axis-x')
       .transition().duration(200).call(xAxis)
+
+    svg.select('.axis-x-date')
+      .transition().duration(200).call(xAxisDate)
 
     svg.select('.axis-y')
       .transition().duration(200).call(yAxis)
