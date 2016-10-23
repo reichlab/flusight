@@ -3,8 +3,6 @@
 
 * Todos
 ** Primary
-*** [#A] Fix prediction values                                        :bug:
-DEADLINE: <2016-10-23 Sun>
 *** [#A] Add mouseover annotations
 DEADLINE: <2016-10-23 Sun>
 **** Snap to nearest vertical (virtual) line
@@ -12,6 +10,11 @@ DEADLINE: <2016-10-23 Sun>
 DEADLINE: <2016-10-23 Sun>
 *** Place potential switches and selectors
 *** [#C] Setup first run demo
+*** Link to definitions
+Apart from hover
+*** Fix prediction values                                             :plan:
++ Fractional week values?
++ Uniform distribution over bins issue
 ** Secondary
 *** Automate weekly data processing
 *** Automate pull request based data ingestion
@@ -36,13 +39,13 @@ DEADLINE: <2016-10-23 Sun>
 :date-creation: 2016-10-20T16:49:20-0400
 :author:   "nickreich"
 :END:
-: - [ ] add month and year to x-axis labeling
-: - [ ] move weighted ILI (%) to outside of y-axis and maybe link to description of what it is.
+: - [X] add month and year to x-axis labeling
+: - [X] move weighted ILI (%) to outside of y-axis and maybe link to description of what it is.
 : - [ ] add hover info about what weighted ILI is
-: - [ ] random jumps of peak week and onset week point estimates (sometimes outside of intervals)
+: - [X] random jumps of peak week and onset week point estimates (sometimes outside of intervals)
 : - [ ] add hover text just on value of points based on snapped-to x coordinate
 : - [ ] change boxes for point estimates of week metric to circles with different hover stats
-: - [ ] add annotation for baseline: "CDC baseline value"
+: - [X] add annotation for baseline: "CDC baseline value"
 : - [ ] add historical lines with highlight on hover
 : - [ ] add color legend/scale for map and switch to different color scheme
 : - [ ] little images not showing up on mac
@@ -52,7 +55,7 @@ DEADLINE: <2016-10-23 Sun>
 : - [ ] add demo slides to introduce key features
 : - [ ] clickability of regions
 : - [ ] on hover and selection highlights of regions  
-: - [ ] change text of title to "Real-time Influenza Forecasts: CDC FluSight Challenge"
+: - [X] change text of title to "Real-time Influenza Forecasts: CDC FluSight Challenge"
 ** OPEN Setup cached data streaming
 :PROPERTIES:
 :id:       7
