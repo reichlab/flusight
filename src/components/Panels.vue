@@ -23,18 +23,18 @@ $accent: rgba(24, 129, 127, 0.901961);
 // Onset markers
 .onset-group {
     .onset-mark {
-        fill: rgba(52, 152, 219, 1.0);
-        stroke: rgba(52, 152, 219, 0.5);
-        stroke-width: 4px;
+        fill: white;
+        stroke: $accent;
+        stroke-width: 1.5px;
     }
 }
 
 // Peak markers
 .peak-group {
     .peak-mark {
-        fill: rgba(243, 156, 18, 9.0);
-        stroke: rgba(243, 156, 18, 0.5);
-        stroke-width: 4px;
+        fill: white;
+        stroke: $accent;
+        stroke-width: 1.5px;
     }
     .range {
         stroke-width: 0.5px;

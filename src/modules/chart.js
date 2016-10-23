@@ -155,7 +155,7 @@ export default class Chart {
       .attr('class', 'stopper onset-stopper onset-high')
 
     group.append('circle')
-      .attr('r', 3)
+      .attr('r', 4)
       .attr('cy', cy)
       .attr('class', 'onset-mark')
 
@@ -165,13 +165,13 @@ export default class Chart {
         d3.select(this)
           .transition()
           .duration(100)
-          .style('stroke-width', '6px')
+          .attr('r', 5)
       })
       .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
-          .style('stroke-width', '4px')
+          .attr('r', 4)
       })
   }
 
@@ -202,7 +202,7 @@ export default class Chart {
       .attr('class', 'stopper peak-stopper peak-high-y')
 
     group.append('circle')
-      .attr('r', 3)
+      .attr('r', 4)
       .attr('class', 'peak-mark')
 
     // Effects
@@ -211,13 +211,13 @@ export default class Chart {
         d3.select(this)
           .transition()
           .duration(100)
-          .style('stroke-width', '6px')
+          .attr('r', 5)
       })
       .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(300)
-          .style('stroke-width', '4px')
+          .attr('r', 4)
       })
   }
 
