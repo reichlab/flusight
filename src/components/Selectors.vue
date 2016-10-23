@@ -20,10 +20,10 @@
                     <div class="level-left">
                         <div class="container">
                             <h1 class="title">
-                                Influenza Forecast
+                                Real-time Influenza Forecasts
                             </h1>
                             <h2 class="subtitle">
-                                Some descriptory subtitle
+                                CDC FluSight Challenge
                             </h2>
                         </div>
                     </div>
