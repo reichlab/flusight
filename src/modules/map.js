@@ -54,6 +54,7 @@ export default class Map {
    * in the given chart data
    */
   plotData(mapData, predictions) {
+    let d3 = this.d3
 
     // Save data for movement
     this.mapData = mapData
@@ -65,6 +66,25 @@ export default class Map {
     this.colorScale = this.d3.scaleLinear()
       .domain([this.getMaxData(), 0])
       .range([0, 49.99]) // Will take floor for shade
+
+    // On hover color change
+    d3.selectAll('.datamaps-subunit')
+      .on('mouseover', function() {
+        d3.selectAll('.datamaps-subunit')
+          .filter(d => getCousins(this, mapData)
+                  .indexOf(d.id) > -1)
+          .transition()
+          .duration(100)
+          .style('opacity', '0.4')
+      })
+      .on('mouseout', function() {
+        d3.selectAll('.datamaps-subunit')
+          .filter(d => getCousins(this, mapData)
+                  .indexOf(d.id) > -1)
+          .transition()
+          .duration(100)
+          .style('opacity', '1.0')
+      })
   }
 
   /**
@@ -135,4 +155,30 @@ export default class Map {
 
     return output
   }
+}
+
+// Purer utility functions
+// -----------------------
+
+/**
+ * Return sibling data for given element
+ */
+const getSiblings = (element, mapData) => {
+  let stateName = element.getAttribute('class').split(' ')[1]
+  return mapData.filter(d => d.states.indexOf(stateName) > -1)[0]
+}
+
+/**
+ * Return non-sibling states
+ */
+const getCousins = (element, mapData) => {
+  let stateName = element.getAttribute('class').split(' ')[1]
+  let states = []
+  mapData.forEach(d => {
+    if (d.states.indexOf(stateName) === - 1) {
+      states = states.concat(d.states)
+    }
+  })
+
+  return states
 }

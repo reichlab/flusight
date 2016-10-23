@@ -98,6 +98,10 @@ $accent: rgba(24, 129, 127, 0.901961);
     stroke-width: 1px;
 }
 
+// Map stuff
+.datamaps-subunit {
+    cursor: pointer;
+}
 </style>
 
 <template>
