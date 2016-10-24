@@ -3,6 +3,12 @@
 
 * Todos
 ** Primary
+*** Alow float week
+*** Choropleth
+**** Plot other data in maps
+*** Different confidence interval
+*** Histogram
+*** Scale svg elements dynamically
 *** [#A] Add mouseover annotations
 DEADLINE: <2016-10-23 Sun>
 **** Snap to nearest vertical (virtual) line
@@ -13,7 +19,6 @@ DEADLINE: <2016-10-23 Sun>
 *** Link to definitions
 Apart from hover
 *** Fix prediction values                                             :plan:
-+ Fractional week values?
 + Uniform distribution over bins issue
 ** Secondary
 *** Automate weekly data processing
