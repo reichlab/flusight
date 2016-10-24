@@ -20,8 +20,8 @@ export default class Map {
       scope: 'usa',
       setProjection: (element, options) => {
         let projection = this.d3.geoAlbersUsa()
-          .scale(500)
-          .translate([element.offsetWidth / 2, element.offsetHeight / 2])
+          .scale(450)
+          .translate([element.offsetWidth / 2 - 30, element.offsetHeight / 2])
         return {
           path: this.d3.geoPath().projection(projection),
           projection: projection
@@ -42,11 +42,56 @@ export default class Map {
       }
     })
 
+    let nCmap = 50
     this.cmap = colormap({
       colormap: 'YIOrRd',
-      nshades: 50,
+      nshades: nCmap,
       format: 'rgbaString'
     })
+
+    let svg = this.d3.select('#' + this.elementId + ' svg')
+    this.width = svg.node().getBoundingClientRect().width
+    this.height = svg.node().getBoundingClientRect().height
+    this.svg = svg
+    this.nCmap = nCmap
+
+    this.setupColorBar()
+  }
+
+  /**
+   * Add color bar to the side
+   */
+  setupColorBar() {
+    let group = this.svg.append('g')
+
+    let cb = {
+      height: 160,
+      width: 20,
+      x: this.width - 20,
+      y: 80
+    },
+        barHeight = Math.floor(cb.height / this.nCmap)
+
+    for (let i = 0; i < this.nCmap; i++) {
+      group.append('rect')
+        .attr('x', cb.x)
+        .attr('y', cb.y + i * barHeight)
+        .attr('width', cb.width)
+        .attr('height', barHeight)
+        .attr('class', 'colorbar')
+        .style('fill', this.cmap[i])
+    }
+
+    // Add axis
+    let scale = this.d3.scaleLinear()
+        .range([cb.height, 0])
+    let axis = this.d3.axisLeft(scale)
+        .ticks(5)
+
+    group.append('g')
+      .attr('class', 'axis axis-y-color')
+      .attr('transform', 'translate(' + cb.x + ',' + cb.y + ')')
+      .call(axis)
   }
 
   /**
