@@ -1,6 +1,6 @@
 <style lang="scss">
 
-$accent: rgb(24, 128, 126);
+$accent: #268bd2;
 
 ::selection {
     background: $accent;
@@ -10,6 +10,9 @@ $accent: rgb(24, 128, 126);
 ::-moz-selection {
     background: $accent;
     color: white;
+}
+svg text::selection {
+    fill: white;
 }
 </style>
 
