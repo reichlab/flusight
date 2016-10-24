@@ -102,6 +102,21 @@ $accent: rgba(24, 129, 127, 0.901961);
 .datamaps-subunit {
     cursor: pointer;
 }
+
+.info-group {
+    .title {
+        font-size: 15px;
+    }
+    .sub-title {
+        font-size: 20px;
+    }
+    .switch {
+        font-family: FontAwesome;
+        font-size: 20px;
+        cursor: pointer;
+        fill: #ccc;
+    }
+}
 </style>
 
 <template>

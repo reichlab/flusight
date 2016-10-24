@@ -21,7 +21,7 @@ export default class Map {
       setProjection: (element, options) => {
         let projection = this.d3.geoAlbersUsa()
           .scale(450)
-          .translate([element.offsetWidth / 2 - 30, element.offsetHeight / 2])
+          .translate([element.offsetWidth / 2 - 30, element.offsetHeight / 2 + 20])
         return {
           path: this.d3.geoPath().projection(projection),
           projection: projection
@@ -55,7 +55,56 @@ export default class Map {
     this.svg = svg
     this.nCmap = nCmap
 
+    this.setupInfo()
     this.setupColorBar()
+  }
+
+  /**
+   * Add info text + toggle
+   */
+  setupInfo() {
+    let d3 = this.d3
+    let group = this.svg.append('g')
+        .attr('class', 'info-group')
+
+    group.append('text')
+      .attr('class', 'switch')
+      .attr('text-andhor', 'start')
+      .attr('transform', 'translate(220, 17)')
+      .text('\uf205')
+      .on('mouseover', function() {
+        d3.select(this)
+          .style('fill', '#333')
+      })
+      .on('mouseout', function() {
+        d3.select(this)
+          .style('fill', '#ccc')
+      })
+      .on('click', function() {
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .text('\uf204')
+      })
+
+    group.append('rect')
+      .attr('x', 20)
+      .attr('y', 0)
+      .attr('width', 4)
+      .attr('height', 45)
+      .style('fill', '#ccc')
+
+    group.append('text')
+      .attr('class', 'title')
+      .attr('text-anchor', 'start')
+      .attr('transform', 'translate(35, 15)')
+      .text('Absolute Weighted ILI (%)')
+
+    group.append('text')
+      .attr('class', 'sub-title')
+      .attr('text-anchor', 'start')
+      .attr('transform', 'translate(35, 40)')
+      .text('Week 18')
   }
 
   /**
@@ -63,12 +112,13 @@ export default class Map {
    */
   setupColorBar() {
     let group = this.svg.append('g')
+        .attr('class', 'colorbar-group')
 
     let cb = {
       height: 160,
       width: 20,
       x: this.width - 20,
-      y: 80
+      y: 100
     },
         barHeight = Math.floor(cb.height / this.nCmap)
 
@@ -78,7 +128,6 @@ export default class Map {
         .attr('y', cb.y + i * barHeight)
         .attr('width', cb.width)
         .attr('height', barHeight)
-        .attr('class', 'colorbar')
         .style('fill', this.cmap[i])
     }
 
