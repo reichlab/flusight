@@ -28,8 +28,6 @@ export default class Chart {
     // Initialize values
     let xScale = d3.scaleLinear()
         .range([0, width]),
-        xScalePoint = d3.scalePoint()
-        .range([0, width]),
         yScale = d3.scaleLinear()
         .range([height, 0]),
         xScaleDate = d3.scaleTime()
@@ -45,7 +43,6 @@ export default class Chart {
     // Save variables
     this.svg = svg
     this.xScale = xScale
-    this.xScalePoint = xScalePoint
     this.yScale = yScale
     this.xScaleDate = xScaleDate
     this.height = height
@@ -279,17 +276,20 @@ export default class Chart {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
-        xScalePoint = this.xScalePoint,
         yScale = this.yScale,
         xScaleDate = this.xScaleDate
 
     // Reset scales and axes
     yScale.domain([0, this.getChartDataMax(chartData)])
     let weeks = chartData.actual.map(d => d.week % 100)
-    xScalePoint.domain(weeks)
     xScale.domain([0, weeks.length - 1])
 
-    // Week domain scale
+    // Setup a scale for ticks
+    let xScalePoint = d3.scalePoint()
+        .domain(weeks)
+        .range([0, this.width])
+
+    // Week domain scale for easy mapping
     let xScaleWeek = (d) => xScale(weeks.indexOf(Math.floor(d))) + d % 1
 
     // Week to date parser
