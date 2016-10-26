@@ -55,6 +55,10 @@ export default class Chart {
     this.setupPrediction()
     this.setupOnset()
     this.setupPeak()
+
+    // Add overlays and other mouse interaction items
+    this.setupOverlay()
+    this.setupLegend()
   }
 
   // Markers initialization
@@ -256,6 +260,25 @@ export default class Chart {
       .enter()
       .append('circle')
       .attr('class', 'point-actual')
+  }
+
+  /**
+   * Setup overlay for mouse events
+   */
+  setupOverlay() {
+    this.svg.append('rect')
+      .attr('class', 'overlay')
+      .attr('height', this.height)
+      .attr('width', this.width)
+      .on('mouseover', () => console.log('how'))
+      .on('mouseout', () => console.log('out'))
+      .on('mousemove', () => console.log('hi'))
+  }
+
+  /**
+   * Setup legend
+   */
+  setupLegend() {
   }
 
   // plot data

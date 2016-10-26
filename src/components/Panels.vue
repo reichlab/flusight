@@ -6,6 +6,12 @@
 
 $accent: rgba(24, 129, 127, 0.901961);
 
+// Mouse overlay
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
 // Axes styles
 .axis {
     path, line {
