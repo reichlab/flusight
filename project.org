@@ -86,14 +86,6 @@ Apart from hover
 :author:   "lepisma"
 :assignee: "lepisma"
 :END:
-** OPEN Fix font-awesome icons in mobile view
-:PROPERTIES:
-:id:       5
-:date-modification: 2016-10-06T03:03:00-0400
-:date-creation: 2016-10-06T03:03:00-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
 ** OPEN About (help) modal
 :PROPERTIES:
 :id:       3
@@ -111,12 +103,3 @@ Apart from hover
 :author:   "lepisma"
 :assignee: "lepisma"
 :END:
-** CLOSED Parser for submission templates
-:PROPERTIES:
-:id:       1
-:date-modification: 2016-10-11T04:28:49-0400
-:date-creation: 2016-10-03T03:25:46-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
-: npm script that converts submission data and other meta content, from a directory, to formatted content for visualization.
