@@ -162,21 +162,6 @@ export default class Chart {
       .attr('r', 4)
       .attr('cy', cy)
       .attr('class', 'onset-mark')
-
-    // Effects
-    group.selectAll('.onset-mark')
-      .on('mouseover', function() {
-        d3.select(this)
-          .transition()
-          .duration(100)
-          .attr('r', 5)
-      })
-      .on('mouseout', function() {
-        d3.select(this)
-          .transition()
-          .duration(300)
-          .attr('r', 4)
-      })
   }
 
   /**
@@ -208,21 +193,6 @@ export default class Chart {
     group.append('circle')
       .attr('r', 4)
       .attr('class', 'peak-mark')
-
-    // Effects
-    group.selectAll('.peak-mark')
-      .on('mouseover', function() {
-        d3.select(this)
-          .transition()
-          .duration(100)
-          .attr('r', 5)
-      })
-      .on('mouseout', function() {
-        d3.select(this)
-          .transition()
-          .duration(300)
-          .attr('r', 4)
-      })
   }
 
   /**
