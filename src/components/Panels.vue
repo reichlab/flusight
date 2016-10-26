@@ -10,6 +10,13 @@ $accent: rgba(24, 129, 127, 0.901961);
 .overlay {
     fill: none;
     pointer-events: all;
+    cursor: pointer;
+}
+
+.hover-line {
+    fill: none;
+    stroke: #bbb;
+    stroke-width: 1px;
 }
 
 // Axes styles

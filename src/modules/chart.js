@@ -26,7 +26,9 @@ export default class Chart {
         height = divHeight - margin.top - margin.bottom
 
     // Initialize values
-    let xScale = d3.scalePoint()
+    let xScale = d3.scaleLinear()
+        .range([0, width]),
+        xScalePoint = d3.scalePoint()
         .range([0, width]),
         yScale = d3.scaleLinear()
         .range([height, 0]),
@@ -43,6 +45,7 @@ export default class Chart {
     // Save variables
     this.svg = svg
     this.xScale = xScale
+    this.xScalePoint = xScalePoint
     this.yScale = yScale
     this.xScaleDate = xScaleDate
     this.height = height
@@ -236,13 +239,33 @@ export default class Chart {
    * Setup overlay for mouse events
    */
   setupOverlay() {
+    let d3 = this.d3,
+        xScale = this.xScale,
+        yScale = this.yScale
+
+    // Add vertical line
+    let line = this.svg.append('line')
+        .attr('class', 'hover-line')
+        .attr('x1', 0)
+        .attr('y1', 0)
+        .attr('x2', 0)
+        .attr('y2', this.height)
+        .style('display', 'none')
+
     this.svg.append('rect')
       .attr('class', 'overlay')
       .attr('height', this.height)
       .attr('width', this.width)
-      .on('mouseover', () => console.log('how'))
-      .on('mouseout', () => console.log('out'))
-      .on('mousemove', () => console.log('hi'))
+      .on('mouseover', () => line.style('display', null))
+      .on('mouseout', () => line.style('display', 'none'))
+      .on('mousemove', function() {
+        let mousePos = d3.mouse(this)
+
+        // Move the follow line
+        line
+          .attr('x1', mousePos[0])
+          .attr('x2', mousePos[0])
+      })
   }
 
   /**
@@ -256,12 +279,18 @@ export default class Chart {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
+        xScalePoint = this.xScalePoint,
         yScale = this.yScale,
         xScaleDate = this.xScaleDate
 
     // Reset scales and axes
     yScale.domain([0, this.getChartDataMax(chartData)])
-    xScale.domain(chartData.actual.map(d => d.week % 100))
+    let weeks = chartData.actual.map(d => d.week % 100)
+    xScalePoint.domain(weeks)
+    xScale.domain([0, weeks.length - 1])
+
+    // Week domain scale
+    let xScaleWeek = (d) => xScale(weeks.indexOf(Math.floor(d))) + d % 1
 
     // Week to date parser
     let dateParser = d3.timeParse('%Y-%U')
@@ -270,8 +299,8 @@ export default class Chart {
       return dateParser(formattedDate)
     })))
 
-    let xAxis = d3.axisBottom(xScale)
-        .tickValues(xScale.domain().filter((d, i) => !(i % 2)))
+    let xAxis = d3.axisBottom(xScalePoint)
+        .tickValues(xScalePoint.domain().filter((d, i) => !(i % 2)))
 
     let xAxisDate = d3.axisBottom(xScaleDate)
         .ticks(d3.timeMonth)
@@ -302,7 +331,7 @@ export default class Chart {
     let group = svg.select('.actual-group')
 
     let line = d3.line()
-        .x(d => xScale(d.week % 100))
+        .x(d => xScaleWeek(d.week % 100))
         .y(d => yScale(d.data))
 
     group.select('.line-actual')
@@ -322,7 +351,7 @@ export default class Chart {
       .transition()
       .duration(200)
       .ease(d3.easeQuadOut)
-      .attr('cx', d => xScale(d.week % 100))
+      .attr('cx', d => xScaleWeek(d.week % 100))
       .attr('cy', d => yScale(d.data))
       .attr('r', 2.5)
 
@@ -331,6 +360,9 @@ export default class Chart {
 
     // Set pointer in prediction data (start with last)
     this.pointer = this.chartData.predictions.length - 1
+
+    this.weeks = weeks
+    this.xScaleWeek = xScaleWeek
   }
 
   // Marker transition functions
@@ -344,7 +376,7 @@ export default class Chart {
     this.svg.select('.timerect')
       .transition()
       .duration(200)
-      .attr('width', this.xScale(xPoint))
+      .attr('width', this.xScaleWeek(xPoint))
   }
 
   /**
@@ -352,31 +384,31 @@ export default class Chart {
    */
   moveOnset() {
     let svg = this.svg,
-        xScale = this.xScale
+        xScaleWeek = this.xScaleWeek
     let onset = this.chartData.predictions[this.pointer].onsetWeek
 
     svg.select('.onset-mark')
       .transition()
       .duration(200)
-      .attr('cx', xScale(onset.point))
+      .attr('cx', xScaleWeek(onset.point))
 
     svg.select('.onset-range')
       .transition()
       .duration(200)
-      .attr('x1', xScale(onset.low))
-      .attr('x2', xScale(onset.high))
+      .attr('x1', xScaleWeek(onset.low))
+      .attr('x2', xScaleWeek(onset.high))
 
     svg.select('.onset-low')
       .transition()
       .duration(200)
-      .attr('x1', xScale(onset.low))
-      .attr('x2', xScale(onset.low))
+      .attr('x1', xScaleWeek(onset.low))
+      .attr('x2', xScaleWeek(onset.low))
 
     svg.select('.onset-high')
       .transition()
       .duration(200)
-      .attr('x1', xScale(onset.high))
-      .attr('x2', xScale(onset.high))
+      .attr('x1', xScaleWeek(onset.high))
+      .attr('x2', xScaleWeek(onset.high))
   }
 
   /**
@@ -384,12 +416,12 @@ export default class Chart {
    */
   movePeak() {
     let svg = this.svg,
-        xScale = this.xScale,
+        xScaleWeek = this.xScaleWeek,
         yScale = this.yScale
     let pw = this.chartData.predictions[this.pointer].peakWeek,
         pp = this.chartData.predictions[this.pointer].peakPercent
 
-    let leftW = xScale(pw.point),
+    let leftW = xScaleWeek(pw.point),
         leftP = yScale(pp.point)
     svg.select('.peak-mark')
       .transition()
@@ -400,36 +432,36 @@ export default class Chart {
     svg.select('.peak-range-x')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.low))
-      .attr('x2', xScale(pw.high))
+      .attr('x1', xScaleWeek(pw.low))
+      .attr('x2', xScaleWeek(pw.high))
       .attr('y1', yScale(pp.point))
       .attr('y2', yScale(pp.point))
 
     svg.select('.peak-range-y')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.point))
-      .attr('x2', xScale(pw.point))
+      .attr('x1', xScaleWeek(pw.point))
+      .attr('x2', xScaleWeek(pw.point))
       .attr('y1', yScale(pp.low))
       .attr('y2', yScale(pp.high))
 
     svg.select('.peak-low-x')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.low))
-      .attr('x2', xScale(pw.low))
+      .attr('x1', xScaleWeek(pw.low))
+      .attr('x2', xScaleWeek(pw.low))
       .attr('y1', yScale(pp.point) - 5)
       .attr('y2', yScale(pp.point) + 5)
 
     svg.select('.peak-high-x')
       .transition()
       .duration(200)
-      .attr('x1', xScale(pw.high))
-      .attr('x2', xScale(pw.high))
+      .attr('x1', xScaleWeek(pw.high))
+      .attr('x2', xScaleWeek(pw.high))
       .attr('y1', yScale(pp.point) - 5)
       .attr('y2', yScale(pp.point) + 5)
 
-    leftW = xScale(pw.point)
+    leftW = xScaleWeek(pw.point)
     svg.select('.peak-low-y')
       .transition()
       .duration(200)
@@ -452,7 +484,7 @@ export default class Chart {
    */
   movePrediction() {
     let d3 = this.d3,
-        xScale = this.xScale,
+        xScaleWeek = this.xScaleWeek,
         yScale = this.yScale,
         svg = this.svg
 
@@ -493,12 +525,12 @@ export default class Chart {
       .transition()
       .duration(200)
       .ease(d3.easeQuadOut)
-      .attr('cx', d => xScale(d.week))
+      .attr('cx', d => xScaleWeek(d.week))
       .attr('cy', d => yScale(d.data))
       .attr('r', 3)
 
     let line = d3.line()
-        .x(d => xScale(d.week % 100))
+        .x(d => xScaleWeek(d.week % 100))
         .y(d => yScale(d.data))
 
     group.select('.line-prediction')
@@ -508,7 +540,7 @@ export default class Chart {
       .attr('d', line)
 
     let area = d3.area()
-        .x(d => xScale(d.week % 100))
+        .x(d => xScaleWeek(d.week % 100))
         .y1(d => yScale(d.low))
         .y0(d => yScale(d.high))
 
@@ -568,11 +600,11 @@ export default class Chart {
    * Return next four week numbers for given week
    */
   getNextWeeks(currentWeek) {
-    let current = this.xScale.domain().indexOf(currentWeek % 100)
+    let current = this.weeks.indexOf(currentWeek % 100)
     let weeks = []
     for (let i = 0; i < 4; i++) {
       current += 1
-      if (current < this.xScale.domain().length) weeks.push(this.xScale.domain()[current])
+      if (current < this.weeks.length) weeks.push(this.weeks[current])
     }
     return weeks
   }
