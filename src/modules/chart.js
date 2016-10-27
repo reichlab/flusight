@@ -256,12 +256,14 @@ export default class Chart {
       .on('mouseover', () => line.style('display', null))
       .on('mouseout', () => line.style('display', 'none'))
       .on('mousemove', function() {
-        let mousePos = d3.mouse(this)
-
-        // Move the follow line
+        let mouseX = d3.mouse(this)[0]
+        // Snap x to nearest tick
+        let snappedX = xScale(Math.round(xScale.invert(mouseX)))
         line
-          .attr('x1', mousePos[0])
-          .attr('x2', mousePos[0])
+          .transition()
+          .duration(50)
+          .attr('x1', snappedX)
+          .attr('x2', snappedX)
       })
   }
 
