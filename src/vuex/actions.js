@@ -1,8 +1,6 @@
-// Vuex actions
+import * as get from './getters'
 
-export const updateSelectedModel = ({ dispatch, state }, val) => {
-  dispatch('UPDATE_SELECTED_MODEL', val)
-}
+// Vuex actions
 
 export const updateSelectedSeason = ({ dispatch, state }, val) => {
   dispatch('UPDATE_SELECTED_SEASON', val)
@@ -12,30 +10,55 @@ export const updateSelectedRegion = ({ dispatch, state }, val) => {
   dispatch('UPDATE_SELECTED_REGION', val)
 }
 
-export const setChart = ({ dispatch, state }, val) => {
-  dispatch('SET_CHART', val)
+export const updateSelectedWeek = ({ dispatch, state }, val) => {
+  dispatch('UPDATE_SELECTED_WEEK', val)
 }
 
-export const setMap = ({ dispatch, state }, val) => {
-  dispatch('SET_MAP', val)
+export const updateSelectedChoropleth = ({ dispatch, state}, val) => {
+  dispatch('UPDATE_SELECTED_CHOROPLETH', val)
 }
 
-export const plotChart = ({ dispatch, state }, val) => {
-  state.chart.plotData(val)
+// Initializations
+// ---------------
+
+export const initTimeChart = ({ dispatch, state }, val) => {
+  dispatch('SET_TIMECHART', val)
 }
 
-export const plotMap = ({ dispatch, state }, val) => {
-  state.map.plotData(val[0], val[1], (regionId) => {
-    updateSelectedRegion({ dispatch, state }, regionId)
-  })
+export const initChoropleth = ({ dispatch, state }, val) => {
+  dispatch('SET_CHOROPLETH', val)
 }
 
-export const stepForward = ({ dispatch, state }, val) => {
-  state.chart.stepForward()
-  state.map.stepForward()
+// Plotting (data-changing) actions
+// --------------------------------
+
+/**
+ * Plot (update) time chart with region / season data
+ */
+export const plotTimeChart = ({ dispatch, state }) => {
 }
 
-export const stepBackward = ({ dispatch, state }, val) => {
-  state.chart.stepBackward()
-  state.map.stepBackward()
+/**
+ * Plot (update) choropleth with currently selected data
+ */
+export const plotChoropleth = ({ dispatch, state }) => {
+}
+
+// Movement transition actions
+export const updateTimeChart = ({ dispatch, state }) => {
+}
+
+export const updateChoropleth = ({ dispatch, state }) => {
+}
+
+// Update week pointer in store
+// watchers will take care of everything else
+export const forward = ({ dispatch, state }) => {
+  updateSelectedWeek({ dispatch, state }, get.nextWeek(state))
+}
+
+// Update week pointer in store
+// watchers will take care of everything else
+export const backward = ({ dispatch, state }) => {
+  updateSelectedWeek({ dispatch, state }, get.previousWeek(state))
 }

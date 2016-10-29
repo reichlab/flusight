@@ -2,48 +2,49 @@
 
 export default class ColorBar {
   constructor(d3, cmap, elementId) {
-    this.d3 = d3
-    this.cmap = cmap
-    this.elementId = elementId
-    this.setup()
-  }
+    let svg = d3.select('#' + elementId).append('svg')
 
-  // Setup color bar on element
-  setup() {
-    let svg = this.d3.select('#' + this.elementId + ' svg')
-
-    let chartDiv = document.getElementById(this.elementId),
+    let chartDiv = document.getElementById(elementId),
         divWidth = chartDiv.offsetWidth,
         divHeight = chartDiv.offsetHeight
 
     let group = svg.append('g')
         .attr('class', 'colorbar-group')
 
-    let barHeight = Math.floor(divHeight / this.cmap.length)
+    let bar = {
+      height: 0.7 * divHeight,
+      width: divWidth / 3,
+      x: divWidth * 3 / 5,
+      y: 0.15 * divHeight
+    }
+
+    let eachHeight = bar.height / cmap.length
 
     // Add rectangles
-    for (let i = 0; i < this.cmap.length; i++) {
+    for (let i = 0; i < cmap.length; i++) {
       group.append('rect')
-        .attr('x', 0)
-        .attr('y', 0 + i * barHeight)
-        .attr('width', divWidth / 2)
-        .style('fill', this.cmap[i])
+        .attr('x', bar.x)
+        .attr('y', bar.y + i * eachHeight)
+        .attr('height', eachHeight)
+        .attr('width', bar.width)
+        .style('fill', cmap[i])
     }
 
     // Add axis
-    let scale = this.d3.scaleLinear()
-        .range([divHeight, 0])
+    let scale = d3.scaleLinear()
+        .range([bar.height, 0])
 
     group.append('g')
       .attr('class', 'axis axis-color')
-      .attr('transform', 'translate(' + 0 + ',' + 0 + ')')
+      .attr('transform', 'translate(' + divWidth / 2 + ',' + bar.y + ')')
 
+    this.d3 = d3
     this.svg = svg
     this.scale = scale
   }
 
   // Update scale of colorbar
-  update(range) {
+  calibrate(range) {
     this.scale.domain(range)
 
     let axis = this.d3.axisLeft(this.scale)

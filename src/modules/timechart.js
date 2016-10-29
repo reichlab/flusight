@@ -1,22 +1,13 @@
 // Chart plotting functions
 
-export default class Chart {
-  constructor(d3, elementId) {
-    this.d3 = d3
-    this.elementId = elementId
-    this.setup()
-  }
+import * as util from './utils/timechart'
 
-  /**
-   * Setup scales, axes, markers etc.
-   */
-  setup() {
-    // Sugar !!
-    let d3 = this.d3
+export default class TimeChart {
+  constructor(d3, elementId) {
     // Get div dimensions
-    let chartDiv = document.getElementById(this.elementId),
+    let chartDiv = document.getElementById(elementId),
         divWidth = chartDiv.offsetWidth,
-        divHeight = 330
+        divHeight = 350 // TODO: Fix these dynamically
 
     // Create blank chart
     let margin = {
@@ -34,13 +25,14 @@ export default class Chart {
         .range([0, width])
 
     // Add svg
-    let svg = d3.select('#' + this.elementId).append('svg')
+    let svg = d3.select('#' + elementId).append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     // Save variables
+    this.d3 = d3
     this.svg = svg
     this.xScale = xScale
     this.yScale = yScale
@@ -274,7 +266,7 @@ export default class Chart {
   }
 
   // plot data
-  plotData(chartData) {
+  update(data) {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
@@ -282,8 +274,8 @@ export default class Chart {
         xScaleDate = this.xScaleDate
 
     // Reset scales and axes
-    yScale.domain([0, this.getChartDataMax(chartData)])
-    let weeks = chartData.actual.map(d => d.week % 100)
+    yScale.domain([0, util.getYMax(data)])
+    let weeks = data.actual.map(d => d.week % 100)
     xScale.domain([0, weeks.length - 1])
 
     // Setup a scale for ticks
@@ -296,7 +288,7 @@ export default class Chart {
 
     // Week to date parser
     let dateParser = d3.timeParse('%Y-%U')
-    xScaleDate.domain(d3.extent(chartData.actual.map(d => {
+    xScaleDate.domain(d3.extent(data.actual.map(d => {
       let formattedDate = Math.floor(d.week / 100) + '-' + d.week % 100
       return dateParser(formattedDate)
     })))
@@ -322,12 +314,12 @@ export default class Chart {
     // Reset baseline
     svg.select('.baseline')
       .transition().duration(300)
-      .attr('y1', yScale(chartData.baseline))
-      .attr('y2', yScale(chartData.baseline))
+      .attr('y1', yScale(data.baseline))
+      .attr('y2', yScale(data.baseline))
 
     svg.select('.baseline-group .title')
       .transition().duration(300)
-      .attr('dy', yScale(chartData.baseline))
+      .attr('dy', yScale(data.baseline))
 
     // Move actual markers
     let group = svg.select('.actual-group')
@@ -337,13 +329,13 @@ export default class Chart {
         .y(d => yScale(d.data))
 
     group.select('.line-actual')
-      .datum(chartData.actual)
+      .datum(data.actual)
       .transition()
       .duration(200)
       .attr('d', line)
 
     let circles = group.selectAll('.point-actual')
-        .data(chartData.actual)
+        .data(data.actual)
 
     circles.exit().remove()
 
@@ -358,13 +350,12 @@ export default class Chart {
       .attr('r', 2.5)
 
     // Save for later
-    this.chartData = chartData
-
-    // Set pointer in prediction data (start with last)
-    this.pointer = this.chartData.predictions.length - 1
-
+    this.data = data
     this.weeks = weeks
     this.xScaleWeek = xScaleWeek
+
+    // Set pointer in prediction data (start with last)
+    this.pointer = this.data.actual.length - 1
   }
 
   // Marker transition functions
@@ -567,7 +558,7 @@ export default class Chart {
    * Increment pointer and redraw
    */
   stepForward() {
-    this.pointer = Math.min(this.chartData.predictions.length - 1, ++this.pointer)
+    this.pointer = Math.min(this.data.predictions.length - 1, ++this.pointer)
     this.moveAll()
   }
 
@@ -580,22 +571,27 @@ export default class Chart {
   }
 
 
-  // Utility functions
-  // ----------------
+  // External interaction functions
+  // ------------------------------
 
   /**
-   * Return maximum value to be displayed (y axis) in the given subset
+   * Return next week idx and name for vuex store
    */
-  getChartDataMax(chartData) {
-    let actualMax = Math.max(...chartData.actual.map(d => d.data))
-    let predictionHighMax = Math.max(...chartData.predictions.map(d => Math.max(...[
-      d.oneWk.high,
-      d.twoWk.high,
-      d.threeWk.high,
-      d.fourWk.high,
-      d.peakPercent.high])))
+  getNextWeekData() {
+    return {
+      idx: 0,
+      name: 'NA'
+    }
+  }
 
-    return 1.1 * Math.max(...[actualMax, predictionHighMax])
+  /**
+   * Return preview week idx and name for vuex store
+   */
+  getPreviousWeekData() {
+    return {
+      idx: 0,
+      name: 'NA'
+    }
   }
 
   /**

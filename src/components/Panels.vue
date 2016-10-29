@@ -1,191 +1,73 @@
 <style lang="scss">
-#map {
-    position: relative;
-    height: 325px;
-}
-
-$accent: rgba(24, 129, 127, 0.901961);
-
-// Mouse overlay
-.overlay {
-    fill: none;
-    pointer-events: all;
-    cursor: pointer;
-}
-
-.hover-line {
-    fill: none;
-    stroke: #bbb;
-    stroke-width: 1px;
-}
-
-// Axes styles
-.axis {
-    path, line {
-        fill: none;
-        stroke: #bbb;
-        shape-rendering: geometricPrecision;
-    }
-
-    .title {
-        fill: #444;
-        font: 10px sans-serif;
-    }
-}
-
-// Onset markers
-.onset-group {
-    .onset-mark {
-        fill: white;
-        stroke: $accent;
-        stroke-width: 1.5px;
-    }
-}
-
-// Peak markers
-.peak-group {
-    .peak-mark {
-        fill: white;
-        stroke: $accent;
-        stroke-width: 1.5px;
-    }
-    .range {
-        stroke-width: 0.5px;
-        stroke-dasharray: 5, 5;
-    }
-}
-
-// Prediction area, line and dots
-.prediction-group {
-    .area-prediction {
-        fill: rgba(43, 131, 186, 0.4);
-    }
-
-    .line-prediction {
-        fill: none;
-        stroke: rgba(43, 131, 186, 1.0);
-        stroke-width: 1.5px;
-    }
-
-    .point-prediction {
-        stroke: rgba(43, 131, 186, 1.0);
-        fill: white;
-        stroke-width: 1.5px;
-    }
-}
-
-// Actual data
-.actual-group {
-    .line-actual {
-        fill: none;
-        stroke: $accent;
-        stroke-width: 1.5px;
-        opacity: 0.7;
-    }
-
-    .point-actual {
-        stroke: $accent;
-        fill: $accent;
-        opacity: 0.7;
-    }
-}
-
-.baseline-group {
-    .baseline {
-        stroke: #353535;
-        stroke-width: 0.5px;
-        stroke-dasharray: 5, 5;
-    }
-    .title {
-        fill: #444;
-        font-size: 10px;
-    }
-}
-
-.timerect {
-    fill: rgba(253, 245, 230, 0.59);
-}
-
-.range, .stopper {
-    stroke: rgba(100, 100, 100, 0.6);
-    stroke-width: 1px;
-}
-
-// Map stuff
-.datamaps-subunit {
-    cursor: pointer;
-}
-
-.info-group {
-    .title {
-        font-size: 15px;
-    }
-    .sub-title {
-        font-size: 20px;
-    }
-    .switch {
-        font-family: FontAwesome;
-        font-size: 20px;
-        cursor: pointer;
-        fill: #ccc;
-    }
-}
 </style>
 
 <template>
     <div class="columns">
-        <div class="column is-one-third">
-            <div id="map">
-            </div>
+        <div class="column is-4">
+            <choropleth></choropleth>
         </div>
 
-        <div class="column">
-            <div id="chart">
-            </div>
+        <div class="column id-8">
+            <time-chart></time-chart>
         </div>
     </div>
 </template>
 
 <script>
-  import Chart from '../modules/chart'
-  import Map from '../modules/map'
-  import { chart, chartData, map, mapData } from '../vuex/getters'
-  import { setChart, setMap, plotChart, plotMap, stepForward, stepBackward } from '../vuex/actions'
+  import Choropleth from './Panels/Choropleth'
+  import TimeChart from './Panels/TimeChart'
+  import {
+    updateTimeChart,
+    updateChoropleth,
+    plotTimeChart,
+    plotChoropleth
+  } from '../vuex/actions'
 
   export default {
+    components: {
+      Choropleth,
+      TimeChart
+    },
     vuex: {
-      getters: {
-        chart,
-        chartData,
-        map,
-        mapData
-      },
       actions: {
-        setChart,
-        setMap,
-        stepBackward,
-        stepForward,
-        plotChart,
-        plotMap
+        updateTimeChart,
+        updateChoropleth,
+        plotChoropleth,
+        plotTimeChart
       }
     },
-    ready() {
-      // Use d3 v4 (vue-d3)
-      this.setChart(new Chart(this.$d3, 'chart'))
-      this.setMap(new Map(this.$d3, 'map'))
-      this.plotChart(this.chartData)
-      this.plotMap([this.mapData, this.chartData.predictions])
-
-      this.stepForward()
-
-
-      window.addEventListener('keyup', (evt) => {
-        if (evt.code === 'ArrowRight') {
-          this.stepForward()
-        } else if (evt.code === 'ArrowLeft') {
-          this.stepBackward()
-        }
-      })
+    watch: {
+      selectedRegion: function() {
+        // Triggered by
+        // - selector
+        // - map clicks
+        // Time series gets new data
+        // Choropleth gets highlight
+        this.plotTimeChart()
+        this.updateChoropleth()
+      },
+      selectedSeason: function() {
+        // Triggered by selector
+        // Choropleth gets new plot
+        // Time series gets new data
+        this.plotTimeChart()
+        this.plotChoropleth()
+      },
+      selectedChoropleth: function() {
+        // Triggered by selector
+        // Use specfic choropleth getter and do a plot
+        this.plotChoropleth()
+      },
+      selectedWeek: function() {
+        // Triggered by
+        // - nav buttons
+        // - mouse jumps
+        // - keyboard
+        // Choropleth gets transitions
+        // Time series gets transitions
+        this.updateChoropleth()
+        this.updateTimeChart()
+      }
     }
   }
 </script>

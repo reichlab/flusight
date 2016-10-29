@@ -53,26 +53,14 @@
                             </p>
                         </div>
                         <div class="level-item">
-                            <p class="heading">Model</p>
-                            <p class="control title">
-                                <span class="select">
-                                    <select v-model="currentModel">
-                                        <option v-for="model in models">
-                                            {{ model }}
-                                        </option>
-                                    </select>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="level-item">
                             <p class="heading">Navigate</p>
                             <p class="control title">
-                                <a class="button is-primary chart-nav-btn" v-on:click="stepBackward">
+                                <a class="button is-primary chart-nav-btn" v-on:click="backward">
                                     <span class="icon">
                                         <i class="fa fa-arrow-left"></i>
                                     </span>
                                 </a>
-                                <a class="button is-primary chart-nav-btn" v-on:click="stepForward">
+                                <a class="button is-primary chart-nav-btn" v-on:click="forward">
                                     <span class="icon">
                                         <i class="fa fa-arrow-right"></i>
                                     </span>
@@ -88,47 +76,31 @@
 
 <script>
   import {
-    selectedModel,
     selectedSeason,
     selectedRegion,
-    models,
     seasons,
-    regions,
-    chart,
-    chartData,
-    mapData
+    regions
   } from '../vuex/getters'
   import {
-    updateSelectedModel,
     updateSelectedRegion,
     updateSelectedSeason,
-    stepForward,
-    stepBackward,
-    plotChart,
-    plotMap
+    backward,
+    forward
   } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        selectedModel,
         selectedSeason,
         selectedRegion,
-        models,
         seasons,
-        regions,
-        chart,
-        chartData,
-        mapData
+        regions
       },
       actions: {
         updateSelectedSeason,
-        updateSelectedModel,
         updateSelectedRegion,
-        stepForward,
-        stepBackward,
-        plotChart,
-        plotMap
+        backward,
+        forward
       }
     },
     computed: {
@@ -146,28 +118,7 @@
         },
         set(val) {
           this.updateSelectedSeason(this.seasons.indexOf(val))
-          this.plotChart(this.chartData)
-          this.plotMap([this.mapData, this.chartData.predictions])
-          this.stepForward()
         }
-      },
-      currentModel: {
-        get() {
-          return this.models[this.selectedModel]
-        },
-        set(val) {
-          this.updateSelectedModel(this.models.indexOf(val))
-          this.plotChart(this.chartData)
-          this.plotMap([this.mapData, this.chartData.predictions])
-          this.stepForward()
-        }
-      }
-    },
-    watch: {
-      selectedRegion: function() {
-        this.plotChart(this.chartData)
-        this.plotMap([this.mapData, this.chartData.predictions])
-        this.stepForward()
       }
     }
   }

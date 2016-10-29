@@ -39,6 +39,7 @@ svg text::selection {
   import Selectors from './components/Selectors'
   import Foot from './components/Foot'
   import store from './vuex/store'
+  import { forward, backward } from './vuex/actions'
 
   var $ = window.jQuery = require('jquery')
   require('./assets/fakeLoader.min.js')
@@ -50,11 +51,25 @@ svg text::selection {
       Selectors,
       Foot
     },
+    vuex: {
+      actions: {
+        backward,
+        forward
+      }
+    },
     store,
     ready() {
       $("#fakeLoader").fakeLoader({
         spinner:"spinner6",
-        bgColor:"#18807e"
+        bgColor:"#268bd2"
+      })
+
+      window.addEventListener('keyup', (evt) => {
+        if (evt.code === 'ArrowRight') {
+          this.forward()
+        } else if (evt.code === 'ArrowLeft') {
+          this.backward()
+        }
       })
     }
   }

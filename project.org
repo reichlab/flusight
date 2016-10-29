@@ -2,22 +2,21 @@
 #+TITLE: Project Board
 
 * Todos
-** Primary
-*** Alow float week
-*** Choropleth
-**** Plot other data in maps
+** Next
+*** Plan interfaces of objects
+SCHEDULED: <2016-10-29 Sat>
+*** Write getters
+SCHEDULED: <2016-10-29 Sat>
+*** Objectify each prediction plot group
+SCHEDULED: <2016-10-29 Sat>
+*** What to show on movements
+*** Tooltips
+** All
 *** Different confidence interval
 *** Histogram
 *** Scale svg elements dynamically
-*** [#A] Add mouseover annotations
-DEADLINE: <2016-10-23 Sun>
-**** Snap to nearest vertical (virtual) line
-*** [#B] Objectify each prediction plot group
-DEADLINE: <2016-10-23 Sun>
-*** Place potential switches and selectors
 *** [#C] Setup first run demo
 *** Link to definitions
-Apart from hover
 *** Fix prediction values                                             :plan:
 + Uniform distribution over bins issue
 ** Secondary
