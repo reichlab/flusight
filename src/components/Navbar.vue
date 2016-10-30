@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .brand {
     font-size: 20px;
-    color: #00d1b2;
+    color: #72caf9;
     .thick {
         font-family: "Open Sans Extrabold";
         color: #aaa;

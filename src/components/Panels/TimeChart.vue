@@ -99,7 +99,7 @@ $accent: rgba(24, 129, 127, 0.901961);
 }
 
 .timerect {
-    fill: rgba(253, 245, 230, 0.59);
+    fill: rgb(245, 245, 245);
 }
 
 .range, .stopper {
