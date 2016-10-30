@@ -3,103 +3,19 @@
 
 * Todos
 ** Next
-*** Objectify each prediction plot group
-SCHEDULED: <2016-10-29 Sat>
-*** What to show on movements
-*** Query using week number / not weekIdx
-*** Get complete weeks for actual, with NA fills
-** All
-*** Last updated thing metadata
-*** Fix Open sans extrabold face
-*** Move pointers till the last prediction week only
-**** Include NAs in parse steps
+*** [#A] Tooltip query
+*** [#A] Interactive Legend
+*** Backend
+**** Get complete weeks for actual, with NA fills
+**** Fix uniform prediction values
+**** Last updated thing metadata
+*** Fix Open Sans Extrabold face issue                                :bug:
+*** Link to definitions
+** Secondary
 *** Different confidence interval
 *** Histogram
-*** Scale svg elements dynamically
+*** Rescale svg on draw
 *** [#C] Setup first run demo
-*** Link to definitions
-*** Fix prediction values                                             :plan:
-+ Uniform distribution over bins issue
-** Secondary
 *** Automate weekly data processing
 *** Automate pull request based data ingestion
 *** Document development process
-* Github Issues
-:PROPERTIES:
-:since:    
-:url:      https://api.github.com/repos/reichlab/flusight
-:END:
-** OPEN add option for relative incidence scale for regions
-:PROPERTIES:
-:id:       9
-:date-modification: 2016-10-20T16:50:15-0400
-:date-creation: 2016-10-20T16:50:15-0400
-:author:   "nickreich"
-:END:
-: Consider standardizing based on baseline values, so color indicates a relative measure of incidence as opposed to absolute.
-** OPEN minor cosmetic stuff
-:PROPERTIES:
-:id:       8
-:date-modification: 2016-10-20T16:49:20-0400
-:date-creation: 2016-10-20T16:49:20-0400
-:author:   "nickreich"
-:END:
-: - [X] add month and year to x-axis labeling
-: - [X] move weighted ILI (%) to outside of y-axis and maybe link to description of what it is.
-: - [ ] add hover info about what weighted ILI is
-: - [X] random jumps of peak week and onset week point estimates (sometimes outside of intervals)
-: - [ ] add hover text just on value of points based on snapped-to x coordinate
-: - [ ] change boxes for point estimates of week metric to circles with different hover stats
-: - [X] add annotation for baseline: "CDC baseline value"
-: - [ ] add historical lines with highlight on hover
-: - [ ] add color legend/scale for map and switch to different color scheme
-: - [ ] little images not showing up on mac
-: - [ ] remove predictions that are not showing anything.
-: - [ ] add note when there are no predictions to show.
-: - [ ] add mouse click as action to move "current time"
-: - [ ] add demo slides to introduce key features
-: - [ ] clickability of regions
-: - [ ] on hover and selection highlights of regions  
-: - [X] change text of title to "Real-time Influenza Forecasts: CDC FluSight Challenge"
-** OPEN Setup cached data streaming
-:PROPERTIES:
-:id:       7
-:date-modification: 2016-10-17T05:20:02-0400
-:date-creation: 2016-10-17T05:20:02-0400
-:author:   "lepisma"
-:END:
-: Load model predictions on demand
-** OPEN Migrate data handling steps to AlaSQL
-:PROPERTIES:
-:id:       6
-:date-modification: 2016-10-11T04:51:59-0400
-:date-creation: 2016-10-11T04:51:59-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
-: Current setup has a huge potential of becoming a mess. A query language abstraction will help in readability and performance.
-** OPEN Fix nav menu in mobile view
-:PROPERTIES:
-:id:       4
-:date-modification: 2016-10-11T04:49:57-0400
-:date-creation: 2016-10-03T09:14:13-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
-** OPEN About (help) modal
-:PROPERTIES:
-:id:       3
-:date-modification: 2016-10-03T03:27:48-0400
-:date-creation: 2016-10-03T03:27:48-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
-** OPEN Content loading spinner
-:PROPERTIES:
-:tags:     ("enhancement")
-:id:       2
-:date-modification: 2016-10-03T03:27:05-0400
-:date-creation: 2016-10-03T03:27:05-0400
-:author:   "lepisma"
-:assignee: "lepisma"
-:END:
