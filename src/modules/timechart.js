@@ -50,29 +50,18 @@ export default class TimeChart {
     this.width = width
     this.weekHook = weekHook
 
-    this.setupMarkers()
+    // Add marker primitives
+    this.timerect = new marker.TimeRect(this)
+    this.baseline = new marker.Baseline(this)
+    this.actual = new marker.Actual(this)
 
-    this.setupTimeRect()
     this.setupAxes()
-    this.setupBaseline()
-    this.setupActual()
     this.setupPrediction()
     this.setupOnset()
     this.setupPeak()
 
     // Add overlays and other mouse interaction items
     this.setupOverlay()
-    this.setupLegend()
-  }
-
-  // Markers initialization
-  // ----------------------
-
-  /**
-   * Add marker objects with
-   */
-  setupMarkers() {
-    //
   }
 
   /**
@@ -104,44 +93,6 @@ export default class TimeChart {
       .attr('dy', '.71em')
       .style('text-anchor', 'middle')
       .text('Weighted ILI (%)')
-  }
-
-  /**
-   * Setup current time rectangle
-   */
-  setupTimeRect() {
-    this.svg.append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', 0)
-      .attr('height', this.height)
-      .attr('class', 'timerect')
-  }
-
-  /**
-   * Setup baseline
-   */
-  setupBaseline() {
-    let group = this.svg.append('g')
-        .attr('class', 'baseline-group')
-
-    group.append('line')
-      .attr('x1', 0)
-      .attr('y1', this.height)
-      .attr('x2', this.width)
-      .attr('y2', this.height)
-      .attr('class', 'baseline')
-
-    let text = group.append('text')
-        .attr('class', 'title')
-        .attr('transform', 'translate(' + (this.width + 10) + ', 0)')
-    text.append('tspan')
-      .text('CDC')
-      .attr('x', 0)
-    text.append('tspan')
-      .text('Baseline')
-      .attr('x', 0)
-      .attr('dy', '1em')
   }
 
   /**
@@ -225,22 +176,6 @@ export default class TimeChart {
       .enter()
       .append('circle')
       .attr('class', 'point-prediction')
-  }
-
-  /**
-   * Setup actual data markers
-   */
-  setupActual() {
-    let group = this.svg.append('g')
-        .attr('class', 'actual-group')
-
-    group.append('path')
-      .attr('class', 'line-actual')
-
-    group.selectAll('.point-actual')
-      .enter()
-      .append('circle')
-      .attr('class', 'point-actual')
   }
 
   /**
@@ -334,59 +269,19 @@ export default class TimeChart {
     svg.select('.axis-y')
       .transition().duration(200).call(yAxis)
 
-    // Reset baseline
-    svg.select('.baseline')
-      .transition().duration(300)
-      .attr('y1', yScale(data.baseline))
-      .attr('y2', yScale(data.baseline))
-
-    svg.select('.baseline-group .title')
-      .transition().duration(300)
-      .attr('dy', yScale(data.baseline))
-
-    // Move actual markers
-    let group = svg.select('.actual-group')
-
-    let line = d3.line()
-        .x(d => xScaleWeek(d.week % 100))
-        .y(d => yScale(d.data))
-
-    group.select('.line-actual')
-      .datum(data.actual)
-      .transition()
-      .duration(200)
-      .attr('d', line)
-
-    let circles = group.selectAll('.point-actual')
-        .data(data.actual)
-
-    circles.exit().remove()
-
-    circles.enter().append('circle')
-      .merge(circles)
-      .attr('class', 'point-actual')
-      .transition()
-      .duration(200)
-      .ease(d3.easeQuadOut)
-      .attr('cx', d => xScaleWeek(d.week % 100))
-      .attr('cy', d => yScale(d.data))
-      .attr('r', 2)
-
-    // Save for later
-    this.data = data
+    // Save
     this.weeks = weeks
     this.xScaleWeek = xScaleWeek
 
     // Set pointer for week data (start with last)
-    this.weekIdx = this.data.actual.length - 1
+    this.weekIdx = data.actual.length - 1
     this.weekHook({
       idx: this.weekIdx,
       name: this.weeks[this.weekIdx]
     })
 
-    let bb = svg.node().getBoundingClientRect()
-
     // Add mouse move and click events
+    let bb = svg.node().getBoundingClientRect()
     d3.select('.overlay')
       .on('mousemove', function() {
         let mouse = d3.mouse(this)
@@ -415,22 +310,15 @@ export default class TimeChart {
           name: weeks[idx]
         })
       })
+
+    // Update markers with data
+    this.timerect.plot(this, data)
+    this.baseline.plot(this, data)
+    this.actual.plot(this, data)
   }
 
   // Marker transition functions
   // ---------------------------
-
-  /**
-   * Move time rectangle following the prediction pointer
-   */
-  moveTimeRect() {
-    let xPoint = this.data.actual[this.weekIdx].week % 100
-    this.svg.select('.timerect')
-      .transition()
-      .duration(200)
-      .attr('width', this.xScaleWeek(xPoint))
-  }
-
   /**
    * Move onset marker
    */
@@ -607,7 +495,6 @@ export default class TimeChart {
    * Move all prediction specific markers
    */
   moveAll() {
-    this.moveTimeRect()
     this.moveOnset()
     this.movePeak()
     this.movePrediction()
@@ -619,7 +506,7 @@ export default class TimeChart {
   update(idx) {
     // Change self index
     this.weekIdx = idx
-    this.moveTimeRect()
+    this.timerect.update(idx)
   }
 
   // External interaction functions
