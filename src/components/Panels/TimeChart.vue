@@ -1,6 +1,6 @@
 <style lang="scss">
 
-$accent: rgba(24, 129, 127, 0.901961);
+$accent: rgb(24, 129, 127);
 
 // Mouse overlay
 .overlay {
@@ -33,7 +33,6 @@ $accent: rgba(24, 129, 127, 0.901961);
 .onset-group {
     .onset-mark {
         fill: white;
-        stroke: $accent;
         stroke-width: 1.5px;
     }
 }
@@ -42,7 +41,6 @@ $accent: rgba(24, 129, 127, 0.901961);
 .peak-group {
     .peak-mark {
         fill: white;
-        stroke: $accent;
         stroke-width: 1.5px;
     }
     .range {
@@ -53,30 +51,29 @@ $accent: rgba(24, 129, 127, 0.901961);
 
 // Prediction area, line and dots
 .prediction-group {
-    .area-prediction {
-        fill: rgba(43, 131, 186, 0.4);
-    }
-
+    pointer-events: none;
     .line-prediction {
         fill: none;
-        stroke: rgba(43, 131, 186, 1.0);
         stroke-width: 1.5px;
     }
 
     .point-prediction {
-        stroke: rgba(43, 131, 186, 1.0);
         fill: white;
         stroke-width: 1.5px;
+    }
+    .area-prediction {
+        opacity: 0.3;
     }
 }
 
 // Actual data
 .actual-group {
+    pointer-events: none;
     .line-actual {
         fill: none;
         stroke: $accent;
         stroke-width: 1.5px;
-        opacity: 0.7;
+        opacity: 0.4;
     }
 
     .point-actual {
@@ -107,12 +104,26 @@ $accent: rgba(24, 129, 127, 0.901961);
     stroke-width: 1px;
 }
 
-#chart-hover {
-    padding: 10px;
+#chart-tooltip {
     box-shadow: 0px 0px 2px;
     border-radius: 1px;
     background-color: white;
-    font-size: 12px;
+    font-size: 11px;
+    .bold {
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .actual {
+        padding: 5px 10px;
+        background-color: white;
+        color: #333;
+    }
+    .prediction {
+        padding: 5px 10px;
+        color: white;
+    }
 }
 
 #nav-controls {
@@ -123,8 +134,24 @@ $accent: rgba(24, 129, 127, 0.901961);
         margin-left: 0px !important;
     }
     a {
+        box-shadow: 1px 1px 1px #ccc;
         margin: 2px 0px;
+        &.legend-btn {
+            border-width: 1px;
+            border-color: #3273dc;
+        }
     }
+}
+
+#legend {
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    width: 100px;
+    height: 200px;
+    box-shadow: 1px 1px 2px #ccc;
+    background-color: white;
+    border-radius: 1px;
 }
 
 </style>
@@ -132,14 +159,22 @@ $accent: rgba(24, 129, 127, 0.901961);
 <template>
     <div id="timechart">
     </div>
+    <div id="legend" v-show="show">
+    </div>
     <div id="nav-controls">
-        <a class="button is-small is-outlined is-info chart-nav-btn" v-on:click="backward">
+        <a class="button is-small is-info legend-btn" v-on:click="toggle" v-bind:class="[show ? 'is-outlined' : '']">
+            <span class="icon is-small">
+                <i class="fa fa-map-o"></i>
+            </span>
+        </a>
+        <br>
+        <a class="button is-small is-outlined is-info" v-on:click="backward">
             <span class="icon is-small">
                 <i class="fa fa-arrow-left"></i>
             </span>
         </a>
         <br>
-        <a class="button is-small is-outlined is-info chart-nav-btn" v-on:click="forward">
+        <a class="button is-small is-outlined is-info" v-on:click="forward">
             <span class="icon is-small">
                 <i class="fa fa-arrow-right"></i>
             </span>
@@ -159,6 +194,16 @@ $accent: rgba(24, 129, 127, 0.901961);
   } from '../../vuex/actions'
 
   export default {
+    data() {
+      return {
+        show: false
+      }
+    },
+    methods: {
+      toggle() {
+        this.show = !this.show
+      }
+    },
     vuex: {
       actions: {
         initTimeChart,

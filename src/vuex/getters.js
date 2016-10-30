@@ -35,7 +35,7 @@ export function regions (state) {
 
 export function choropleths (state) {
   // TODO: Parse from data
-  return ['Weighted ILI (%)']
+  return ['Actual Weighted ILI (%)']
 }
 
 export function timeChart (state) {

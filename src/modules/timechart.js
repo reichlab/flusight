@@ -34,9 +34,9 @@ export default class TimeChart {
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    // Add hover info div
+    // Add tooltip
     this.tooltip = d3.select('body').append('div')
-      .attr('id', 'chart-hover')
+      .attr('id', 'chart-tooltip')
       .style('position', 'fixed')
       .style('display', 'none')
 
@@ -50,18 +50,18 @@ export default class TimeChart {
     this.width = width
     this.weekHook = weekHook
 
+    // Add axes
+    this.setupAxes()
+
     // Add marker primitives
     this.timerect = new marker.TimeRect(this)
-    this.baseline = new marker.Baseline(this)
-    this.actual = new marker.Actual(this)
-
-    this.setupAxes()
-    this.setupPrediction()
-    this.setupOnset()
-    this.setupPeak()
 
     // Add overlays and other mouse interaction items
     this.setupOverlay()
+
+    this.baseline = new marker.Baseline(this)
+    this.actual = new marker.Actual(this)
+    this.predictions = []
   }
 
   /**
@@ -93,89 +93,6 @@ export default class TimeChart {
       .attr('dy', '.71em')
       .style('text-anchor', 'middle')
       .text('Weighted ILI (%)')
-  }
-
-  /**
-   * Setup onset marker
-   * One central circle, two end line markers and a range line
-   */
-  setupOnset() {
-    let group = this.svg.append('g').attr('class', 'onset-group')
-
-    let stp = 10,
-        cy = this.height - 15
-
-    group.append('line')
-      .attr('y1', cy)
-      .attr('y2', cy)
-      .attr('class', 'range onset-range')
-
-    group.append('line')
-      .attr('y1', cy - stp / 2)
-      .attr('y2', cy + stp / 2)
-      .attr('class', 'stopper onset-stopper onset-low')
-
-    group.append('line')
-      .attr('y1', cy - stp / 2)
-      .attr('y2', cy + stp / 2)
-      .attr('class', 'stopper onset-stopper onset-high')
-
-    group.append('circle')
-      .attr('r', 4)
-      .attr('cy', cy)
-      .attr('class', 'onset-mark')
-  }
-
-  /**
-   * Setup peak marker
-   * One central circle, four end line markers and two range lines
-   */
-  setupPeak() {
-    let d3 = this.d3
-    let group = this.svg.append('g').attr('class', 'peak-group')
-
-    group.append('line')
-      .attr('class', 'range peak-range peak-range-x')
-
-    group.append('line')
-      .attr('class', 'range peak-range peak-range-y')
-
-    group.append('line')
-      .attr('class', 'stopper peak-stopper peak-low-x')
-
-    group.append('line')
-      .attr('class', 'stopper peak-stopper peak-high-x')
-
-    group.append('line')
-      .attr('class', 'stopper peak-stopper peak-low-y')
-
-    group.append('line')
-      .attr('class', 'stopper peak-stopper peak-high-y')
-
-    group.append('circle')
-      .attr('r', 4)
-      .attr('class', 'peak-mark')
-  }
-
-  /**
-   * Setup predictions
-   * Five points (with current), a path joining them and an area
-   */
-  setupPrediction() {
-    let group = this.svg.append('g')
-        .attr('class', 'prediction-group')
-
-    group.append('path')
-      .attr('class', 'area-prediction')
-
-    group.append('path')
-      .attr('class', 'line-prediction')
-
-    // Add circles
-    group.selectAll('.point-prediction')
-      .enter()
-      .append('circle')
-      .attr('class', 'point-prediction')
   }
 
   /**
@@ -215,12 +132,6 @@ export default class TimeChart {
       })
   }
 
-  /**
-   * Setup legend
-   */
-  setupLegend() {
-  }
-
   // plot data
   plot(data) {
     let d3 = this.d3,
@@ -233,6 +144,7 @@ export default class TimeChart {
 
     // Reset scales and axes
     yScale.domain([0, util.getYMax(data)])
+    // Assuming actual data has all the weeks
     let weeks = data.actual.map(d => d.week % 100)
     xScale.domain([0, weeks.length - 1])
 
@@ -280,28 +192,45 @@ export default class TimeChart {
       name: this.weeks[this.weekIdx]
     })
 
+    // Update markers with data
+    this.timerect.plot(this, data.actual)
+    this.baseline.plot(this, data.baseline)
+    this.actual.plot(this, data.actual)
+
+    // Reset history lines
+    if (this.history) this.history.clear()
+    this.history = new marker.HistoricalLines(this)
+    this.history.plot(this, data.history)
+
+    // Reset predictions
+    this.predictions.map(p => p.clear())
+    let colors = d3.scaleOrdinal(d3.schemeCategory10)
+
+    data.models.forEach((m, idx) => {
+      let predMarker = new marker.Prediction(this, m.id, colors(idx))
+      predMarker.plot(this, m.predictions, data.actual)
+      this.predictions.push(predMarker)
+    })
+
+    let that = this
     // Add mouse move and click events
     let bb = svg.node().getBoundingClientRect()
     d3.select('.overlay')
       .on('mousemove', function() {
         let mouse = d3.mouse(this)
         // Snap x to nearest tick
-        let snappedX = xScale(Math.round(xScale.invert(mouse[0])))
+        let index = Math.round(xScale.invert(mouse[0]))
+        let snappedX = xScale(index)
         d3.select('.hover-line')
           .transition()
           .duration(50)
           .attr('x1', snappedX)
           .attr('x2', snappedX)
 
-        // TODO
-        // Get proximities from
-        // - Historical points
-        // - Peak points
-        // - Actual point
         tooltip
           .style('top', (mouse[1] + bb.top) + 'px')
           .style('left', (mouse[0] + bb.left + 70) + 'px')
-          .html('Hello<br>Chart')
+          .html(util.tooltipText(that, index))
       })
       .on('click', function() {
         let idx = Math.round(xScale.invert(d3.mouse(this)[0]))
@@ -310,194 +239,6 @@ export default class TimeChart {
           name: weeks[idx]
         })
       })
-
-    // Update markers with data
-    this.timerect.plot(this, data)
-    this.baseline.plot(this, data)
-    this.actual.plot(this, data)
-  }
-
-  // Marker transition functions
-  // ---------------------------
-  /**
-   * Move onset marker
-   */
-  moveOnset() {
-    let svg = this.svg,
-        xScaleWeek = this.xScaleWeek
-    let onset = this.chartData.predictions[this.pointer].onsetWeek
-
-    svg.select('.onset-mark')
-      .transition()
-      .duration(200)
-      .attr('cx', xScaleWeek(onset.point))
-
-    svg.select('.onset-range')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(onset.low))
-      .attr('x2', xScaleWeek(onset.high))
-
-    svg.select('.onset-low')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(onset.low))
-      .attr('x2', xScaleWeek(onset.low))
-
-    svg.select('.onset-high')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(onset.high))
-      .attr('x2', xScaleWeek(onset.high))
-  }
-
-  /**
-   * Move peak marker
-   */
-  movePeak() {
-    let svg = this.svg,
-        xScaleWeek = this.xScaleWeek,
-        yScale = this.yScale
-    let pw = this.chartData.predictions[this.pointer].peakWeek,
-        pp = this.chartData.predictions[this.pointer].peakPercent
-
-    let leftW = xScaleWeek(pw.point),
-        leftP = yScale(pp.point)
-    svg.select('.peak-mark')
-      .transition()
-      .duration(200)
-      .attr('cx', leftW)
-      .attr('cy', leftP)
-
-    svg.select('.peak-range-x')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(pw.low))
-      .attr('x2', xScaleWeek(pw.high))
-      .attr('y1', yScale(pp.point))
-      .attr('y2', yScale(pp.point))
-
-    svg.select('.peak-range-y')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(pw.point))
-      .attr('x2', xScaleWeek(pw.point))
-      .attr('y1', yScale(pp.low))
-      .attr('y2', yScale(pp.high))
-
-    svg.select('.peak-low-x')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(pw.low))
-      .attr('x2', xScaleWeek(pw.low))
-      .attr('y1', yScale(pp.point) - 5)
-      .attr('y2', yScale(pp.point) + 5)
-
-    svg.select('.peak-high-x')
-      .transition()
-      .duration(200)
-      .attr('x1', xScaleWeek(pw.high))
-      .attr('x2', xScaleWeek(pw.high))
-      .attr('y1', yScale(pp.point) - 5)
-      .attr('y2', yScale(pp.point) + 5)
-
-    leftW = xScaleWeek(pw.point)
-    svg.select('.peak-low-y')
-      .transition()
-      .duration(200)
-      .attr('x1', (!leftW ? 0 : leftW) - 5)
-      .attr('x2', (!leftW ? 0 : leftW) + 5)
-      .attr('y1', yScale(pp.low))
-      .attr('y2', yScale(pp.low))
-
-    svg.select('.peak-high-y')
-      .transition()
-      .duration(200)
-      .attr('x1', (!leftW ? 0 : leftW) - 5)
-      .attr('x2', (!leftW ? 0 : leftW) + 5)
-      .attr('y1', yScale(pp.high))
-      .attr('y2', yScale(pp.high))
-  }
-
-  /**
-   * Move prediction points + area
-   */
-  movePrediction() {
-    let d3 = this.d3,
-        xScaleWeek = this.xScaleWeek,
-        yScale = this.yScale,
-        svg = this.svg
-
-    let predictionData = this.chartData.predictions[this.pointer]
-    let startWeek = predictionData.week,
-        startData = this.chartData.actual.filter(d => d.week == startWeek)[0].data
-
-    let data = [{
-      week: startWeek % 100,
-      data: startData,
-      low: startData,
-      high: startData
-    }]
-
-    let names = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-    let weeks = this.getNextWeeks(startWeek)
-
-    weeks.forEach((item, idx) => {
-      data.push({
-        week: item,
-        data: predictionData[names[idx]].point,
-        low: predictionData[names[idx]].low,
-        high: predictionData[names[idx]].high
-      })
-    })
-
-    let group = svg.select('.prediction-group')
-
-    // Move circles around
-    let circles = group.selectAll('.point-prediction')
-        .data(data)
-
-    circles.exit().remove()
-
-    circles.enter().append('circle')
-      .merge(circles)
-      .attr('class', 'point-prediction')
-      .transition()
-      .duration(200)
-      .ease(d3.easeQuadOut)
-      .attr('cx', d => xScaleWeek(d.week))
-      .attr('cy', d => yScale(d.data))
-      .attr('r', 3)
-
-    let line = d3.line()
-        .x(d => xScaleWeek(d.week % 100))
-        .y(d => yScale(d.data))
-
-    group.select('.line-prediction')
-      .datum(data)
-      .transition()
-      .duration(200)
-      .attr('d', line)
-
-    let area = d3.area()
-        .x(d => xScaleWeek(d.week % 100))
-        .y1(d => yScale(d.low))
-        .y0(d => yScale(d.high))
-
-    group.select('.area-prediction')
-      .datum(data)
-      .transition()
-      .duration(200)
-      .attr('d', area)
-  }
-
-  /**
-   * Move all prediction specific markers
-   */
-  moveAll() {
-    this.moveOnset()
-    this.movePeak()
-    this.movePrediction()
   }
 
   /**
@@ -507,6 +248,10 @@ export default class TimeChart {
     // Change self index
     this.weekIdx = idx
     this.timerect.update(idx)
+
+    this.predictions.forEach(p => {
+      p.update(idx)
+    })
   }
 
   // External interaction functions
@@ -532,18 +277,5 @@ export default class TimeChart {
       idx: previousIdx,
       name: this.weeks[previousIdx]
     }
-  }
-
-  /**
-   * Return next four week numbers for given week
-   */
-  getNextWeeks(currentWeek) {
-    let current = this.weeks.indexOf(currentWeek % 100)
-    let weeks = []
-    for (let i = 0; i < 4; i++) {
-      current += 1
-      if (current < this.weeks.length) weeks.push(this.weeks[current])
-    }
-    return weeks
   }
 }

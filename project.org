@@ -3,17 +3,16 @@
 
 * Todos
 ** Next
-*** Plan interfaces of objects
-SCHEDULED: <2016-10-29 Sat>
-*** Write getters
-SCHEDULED: <2016-10-29 Sat>
 *** Objectify each prediction plot group
 SCHEDULED: <2016-10-29 Sat>
 *** What to show on movements
-*** Tooltips
+*** Query using week number / not weekIdx
+*** Get complete weeks for actual, with NA fills
 ** All
 *** Last updated thing metadata
+*** Fix Open sans extrabold face
 *** Move pointers till the last prediction week only
+**** Include NAs in parse steps
 *** Different confidence interval
 *** Histogram
 *** Scale svg elements dynamically

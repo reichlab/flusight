@@ -19,3 +19,41 @@ export const getYMax = data => {
 
   return 1.1 * Math.max(...maxValues)
 }
+
+
+/**
+ * Return next four week numbers for given week
+ */
+export const getNextWeeks = (currentWeek, weeks) => {
+  let current = weeks.indexOf(currentWeek % 100)
+  let nextWeeks = []
+  for (let i = 0; i < 4; i++) {
+    current += 1
+    if (current < weeks.length) nextWeeks.push(weeks[current])
+  }
+  return nextWeeks
+}
+
+/**
+ * Return formatted tooltip text for given weekIdx
+ */
+export const tooltipText = (object, idx) => {
+  // Run queries on objects and return html
+
+  var color = object.d3.scaleOrdinal(object.d3.schemeCategory10)
+
+  let text = ''
+
+  // Ask actual
+  let actualValue = object.actual.query(idx)
+  // if (actualValue) {
+  //   text += '<div class="actual" style="background:' + color(0) +  '">Actual <span class="bold">' + actualValue + '</span></div>'
+  // }
+  // text += '<div class="prediction" style="background:' + color(1) +  '">>KOT <span class="bold">' + actualValue + '</span></div>'
+
+  for (let i = 0; i < 1; i++) {
+    text += '<div class="prediction" style="background:' + color(i) +  '">KOT <span class="bold">' + actualValue + '</span></div>'
+  }
+
+  return text
+}

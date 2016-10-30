@@ -19,15 +19,15 @@
     margin-bottom: 5px;
 }
 
-#choropleth-hover {
+#choropleth-tooltip {
     padding: 10px;
     box-shadow: 0px 0px 2px;
     border-radius: 1px;
     background-color: white;
-    font-size: 12px;
+    font-size: 11px;
 
     .value {
-        font-size: 15px;
+        font-size: 12px;
         font-weight: bold;
     }
 }
