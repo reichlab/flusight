@@ -37,23 +37,27 @@ export const getNextWeeks = (currentWeek, weeks) => {
 /**
  * Return formatted tooltip text for given weekIdx
  */
-export const tooltipText = (object, idx) => {
+export const tooltipText = (object, idx, y) => {
   // Run queries on objects and return html
-
-  var color = object.d3.scaleOrdinal(object.d3.schemeCategory10)
 
   let text = ''
 
   // Ask actual
   let actualValue = object.actual.query(idx)
-  // if (actualValue) {
-  //   text += '<div class="actual" style="background:' + color(0) +  '">Actual <span class="bold">' + actualValue + '</span></div>'
-  // }
-  // text += '<div class="prediction" style="background:' + color(1) +  '">>KOT <span class="bold">' + actualValue + '</span></div>'
 
-  for (let i = 0; i < 1; i++) {
-    text += '<div class="prediction" style="background:' + color(i) +  '">KOT <span class="bold">' + actualValue + '</span></div>'
+  if (actualValue != -1) {
+    text += '<div class="actual" style="background:white">Actual <span class="bold">'
+    text += actualValue + '</span></div>'
   }
+
+  object.predictions.map(p => {
+    let data = p.query(idx)
+
+    if (data) {
+      text += '<div class="prediction" style="background:' + p.color +  '">'
+      text += p.id + ' <span class="bold">' + data + '</span></div>'
+    }
+  })
 
   return text
 }

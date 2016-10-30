@@ -202,11 +202,13 @@ export default class TimeChart {
 
     // Reset predictions
     this.predictions.map(p => p.clear())
-    let colors = d3.scaleOrdinal(d3.schemeCategory10)
+    this.predictions = []
+    let colors = d3.schemeCategory10 // TODO: handle more than 10 colors
 
     data.models.forEach((m, idx) => {
-      let predMarker = new marker.Prediction(this, m.id, colors(idx))
+      let predMarker = new marker.Prediction(this, m.id, colors[idx])
       predMarker.plot(this, m.predictions, data.actual)
+      predMarker.hide()
       this.predictions.push(predMarker)
     })
 
@@ -228,7 +230,7 @@ export default class TimeChart {
         tooltip
           .style('top', (mouse[1] + bb.top) + 'px')
           .style('left', (mouse[0] + bb.left + 70) + 'px')
-          .html(util.tooltipText(that, index))
+          .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function() {
         let idx = Math.round(xScale.invert(d3.mouse(this)[0]))

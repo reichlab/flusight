@@ -214,13 +214,19 @@ export class Prediction {
       let names = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
       let nextWeeks = util.getNextWeeks(startWeek, this.weeks)
 
-      nextWeeks.forEach((item, idx) => {
+      nextWeeks.forEach((item, index) => {
         data.push({
           week: item,
-          data: predData[names[idx]].point,
-          low: predData[names[idx]].low,
-          high: predData[names[idx]].high
+          data: predData[names[index]].point,
+          low: predData[names[index]].low,
+          high: predData[names[index]].high
         })
+      })
+
+      // Save week indexed data
+      this.displayedData = Array(this.weeks.length).fill(false)
+      data.forEach((d, index) => {
+        if (index > 0) this.displayedData[this.weeks.indexOf(d.week)] = d.data
       })
 
       let circles = this.predictionGroup.selectAll('.point-prediction')
@@ -271,6 +277,8 @@ export class Prediction {
 
     this.predictionGroup
       .style('visibility', 'hidden')
+
+    this.hidden = true
   }
 
   show() {
@@ -282,12 +290,22 @@ export class Prediction {
 
     this.predictionGroup
       .style('visibility', null)
+
+    this.hidden = false
   }
 
   clear() {
     this.onsetGroup.remove();
     this.peakGroup.remove();
     this.predictionGroup.remove();
+  }
+
+  query(idx) {
+
+    // Don't show anything if predictions are hidden
+    if (this.hidden) return false
+
+    return this.displayedData[idx]
   }
 }
 
@@ -437,7 +455,6 @@ export class Actual {
   }
 
   query(idx) {
-    // TODO: handle NAs
     return this.data[idx].data
   }
 }
