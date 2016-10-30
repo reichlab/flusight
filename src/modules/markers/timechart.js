@@ -5,6 +5,27 @@ import * as util from '../utils/timechart'
 export class Prediction {
   constructor(parent, id, color) {
 
+    // Prediction group
+    let predictionGroup = parent.svg.append('g')
+        .attr('class', 'prediction-group')
+        .attr('id', id + '-marker')
+
+    predictionGroup.append('path')
+      .attr('class', 'area-prediction')
+      .style('fill', color)
+
+    predictionGroup.append('path')
+      .attr('class', 'line-prediction')
+      .style('stroke', color)
+
+    predictionGroup.selectAll('.point-prediction')
+      .enter()
+      .append('circle')
+      .attr('class', 'point-prediction')
+      .style('stroke', color)
+
+    this.predictionGroup = predictionGroup
+
     // Create onset group
     let onsetGroup = parent.svg.append('g')
         .attr('class', 'onset-group')
@@ -32,7 +53,8 @@ export class Prediction {
       .attr('r', 4)
       .attr('cy', cy)
       .attr('class', 'onset-mark')
-      .style('stroke', color)
+      .style('stroke', util.hexToRgba(color, 0.3))
+      .style('fill', color)
 
     this.onsetGroup = onsetGroup
 
@@ -62,30 +84,10 @@ export class Prediction {
     peakGroup.append('circle')
       .attr('r', 4)
       .attr('class', 'peak-mark')
-      .style('stroke', color)
-
-    this.peakGroup = peakGroup
-
-    // Prediction group
-    let predictionGroup = parent.svg.append('g')
-        .attr('class', 'prediction-group')
-        .attr('id', id + '-marker')
-
-    predictionGroup.append('path')
-      .attr('class', 'area-prediction')
+      .style('stroke', util.hexToRgba(color, 0.3))
       .style('fill', color)
 
-    predictionGroup.append('path')
-      .attr('class', 'line-prediction')
-      .style('stroke', color)
-
-    predictionGroup.selectAll('.point-prediction')
-      .enter()
-      .append('circle')
-      .attr('class', 'point-prediction')
-      .style('stroke', color)
-
-    this.predictionGroup = predictionGroup
+    this.peakGroup = peakGroup
 
     this.color = color
     this.id = id

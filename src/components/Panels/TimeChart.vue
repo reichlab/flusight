@@ -32,16 +32,14 @@ $accent: rgb(24, 129, 127);
 // Onset markers
 .onset-group {
     .onset-mark {
-        fill: white;
-        stroke-width: 1.5px;
+        stroke-width: 10px;
     }
 }
 
 // Peak markers
 .peak-group {
     .peak-mark {
-        fill: white;
-        stroke-width: 1.5px;
+        stroke-width: 10px;
     }
     .range {
         stroke-width: 0.5px;

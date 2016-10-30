@@ -99,20 +99,18 @@ export default class TimeChart {
    * Setup overlay for mouse events
    */
   setupOverlay() {
-    let d3 = this.d3,
-        svg = this.svg,
-        xScale = this.xScale,
-        yScale = this.yScale,
-        weekHook = this.weekHook,
+    let svg = this.svg,
+        height = this.height,
+        width = this.width,
         tooltip = this.tooltip
 
     // Add vertical line
-    let line = this.svg.append('line')
+    let line = svg.append('line')
         .attr('class', 'hover-line')
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
-        .attr('y2', this.height)
+        .attr('y2', height)
         .style('display', 'none')
 
     // Get bounding box
@@ -120,8 +118,8 @@ export default class TimeChart {
 
     svg.append('rect')
       .attr('class', 'overlay')
-      .attr('height', this.height)
-      .attr('width', this.width)
+      .attr('height', height)
+      .attr('width', width)
       .on('mouseover', () => {
         line.style('display', null)
         tooltip.style('display', null)
