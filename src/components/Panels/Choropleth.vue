@@ -25,6 +25,11 @@
     border-radius: 1px;
     background-color: white;
     font-size: 12px;
+
+    .value {
+        font-size: 15px;
+        font-weight: bold;
+    }
 }
 
 .colorbar-group .axis {

@@ -111,7 +111,7 @@ export default class Choropleth {
         tooltip
           .style('top', (mouse[1] + bb.top) + 'px')
           .style('left', (mouse[0] + bb.left + 30) + 'px')
-          .html('Hello<br>Map')
+          .html(util.tooltipText(this, data))
       })
       .on('click', function() {
         // Change the region selector
@@ -142,7 +142,8 @@ export default class Choropleth {
 
     // Update colors for given week
     data.map(d => {
-      let colorId =  Math.floor(colorScale(d.value[ids.weekIdx].data))
+      let value = d.value[ids.weekIdx].data
+      let colorId =  Math.floor(colorScale(value))
       color = cmap[colorId]
 
       d.states.map(s => {
@@ -157,6 +158,7 @@ export default class Choropleth {
         }
 
         d3State.style('fill', color)
+        d3State.attr('data-value', value)
       })
     })
   }
