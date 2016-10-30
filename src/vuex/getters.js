@@ -53,13 +53,24 @@ export function timeChartData (state) {
 
   let regionSubset = state.data[selectedRegion(state)]
   let seasonSubset = regionSubset.seasons[selectedSeason(state)]
+  let historyData = []
 
-  // TODO: Return all seasons
+  regionSubset.seasons.forEach((s, idx) => {
+    // For all the non selected seasons
+    if (idx !== selectedSeason(state)) {
+      historyData.append({
+        id: s.id,
+        actual: s.actual
+      })
+    }
+  })
+
   return {
     region: regionSubset.subId, // Submission ids are concise
     actual: seasonSubset.actual,
     baseline: seasonSubset.baseline,
-    models: seasonSubset.models // All model predictions
+    models: seasonSubset.models // All model predictions,
+    history: historyData
   }
 }
 
@@ -82,7 +93,7 @@ export function previousWeek (state) {
  */
 export function choroplethData (state) {
 
-  // Handle choropleth selector
+  // TODO: Handle choropleth selector
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
 
