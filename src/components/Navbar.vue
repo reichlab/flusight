@@ -11,22 +11,24 @@
 </style>
 
 <template>
-    <nav class="nav has-shadow">
+    <div class="hero-head">
+    <div class="container">
+      <nav class="nav">
         <div class="nav-left">
             <a class="nav-item is-brand" href="#">
                 <span class="brand title"><i class="fa fa-bar-chart"></i> {{ metadata.title }} | <span class="thick">{{ metadata.parent }}</span></span>
             </a>
         </div>
 
-        <span class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
+  <span id="nav-toggle" class="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
 
-        <div class="nav-right nav-menu">
-            <span class="nav-item">
-                <a class="button is-small is-info">
+  <div id="nav-menu" class="nav-right nav-menu">
+      <span class="nav-item">
+        <a class="button is-small">
                     <span class="icon is-small">
                         <i class="fa fa-question"></i>
                     </span>
@@ -38,9 +40,12 @@
                    </span>
                    <span>Source</span>
                </a>
-           </span>
-       </div>
-   </nav>
+      </span>
+  </div>
+</nav>
+
+    </div>
+  </div>
 </template>
 
 <script>

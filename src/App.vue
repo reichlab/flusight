@@ -14,6 +14,10 @@ $accent: #268bd2;
 svg text::selection {
     fill: white;
 }
+
+body {
+    background-color: white;
+}
 </style>
 
 <template>

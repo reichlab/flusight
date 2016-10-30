@@ -3,8 +3,11 @@
     padding: 5px 0px;
     .box {
         padding: 10px 15px;
-        margin: 15px 10px;
+        margin: 15px 0px;
         border-radius: 2px;
+    }
+    .bold {
+        font-weight: bold;
     }
 }
 </style>
@@ -17,7 +20,7 @@
                     <div class="level-left">
                         <div class="container">
                             <h1 class="title">
-                                Real-time Influenza Forecasts
+                                Real-time <span class="bold">Influenza Forecasts</span>
                             </h1>
                             <h2 class="subtitle">
                                 CDC FluSight Challenge

@@ -63,7 +63,6 @@ export default class Choropleth {
     this.regionHook = regionHook
     // Setup color bar
     this.colorBar = new marker.ColorBar(d3, svg, this.cmap)
-    this.colorBar.update([0, 1])
   }
 
   /**
@@ -80,9 +79,13 @@ export default class Choropleth {
         regionHook = this.regionHook,
         tooltip = this.tooltip
 
+    let maxData = util.getMaxData(data)
+
     this.colorScale = d3.scaleLinear()
-      .domain([util.getMaxData(data), 0])
+      .domain([maxData, 0])
       .range([0, cmap.length - 0.01])
+
+    this.colorBar.update([0, maxData])
 
     let bb = svg.node().getBoundingClientRect()
 
