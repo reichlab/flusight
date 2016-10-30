@@ -107,10 +107,43 @@ $accent: rgba(24, 129, 127, 0.901961);
     stroke-width: 1px;
 }
 
+#chart-hover {
+    padding: 10px;
+    box-shadow: 0px 0px 2px;
+    border-radius: 1px;
+    background-color: white;
+    font-size: 12px;
+}
+
+#nav-controls {
+    position: absolute;
+    right: 0px;
+    top: 20px;
+    .icon {
+        margin-left: 0px !important;
+    }
+    a {
+        margin: 2px 0px;
+    }
+}
+
 </style>
 
 <template>
     <div id="timechart">
+    </div>
+    <div id="nav-controls">
+        <a class="button is-small is-outlined is-info chart-nav-btn" v-on:click="backward">
+            <span class="icon is-small">
+                <i class="fa fa-arrow-left"></i>
+            </span>
+        </a>
+        <br>
+        <a class="button is-small is-outlined is-info chart-nav-btn" v-on:click="forward">
+            <span class="icon is-small">
+                <i class="fa fa-arrow-right"></i>
+            </span>
+        </a>
     </div>
 </template>
 
@@ -120,7 +153,9 @@ $accent: rgba(24, 129, 127, 0.901961);
     initTimeChart,
     updateSelectedWeek,
     plotTimeChart,
-    updateTimeChart
+    updateTimeChart,
+    backward,
+    forward
   } from '../../vuex/actions'
 
   export default {
@@ -129,7 +164,9 @@ $accent: rgba(24, 129, 127, 0.901961);
         initTimeChart,
         updateSelectedWeek,
         plotTimeChart,
-        updateTimeChart
+        updateTimeChart,
+        backward,
+        forward
       }
     },
     ready() {

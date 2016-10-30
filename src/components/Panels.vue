@@ -3,11 +3,11 @@
 
 <template>
     <div class="columns">
-        <div class="column is-4">
+        <div class="column is-5">
             <choropleth></choropleth>
         </div>
 
-        <div class="column id-8">
+        <div class="column id-7">
             <time-chart></time-chart>
         </div>
     </div>
@@ -16,6 +16,12 @@
 <script>
   import Choropleth from './Panels/Choropleth'
   import TimeChart from './Panels/TimeChart'
+  import {
+    selectedRegion,
+    selectedSeason,
+    selectedWeekIdx,
+    selectedChoropleth
+  } from '../vuex/getters'
   import {
     updateTimeChart,
     updateChoropleth,
@@ -29,6 +35,12 @@
       TimeChart
     },
     vuex: {
+      getters: {
+        selectedRegion,
+        selectedSeason,
+        selectedWeekIdx,
+        selectedChoropleth
+      },
       actions: {
         updateTimeChart,
         updateChoropleth,
@@ -58,7 +70,7 @@
         // Use specfic choropleth getter and do a plot
         this.plotChoropleth()
       },
-      selectedWeek: function() {
+      selectedWeekIdx: function() {
         // Triggered by
         // - nav buttons
         // - mouse jumps

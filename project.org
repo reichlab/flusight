@@ -12,6 +12,8 @@ SCHEDULED: <2016-10-29 Sat>
 *** What to show on movements
 *** Tooltips
 ** All
+*** Last updated thing metadata
+*** Move pointers till the last prediction week only
 *** Different confidence interval
 *** Histogram
 *** Scale svg elements dynamically

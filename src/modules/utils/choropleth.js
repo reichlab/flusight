@@ -4,7 +4,7 @@
 /**
  * Return max value in the current season
  */
-export const getMaxData = data => Math.max(...data.map(d => d.value))
+export const getMaxData = data => Math.max(...data.map(d => Math.max(...d.value.map(dd => dd.data))))
 
 /**
  * Return sibling data for given element

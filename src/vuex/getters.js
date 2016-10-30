@@ -69,7 +69,7 @@ export function timeChartData (state) {
     region: regionSubset.subId, // Submission ids are concise
     actual: seasonSubset.actual,
     baseline: seasonSubset.baseline,
-    models: seasonSubset.models // All model predictions,
+    models: seasonSubset.models, // All model predictions
     history: historyData
   }
 }

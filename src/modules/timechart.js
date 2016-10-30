@@ -1,13 +1,16 @@
 // Chart plotting functions
 
 import * as util from './utils/timechart'
+import * as marker from './markers/timechart'
 
 export default class TimeChart {
-  constructor(d3, elementId) {
+  constructor(d3, elementId, weekHook) {
     // Get div dimensions
-    let chartDiv = document.getElementById(elementId),
-        divWidth = chartDiv.offsetWidth,
-        divHeight = 350 // TODO: Fix these dynamically
+    let footBB = d3.select('.footer').node().getBoundingClientRect(),
+        chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
+
+    let divWidth = chartBB.width,
+        divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Create blank chart
     let margin = {
@@ -16,7 +19,7 @@ export default class TimeChart {
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom
 
-    // Initialize values
+    // Initialize scales and stuff
     let xScale = d3.scaleLinear()
         .range([0, width]),
         yScale = d3.scaleLinear()
@@ -31,6 +34,12 @@ export default class TimeChart {
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
+    // Add hover info div
+    this.tooltip = d3.select('body').append('div')
+      .attr('id', 'chart-hover')
+      .style('position', 'fixed')
+      .style('display', 'none')
+
     // Save variables
     this.d3 = d3
     this.svg = svg
@@ -39,6 +48,9 @@ export default class TimeChart {
     this.xScaleDate = xScaleDate
     this.height = height
     this.width = width
+    this.weekHook = weekHook
+
+    this.setupMarkers()
 
     this.setupTimeRect()
     this.setupAxes()
@@ -55,6 +67,13 @@ export default class TimeChart {
 
   // Markers initialization
   // ----------------------
+
+  /**
+   * Add marker objects with
+   */
+  setupMarkers() {
+    //
+  }
 
   /**
    * Setup axes
@@ -229,8 +248,11 @@ export default class TimeChart {
    */
   setupOverlay() {
     let d3 = this.d3,
+        svg = this.svg,
         xScale = this.xScale,
-        yScale = this.yScale
+        yScale = this.yScale,
+        weekHook = this.weekHook,
+        tooltip = this.tooltip
 
     // Add vertical line
     let line = this.svg.append('line')
@@ -241,21 +263,47 @@ export default class TimeChart {
         .attr('y2', this.height)
         .style('display', 'none')
 
-    this.svg.append('rect')
+    // Get bounding box
+    let bb = svg.node().getBoundingClientRect()
+
+    svg.append('rect')
       .attr('class', 'overlay')
       .attr('height', this.height)
       .attr('width', this.width)
-      .on('mouseover', () => line.style('display', null))
-      .on('mouseout', () => line.style('display', 'none'))
+      .on('mouseover', () => {
+        line.style('display', null)
+        tooltip.style('display', null)
+      })
+      .on('mouseout', () => {
+        line.style('display', 'none')
+        tooltip.style('display', 'none')
+      })
       .on('mousemove', function() {
-        let mouseX = d3.mouse(this)[0]
+        let mouse = d3.mouse(this)
         // Snap x to nearest tick
-        let snappedX = xScale(Math.round(xScale.invert(mouseX)))
+        let snappedX = xScale(Math.round(xScale.invert(mouse[0])))
         line
           .transition()
           .duration(50)
           .attr('x1', snappedX)
           .attr('x2', snappedX)
+
+        // TODO
+        // Get proximities from
+        // - Historical points
+        // - Peak points
+        // - Actual point
+        tooltip
+          .style('top', (mouse[1] + bb.top) + 'px')
+          .style('left', (mouse[0] + bb.left + 70) + 'px')
+          .html('Hello<br>Chart')
+      })
+      .on('click', function() {
+        let idx = Math.round(xScale.invert(d3.mouse(this)[0]))
+        weekHook({
+          idx: idx,
+          name: weeks[idx]
+        })
       })
   }
 
@@ -266,7 +314,7 @@ export default class TimeChart {
   }
 
   // plot data
-  update(data) {
+  plot(data) {
     let d3 = this.d3,
         svg = this.svg,
         xScale = this.xScale,
@@ -354,8 +402,12 @@ export default class TimeChart {
     this.weeks = weeks
     this.xScaleWeek = xScaleWeek
 
-    // Set pointer in prediction data (start with last)
-    this.pointer = this.data.actual.length - 1
+    // Set pointer for week data (start with last)
+    this.weekIdx = this.data.actual.length - 1
+    this.weekHook({
+      idx: this.weekIdx,
+      name: this.weeks[this.weekIdx]
+    })
   }
 
   // Marker transition functions
@@ -365,7 +417,7 @@ export default class TimeChart {
    * Move time rectangle following the prediction pointer
    */
   moveTimeRect() {
-    let xPoint = this.chartData.predictions[this.pointer].week % 100
+    let xPoint = this.data.actual[this.weekIdx].week % 100
     this.svg.select('.timerect')
       .transition()
       .duration(200)
@@ -555,21 +607,13 @@ export default class TimeChart {
   }
 
   /**
-   * Increment pointer and redraw
+   * Update marker position
    */
-  stepForward() {
-    this.pointer = Math.min(this.data.predictions.length - 1, ++this.pointer)
-    this.moveAll()
+  update(idx) {
+    // Change self index
+    this.weekIdx = idx
+    this.moveTimeRect()
   }
-
-  /**
-   * Decrement pointer and redraw
-   */
-  stepBackward() {
-    this.pointer = Math.max(0, --this.pointer)
-    this.moveAll()
-  }
-
 
   // External interaction functions
   // ------------------------------
@@ -578,9 +622,10 @@ export default class TimeChart {
    * Return next week idx and name for vuex store
    */
   getNextWeekData() {
+    let nextIdx = Math.min(this.weeks.length - 1, this.weekIdx + 1)
     return {
-      idx: 0,
-      name: 'NA'
+      idx: nextIdx,
+      name: this.weeks[nextIdx]
     }
   }
 
@@ -588,9 +633,10 @@ export default class TimeChart {
    * Return preview week idx and name for vuex store
    */
   getPreviousWeekData() {
+    let previousIdx = Math.max(0, this.weekIdx - 1)
     return {
-      idx: 0,
-      name: 'NA'
+      idx: previousIdx,
+      name: this.weeks[previousIdx]
     }
   }
 

@@ -36,29 +36,51 @@ export const initChoropleth = ({ dispatch, state }, val) => {
  * Plot (update) time chart with region / season data
  */
 export const plotTimeChart = ({ dispatch, state }) => {
+  let data = get.timeChartData(state)
+
+  get.timeChart(state).plot(data)
 }
 
 /**
  * Plot (update) choropleth with currently selected data
  */
 export const plotChoropleth = ({ dispatch, state }) => {
+  let data = get.choroplethData(state)
+
+  get.choropleth(state).plot(data)
 }
 
-// Movement transition actions
+/**
+ * Tell time chart to move markers to weekIdx
+ */
 export const updateTimeChart = ({ dispatch, state }) => {
+  get.timeChart(state).update(get.selectedWeekIdx(state))
 }
 
+/**
+ * Tell choropleth to move to weekidx and highlight a region
+ */
 export const updateChoropleth = ({ dispatch, state }) => {
+  let payload = {
+    weekIdx: get.selectedWeekIdx(state),
+    regionIdx: get.selectedRegion(state) - 1
+  }
+
+  get.choropleth(state).update(payload)
 }
 
-// Update week pointer in store
-// watchers will take care of everything else
+/**
+ * Update week pointer in main store
+ * and let watchers take care of everything else
+ */
 export const forward = ({ dispatch, state }) => {
   updateSelectedWeek({ dispatch, state }, get.nextWeek(state))
 }
 
-// Update week pointer in store
-// watchers will take care of everything else
+/**
+ * Update week pointer in main store
+ * and let watchers take care of everything else
+ */
 export const backward = ({ dispatch, state }) => {
   updateSelectedWeek({ dispatch, state }, get.previousWeek(state))
 }

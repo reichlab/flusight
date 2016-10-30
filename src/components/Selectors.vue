@@ -1,13 +1,10 @@
 <style lang="scss" scoped>
 .hero-body {
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-
-.chart-nav-btn {
-    .icon {
-        margin-left: 0px !important;
-        color: white;
+    padding: 5px 0px;
+    .box {
+        padding: 10px 15px;
+        margin: 15px 10px;
+        border-radius: 2px;
     }
 }
 </style>
@@ -31,7 +28,7 @@
                         <div class="level-item">
                             <p class="heading">Region</p>
                             <p class="control title">
-                                <span class="select">
+                                <span class="select is-small">
                                     <select v-model="currentRegion">
                                         <option v-for="region in regions">
                                             {{ region }}
@@ -43,28 +40,13 @@
                         <div class="level-item">
                             <p class="heading">Season</p>
                             <p class="control title">
-                                <span class="select">
+                                <span class="select is-small">
                                     <select v-model="currentSeason">
                                         <option v-for="season in seasons">
                                             {{ season }}
                                         </option>
                                     </select>
                                 </span>
-                            </p>
-                        </div>
-                        <div class="level-item">
-                            <p class="heading">Navigate</p>
-                            <p class="control title">
-                                <a class="button is-primary chart-nav-btn" v-on:click="backward">
-                                    <span class="icon">
-                                        <i class="fa fa-arrow-left"></i>
-                                    </span>
-                                </a>
-                                <a class="button is-primary chart-nav-btn" v-on:click="forward">
-                                    <span class="icon">
-                                        <i class="fa fa-arrow-right"></i>
-                                    </span>
-                                </a>
                             </p>
                         </div>
                     </div>
@@ -83,9 +65,7 @@
   } from '../vuex/getters'
   import {
     updateSelectedRegion,
-    updateSelectedSeason,
-    backward,
-    forward
+    updateSelectedSeason
   } from '../vuex/actions'
 
   export default {
@@ -98,9 +78,7 @@
       },
       actions: {
         updateSelectedSeason,
-        updateSelectedRegion,
-        backward,
-        forward
+        updateSelectedRegion
       }
     },
     computed: {
