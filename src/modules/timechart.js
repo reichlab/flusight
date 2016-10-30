@@ -278,33 +278,6 @@ export default class TimeChart {
         line.style('display', 'none')
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function() {
-        let mouse = d3.mouse(this)
-        // Snap x to nearest tick
-        let snappedX = xScale(Math.round(xScale.invert(mouse[0])))
-        line
-          .transition()
-          .duration(50)
-          .attr('x1', snappedX)
-          .attr('x2', snappedX)
-
-        // TODO
-        // Get proximities from
-        // - Historical points
-        // - Peak points
-        // - Actual point
-        tooltip
-          .style('top', (mouse[1] + bb.top) + 'px')
-          .style('left', (mouse[0] + bb.left + 70) + 'px')
-          .html('Hello<br>Chart')
-      })
-      .on('click', function() {
-        let idx = Math.round(xScale.invert(d3.mouse(this)[0]))
-        weekHook({
-          idx: idx,
-          name: weeks[idx]
-        })
-      })
   }
 
   /**
@@ -319,7 +292,9 @@ export default class TimeChart {
         svg = this.svg,
         xScale = this.xScale,
         yScale = this.yScale,
-        xScaleDate = this.xScaleDate
+        xScaleDate = this.xScaleDate,
+        tooltip = this.tooltip,
+        weekHook = this.weekHook
 
     // Reset scales and axes
     yScale.domain([0, util.getYMax(data)])
@@ -408,6 +383,38 @@ export default class TimeChart {
       idx: this.weekIdx,
       name: this.weeks[this.weekIdx]
     })
+
+    let bb = svg.node().getBoundingClientRect()
+
+    // Add mouse move and click events
+    d3.select('.overlay')
+      .on('mousemove', function() {
+        let mouse = d3.mouse(this)
+        // Snap x to nearest tick
+        let snappedX = xScale(Math.round(xScale.invert(mouse[0])))
+        d3.select('.hover-line')
+          .transition()
+          .duration(50)
+          .attr('x1', snappedX)
+          .attr('x2', snappedX)
+
+        // TODO
+        // Get proximities from
+        // - Historical points
+        // - Peak points
+        // - Actual point
+        tooltip
+          .style('top', (mouse[1] + bb.top) + 'px')
+          .style('left', (mouse[0] + bb.left + 70) + 'px')
+          .html('Hello<br>Chart')
+      })
+      .on('click', function() {
+        let idx = Math.round(xScale.invert(d3.mouse(this)[0]))
+        weekHook({
+          idx: idx,
+          name: weeks[idx]
+        })
+      })
   }
 
   // Marker transition functions
