@@ -395,7 +395,7 @@ export default class TimeChart {
       .ease(d3.easeQuadOut)
       .attr('cx', d => xScaleWeek(d.week % 100))
       .attr('cy', d => yScale(d.data))
-      .attr('r', 2.5)
+      .attr('r', 2)
 
     // Save for later
     this.data = data
