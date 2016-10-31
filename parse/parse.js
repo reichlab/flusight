@@ -10,6 +10,7 @@ const utils = require('./modules/utils')
 
 const fs = require('fs')
 const path = require('path')
+const moment = require('moment')
 
 
 /**
@@ -89,6 +90,8 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
     })
 
     let yamlData = config.read(configFile)
+    // Add current time
+    yamlData.updateTime = moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
     let outputWithYamlData = {
       data: output,
       metadata: yamlData

@@ -2,13 +2,24 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:800');
 
-.brand {
+.brand.title {
     font-size: 20px;
     color: #72caf9;
+
+    .brand-link{
+        color: #72caf9;
+        &:hover {
+            border: none;
+        }
+    }
+
     .thick {
         font-family: "Open Sans";
         color: #aaa;
         font-weight: 800;
+        &:hover {
+            color: #888;
+        }
     }
 }
 </style>
@@ -18,9 +29,16 @@
     <div class="container">
       <nav class="nav">
         <div class="nav-left">
-            <a class="nav-item is-brand" href="#">
-                <span class="brand title"><i class="fa fa-bar-chart"></i> {{ metadata.title }} | <span class="thick">{{ metadata.parent }}</span></span>
-            </a>
+            <span class="nav-item is-brand">
+                <span class="brand title">
+                    <a href="#" class="brand-link">
+                        <i class="fa fa-bar-chart"></i> {{ metadata.title }}
+                    </a>
+                        |
+                    <a class="thick brand-link" v-bind:href="metadata.parentUrl">
+                        {{ metadata.parent }}
+                </a>
+            </span>
         </div>
 
   <div id="nav-menu" class="nav-right nav-menu">

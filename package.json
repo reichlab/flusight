@@ -19,6 +19,7 @@
     "hint.css": "^2.4.0",
     "jquery": "^1.11.1",
     "js-yaml": "^3.6.1",
+    "moment": "^2.15.2",
     "papaparse": "^4.1.2",
     "textures": "^1.0.4",
     "topojson": "^1.6.27",
