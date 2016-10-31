@@ -50,11 +50,11 @@ export class Prediction {
       .attr('class', 'stopper onset-stopper onset-high')
 
     onsetGroup.append('circle')
-      .attr('r', 4)
+      .attr('r', 5)
       .attr('cy', cy)
       .attr('class', 'onset-mark')
-      .style('stroke', util.hexToRgba(color, 0.3))
-      .style('fill', color)
+      .style('stroke', 'transparent')
+      .style('fill', util.hexToRgba(color, 0.8))
 
     this.onsetGroup = onsetGroup
 
@@ -82,10 +82,10 @@ export class Prediction {
       .attr('class', 'stopper peak-stopper peak-high-y')
 
     peakGroup.append('circle')
-      .attr('r', 4)
+      .attr('r', 5)
       .attr('class', 'peak-mark')
-      .style('stroke', util.hexToRgba(color, 0.3))
-      .style('fill', color)
+      .style('stroke', 'transparent')
+      .style('fill', util.hexToRgba(color, 0.8))
 
     this.peakGroup = peakGroup
 
@@ -103,6 +103,9 @@ export class Prediction {
   }
 
   update(idx) {
+    let d3 = this.d3
+    let color = this.color
+    let id = this.id
     let week = this.weeks[idx]
 
     let localPosition = this.data.map(d => d.week % 100).indexOf(week)
@@ -112,13 +115,33 @@ export class Prediction {
     } else {
       this.show()
 
+      this.displayedPoints = {}
+
       // Move things
       let onset = this.data[localPosition].onsetWeek
+      this.displayedPoints.onset = onset.point
 
       this.onsetGroup.select('.onset-mark')
         .transition()
         .duration(200)
         .attr('cx', this.xScale(onset.point))
+
+      this.onsetGroup.select('.onset-mark')
+        .on('mouseover', function() {
+          d3.select(this)
+            .transition()
+            .duration(300)
+            .style('stroke', util.hexToRgba(color, 0.3))
+          d3.select('#chart-tooltip')
+            .style('display', null)
+            .html(util.pointTooltip(id, 'Season Onset', onset.point, color))
+        })
+        .on('mouseout', function() {
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .style('stroke', 'transparent')
+        })
 
       this.onsetGroup.select('.onset-range')
         .transition()
@@ -141,6 +164,8 @@ export class Prediction {
     let pw = this.data[localPosition].peakWeek,
         pp = this.data[localPosition].peakPercent
 
+      this.displayedPoints.peak = pw.point
+
       let leftW = this.xScale(pw.point),
           leftP = this.yScale(pp.point)
       this.peakGroup.select('.peak-mark')
@@ -148,6 +173,23 @@ export class Prediction {
         .duration(200)
         .attr('cx', leftW)
         .attr('cy', leftP)
+
+      this.peakGroup.select('.peak-mark')
+        .on('mouseover', function() {
+          d3.select(this)
+            .transition()
+            .duration(300)
+            .style('stroke', util.hexToRgba(color, 0.3))
+          d3.select('#chart-tooltip')
+            .style('display', null)
+            .html(util.pointTooltip(id, 'Peak value', pw.point, color))
+        })
+        .on('mouseout', function() {
+          d3.select(this)
+            .transition()
+            .duration(200)
+            .style('stroke', 'transparent')
+        })
 
       this.peakGroup.select('.peak-range-x')
         .transition()

@@ -62,6 +62,19 @@ export const tooltipText = (object, idx, y) => {
   return text
 }
 
+/**
+ * Return formatted tooltip info text for points
+ */
+export const pointTooltip = (id, desc, value, color) => {
+  let text = ''
+
+  text += '<div class="point head">' + desc + '</div>'
+  text += '<div class="point" style="background:' + color + '">'
+  text += id + '<span class="bold">' + value + '</span></div>'
+
+  return text
+}
+
 
 /**
  * Return rgba for hex

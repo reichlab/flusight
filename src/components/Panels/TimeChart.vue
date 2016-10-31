@@ -107,12 +107,12 @@ $accent: rgb(24, 129, 127);
     border-radius: 1px;
     background-color: white;
     font-size: 11px;
+
     .bold {
         font-weight: bold;
         float: right;
         margin-left: 5px;
     }
-
     .actual {
         padding: 5px 10px;
         background-color: white;
@@ -121,6 +121,14 @@ $accent: rgb(24, 129, 127);
     .prediction {
         padding: 5px 10px;
         color: white;
+    }
+    .point {
+        padding: 5px 10px;
+        color: white;
+
+        &.head {
+            color: #333;
+        }
     }
 }
 
