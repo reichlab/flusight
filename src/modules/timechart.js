@@ -246,8 +246,18 @@ export default class TimeChart {
     data.models.forEach((m, idx) => {
       let predMarker = new marker.Prediction(this, m.id, colors[idx])
       predMarker.plot(this, m.predictions, data.actual)
-      predMarker.hide()
+      predMarker.hideMarkers()
       this.predictions.push(predMarker)
+    })
+
+    this.legend = new marker.Legend(this, (pid, hide) => {
+      let pred = this.predictions.filter(p => p.id == pid)[0]
+      pred.legendHidden = hide
+      if (hide) {
+        pred.hideMarkers()
+      } else {
+        pred.showMarkers()
+      }
     })
 
     let that = this
@@ -290,6 +300,8 @@ export default class TimeChart {
     this.predictions.forEach(p => {
       p.update(idx)
     })
+
+    this.legend.update(this.predictions)
   }
 
   // External interaction functions

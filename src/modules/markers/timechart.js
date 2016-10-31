@@ -100,6 +100,7 @@ export class Prediction {
     this.xScale = parent.xScaleWeek
     this.yScale = parent.yScale
     this.weeks = parent.weeks
+    this.legendHidden = false
   }
 
   update(idx) {
@@ -111,9 +112,13 @@ export class Prediction {
     let localPosition = this.data.map(d => d.week % 100).indexOf(week)
 
     if (localPosition == -1) {
-      this.hide()
+      this.hidden = true
+      this.hideMarkers()
     } else {
-      this.show()
+      this.hidden = false
+      if (!this.legendHidden) {
+        this.showMarkers()
+      }
 
       this.displayedPoints = {}
 
@@ -310,7 +315,7 @@ export class Prediction {
     }
   }
 
-  hide() {
+  hideMarkers() {
     this.onsetGroup
       .style('visibility', 'hidden')
 
@@ -319,11 +324,12 @@ export class Prediction {
 
     this.predictionGroup
       .style('visibility', 'hidden')
-
-    this.hidden = true
   }
 
-  show() {
+  showMarkers() {
+    // Only show if not hidden
+    if (this.hidden) return
+
     this.onsetGroup
       .style('visibility', null)
 
@@ -332,8 +338,6 @@ export class Prediction {
 
     this.predictionGroup
       .style('visibility', null)
-
-    this.hidden = false
   }
 
   clear() {
@@ -345,7 +349,7 @@ export class Prediction {
   query(idx) {
 
     // Don't show anything if predictions are hidden
-    if (this.hidden) return false
+    if (this.hidden || this.legendHidden) return false
 
     return this.displayedData[idx]
   }
@@ -401,7 +405,66 @@ export class HistoricalLines {
 }
 
 export class Legend {
-  //
+  constructor(parent, legendHook) {
+    let legendDiv = parent.d3.select('#legend')
+    legendDiv.selectAll('*').remove()
+
+    let actualItem = legendDiv.append('div')
+        .attr('class', 'item')
+        .attr('id', 'legend-actual')
+
+    actualItem.append('i')
+      .attr('class', 'fa fa-circle')
+      .style('color', 'green')
+
+    actualItem.append('span')
+      .attr('class', 'item-title')
+      .html('Actual')
+
+    parent.predictions.forEach(p => {
+      let predItem = legendDiv.append('div')
+          .attr('class', 'item')
+          .attr('id', 'legend-' + p.id)
+          .style('cursor', 'pointer')
+
+      predItem.append('i')
+        .attr('class', 'fa fa-circle')
+        .style('color', p.color)
+
+      predItem.append('span')
+        .attr('class', 'item-title')
+        .html(p.id)
+
+      predItem
+        .on('click', function() {
+          let iElem = parent.d3.select(this).select('i')
+          let isActive = iElem.classed('fa-circle')
+
+          iElem.classed('fa-circle', !isActive)
+          iElem.classed('fa-circle-o', isActive)
+
+          legendHook(p.id, isActive)
+        })
+    })
+
+    this.legendDiv = legendDiv
+    this.d3 = parent.d3
+  }
+
+  update(predictions) {
+    let d3 = this.d3,
+        legendDiv = this.legendDiv
+
+    predictions.forEach(p => {
+      if (p.hidden) {
+        legendDiv.select('#legend-' + p.id)
+          .classed('na', true)
+      } else {
+        legendDiv.select('#legend-' + p.id)
+          .classed('na', false)
+      }
+    })
+  }
 }
 
 /**

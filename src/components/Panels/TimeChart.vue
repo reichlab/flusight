@@ -151,13 +151,32 @@ $accent: rgb(24, 129, 127);
 
 #legend {
     position: absolute;
-    right: 60px;
-    top: 30px;
-    width: 100px;
-    height: 200px;
+    right: 58px;
+    top: 25px;
     box-shadow: 1px 1px 2px #ccc;
     background-color: white;
     border-radius: 1px;
+    font-size: 11px;
+    .item {
+        padding: 5px 10px;
+        .fa {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .item-title {
+            font-size: 11px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        &.na {
+            .fa {
+                color: #aaa !important;
+            }
+            color: #aaa !important;
+        }
+    }
 }
 
 </style>
@@ -202,7 +221,7 @@ $accent: rgb(24, 129, 127);
   export default {
     data() {
       return {
-        show: false
+        show: true
       }
     },
     methods: {
