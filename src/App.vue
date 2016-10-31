@@ -18,9 +18,26 @@ svg text::selection {
 body {
     background-color: white;
 }
+
+#info-tooltip {
+    z-index: 100;
+    position: fixed;
+    box-shadow: 0px 0px 2px;
+    border-radius: 1px;
+    padding: 5px 10px;
+    color: #333;
+    font-size: 11px;
+    background-color: white;
+
+    .bold {
+        font-weight: bold;
+    }
+}
 </style>
 
 <template>
+
+    <div id="info-tooltip"></div>
 
     <div id="fakeLoader"></div>
 
@@ -63,10 +80,12 @@ body {
     },
     store,
     ready() {
-      $("#fakeLoader").fakeLoader({
-        spinner:"spinner6",
-        bgColor:"#268bd2"
+      $('#fakeLoader').fakeLoader({
+        spinner: 'spinner6',
+        bgColor: '#268bd2'
       })
+
+      $('#info-tooltip').css('display', 'none')
 
       window.addEventListener('keyup', (evt) => {
         if (evt.code === 'ArrowRight') {

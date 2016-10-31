@@ -1,21 +1,16 @@
-#+TODO: OPEN | CLOSED
 #+TITLE: Project Board
 
-* Todos
-** Next
-*** [#A] Tooltip query
-*** [#A] Interactive Legend
-*** Backend
-**** Get complete weeks for actual, with NA fills
-**** Fix uniform prediction values
-**** Last updated thing metadata
-*** Fix Open Sans Extrabold face issue                                :bug:
-*** Link to definitions
-** Secondary
-*** Different confidence interval
-*** Histogram
-*** Rescale svg on draw
-*** [#C] Setup first run demo
-*** Automate weekly data processing
-*** Automate pull request based data ingestion
-*** Document development process
+* Next
+** [#A] Interactive Legend
+** Backend
+*** Get complete weeks for actual, with NA fills
+*** Fix uniform prediction values
+*** Last updated thing metadata
+** Setup help demo
+* Secondary
+** Different confidence interval
+** Histogram
+** Rescale svg on draw
+** Automate weekly data processing
+** Automate pull request based data ingestion
+** Document development process

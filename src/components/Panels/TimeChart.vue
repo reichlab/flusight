@@ -103,6 +103,7 @@ $accent: rgb(24, 129, 127);
 }
 
 #chart-tooltip {
+    position: fixed;
     box-shadow: 0px 0px 2px;
     border-radius: 1px;
     background-color: white;
@@ -115,7 +116,6 @@ $accent: rgb(24, 129, 127);
     }
     .actual {
         padding: 5px 10px;
-        background-color: white;
         color: #333;
     }
     .prediction {

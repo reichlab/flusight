@@ -43,7 +43,6 @@ export default class Choropleth {
     // Add hover info div
     this.tooltip = d3.select('body').append('div')
       .attr('id', 'choropleth-tooltip')
-      .style('position', 'fixed')
       .style('display', 'none')
 
     let svg = d3.select('#' + elementId + ' svg')

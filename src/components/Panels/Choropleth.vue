@@ -20,6 +20,7 @@
 }
 
 #choropleth-tooltip {
+    position: fixed;
     padding: 10px;
     box-shadow: 0px 0px 2px;
     border-radius: 1px;

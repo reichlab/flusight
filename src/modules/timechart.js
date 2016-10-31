@@ -37,7 +37,6 @@ export default class TimeChart {
     // Add tooltip
     this.tooltip = d3.select('body').append('div')
       .attr('id', 'chart-tooltip')
-      .style('position', 'fixed')
       .style('display', 'none')
 
     // Save variables
@@ -69,8 +68,11 @@ export default class TimeChart {
    */
   setupAxes() {
     let svg = this.svg,
+        d3 = this.d3,
         width = this.width,
         height = this.height
+
+    let infoTooltip = d3.select('#info-tooltip')
 
     svg.append('g')
       .attr('class', 'axis axis-x')
@@ -84,6 +86,24 @@ export default class TimeChart {
       .attr('text-anchor', 'middle')
       .attr('transform', 'translate(' + width / 2 + ',' + 40 + ')')
       .text('Epidemic Week')
+      .style('cursor', 'pointer')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', (event.clientY - 20) + 'px')
+          .style('left', (event.clientX + 20) + 'px')
+          .html('Description<br><br><em>Click to know more</em>') // TODO: Add description
+      })
+      .on('click', function() {
+        window.open('#', '_blank') // TODO: Add link
+      })
 
     svg.append('g')
       .attr('class', 'axis axis-y')
@@ -93,6 +113,24 @@ export default class TimeChart {
       .attr('dy', '.71em')
       .style('text-anchor', 'middle')
       .text('Weighted ILI (%)')
+      .style('cursor', 'pointer')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', event.clientY + 'px')
+          .style('left', (event.clientX + 20) + 'px')
+          .html('Description<br><br><em>Click to know more</em>') // TODO: Add description
+      })
+      .on('click', function() {
+        window.open('#', '_blank') // TODO: Add link
+      })
   }
 
   /**
