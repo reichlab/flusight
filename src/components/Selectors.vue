@@ -9,6 +9,13 @@
     .bold {
         font-weight: bold;
     }
+
+    @media (max-width: 980px) {
+        .level-left .container {
+            text-align: center;
+            padding: 20px 0px;
+        }
+    }
 }
 </style>
 
