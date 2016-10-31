@@ -1,10 +1,12 @@
 #+TITLE: Project Board
 
 * Next
-** [#A] Interactive Legend
+** Choropleth
+*** Relative weighted ILI
+*** Set NA
 ** Backend
-*** Get complete weeks for actual, with NA fills
-*** Fix uniform prediction values
+*** Get all weeks for actual, with -1 fills
+*** Skip uniform prediction values
 *** Last updated thing metadata
 ** Setup help demo
 * Secondary

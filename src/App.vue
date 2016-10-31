@@ -33,13 +33,23 @@ body {
         font-weight: bold;
     }
 }
+
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: $accent;
+    z-index: 999;
+}
 </style>
 
 <template>
 
     <div id="info-tooltip"></div>
 
-    <div id="fakeLoader"></div>
+    <div id="loader"></div>
 
     <navbar></navbar>
 
@@ -80,11 +90,10 @@ body {
     },
     store,
     ready() {
-      $('#fakeLoader').fakeLoader({
-        spinner: 'spinner6',
+      $('#loader').fakeLoader({
+        spinner: 'spinner1',
         bgColor: '#268bd2'
       })
-
       $('#info-tooltip').css('display', 'none')
 
       window.addEventListener('keyup', (evt) => {
