@@ -7,7 +7,6 @@
 ** Backend
 *** Get all weeks for actual, with -1 fills
 *** Skip uniform prediction values
-*** Last updated thing metadata
 ** Setup help demo
 * Secondary
 ** Different confidence interval
