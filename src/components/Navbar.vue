@@ -1,11 +1,14 @@
 <style lang="scss" scoped>
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:800');
+
 .brand {
     font-size: 20px;
     color: #72caf9;
     .thick {
-        font-family: "Open Sans Extrabold";
+        font-family: "Open Sans";
         color: #aaa;
-        font-weight: bold;
+        font-weight: 800;
     }
 }
 </style>
