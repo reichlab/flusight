@@ -6,7 +6,7 @@
 #choropleth-info {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 10px;
 }
 
 #week-number {
