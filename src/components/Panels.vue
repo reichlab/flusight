@@ -1,4 +1,9 @@
-<style lang="scss">
+<style lang="scss" scoped>
+.columns {
+    .column {
+        position: relative;
+    }
+}
 </style>
 
 <template>
