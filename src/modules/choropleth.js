@@ -109,8 +109,8 @@ export default class Choropleth {
         let mouse = d3.mouse(this)
 
         tooltip
-          .style('top', (mouse[1] + bb.top) + 'px')
-          .style('left', (mouse[0] + bb.left + 30) + 'px')
+          .style('top', (event.clientY + 20) + 'px')
+          .style('left', (event.clientX + 20) + 'px')
           .html(util.tooltipText(this, data))
       })
       .on('click', function() {

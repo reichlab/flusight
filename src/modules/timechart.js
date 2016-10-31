@@ -228,8 +228,8 @@ export default class TimeChart {
           .attr('x2', snappedX)
 
         tooltip
-          .style('top', (mouse[1] + bb.top) + 'px')
-          .style('left', (mouse[0] + bb.left + 70) + 'px')
+          .style('top', (event.clientY + 20) + 'px')
+          .style('left', (event.clientX + 20) + 'px')
           .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function() {
