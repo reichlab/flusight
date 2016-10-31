@@ -23,12 +23,6 @@
             </a>
         </div>
 
-  <span id="nav-toggle" class="nav-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </span>
-
   <div id="nav-menu" class="nav-right nav-menu">
       <span class="nav-item">
         <a class="button is-small">
