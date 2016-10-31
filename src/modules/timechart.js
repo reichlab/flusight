@@ -208,6 +208,12 @@ export default class TimeChart {
         .ticks(d3.timeMonth)
         .tickFormat(d3.timeFormat('%b %y'))
 
+    // Mobile view fix
+    if (this.width < 420) {
+      xAxisDate.ticks(2)
+      xAxis.tickValues(xScalePoint.domain().filter((d, i) => !(i % 10)))
+    }
+
     let yAxis = d3.axisLeft(yScale)
 
     svg.select('.axis-x')
