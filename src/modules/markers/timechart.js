@@ -182,7 +182,7 @@ export class Prediction {
             .style('stroke', util.hexToRgba(color, 0.3))
           d3.select('#chart-tooltip')
             .style('display', null)
-            .html(util.pointTooltip(id, 'Peak value', pw.point, color))
+            .html(util.pointTooltip(id, 'Peak value', pp.point, color))
         })
         .on('mouseout', function() {
           d3.select(this)
