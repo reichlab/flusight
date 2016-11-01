@@ -1,13 +1,25 @@
 #+TITLE: Project Board
 
+* TODO Discuss
+** Axes label descriptions and links
+** Choropleth relative value plan
+*** Peak week
+*** Model \to Peak percents
+** Chart Tooltip additional information
+*** X value
+*** Confidence for points
 * Next
-** Choropleth
-*** Relative weighted ILI
-*** Set NA
-** Backend
+** [#A] Backend
 *** Get all weeks for actual, with -1 fills
 *** Skip uniform prediction values
+*** Get historical data
+** Start with sensible week pointer
+** Lag data
+** Choropleth
+*** Relative weighted ILI
+** Add history legend
 ** Setup help demo
+** Favicons
 * Secondary
 ** Different confidence interval
 ** Histogram
