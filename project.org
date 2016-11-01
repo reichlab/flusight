@@ -1,29 +1,54 @@
 #+TITLE: Project Board
 
-* TODO Discuss
-** Axes label descriptions and links
-** Choropleth relative value plan
-*** Peak week
-*** Model \to Peak percents
-** Chart Tooltip additional information
-*** X value
-*** Confidence for points
-* Next
-** [#A] Backend
-*** Get all weeks for actual, with -1 fills
-*** Skip uniform prediction values
-*** Get historical data
-** Start with sensible week pointer
-** Lag data
-** Choropleth
-*** Relative weighted ILI
-** Add history legend
-** Setup help demo
-** Favicons
-* Secondary
-** Different confidence interval
-** Histogram
-** Rescale svg on draw
-** Automate weekly data processing
-** Automate pull request based data ingestion
-** Document development process
+* Misc Todos
+** Update workflow wiki and email
+SCHEDULED: <2016-11-02 Wed>
+
+* Features
+** TODO [#A] Data collection
+*** Get all weeks for actual (with negative filler)
+*** Skip uniform predictions
+** [#A] Choropleth
+*** [#A] Relative Weighted ILI (%)
+**** (y - \beta) / \beta style
+**** Use a diverging color scale
+*** [#B] Peak week
+*** [#B] Peak percent
+** [#A] Historical data
+*** Gather historical data
+*** Highlight on hover
+*** Legend entry
+** [#A] Model metadata file
+*** Legend “onmouseover” tooltip
+** First run demo
+** [#B] Show data used for prediction
+*** Get reported data for each week
+*** Plot as default backtrace on movements
+** [#B] Allow option for choosing confidence interval
+** [#B] Histogram for onset prediction
+** Automation
+*** Weekly data ingestion
+*** Run on pull
+
+* Enhancements
+** TODO Axis description
+*** Add description content from email
+*** Change position of week axis
+** TODO Tooltips
+*** Point predictions
+**** Week value on tooltip
+**** [#B] Confidence ranges
+*** Format to display 2 decimal places
+** TODO Skip first prediction circle
+** TODO Add “Best viewed on” text
+** TODO Start pointers at prediction with
+*** Oldest week for past years
+*** Newest week for current year
+** TODO Favicon
+Use the font-awesome one
+** Show footer in single view
+** Fix Large screen layout
+Possible fixes
+*** Set max-height
+*** Remove max-width
+** Increase mobile view width threshold
