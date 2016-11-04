@@ -18,6 +18,10 @@ export default class Choropleth {
     let divWidth = chartBB.width,
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
+    // Padding offsets
+    divHeight -= 50
+
+    // Limits
     divHeight = Math.min(Math.max(300, divHeight), 500)
 
     // Initialized datamap
