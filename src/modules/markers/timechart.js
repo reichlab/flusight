@@ -497,6 +497,12 @@ export class Baseline {
   }
 
   plot(parent, data) {
+    if (data) this.show()
+    else {
+      this.hide()
+      return
+    }
+
     this.group.select('.baseline')
       .transition()
       .duration(300)
@@ -507,6 +513,18 @@ export class Baseline {
       .transition()
       .duration(300)
       .attr('dy', parent.yScale(data))
+  }
+
+  // Hide baseline
+  hide() {
+    this.group
+      .style('visibility', 'hidden')
+  }
+
+  // Show baseline
+  show() {
+    this.group
+      .style('visibility', null)
   }
 }
 
@@ -538,14 +556,14 @@ export class Actual {
     this.data = data
 
     this.group.select('.line-actual')
-      .datum(this.data.filter(d => d != -1))
+      .datum(this.data.filter(d => d.data != -1))
       .transition()
       .duration(200)
       .attr('d', line)
 
     // Only plot non -1
     let circles = this.group.selectAll('.point-actual')
-        .data(this.data.filter(d => d != -1))
+        .data(this.data.filter(d => d.data != -1))
 
     circles.exit().remove()
 
