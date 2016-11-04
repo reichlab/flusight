@@ -12,7 +12,7 @@ export default class TimeChart {
     let divWidth = chartBB.width,
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
-    divHeight = Math.max(300, divHeight)
+    divHeight = Math.min(Math.max(300, divHeight), 500)
 
     // Create blank chart
     let margin = {
