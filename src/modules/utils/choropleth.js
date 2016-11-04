@@ -42,6 +42,6 @@ export const tooltipText = (element, data) => {
       region = data.filter(d => (d.states.indexOf(stateName) > -1))[0].region,
       value = element.getAttribute('data-value')
 
-  return '<div class="value">' + value + '</div>' +
+  return '<div class="value">' + parseFloat(value).toFixed(2) + '</div>' +
     '<div>' + region + ' : ' + stateName + '</div>'
 }

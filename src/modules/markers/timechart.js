@@ -140,7 +140,12 @@ export class Prediction {
             .style('stroke', util.hexToRgba(color, 0.3))
           d3.select('#chart-tooltip')
             .style('display', null)
-            .html(util.pointTooltip(id, 'Season Onset', onset.point, color))
+            .html(util.pointTooltip(id, [
+              {
+                key: 'Season Onset',
+                value: onset.point
+              }
+            ], color))
         })
         .on('mouseout', function() {
           d3.select(this)
@@ -188,7 +193,16 @@ export class Prediction {
             .style('stroke', util.hexToRgba(color, 0.3))
           d3.select('#chart-tooltip')
             .style('display', null)
-            .html(util.pointTooltip(id, 'Peak value', pp.point, color))
+            .html(util.pointTooltip(id, [
+              {
+                key: 'Peak Percent',
+                value: pp.point.toFixed(2)
+              },
+              {
+                key: 'Peak Week',
+                value: pw.point
+              }
+            ], color))
         })
         .on('mouseout', function() {
           d3.select(this)

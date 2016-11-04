@@ -124,10 +124,10 @@ $accent: rgb(24, 129, 127);
     }
     .point {
         padding: 5px 10px;
-        color: white;
+        color: #333;
 
         &.head {
-            color: #333;
+            color: white;
         }
     }
 }

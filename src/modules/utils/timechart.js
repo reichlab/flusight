@@ -47,7 +47,7 @@ export const tooltipText = (object, idx, y) => {
 
   if (actualValue != -1) {
     text += '<div class="actual" style="background:white">Actual <span class="bold">'
-    text += actualValue + '</span></div>'
+    text += actualValue.toFixed(2) + '</span></div>'
   }
 
   object.predictions.map(p => {
@@ -55,7 +55,7 @@ export const tooltipText = (object, idx, y) => {
 
     if (data) {
       text += '<div class="prediction" style="background:' + p.color +  '">'
-      text += p.id + ' <span class="bold">' + data + '</span></div>'
+      text += p.id + ' <span class="bold">' + data.toFixed(2) + '</span></div>'
     }
   })
 
@@ -65,12 +65,15 @@ export const tooltipText = (object, idx, y) => {
 /**
  * Return formatted tooltip info text for points
  */
-export const pointTooltip = (id, desc, value, color) => {
+export const pointTooltip = (id, data, color) => {
   let text = ''
 
-  text += '<div class="point head">' + desc + '</div>'
-  text += '<div class="point" style="background:' + color + '">'
-  text += id + '<span class="bold">' + value + '</span></div>'
+  text += '<div class="point head" style="background:' + color + '">' + id + '</div>'
+
+  data.map(d => {
+    text += '<div class="point">'
+    text += d.key + '<span class="bold">' + d.value + '</span></div>'
+  })
 
   return text
 }
