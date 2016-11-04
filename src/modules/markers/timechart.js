@@ -277,7 +277,7 @@ export class Prediction {
       })
 
       let circles = this.predictionGroup.selectAll('.point-prediction')
-          .data(data)
+          .data(data.slice(1))
 
       circles.exit().remove()
 
