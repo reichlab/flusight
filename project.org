@@ -1,13 +1,18 @@
 #+TITLE: Project Board
 
-* Misc Todos
-** DONE Update workflow wiki and email
-CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
-
+* Issues
+** TODO Week counts for years
+** TODO Legend metadata url click
+** TODO First tooltip rendering after changing region
+** TODO Start selectors with latest data
+** TODO Freeze movements inside actual range
+*** Override clicks
+** TODO Choropleth gray for no data
+** DONE Fix tooltip positions in right end
+CLOSED: [2016-11-04 Fri 03:04]
+** DONE Nav buttons tooltips
+CLOSED: [2016-11-04 Fri 03:21]
 * Features
-** TODO [#A] Data collection
-*** Get all weeks for actual (with negative filler)
-*** Skip uniform predictions
 ** [#A] Choropleth
 *** [#A] Relative Weighted ILI (%)
 **** (y - \beta) / \beta style
@@ -18,37 +23,48 @@ CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
 *** Gather historical data
 *** Highlight on hover
 *** Legend entry
-** [#A] Model metadata file
-*** Legend “onmouseover” tooltip
 ** First run demo
+** Automation
+*** Weekly data ingestion
+*** Run on pull
+** DONE [#A] Model metadata file
+CLOSED: [2016-11-04 Fri 02:15]
+*** Legend “onmouseover” tooltip
+** DONE [#A] Data collection
+CLOSED: [2016-11-04 Fri 00:43]
+*** Get all weeks for actual (with negative filler)
+*** Skip uniform predictions
 ** [#B] Show data used for prediction
 *** Get reported data for each week
 *** Plot as default backtrace on movements
 ** [#B] Allow option for choosing confidence interval
 ** [#B] Histogram for onset prediction
-** Automation
-*** Weekly data ingestion
-*** Run on pull
-
 * Enhancements
-** TODO Axis description
-*** Add description content from email
-*** Change position of week axis
-** TODO Tooltips
-*** Point predictions
-**** Week value on tooltip
-**** [#B] Confidence ranges
-*** Format to display 2 decimal places
-** TODO Skip first prediction circle
-** TODO Add “Best viewed on” text
+** Add axes description content from email
 ** TODO Start pointers at prediction with
 *** Oldest week for past years
 *** Newest week for current year
-** TODO Favicon
-Use the font-awesome one
+** TODO Add “Best viewed on” text
 ** Show footer in single view
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Change position of week axis
+CLOSED: [2016-11-04 Fri 02:55]
+** DONE Tooltips
+CLOSED: [2016-11-04 Fri 02:38]
+*** Point predictions
+**** Week value on tooltip
+*** Format to display 2 decimal places
+** DONE Favicon
+CLOSED: [2016-11-04 Fri 00:53]
+Use the font-awesome one
+** DONE Skip first prediction circle
+CLOSED: [2016-11-04 Fri 01:02]
+** [#B] Confidence ranges in tooltips
+
+* Misc Todos
+** DONE Update workflow wiki and email
+CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
