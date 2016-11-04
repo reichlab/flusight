@@ -194,6 +194,9 @@ export default class TimeChart {
     yScale.domain([0, util.getYMax(data)])
     // Assuming actual data has all the weeks
     let weeks = data.actual.map(d => d.week % 100)
+    let actualIndices = data.actual
+        .filter(d => d.data !== -1)
+        .map(d => weeks.indexOf(d.week % 100))
     xScale.domain([0, weeks.length - 1])
 
     // Setup a scale for ticks
@@ -237,10 +240,11 @@ export default class TimeChart {
 
     // Save
     this.weeks = weeks
+    this.actualIndices = actualIndices
     this.xScaleWeek = xScaleWeek
 
-    // Set pointer for week data (start with last)
-    this.weekIdx = data.actual.length - 1
+    // Set pointer for week data (start with most recent actual)
+    this.weekIdx = actualIndices[actualIndices.length - 1]
     this.weekHook({
       idx: this.weekIdx,
       name: this.weeks[this.weekIdx]
@@ -299,7 +303,7 @@ export default class TimeChart {
           .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function() {
-        let idx = Math.round(xScale.invert(d3.mouse(this)[0]))
+        let idx = that.capToActual(Math.round(xScale.invert(d3.mouse(this)[0])))
         weekHook({
           idx: idx,
           name: weeks[idx]
@@ -322,6 +326,17 @@ export default class TimeChart {
     this.legend.update(this.predictions)
   }
 
+  /**
+   * Return capped week index using actual values only
+   * Assuming continuos actual data sequence
+   */
+  capToActual(idx) {
+    return Math.max(
+      Math.min(this.actualIndices[this.actualIndices.length - 1], idx),
+      this.actualIndices[0]
+    )
+  }
+
   // External interaction functions
   // ------------------------------
 
@@ -329,7 +344,7 @@ export default class TimeChart {
    * Return next week idx and name for vuex store
    */
   getNextWeekData() {
-    let nextIdx = Math.min(this.weeks.length - 1, this.weekIdx + 1)
+    let nextIdx = this.capToActual(Math.min(this.weeks.length - 1, this.weekIdx + 1))
     return {
       idx: nextIdx,
       name: this.weeks[nextIdx]
@@ -340,7 +355,7 @@ export default class TimeChart {
    * Return preview week idx and name for vuex store
    */
   getPreviousWeekData() {
-    let previousIdx = Math.max(0, this.weekIdx - 1)
+    let previousIdx = this.capToActual(Math.max(0, this.weekIdx - 1))
     return {
       idx: previousIdx,
       name: this.weeks[previousIdx]
