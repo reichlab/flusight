@@ -13,14 +13,21 @@ CLOSED: [2016-11-04 Fri 04:22]
 CLOSED: [2016-11-04 Fri 03:04]
 ** DONE Nav buttons tooltips
 CLOSED: [2016-11-04 Fri 03:21]
+
+* Misc Todos
+** TODO Update baseline file automatically
+** DONE Update workflow wiki and email
+CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
 * Features
 ** [#A] Choropleth
 *** [#A] Relative Weighted ILI (%)
+SCHEDULED: <2016-11-04 Fri>
 **** (y - \beta) / \beta style
 **** Use a diverging color scale
 *** [#B] Peak week
 *** [#B] Peak percent
 ** [#A] Historical data
+SCHEDULED: <2016-11-04 Fri>
 *** Gather historical data
 *** Highlight on hover
 *** Legend entry
@@ -43,15 +50,17 @@ CLOSED: [2016-11-04 Fri 00:43]
 * Enhancements
 ** Add axes description content from email
 ** TODO Start pointers at prediction with
+SCHEDULED: <2016-11-04 Fri>
 *** Oldest week for past years
 *** Newest week for current year
 ** TODO Add “Best viewed on” text
-** Show footer in single view
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Show footer in single view
+CLOSED: [2016-11-04 Fri 04:41]
 ** DONE Change position of week axis
 CLOSED: [2016-11-04 Fri 02:55]
 ** DONE Tooltips
@@ -65,7 +74,3 @@ Use the font-awesome one
 ** DONE Skip first prediction circle
 CLOSED: [2016-11-04 Fri 01:02]
 ** [#B] Confidence ranges in tooltips
-
-* Misc Todos
-** DONE Update workflow wiki and email
-CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
