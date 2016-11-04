@@ -3,8 +3,46 @@
 
 const delphiAPI = require('./vendor/delphi_epidata')
 const metadata = require('./metadata')
+const moment = require('moment')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
+
+/**
+ * Function returning complete week array for a season
+ * @param {string} season representing season
+ * @returns {array} container with week, data pairs
+ */
+const seasonWeeksData = (season) => {
+  let first = parseInt(season.split('-')[0]),
+      second = parseInt(season.split('-')[1])
+
+  // Check the number of weeks in first year
+  let firstMaxWeek = Math.max(moment(new Date(first, 11, 31)).week(),
+                              moment(new Date(first, 11, 24)).week())
+
+  let weeks = []
+  // Weeks for first year
+  for (let i = 30; i <= firstMaxWeek; i++) {
+    weeks.push({
+      week: parseInt(first + '' + i),
+      data: -1
+    })
+  }
+
+  // Weeks for second year
+  for (let i = 1; i < 30; i++) {
+    let week
+
+    if (i < 10) week = parseInt(second + '0' + i)
+    else week = parseInt(second + '' + i)
+
+    weeks.push({
+      week: week,
+      data: -1
+    })
+  }
+  return weeks
+}
 
 /**
  * Function mapping week number (201523) to season string
@@ -41,17 +79,22 @@ const getActual = (seasons, callback) => {
   regionIdentifiers.forEach(id => {
     output[id] = {}
     seasons.map(season => {
-      output[id][season] = []
+      output[id][season] = seasonWeeksData(season)
     })
   })
 
   // Request API
   delphiAPI.Epidata.fluview((res, message, data) => {
     data.forEach(d => {
-      output[d['region']][weekToSeason(d['epiweek'])].push({
-        week: d['epiweek'],
-        data: d['wili']
-      })
+      let sub = output[d['region']][weekToSeason(d['epiweek'])]
+      let dataIndex
+      for (let i = 0; i < sub.length; i++) {
+        if (sub[i].week == d['epiweek']) {
+          dataIndex = i
+          break
+        }
+      }
+      output[d['region']][weekToSeason(d['epiweek'])][dataIndex].data = d['wili']
     })
 
     callback(output)
