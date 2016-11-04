@@ -28,7 +28,7 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
   // Stop if no folder found
   if (seasons.length == 0) {
     console.log('No seasons found in data directory!')
-    process.exit(1)
+    return
   }
 
   // Print seasons
@@ -46,7 +46,6 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
 
   // Get actual data for seasons
   actual.getActual(seasons, (actualData) => {
-
     // Caches CSVs
     let cachedCSVDumps = []
 
@@ -75,9 +74,12 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
               }
               // Take only for the current region
               filtered = utils.regionFilter(data, val.subId)
-              filtered.week = week
-              return filtered
-            })
+              if (filtered == -1) return -1
+              else {
+                filtered.week = week
+                return filtered
+              }
+            }).filter(skipData => skipData !== -1)
           }
         })
         return {

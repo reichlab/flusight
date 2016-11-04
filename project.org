@@ -1,8 +1,8 @@
 #+TITLE: Project Board
 
 * Misc Todos
-** Update workflow wiki and email
-SCHEDULED: <2016-11-02 Wed>
+** DONE Update workflow wiki and email
+CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
 
 * Features
 ** TODO [#A] Data collection

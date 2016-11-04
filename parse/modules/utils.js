@@ -53,7 +53,9 @@ const regionFilter = (data, region) => {
     }
   })
 
-  return filtered
+  // Assuming all the predictions are not present when one isn't
+  if (filtered.oneWk.point == -1) return -1
+  else return filtered
 }
 
 

@@ -194,11 +194,19 @@ const parseSeries = (series) => {
   let maxIdx = 0,
       maxValue = series[maxIdx][2]
 
+  // Checking if everything is same
+  let matches = 0
+
   for (let i = 0; i < len; i++) {
     // Look for max
     if (series[i][2] > maxValue) {
       maxIdx = i
       maxValue = series[maxIdx][2]
+    }
+
+    // Skip last value which can be (slightly) different
+    if ((i < (len - 1)) && (series[0][2] == series[i][2])) {
+      matches += 1
     }
 
     // Update accumulators
@@ -209,10 +217,20 @@ const parseSeries = (series) => {
     if ((accumulator.high > 0.05) && (!range.high)) range.high = series[len - i - 1][1]
   }
 
-  return {
-    low: range.low,
-    high: range.high,
-    point: series[maxIdx][0]
+  if (matches === (len - 1)) {
+    // No actual prediction, skip these
+    return {
+      low: -1,
+      high: -1,
+      point: -1
+    }
+  }
+  else {
+    return {
+      low: range.low,
+      high: range.high,
+      point: series[maxIdx][0]
+    }
   }
 }
 

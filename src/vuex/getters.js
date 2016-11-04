@@ -58,7 +58,7 @@ export function timeChartData (state) {
   regionSubset.seasons.forEach((s, idx) => {
     // For all the non selected seasons
     if (idx !== selectedSeason(state)) {
-      historyData.append({
+      historyData.push({
         id: s.id,
         actual: s.actual
       })
