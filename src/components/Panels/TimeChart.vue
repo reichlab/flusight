@@ -212,13 +212,13 @@ $accent: rgb(24, 129, 127);
             </span>
         </a>
         <br>
-        <a class="button is-small is-outlined is-info" v-on:click="backward">
+        <a class="button is-small is-outlined is-info" id="backward-btn" v-on:click="backward">
             <span class="icon is-small">
                 <i class="fa fa-arrow-left"></i>
             </span>
         </a>
         <br>
-        <a class="button is-small is-outlined is-info" v-on:click="forward">
+        <a class="button is-small is-outlined is-info" id="forward-btn" v-on:click="forward">
             <span class="icon is-small">
                 <i class="fa fa-arrow-right"></i>
             </span>
@@ -269,6 +269,26 @@ $accent: rgb(24, 129, 127);
 
       // Hot start
       this.updateTimeChart()
+
+      // Add tooltips to nav icons
+      let d3 = this.$d3
+      let tooltip = d3.select('#info-tooltip')
+
+      let elems = [
+        ['.legend-btn', 'Toggle legend'],
+        ['#forward-btn', 'Move forward'],
+        ['#backward-btn', 'Move backward']
+      ]
+
+      elems.map(e => d3.select(e[0])
+                .on('mouseover', () => tooltip.style('display', null).style('width', '100px'))
+                .on('mouseout', () => tooltip.style('display', 'none').style('width', null))
+                .on('mousemove', () => {
+                  tooltip
+                    .style('top', event.clientY + 'px')
+                    .style('left', (event.clientX - 100 - 20) + 'px')
+                    .html(e[1])
+                }))
     }
   }
 </script>
