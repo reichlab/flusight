@@ -80,15 +80,25 @@ export default class TimeChart {
       .attr('class', 'axis axis-x')
       .attr('transform', 'translate(0,' + height + ')')
 
-    svg.append('g')
-      .attr('class', 'axis axis-x-date')
-      .attr('transform', 'translate(0,' + (height + 25) + ')')
-      .append('text')
-      .attr('class', 'title')
-      .attr('text-anchor', 'middle')
-      .attr('transform', 'translate(' + width / 2 + ',' + 40 + ')')
-      .text('Epidemic Week')
-      .style('cursor', 'pointer')
+    let axisXDate = svg.append('g')
+        .attr('class', 'axis axis-x-date')
+        .attr('transform', 'translate(0,' + (height + 25) + ')')
+
+    let xText = axisXDate
+        .append('text')
+        .attr('class', 'title')
+        .attr('text-anchor', 'start')
+        .attr('transform', 'translate(' + (width + 10) + ',-15)')
+
+    xText.append('tspan')
+      .text('Epidemic')
+      .attr('x', 0)
+    xText.append('tspan')
+      .text('Week')
+      .attr('x', 0)
+      .attr('dy', '1em')
+
+    xText.style('cursor', 'pointer')
       .on('mouseover', function() {
         infoTooltip
           .style('display', null)
