@@ -252,7 +252,7 @@ export default class TimeChart {
     let colors = d3.schemeCategory10 // TODO: handle more than 10 colors
 
     data.models.forEach((m, idx) => {
-      let predMarker = new marker.Prediction(this, m.id, colors[idx])
+      let predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx])
       predMarker.plot(this, m.predictions, data.actual)
       predMarker.hideMarkers()
       this.predictions.push(predMarker)

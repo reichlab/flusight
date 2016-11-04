@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const yaml = require('js-yaml')
 
 
 /**
@@ -59,6 +60,14 @@ const regionFilter = (data, region) => {
 }
 
 
+/**
+ * Get model metadata
+ * @param {string} metaFile path to the meta.yaml file
+ * @returns {Object} metadata object
+ */
+const getModelMeta = (metaFile) => yaml.safeLoad(fs.readFileSync(metaFile, 'utf8'))
+
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
+exports.getModelMeta = getModelMeta

@@ -273,6 +273,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": [
                 {
                   "onsetWeek": {
@@ -1334,6 +1339,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": [
                 {
                   "onsetWeek": {
@@ -1607,6 +1617,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -1831,6 +1846,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -2061,6 +2081,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -2285,6 +2310,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -2518,6 +2548,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -2742,6 +2777,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -2978,6 +3018,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -3202,6 +3247,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -3436,6 +3486,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -3660,6 +3715,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -3893,6 +3953,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -4117,6 +4182,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -4349,6 +4419,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -4573,6 +4648,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -4807,6 +4887,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -5031,6 +5116,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -5263,6 +5353,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -5487,6 +5582,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -5719,6 +5819,11 @@
           "models": [
             {
               "id": "KOT",
+              "meta": {
+                "name": "Kernal of Truth",
+                "description": "Reich Lab, UMass Amherst",
+                "url": "https://reichlab.github.io/"
+              },
               "predictions": []
             }
           ],
@@ -5943,6 +6048,11 @@
           "models": [
             {
               "id": "Foo",
+              "meta": {
+                "name": "Foo",
+                "description": "Team Bar",
+                "url": "https://foo.io/"
+              },
               "predictions": []
             }
           ]
@@ -5956,6 +6066,6 @@
     "sourceUrl": "https://github.com/reichlab/flusight",
     "parentUrl": "https://reichlab.github.io",
     "licenseUrl": "https://opensource.org/licenses/GPL-3.0",
-    "updateTime": "November 4th 2016, 04:33:42"
+    "updateTime": "November 4th 2016, 05:52:24"
   }
 }

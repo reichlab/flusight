@@ -75,6 +75,17 @@ export const pointTooltip = (id, desc, value, color) => {
   return text
 }
 
+/**
+ * Return formatted tooltip info text for legend items
+ */
+export const legendTooltip = (meta) => {
+  let text = ''
+
+  text += '<div class="name">' + meta.name + '</div>'
+  text += '<div class="desc">' + meta.description + '</div>'
+
+  return text
+}
 
 /**
  * Return rgba for hex

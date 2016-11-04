@@ -132,6 +132,24 @@ $accent: rgb(24, 129, 127);
     }
 }
 
+#legend-tooltip {
+    position: fixed;
+    box-shadow: 0px 0px 2px;
+    border-radius: 1px;
+    background-color: white;
+    font-size: 11px;
+
+    .name {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+
+    .desc {
+        margin-top: 0px;
+        padding: 5px 10px;
+    }
+}
+
 #nav-controls {
     position: absolute;
     right: 0px;

@@ -3,7 +3,7 @@
 import * as util from '../utils/timechart'
 
 export class Prediction {
-  constructor(parent, id, color) {
+  constructor(parent, id, meta, color) {
 
     // Prediction group
     let predictionGroup = parent.svg.append('g')
@@ -91,6 +91,7 @@ export class Prediction {
 
     this.color = color
     this.id = id
+    this.meta = meta
     this.d3 = parent.d3
   }
 
@@ -421,6 +422,12 @@ export class Legend {
       .attr('class', 'item-title')
       .html('Actual')
 
+    // Meta data info tooltip
+    let tooltip = parent.d3.select('body')
+        .append('div')
+        .attr('id', 'legend-tooltip')
+        .style('display', 'none')
+
     parent.predictions.forEach(p => {
       let predItem = legendDiv.append('div')
           .attr('class', 'item')
@@ -445,8 +452,23 @@ export class Legend {
 
           legendHook(p.id, isActive)
         })
+
+      predItem
+        .on('mouseover', function() {
+          tooltip.style('display', null)
+        })
+        .on('mouseout', function() {
+          tooltip.style('display', 'none')
+        })
+        .on('mousemove', function() {
+          tooltip
+            .style('top', (event.clientY + 20) + 'px')
+            .style('left', (event.clientX + 20) + 'px')
+            .html(util.legendTooltip(p.meta))
+        })
     })
 
+    this.tooltip = tooltip
     this.legendDiv = legendDiv
     this.d3 = parent.d3
   }
@@ -456,11 +478,12 @@ export class Legend {
         legendDiv = this.legendDiv
 
     predictions.forEach(p => {
+      let pDiv = legendDiv.select('#legend-' + p.id)
       if (p.hidden) {
-        legendDiv.select('#legend-' + p.id)
+        pDiv
           .classed('na', true)
       } else {
-        legendDiv.select('#legend-' + p.id)
+        pDiv
           .classed('na', false)
       }
     })
