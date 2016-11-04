@@ -3,11 +3,12 @@
 * Issues
 ** TODO Week counts for years
 ** TODO Legend metadata url click
-** TODO First tooltip rendering after changing region
 ** TODO Start selectors with latest data
-** TODO Freeze movements inside actual range
-*** Override clicks
 ** TODO Choropleth gray for no data
+** DONE First tooltip rendering after changing region
+CLOSED: [2016-11-04 Fri 04:29]
+** DONE Freeze movements inside actual range
+CLOSED: [2016-11-04 Fri 04:22]
 ** DONE Fix tooltip positions in right end
 CLOSED: [2016-11-04 Fri 03:04]
 ** DONE Nav buttons tooltips
