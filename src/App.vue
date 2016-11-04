@@ -28,6 +28,7 @@ body {
     color: #333;
     font-size: 11px;
     background-color: white;
+    width: 150px;
 
     .bold {
         font-weight: bold;

@@ -477,7 +477,7 @@ export class Legend {
         .on('mousemove', function() {
           tooltip
             .style('top', (event.clientY + 20) + 'px')
-            .style('left', (event.clientX + 20) + 'px')
+            .style('left', (event.clientX - 150 - 20) + 'px')
             .html(util.legendTooltip(p.meta))
         })
     })

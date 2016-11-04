@@ -110,7 +110,7 @@ export default class TimeChart {
       .on('mousemove', function() {
         infoTooltip
           .style('top', (event.clientY - 20) + 'px')
-          .style('left', (event.clientX + 20) + 'px')
+          .style('left', (event.clientX - 150 - 20) + 'px')
           .html('Description<br><br><em>Click to know more</em>') // TODO: Add description
       })
       .on('click', function() {

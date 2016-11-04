@@ -138,6 +138,7 @@ $accent: rgb(24, 129, 127);
     border-radius: 1px;
     background-color: white;
     font-size: 11px;
+    width: 150px;
 
     .name {
         padding: 5px 10px;
