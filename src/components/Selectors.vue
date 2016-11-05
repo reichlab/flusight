@@ -108,6 +108,10 @@
           this.updateSelectedSeason(this.seasons.indexOf(val))
         }
       }
+    },
+    ready() {
+      // Start with the latest season
+      this.updateSelectedSeason(this.seasons.length - 1)
     }
   }
 </script>
