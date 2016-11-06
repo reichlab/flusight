@@ -148,8 +148,8 @@ export default class Choropleth {
     // Update colors for given week
     data.map(d => {
       let value = d.value[ids.weekIdx].data
-      let colorId =  Math.floor(colorScale(value))
-      color = cmap[colorId]
+      let color = '#ccc'
+      if (value) color = cmap[Math.floor(colorScale(value))]
 
       d.states.map(s => {
         let d3State = d3.select('.' + s) // TODO: Set texture mask
