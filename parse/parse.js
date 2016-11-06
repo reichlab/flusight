@@ -50,7 +50,7 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
     let cachedCSVDumps = []
 
     // Add seasons to output
-    output.forEach((val, idx) => {
+    output.forEach(val => {
       console.log('Parsing region: ' + val.region)
       val.seasons = seasons.map(season => {
         // Get models for each season
