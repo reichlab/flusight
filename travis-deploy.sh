@@ -14,7 +14,7 @@ SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
 # Run deployment steps
-git checkout -b gh-pages origin/gh-pages
+git checkout gh-pages || git checkout --orphan gh-pages
 rm -rf ./dist/* || exit 0
 
 npm run build
