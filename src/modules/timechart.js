@@ -247,8 +247,19 @@ export default class TimeChart {
     this.actualIndices = actualIndices
     this.xScaleWeek = xScaleWeek
 
-    // Set pointer for week data (start with most recent actual)
-    this.weekIdx = actualIndices[actualIndices.length - 1]
+    // Use actualIndices as indicator of whether the season is current
+    if (actualIndices.length < weeks.length) {
+      // Start at the latest prediction
+      this.weekIdx = Math
+        .max(...data.models
+             .map(m => weeks
+                  .indexOf(m.predictions[m.predictions.length - 1].week % 100)))
+    } else {
+      // Start at the oldest prediction
+      this.weekIdx = Math
+        .min(...data.models
+             .map(m => weeks.indexOf(m.predictions[0].week % 100)))
+    }
     this.weekHook({
       idx: this.weekIdx,
       name: this.weeks[this.weekIdx]
