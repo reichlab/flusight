@@ -1,6 +1,7 @@
 #+TITLE: Project Board
 
 * Issues
+** TODO Prediction plots not rendered after clicking regions
 ** TODO Week counts for years
 ** TODO Legend metadata url click
 ** DONE Start selectors with latest data
