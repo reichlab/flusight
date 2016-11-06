@@ -22,8 +22,7 @@ npm run parse
 npm run build
 cp -r ./dist/* ./
 
-git config user.name "Travis CI Auto Deploy"
-git config user.email "abhinav.tushar.vs@gmail.com"
+git config user.name "CI auto deploy"
 
 git add .
 git commit -m "Auto deploy to GitHub Pages: ${SHA}"
