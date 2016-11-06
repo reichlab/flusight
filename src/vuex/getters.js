@@ -35,7 +35,10 @@ export function regions (state) {
 
 export function choropleths (state) {
   // TODO: Parse from data
-  return ['Actual Weighted ILI (%)']
+  return [
+    'Actual Weighted ILI (%)',
+    'Relative Weighted ILI (%)'
+  ]
 }
 
 export function timeChart (state) {
@@ -108,18 +111,44 @@ export function previousWeek (state) {
  */
 export function choroplethData (state) {
 
-  // TODO: Handle choropleth selector
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
 
-  let output = []
+  let output = {
+    data: [],
+    type: 'sequential'
+  }
+
   state.data.map(r => {
-    output.push({
+    let values = r.seasons[seasonId].actual
+
+    if (choroplethId === 1) {
+      if (r.seasons[seasonId].baseline) {
+        // Rescale by baseline
+        // Return percentage
+        values = values.map(d => {
+          return {
+            week: d.week,
+            data: ((d.data / r.seasons[seasonId].baseline) - 1) * 100
+          }
+        })
+      } else {
+        values = values.map(d => {
+          return {
+            week: d.week,
+            data: null
+          }
+        })
+      }
+      output.type = 'diverging'
+    }
+    output.data.push({
       region: r.subId,
       states: r.states,
-      value: r.seasons[selectedSeason(state)].actual
+      value: values
     })
   })
 
-  return output.slice(1) // Skip national data
+  output.data = output.data.slice(1) // Skip national data
+  return output
 }

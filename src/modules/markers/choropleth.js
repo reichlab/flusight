@@ -5,6 +5,10 @@ export class ColorBar {
 
     let svgBB = svg.node().getBoundingClientRect()
 
+    // Clear
+    d3.select('.colorbar-group')
+      .remove()
+
     let group = svg.append('g')
         .attr('class', 'colorbar-group')
 

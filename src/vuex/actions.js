@@ -48,6 +48,7 @@ export const plotChoropleth = ({ dispatch, state }) => {
   let data = get.choroplethData(state)
 
   get.choropleth(state).plot(data)
+  updateChoropleth({ dispatch, state })
 }
 
 /**

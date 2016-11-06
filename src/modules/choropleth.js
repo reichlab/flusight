@@ -2,7 +2,6 @@ import 'topojson'
 import Datamap from 'datamaps/dist/datamaps.usa'
 import * as util from './utils/choropleth'
 import colormap from 'colormap'
-import textures from 'textures'
 import * as marker from './markers/choropleth'
 
 // Map interaction functions
@@ -54,20 +53,11 @@ export default class Choropleth {
     let svg = d3.select('#' + elementId + ' svg')
         .attr('height', divHeight)
         .attr('width', divWidth)
-    this.texture = textures.lines()
-    svg.call(this.texture)
     this.width = svg.node().getBoundingClientRect().width
     this.height = svg.node().getBoundingClientRect().height
     this.svg = svg
     this.d3 = d3
-    this.cmap = colormap({
-      colormap: 'YIOrRd',
-      nshades: 50,
-      format: 'rgbaString'
-    })
     this.regionHook = regionHook
-    // Setup color bar
-    this.colorBar = new marker.ColorBar(d3, svg, this.cmap)
   }
 
   /**
@@ -80,17 +70,47 @@ export default class Choropleth {
 
     let d3 = this.d3,
         svg = this.svg,
-        cmap = this.cmap,
         regionHook = this.regionHook,
         tooltip = this.tooltip
 
-    let maxData = util.getMaxData(data)
+    let maxData = util.getMaxData(data.data),
+        minData = util.getMinData(data.data)
+
+    let colormapName,
+        limits = [],
+        barLimits = []
+
+    if (data.type === 'sequential') {
+      // Set a 0 to max ranged colorscheme
+      this.cmap = colormap({
+        colormap: 'YIOrRd',
+        nshades: 50,
+        format: 'rgbaString'
+      })
+
+      limits = [maxData, 0]
+      barLimits = [0, maxData]
+
+    } else if (data.type === 'diverging') {
+      this.cmap = colormap({
+        colormap: 'RdBu',
+        nshades: 50,
+        format: 'rgbaString'
+      }).reverse()
+
+      let extreme = Math.max(Math.abs(maxData), Math.abs(minData))
+
+      limits = [extreme, -extreme]
+      barLimits = [-extreme, extreme]
+    }
 
     this.colorScale = d3.scaleLinear()
-      .domain([maxData, 0])
-      .range([0, cmap.length - 0.01])
+      .domain(limits)
+      .range([0, this.cmap.length - 0.01])
 
-    this.colorBar.update([0, maxData])
+    // Setup color bar
+    this.colorBar = new marker.ColorBar(d3, svg, this.cmap)
+    this.colorBar.update(barLimits)
 
     let bb = svg.node().getBoundingClientRect()
 
@@ -98,33 +118,31 @@ export default class Choropleth {
     d3.selectAll('.datamaps-subunit')
       .on('mouseover', function() {
         d3.selectAll('.datamaps-subunit')
-          .filter(d => util.getCousins(this, data)
+          .filter(d => util.getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '0.4')
         tooltip.style('display', null)
       })
       .on('mouseout', function() {
         d3.selectAll('.datamaps-subunit')
-          .filter(d => util.getCousins(this, data)
+          .filter(d => util.getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '1.0')
         tooltip.style('display', 'none')
       })
       .on('mousemove', function() {
-        let mouse = d3.mouse(this)
-
         tooltip
           .style('top', (event.clientY + 20) + 'px')
           .style('left', (event.clientX + 20) + 'px')
-          .html(util.tooltipText(this, data))
+          .html(util.tooltipText(this, data.data))
       })
       .on('click', function() {
         // Change the region selector
-        regionHook(util.getRegionId(util.getSiblings(this, data).region))
+        regionHook(util.getRegionId(util.getSiblings(this, data.data).region))
       })
 
     // Save data
-    this.data = data
+    this.data = data.data
   }
 
   /**
@@ -152,7 +170,7 @@ export default class Choropleth {
       if (value) color = cmap[Math.floor(colorScale(value))]
 
       d.states.map(s => {
-        let d3State = d3.select('.' + s) // TODO: Set texture mask
+        let d3State = d3.select('.' + s)
 
         if (highlightedStates.indexOf(s) > -1) {
           d3State.style('stroke', '#333')

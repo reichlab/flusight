@@ -72,7 +72,7 @@
       },
       selectedChoropleth: function() {
         // Triggered by selector
-        // Use specfic choropleth getter and do a plot
+        // Use specific choropleth getter and do a plot
         this.plotChoropleth()
       },
       selectedWeekIdx: function() {
