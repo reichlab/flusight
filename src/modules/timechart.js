@@ -252,13 +252,29 @@ export default class TimeChart {
       // Start at the latest prediction
       this.weekIdx = Math
         .max(...data.models
-             .map(m => weeks
-                  .indexOf(m.predictions[m.predictions.length - 1].week % 100)))
+             .map(m => {
+               if (m.predictions.length === 0) return 0
+               else {
+                 return weeks
+                   .indexOf(m.predictions[m.predictions.length - 1].week % 100)
+               }
+             }))
     } else {
       // Start at the oldest prediction
-      this.weekIdx = Math
-        .min(...data.models
-             .map(m => weeks.indexOf(m.predictions[0].week % 100)))
+      let modelPredictions = data.models
+          .map(m => {
+            if (m.predictions.length === 0) return -1
+            else {
+              return weeks.indexOf(m.predictions[0].week % 100)
+            }
+          }).filter(d => d != -1)
+
+      if (modelPredictions.length === 0) {
+        // Start at the most recent actual data
+        this.weekIdx = this.actualIndices[this.actualIndices.length - 1]
+      } else {
+        this.weekIdx = Math.min(...t)
+      }
     }
     this.weekHook({
       idx: this.weekIdx,
