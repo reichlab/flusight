@@ -52,25 +52,40 @@ export function choropleth (state) {
 export function timeChartData (state) {
 
   let regionSubset = state.data[selectedRegion(state)]
-  let seasonSubset = regionSubset.seasons[selectedSeason(state)]
-  let historyData = []
+  let currentSeasonId = selectedSeason(state)
+  let seasonSubset = regionSubset.seasons[currentSeasonId]
 
-  regionSubset.seasons.forEach((s, idx) => {
-    // For all the non selected seasons
-    if (idx !== selectedSeason(state)) {
-      historyData.push({
-        id: s.id,
-        actual: s.actual
+  let historicalData = []
+
+  let selectedWeeksCount = seasonSubset.actual.length
+
+  for (let i = 0; i < currentSeasonId; i++) {
+    // Make a copy
+    let historyActual = regionSubset.seasons[i].actual.slice(0)
+    // Check week counts for coherence
+    if (selectedWeeksCount == 52) {
+      // Clip everyone else to remove 53rd week
+      historyActual = historyActual.filter(d => d.week % 100 != 53)
+    } else if (historyActual.length == 52) {
+      // Expand to add 53rd week
+      // Adding a dummy year 1000, this will also help identify the adjustment
+      historyActual.splice(23, 0, {
+        week: 100053,
+        data: (historyActual[22].data + historyActual[23].data) / 2.0
       })
     }
-  })
+    historicalData.push({
+      id: regionSubset.seasons[i].id,
+      actual: historyActual
+    })
+  }
 
   return {
     region: regionSubset.subId, // Submission ids are concise
     actual: seasonSubset.actual,
     baseline: seasonSubset.baseline,
     models: seasonSubset.models, // All model predictions
-    history: historyData
+    history: historicalData
   }
 }
 
