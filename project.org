@@ -1,9 +1,10 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO Prediction plots not rendered after clicking regions
 ** TODO Week counts for years
 ** TODO Legend metadata url click
+** DONE Prediction plots not rendered after clicking regions
+CLOSED: [2016-11-06 Sun 03:55]
 ** DONE Start selectors with latest data
 CLOSED: [2016-11-05 Sat 19:37]
 ** DONE First tooltip rendering after changing region
@@ -21,20 +22,21 @@ CLOSED: [2016-11-06 Sun 01:56]
 ** DONE Update readme
 CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
-CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
+CLOSED: [2016-11-03 Thu 22:12]
 * Features
 ** [#A] Gather historical data
 ** First run demo
-** Automation
-*** Weekly data ingestion
-*** Run on pull
-** [#A] Choropleth
+** Choropleth
 *** DONE [#A] Relative Weighted ILI (%)
-CLOSED: [2016-11-06 Sun 03:08] SCHEDULED: <2016-11-04 Fri>
+CLOSED: [2016-11-06 Sun 03:08]
 **** (y - \beta) / \beta style
 **** Use a diverging color scale
 *** [#B] Peak week
 *** [#B] Peak percent
+** DONE Automation
+CLOSED: [2016-11-06 Sun 16:15]
+*** Weekly data ingestion
+*** Run on pull
 ** DONE Historical lines
 CLOSED: [2016-11-06 Sun 01:49]
 *** Highlight on hover
@@ -60,7 +62,7 @@ Possible fixes
 *** Remove max-width
 ** Increase mobile view width threshold
 ** DONE Start pointers at prediction with
-CLOSED: [2016-11-05 Sat 23:22] SCHEDULED: <2016-11-04 Fri>
+CLOSED: [2016-11-05 Sat 23:22]
 *** Oldest week for past years
 *** Newest week for current year
 ** DONE Show footer in single view
