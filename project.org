@@ -3,8 +3,8 @@
 * Issues
 ** TODO Week counts for years
 ** TODO Legend metadata url click
-** TODO Start selectors with latest data
-** TODO Choropleth gray for no data
+** DONE Start selectors with latest data
+CLOSED: [2016-11-05 Sat 19:37]
 ** DONE First tooltip rendering after changing region
 CLOSED: [2016-11-04 Fri 04:29]
 ** DONE Freeze movements inside actual range
@@ -13,9 +13,11 @@ CLOSED: [2016-11-04 Fri 04:22]
 CLOSED: [2016-11-04 Fri 03:04]
 ** DONE Nav buttons tooltips
 CLOSED: [2016-11-04 Fri 03:21]
-
+** TODO [#B] Choropleth gray for no data
 * Misc Todos
 ** TODO Update baseline file automatically
+** DONE Update readme
+CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
 * Features
@@ -49,16 +51,16 @@ CLOSED: [2016-11-04 Fri 00:43]
 ** [#B] Histogram for onset prediction
 * Enhancements
 ** Add axes description content from email
-** TODO Start pointers at prediction with
-SCHEDULED: <2016-11-04 Fri>
-*** Oldest week for past years
-*** Newest week for current year
 ** TODO Add “Best viewed on” text
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Start pointers at prediction with
+CLOSED: [2016-11-05 Sat 23:22] SCHEDULED: <2016-11-04 Fri>
+*** Oldest week for past years
+*** Newest week for current year
 ** DONE Show footer in single view
 CLOSED: [2016-11-04 Fri 04:41]
 ** DONE Change position of week axis
