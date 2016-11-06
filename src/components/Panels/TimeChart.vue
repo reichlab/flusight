@@ -168,13 +168,29 @@ $accent: rgb(24, 129, 127);
     }
 }
 
+.history-group {
+    .line-history {
+        fill: none;
+        stroke-width: 2px;
+        stroke: #eee;
+
+        &.highlight {
+            stroke: #ddd;
+            stroke-width: 3px;
+        }
+    }
+}
+
 #legend {
     position: absolute;
     right: 58px;
     top: 25px;
     box-shadow: 1px 1px 2px #ccc;
     background-color: white;
-    border-radius: 1px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
     font-size: 11px;
     .item {
         padding: 5px 10px;
@@ -195,6 +211,14 @@ $accent: rgb(24, 129, 127);
             }
             color: #aaa !important;
         }
+    }
+
+    hr {
+        height: 1px;
+        margin: 5px 0;
+        border: 0;
+        border-bottom: 1px dashed rgb(204, 204, 204);
+        background: rgba(153, 153, 153, 0);
     }
 }
 

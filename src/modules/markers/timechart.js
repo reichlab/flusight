@@ -401,23 +401,61 @@ export class TimeRect {
 
 export class HistoricalLines {
   constructor(parent) {
-    //
+    this.group = parent.svg.append('g')
+      .attr('class', 'history-group')
   }
 
   plot(parent, data) {
-    //
+    this.clear()
+    this.show()
+
+    let line = parent.d3.line()
+        .x(d => parent.xScaleWeek(d.week % 100))
+        .y(d => parent.yScale(d.data))
+
+    data.map(d => {
+      let path = this.group.append('path')
+          .attr('class', 'line-history')
+          .attr('id', d.id + '-history')
+
+      path.datum(d.actual)
+        .transition()
+        .duration(200)
+        .attr('d', line)
+
+      path.on('mouseover', function() {
+        parent.d3.select(this)
+          .classed('highlight', true)
+        parent.d3.select('#chart-tooltip')
+          .style('display', null)
+      }).on('mouseout', function() {
+        parent.d3.select(this)
+          .classed('highlight', false)
+        parent.d3.select('#chart-tooltip')
+          .style('display', 'none')
+      }).on('mousemove', function() {
+        parent.d3.select('#chart-tooltip')
+          .style('top', (event.clientY + 20) + 'px')
+          .style('left', (event.clientX + 20) + 'px')
+          .html('<div class="point">' + d.id + '</div>')
+      })
+    })
   }
 
   hide() {
-    //
+    this.group
+      .style('visibility', 'hidden')
   }
 
   show() {
-    //
+    this.group
+      .style('visibility', null)
   }
 
   clear() {
-    //
+    this.group.selectAll('*')
+      .transition()
+      .duration(200).remove()
   }
 }
 
@@ -443,6 +481,49 @@ export class Legend {
         .append('div')
         .attr('id', 'legend-tooltip')
         .style('display', 'none')
+
+    let historyItem = legendDiv.append('div')
+          .attr('class', 'item')
+          .attr('id', 'legend-history')
+          .style('cursor', 'pointer')
+
+      historyItem.append('i')
+        .attr('class', 'fa fa-circle')
+        .style('color', '#ccc')
+
+      historyItem.append('span')
+        .attr('class', 'item-title')
+        .html('History')
+
+      historyItem
+        .on('click', function() {
+          let iElem = parent.d3.select(this).select('i')
+          let isActive = iElem.classed('fa-circle')
+
+          iElem.classed('fa-circle', !isActive)
+          iElem.classed('fa-circle-o', isActive)
+
+          legendHook('legend:history', isActive)
+        })
+
+      historyItem
+        .on('mouseover', function() {
+          tooltip.style('display', null)
+        })
+        .on('mouseout', function() {
+          tooltip.style('display', 'none')
+        })
+        .on('mousemove', function() {
+          tooltip
+            .style('top', (event.clientY + 20) + 'px')
+            .style('left', (event.clientX - 150 - 20) + 'px')
+            .html(util.legendTooltip({
+              name: 'Historical Data',
+              description: 'Toggle historical data lines'
+            }))
+        })
+
+    legendDiv.append('hr')
 
     parent.predictions.forEach(p => {
       let predItem = legendDiv.append('div')

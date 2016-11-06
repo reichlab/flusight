@@ -64,6 +64,7 @@ export default class TimeChart {
     // Add overlays and other mouse interaction items
     this.setupOverlay()
 
+    this.history = new marker.HistoricalLines(this)
     this.baseline = new marker.Baseline(this)
     this.actual = new marker.Actual(this)
     this.predictions = []
@@ -273,7 +274,7 @@ export default class TimeChart {
         // Start at the most recent actual data
         this.weekIdx = this.actualIndices[this.actualIndices.length - 1]
       } else {
-        this.weekIdx = Math.min(...t)
+        this.weekIdx = Math.min(...modelPredictions)
       }
     }
     this.weekHook({
@@ -287,8 +288,7 @@ export default class TimeChart {
     this.actual.plot(this, data.actual)
 
     // Reset history lines
-    if (this.history) this.history.clear()
-    this.history = new marker.HistoricalLines(this)
+    // if (this.history) this.history.clear()
     this.history.plot(this, data.history)
 
     // Reset predictions
@@ -304,12 +304,15 @@ export default class TimeChart {
     })
 
     this.legend = new marker.Legend(this, (pid, hide) => {
-      let pred = this.predictions.filter(p => p.id == pid)[0]
-      pred.legendHidden = hide
-      if (hide) {
-        pred.hideMarkers()
+
+      if (pid === 'legend:history') {
+        if (hide) this.history.hide()
+        else this.history.show()
       } else {
-        pred.showMarkers()
+        let pred = this.predictions.filter(p => p.id == pid)[0]
+        pred.legendHidden = hide
+        if (hide) pred.hideMarkers()
+        else pred.showMarkers()
       }
     })
 
