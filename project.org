@@ -13,7 +13,8 @@ CLOSED: [2016-11-04 Fri 04:22]
 CLOSED: [2016-11-04 Fri 03:04]
 ** DONE Nav buttons tooltips
 CLOSED: [2016-11-04 Fri 03:21]
-** TODO [#B] Choropleth gray for no data
+** DONE [#B] Choropleth gray for no data
+CLOSED: [2016-11-06 Sun 01:56]
 * Misc Todos
 ** TODO Update baseline file automatically
 ** DONE Update readme
@@ -21,22 +22,22 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12] SCHEDULED: <2016-11-02 Wed>
 * Features
-** [#A] Choropleth
-*** [#A] Relative Weighted ILI (%)
-SCHEDULED: <2016-11-04 Fri>
-**** (y - \beta) / \beta style
-**** Use a diverging color scale
-*** [#B] Peak week
-*** [#B] Peak percent
-** [#A] Historical data
-SCHEDULED: <2016-11-04 Fri>
-*** Gather historical data
-*** Highlight on hover
-*** Legend entry
+** [#A] Gather historical data
 ** First run demo
 ** Automation
 *** Weekly data ingestion
 *** Run on pull
+** [#A] Choropleth
+*** DONE [#A] Relative Weighted ILI (%)
+CLOSED: [2016-11-06 Sun 03:08] SCHEDULED: <2016-11-04 Fri>
+**** (y - \beta) / \beta style
+**** Use a diverging color scale
+*** [#B] Peak week
+*** [#B] Peak percent
+** DONE Historical lines
+CLOSED: [2016-11-06 Sun 01:49]
+*** Highlight on hover
+*** Legend entry
 ** DONE [#A] Model metadata file
 CLOSED: [2016-11-04 Fri 02:15]
 *** Legend “onmouseover” tooltip
