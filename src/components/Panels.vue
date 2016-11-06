@@ -62,6 +62,7 @@
         // Choropleth gets highlight
         this.plotTimeChart()
         this.updateChoropleth()
+        this.updateTimeChart()
       },
       selectedSeason: function() {
         // Triggered by selector
