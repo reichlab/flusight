@@ -196,7 +196,7 @@ export default class TimeChart {
         weekHook = this.weekHook
 
     // Reset scales and axes
-    yScale.domain([0, util.getYMax(data)])
+    yScale.domain([0, Math.min(13, util.getYMax(data))])
     // Assuming actual data has all the weeks
     let weeks = data.actual.map(d => d.week % 100)
     let actualIndices = data.actual
