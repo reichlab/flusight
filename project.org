@@ -24,7 +24,6 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12]
 * Features
-** TODO Update baseline file automatically
 ** [#A] Gather historical data
 ** First run demo
 ** [#B] Allow option for choosing confidence interval
@@ -35,6 +34,8 @@ CLOSED: [2016-11-06 Sun 03:08]
 **** Use a diverging color scale
 *** [#B] Peak week
 *** [#B] Peak percent
+** DONE Update baseline file automatically
+CLOSED: [2016-11-06 Sun 22:16]
 ** DONE Automation
 CLOSED: [2016-11-06 Sun 16:15]
 *** Weekly data ingestion
@@ -55,12 +56,13 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Plot as default backtrace on movements
 ** [#B] Histogram for onset prediction
 * Enhancements
-** Add axes description content from email
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Add axes description content from email
+CLOSED: [2016-11-06 Sun 22:16]
 ** DONE Add “Best viewed on” text
 CLOSED: [2016-11-06 Sun 19:25]
 ** DONE Start pointers at prediction with
