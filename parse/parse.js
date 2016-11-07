@@ -60,7 +60,7 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
           let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
           return {
             id: model,
-            meta: utils.getModelMeta(path.join(dataDirectory, season, model, 'meta.yaml')),
+            meta: utils.getModelMeta(path.join(dataDirectory, season, model)),
             predictions: weeks.map(week => {
               let fileName = path.join(dataDirectory, season, model, week + '.csv'),
                   data = null,

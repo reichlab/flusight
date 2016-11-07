@@ -62,10 +62,30 @@ const regionFilter = (data, region) => {
 
 /**
  * Get model metadata
- * @param {string} metaFile path to the meta.yaml file
+ * @param {string} submissionDir path to the submission directory
  * @returns {Object} metadata object
  */
-const getModelMeta = (metaFile) => yaml.safeLoad(fs.readFileSync(metaFile, 'utf8'))
+const getModelMeta = (submissionDir) => {
+
+  let meta = {
+    name: 'No metadata found',
+    description: '',
+    url: ''
+  }
+
+  let metaFiles = ['meta.yaml', 'meta.yml']
+
+  for (let i = 0; i < metaFiles.length; i++) {
+    try {
+      meta = yaml.safeLoad(fs.readFileSync(path.join(submissionDir,
+                                                     metaFiles[i]), 'utf8'))
+    } catch (e) {
+      continue
+    }
+  }
+
+  return meta
+}
 
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
