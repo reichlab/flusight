@@ -2,6 +2,11 @@
 .footer {
     padding: 20px 20px 20px !important;
     font-weight: 100;
+    font-size: 13px;
+    line-height: 20px;
+    strong {
+        color: #696969;
+    }
 }
 </style>
 
@@ -9,7 +14,14 @@
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
-                 Data last updated on <strong>{{ metadata.updateTime }} (UTC)</strong>. The <a v-bind:href="metadata.sourceUrl">source</a> is licensed <a v-bind:href="metadata.licenseUrl">GPLv3</a>.
+                 Data last updated on <strong>{{ metadata.updateTime }}
+                (UTC)</strong>.
+                <br>
+                Visualizations use <a href="https://github.com/d3/d3">D3</a>,
+    see the supported browsers
+    <a href="https://github.com/d3/d3/wiki#supported-environments">here</a>. The
+    <a v-bind:href="metadata.sourceUrl">source</a> is licensed
+    <a v-bind:href="metadata.licenseUrl">GPLv3</a>.
            </div>
         </div>
     </footer>
