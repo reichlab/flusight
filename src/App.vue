@@ -44,6 +44,10 @@ body {
     background-color: $accent;
     z-index: 999;
 }
+
+.section {
+    padding: 30px 20px !important;
+}
 </style>
 
 <template>

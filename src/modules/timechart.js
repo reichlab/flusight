@@ -16,7 +16,7 @@ export default class TimeChart {
     divHeight -= 50
 
     // Limits
-    divHeight = Math.min(Math.max(300, divHeight), 500)
+    divHeight = Math.min(Math.max(350, divHeight), 600)
 
     // Create blank chart
     let margin = {
