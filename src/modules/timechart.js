@@ -116,10 +116,10 @@ export default class TimeChart {
         infoTooltip
           .style('top', (event.clientY - 20) + 'px')
           .style('left', (event.clientX - 150 - 20) + 'px')
-          .html('Description<br><br><em>Click to know more</em>') // TODO: Add description
+          .html('Week of the calendar year, as measured by the CDC.<br><br><em>Click to know more</em>')
       })
       .on('click', function() {
-        window.open('#', '_blank') // TODO: Add link
+        window.open('https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf', '_blank')
       })
 
     svg.append('g')
@@ -143,10 +143,10 @@ export default class TimeChart {
         infoTooltip
           .style('top', event.clientY + 'px')
           .style('left', (event.clientX + 20) + 'px')
-          .html('Description<br><br><em>Click to know more</em>') // TODO: Add description
+          .html('Percentage of patient visits for influenza-like illness, weighted by state population.<br><br><em>Click to know more</em>')
       })
       .on('click', function() {
-        window.open('#', '_blank') // TODO: Add link
+        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank') // TODO: Add link
       })
   }
 
