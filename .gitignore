@@ -4,3 +4,4 @@ dist/
 npm-debug.log
 *~
 deploy_private
+.Rproj.user
