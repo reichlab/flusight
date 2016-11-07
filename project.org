@@ -1,9 +1,12 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO Use history for scaling y axis
+** TODO [#A] Fix position of choropleth elements
+SCHEDULED: <2016-11-07 Mon>
 ** TODO Week counts for years
 ** TODO Legend metadata url click
+** DONE Use history for scaling y axis
+CLOSED: [2016-11-06 Sun 22:37]
 ** DONE Prediction plots not rendered after clicking regions
 CLOSED: [2016-11-06 Sun 03:55]
 ** DONE Start selectors with latest data
@@ -24,8 +27,10 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12]
 * Features
-** [#A] Gather historical data
-** First run demo
+** TODO [#A] Gather historical data
+SCHEDULED: <2016-11-07 Mon>
+** TODO First run demo
+SCHEDULED: <2016-11-07 Mon>
 ** [#B] Allow option for choosing confidence interval
 ** Choropleth
 *** DONE [#A] Relative Weighted ILI (%)
