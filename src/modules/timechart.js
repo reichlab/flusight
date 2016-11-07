@@ -143,7 +143,7 @@ export default class TimeChart {
         infoTooltip
           .style('top', event.clientY + 'px')
           .style('left', (event.clientX + 20) + 'px')
-          .html('Percentage of patient visits for influenza-like illness, weighted by state population.<br><br><em>Click to know more</em>')
+          .html('Percentage of outpatient doctor visits for influenza-like illness, weighted by state population.<br><br><em>Click to know more</em>')
       })
       .on('click', function() {
         window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank') // TODO: Add link
