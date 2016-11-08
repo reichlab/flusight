@@ -1,0 +1,3 @@
+name: 'ensemble model'
+description: 'Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst'
+url: 'https://reichlab.github.io/'
