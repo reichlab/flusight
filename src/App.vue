@@ -108,6 +108,13 @@ body {
           this.backward()
         }
       })
+
+      // Check for first run
+      // Trigger intro
+      if (document.cookie.replace(/(?:(?:^|.*;\s*)firstRun\s*\=\s*([^;]*).*$)|^.*$/, "$1") !== "true") {
+        console.log('This is first run')
+        document.cookie = "firstRun=true; expires=Fri, 31 Dec 9999 23:59:59 GMT"
+      }
     }
   }
 </script>
