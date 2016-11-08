@@ -198,7 +198,7 @@ export class Prediction {
             .html(util.pointTooltip(id, [
               {
                 key: 'Peak Percent',
-                value: pp.point.toFixed(2)
+                value: pp.point
               },
               {
                 key: 'Peak Week',

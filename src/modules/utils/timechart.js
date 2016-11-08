@@ -72,7 +72,7 @@ export const pointTooltip = (id, data, color) => {
 
   data.map(d => {
     text += '<div class="point">'
-    text += d.key + '<span class="bold">' + d.value + '</span></div>'
+    text += d.key + '<span class="bold">' + d.value.toFixed(2) + '</span></div>'
   })
 
   return text
