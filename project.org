@@ -3,6 +3,10 @@
 * Issues
 ** TODO [#A] Fix position of choropleth elements
 SCHEDULED: <2016-11-07 Mon>
+** TODO Reorder prediction markers
+*** Put shades first
+*** Circles second
+** TODO Smoother prediction transition with selector changes
 ** TODO Week counts for years
 ** TODO Legend metadata url click
 ** DONE Use history for scaling y axis
