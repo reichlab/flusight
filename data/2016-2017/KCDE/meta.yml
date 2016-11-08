@@ -1,0 +1,3 @@
+name: 'SARIMA model'
+description: 'Seasonal ARIMA model from the Reich Lab at UMass-Amherst'
+url: 'https://reichlab.github.io/'
