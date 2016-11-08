@@ -60,7 +60,7 @@ $accent: rgb(24, 129, 127);
         stroke-width: 1.5px;
     }
     .area-prediction {
-        opacity: 0.3;
+        opacity: 0.2;
     }
 }
 
