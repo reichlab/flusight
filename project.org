@@ -1,14 +1,18 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO [#A] Fix position of choropleth elements
+** TODO [#B] Fix position of choropleth elements
 SCHEDULED: <2016-11-07 Mon>
-** TODO Reorder prediction markers
+** TODO [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
-** TODO Smoother prediction transition with selector changes
+** TODO [#C] Smoother prediction transition with selector changes
 ** TODO Week counts for years
+** TODO Disable selection on legend
 ** TODO Legend metadata url click
+*** Link icons for each prediction
+SCHEDULED: <2016-11-08 Tue>
+** TODO Max choropleth data across seasons
 ** DONE Use history for scaling y axis
 CLOSED: [2016-11-06 Sun 22:37]
 ** DONE Prediction plots not rendered after clicking regions
@@ -23,7 +27,7 @@ CLOSED: [2016-11-04 Fri 04:22]
 CLOSED: [2016-11-04 Fri 03:04]
 ** DONE Nav buttons tooltips
 CLOSED: [2016-11-04 Fri 03:21]
-** DONE [#B] Choropleth gray for no data
+** DONE Choropleth gray for no data
 CLOSED: [2016-11-06 Sun 01:56]
 * Misc Todos
 ** DONE Update readme
@@ -33,11 +37,11 @@ CLOSED: [2016-11-03 Thu 22:12]
 * Features
 ** TODO [#A] Gather historical data
 SCHEDULED: <2016-11-07 Mon>
-** TODO First run demo
+** TODO [#A] First run demo
 SCHEDULED: <2016-11-07 Mon>
-** [#B] Allow option for choosing confidence interval
+** TODO [#A] Allow option for choosing confidence interval
 ** Choropleth
-*** DONE [#A] Relative Weighted ILI (%)
+*** DONE Relative Weighted ILI (%)
 CLOSED: [2016-11-06 Sun 03:08]
 **** (y - \beta) / \beta style
 **** Use a diverging color scale
@@ -65,6 +69,9 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Plot as default backtrace on movements
 ** [#B] Histogram for onset prediction
 * Enhancements
+** TODO Colors to confidence ranges
+** TODO Move onset predictions to top
+*** Add offsets
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
