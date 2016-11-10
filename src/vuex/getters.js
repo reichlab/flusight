@@ -152,3 +152,28 @@ export function choroplethData (state) {
   output.data = output.data.slice(1) // Skip national data
   return output
 }
+
+// Introduction getters
+export function currentIntro (state) {
+  return state.introData[introStep(state)]
+}
+
+export function introStep (state) {
+  return state.introPointer
+}
+
+export function introLength (state) {
+  return state.introData.length
+}
+
+export function introShow (state) {
+  return state.introShow
+}
+
+export function introAtFirst (state) {
+  return introStep(state) === 0
+}
+
+export function introAtLast (state) {
+  return introStep(state) === introLength(state) - 1
+}

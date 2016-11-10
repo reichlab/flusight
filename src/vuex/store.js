@@ -26,7 +26,18 @@ const state = {
   data: jsonData.data,
 
   // All the metadata!
-  metadata: jsonData.metadata
+  metadata: jsonData.metadata,
+
+  // Introduction steps data
+  introData: [{
+    title: 'Welcome to flusight',
+    content: 'Click <strong>Next</strong> to proceed. Click <strong>Finish</strong> to exit this demo.',
+    element: '',
+    direction: ''
+  }],
+
+  introPointer: 0,
+  introShow: true
 }
 
 const mutations = {
@@ -52,6 +63,30 @@ const mutations = {
 
   SET_CHOROPLETH (state, val) {
     state.choropleth = val
+  },
+
+  INCREMENT_INTRO_POINTER (state) {
+    state.introPointer += 1
+  },
+
+  DECREMENT_INTRO_POINTER (state) {
+    state.introPointer -= 1
+  },
+
+  RESET_INTRO_POINTER (state) {
+    state.introPointer = 0
+  },
+
+  HIDE_INTRO (state) {
+    state.introShow = false
+  },
+
+  SHOW_INTRO (state) {
+    state.introShow = true
+  },
+
+  APPEND_INTRO_ITEM (state, val) {
+    state.introData.push(val)
   }
 }
 

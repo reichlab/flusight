@@ -85,3 +85,33 @@ export const forward = ({ dispatch, state }) => {
 export const backward = ({ dispatch, state }) => {
   updateSelectedWeek({ dispatch, state }, get.previousWeek(state))
 }
+
+// Introduction actions
+
+export const appendIntroItems = ({ dispatch, state }, items) => {
+  items.map(item => {
+    dispatch('APPEND_INTRO_ITEM', item)
+  })
+}
+
+export const moveIntroStart = ({ dispatch, state }) => {
+  dispatch('RESET_INTRO_POINTER')
+  dispatch('SHOW_INTRO')
+}
+
+export const moveIntroForward = ({ dispatch, state }) => {
+  if (get.introAtLast(state)) {
+    // Hide
+    dispatch('HIDE_INTRO')
+  } else {
+    dispatch('INCREMENT_INTRO_POINTER')
+  }
+}
+
+export const moveIntroBackward = ({ dispatch, state }) => {
+  dispatch('DECREMENT_INTRO_POINTER')
+}
+
+export const moveIntroFinish = ({ dispatch, state }) => {
+  dispatch('HIDE_INTRO')
+}

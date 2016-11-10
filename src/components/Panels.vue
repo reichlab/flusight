@@ -4,15 +4,20 @@
         position: relative;
     }
 }
+
+#choropleth-container, #timechart-container {
+    background: white;
+}
+
 </style>
 
 <template>
     <div class="columns">
-        <div class="column is-5">
+        <div class="column is-5" id="choropleth-container">
             <choropleth></choropleth>
         </div>
 
-        <div class="column id-7">
+        <div class="column id-7" id="timechart-container">
             <time-chart></time-chart>
         </div>
     </div>

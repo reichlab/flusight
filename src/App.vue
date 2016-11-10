@@ -56,6 +56,8 @@ body {
 
     <div id="loader"></div>
 
+    <intro></intro>
+
     <navbar></navbar>
 
     <selectors></selectors>
@@ -71,11 +73,12 @@ body {
 
 <script>
   import Navbar from './components/Navbar'
+  import Intro from './components/Intro'
   import Panels from './components/Panels'
   import Selectors from './components/Selectors'
   import Foot from './components/Foot'
   import store from './vuex/store'
-  import { forward, backward } from './vuex/actions'
+  import { forward, backward, appendIntroItems } from './vuex/actions'
 
   var $ = window.jQuery = require('jquery')
   require('./assets/fakeLoader.min.js')
@@ -83,6 +86,7 @@ body {
   export default {
     components: {
       Navbar,
+      Intro,
       Panels,
       Selectors,
       Foot
@@ -90,15 +94,18 @@ body {
     vuex: {
       actions: {
         backward,
-        forward
+        forward,
+        appendIntroItems
       }
     },
     store,
     ready() {
+
       $('#loader').fakeLoader({
         spinner: 'spinner1',
         bgColor: '#268bd2'
       })
+
       $('#info-tooltip').css('display', 'none')
 
       window.addEventListener('keyup', (evt) => {
@@ -109,12 +116,7 @@ body {
         }
       })
 
-      // Check for first run
-      // Trigger intro
-      if (document.cookie.replace(/(?:(?:^|.*;\s*)firstRun\s*\=\s*([^;]*).*$)|^.*$/, "$1") !== "true") {
-        console.log('This is first run')
-        document.cookie = "firstRun=true; expires=Fri, 31 Dec 9999 23:59:59 GMT"
-      }
+      // TODO: Append intro items
     }
   }
 </script>

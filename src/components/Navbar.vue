@@ -43,7 +43,7 @@
 
   <div id="nav-menu" class="nav-right nav-menu">
       <span class="nav-item">
-        <a class="button is-small">
+        <a class="button is-small" v-on:click="moveIntroStart">
                     <span class="icon is-small">
                         <i class="fa fa-question"></i>
                     </span>
@@ -65,11 +65,15 @@
 
 <script>
   import { metadata } from '../vuex/getters'
+  import { moveIntroStart } from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
         metadata
+      },
+      actions: {
+        moveIntroStart
       }
     }
   }
