@@ -182,6 +182,7 @@ $accent: rgb(24, 129, 127);
 }
 
 #legend {
+    user-select: none;
     position: absolute;
     right: 58px;
     top: 25px;
@@ -203,6 +204,11 @@ $accent: rgb(24, 129, 127);
             font-size: 11px;
             display: inline-block;
             vertical-align: middle;
+        }
+
+        .model-url {
+            margin-right: 5px;
+            margin-left: 10px;
         }
 
         &.na {
