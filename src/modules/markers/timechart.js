@@ -38,16 +38,19 @@ export class Prediction {
       .attr('y1', cy)
       .attr('y2', cy)
       .attr('class', 'range onset-range')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     onsetGroup.append('line')
       .attr('y1', cy - stp / 2)
       .attr('y2', cy + stp / 2)
       .attr('class', 'stopper onset-stopper onset-low')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     onsetGroup.append('line')
       .attr('y1', cy - stp / 2)
       .attr('y2', cy + stp / 2)
       .attr('class', 'stopper onset-stopper onset-high')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     onsetGroup.append('circle')
       .attr('r', 5)
@@ -65,21 +68,27 @@ export class Prediction {
 
     peakGroup.append('line')
       .attr('class', 'range peak-range peak-range-x')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('line')
       .attr('class', 'range peak-range peak-range-y')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('line')
       .attr('class', 'stopper peak-stopper peak-low-x')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('line')
       .attr('class', 'stopper peak-stopper peak-high-x')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('line')
       .attr('class', 'stopper peak-stopper peak-low-y')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('line')
       .attr('class', 'stopper peak-stopper peak-high-y')
+      .style('stroke', util.hexToRgba(color, 0.6))
 
     peakGroup.append('circle')
       .attr('r', 5)
