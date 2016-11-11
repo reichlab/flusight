@@ -6,21 +6,26 @@ const transform = require('./modules/transform')
 const preprocess = require('./modules/preprocess')
 const baseline = require('./modules/baseline')
 const config = require('./modules/config')
+const history = require('./modules/history')
 const utils = require('./modules/utils')
 
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
 
-
 /**
  * Generate json data using submissions files in the given dir
  * @param {string} dataDirectory directory with data files
  * @param {string} configFile config.yaml file
  * @param {string} baselineFile wILI_Baseline.csv file
+ * @param {string} historyFile history.json file
  * @param {string} outputFile final data.json file
  */
-const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
+const generate = (dataDirectory,
+                  configFile,
+                  baselineFile,
+                  historyFile,
+                  outputFile) => {
 
   // Look for seasons
   let seasons = utils.getSubDirectories(dataDirectory)
@@ -42,6 +47,9 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
   // Get baseline data
   let baselineData = baseline.getBaselines(baselineFile)
 
+  // Get historical data
+  let historicalData = history.getHistory(historyFile)
+
   console.log('Gathering actual data for the seasons...')
 
   // Get actual data for seasons
@@ -52,6 +60,10 @@ const generate = (dataDirectory, configFile, baselineFile, outputFile) => {
     // Add seasons to output
     output.forEach(val => {
       console.log('Parsing region: ' + val.region)
+
+      // Append historical data to region
+      val.history = historicalData[val.id]
+
       val.seasons = seasons.map(season => {
         // Get models for each season
         let modelsDir = utils.getSubDirectories(path.join(dataDirectory, season))

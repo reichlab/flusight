@@ -1,13 +1,14 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO Week counts for years
 ** TODO [#B] Fix position of choropleth elements
 SCHEDULED: <2016-11-07 Mon>
 ** TODO [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
 ** TODO [#C] Smoother prediction transition with selector changes
+** DONE Week counts for years
+CLOSED: [2016-11-11 Fri 17:13]
 ** DONE Max choropleth data across seasons
 CLOSED: [2016-11-11 Fri 02:15]
 ** DONE Legend metadata url click
@@ -37,7 +38,9 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12]
 * Features
-** TODO [#A] Gather historical data
+** TODO [#B] Show data used for prediction
+*** Get reported data for each week
+*** Plot as default backtrace on movements
 ** Choropleth
 *** DONE Relative Weighted ILI (%)
 CLOSED: [2016-11-06 Sun 03:08]
@@ -45,6 +48,9 @@ CLOSED: [2016-11-06 Sun 03:08]
 **** Use a diverging color scale
 *** [#B] Peak week
 *** [#B] Peak percent
+** [#B] Histogram for onset prediction
+** DONE [#A] Gather historical data
+CLOSED: [2016-11-11 Fri 17:12] SCHEDULED: <2016-11-11 Fri>
 ** DONE [#A] Allow option for choosing confidence interval
 CLOSED: [2016-11-11 Fri 04:25]
 ** DONE Add intro content
@@ -68,12 +74,7 @@ CLOSED: [2016-11-04 Fri 02:15]
 CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
-** [#B] Show data used for prediction
-*** Get reported data for each week
-*** Plot as default backtrace on movements
-** [#B] Histogram for onset prediction
 * Enhancements
-** TODO Colors to confidence ranges
 ** TODO Move onset predictions to top
 *** Add offsets
 ** Fix Large screen layout
@@ -81,6 +82,8 @@ Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Colors to confidence ranges
+CLOSED: [2016-11-11 Fri 04:53]
 ** DONE Add axes description content from email
 CLOSED: [2016-11-06 Sun 22:16]
 ** DONE Add “Best viewed on” text

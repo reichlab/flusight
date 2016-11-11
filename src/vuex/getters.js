@@ -50,6 +50,27 @@ export function choropleth (state) {
 }
 
 /**
+ * Trim history data to fit in length 'numWeeks'
+ */
+function trimHistory (historyActual, numWeeks) {
+  let historyTrimmed = historyActual.slice()
+
+  if (numWeeks == 52) {
+    // Clip everyone else to remove 53rd week
+    historyTrimmed = historyTrimmed.filter(d => d.week % 100 != 53)
+  } else if (historyTrimmed.length == 52) {
+    // Expand to add 53rd week
+    // Adding a dummy year 1000, this will also help identify the adjustment
+    historyTrimmed.splice(23, 0, {
+      week: 100053,
+      data: (historyTrimmed[22].data + historyTrimmed[23].data) / 2.0
+    })
+  }
+
+  return historyTrimmed
+}
+
+/**
  * Return data subset for chart as specified in region/season selected
  */
 export function timeChartData (state) {
@@ -58,28 +79,22 @@ export function timeChartData (state) {
   let currentSeasonId = selectedSeason(state)
   let seasonSubset = regionSubset.seasons[currentSeasonId]
 
-  let historicalData = []
-
   let selectedWeeksCount = seasonSubset.actual.length
 
+  let historicalData = []
+
+  // Add data from history store
+  for (let season of Object.keys(regionSubset.history)) {
+    historicalData.push({
+      id: season,
+      actual: trimHistory(regionSubset.history[season], selectedWeeksCount)
+    })
+  }
+
   for (let i = 0; i < currentSeasonId; i++) {
-    // Make a copy
-    let historyActual = regionSubset.seasons[i].actual.slice(0)
-    // Check week counts for coherence
-    if (selectedWeeksCount == 52) {
-      // Clip everyone else to remove 53rd week
-      historyActual = historyActual.filter(d => d.week % 100 != 53)
-    } else if (historyActual.length == 52) {
-      // Expand to add 53rd week
-      // Adding a dummy year 1000, this will also help identify the adjustment
-      historyActual.splice(23, 0, {
-        week: 100053,
-        data: (historyActual[22].data + historyActual[23].data) / 2.0
-      })
-    }
     historicalData.push({
       id: regionSubset.seasons[i].id,
-      actual: historyActual
+      actual: trimHistory(regionSubset.seasons[i].actual, selectedWeeksCount)
     })
   }
 
