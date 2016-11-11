@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
+    "gather": "node build/gather.js",
     "parse": "node build/parse.js",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
@@ -15,6 +16,7 @@
     "bulma": "^0.2.1",
     "colormap": "^2.2.0",
     "datamaps": "^0.5.8",
+    "download": "^5.0.2",
     "font-awesome": "^4.6.3",
     "jquery": "^1.11.1",
     "js-yaml": "^3.6.1",

@@ -1,7 +1,7 @@
 // Wrapper around delphi-epidata API (https://github.com/undefx/delphi-epidata)
 // for getting actual flu data
 
-const delphiAPI = require('./vendor/delphi_epidata')
+const delphiAPI = require('./assets/delphi_epidata')
 const metadata = require('./metadata')
 const moment = require('moment')
 
