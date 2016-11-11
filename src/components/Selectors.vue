@@ -34,7 +34,7 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="level-right box">
+                    <div class="level-right box" id="main-selectors">
                         <div class="level-item">
                             <p class="heading">Region</p>
                             <p class="control title">

@@ -79,6 +79,7 @@ body {
   import Foot from './components/Foot'
   import store from './vuex/store'
   import { forward, backward, appendIntroItems } from './vuex/actions'
+  import { metadata } from './vuex/getters'
 
   var $ = window.jQuery = require('jquery')
   require('./assets/fakeLoader.min.js')
@@ -96,6 +97,9 @@ body {
         backward,
         forward,
         appendIntroItems
+      },
+      getters: {
+        metadata
       }
     },
     store,
@@ -116,7 +120,57 @@ body {
         }
       })
 
-      // TODO: Append intro items
+      // Append intro items
+      this.appendIntroItems([
+        {
+          title: 'Region and Season',
+          content: `Select the HHS region and flu season`,
+          direction: 'left',
+          element: '#main-selectors'
+        },
+        {
+          title: 'Predictions',
+          content: `<p>Predictions are shown in this panel. You can use your
+      keyboard's arrow keys or mouse to move around through weeks.</p>
+      <br><p>Hover over the chart to know more about the displayed lines and
+      points.</p>`,
+          direction: 'left',
+          element: '#timechart-container'
+        },
+        {
+          title: 'Legend',
+          content: `Available prediction models are shown in this legend. You
+      can toggle marker display from here.`,
+          direction: 'left',
+          element: '#legend'
+        },
+        {
+          title: 'Other controls',
+          content: `Other chart controls are here. Hover over to know more.`,
+          direction: 'left',
+          element: '#nav-controls'
+        },
+        {
+          title: 'Choropleth',
+          content: `<p>This panel shows a map with data for the currently
+      selected week.</p><p>It also doubles up as a region selector</p>`,
+          direction: 'right',
+          element: '#choropleth-container'
+        },
+        {
+          title: 'Choropleth data',
+          content: `Data to be displayed on map can be selected here`,
+          direction: 'right',
+          element: '#choropleth-selector'
+        },
+        {
+          title: 'Finished',
+          content: `Checkout the source and file any issue you have on the
+      project's github page <a href="` + this.metadata.sourceUrl + `">here</a>.`,
+          direction: 'left',
+          element: ''
+        }
+      ])
     }
   }
 </script>

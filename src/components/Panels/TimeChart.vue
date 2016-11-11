@@ -153,6 +153,7 @@ $accent: rgb(24, 129, 127);
 
 #nav-controls {
     position: absolute;
+    background-color: white;
     right: 0px;
     top: 20px;
     .icon {
