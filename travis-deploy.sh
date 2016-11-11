@@ -23,6 +23,7 @@ npm run build
 cp -r ./dist/* ./
 
 git config user.name "CI auto deploy"
+git config user.email "abhinav.tushar.vs@gmail.com"
 
 git add .
 git commit -m "Auto deploy to GitHub Pages: ${SHA}"
