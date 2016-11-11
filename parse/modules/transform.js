@@ -171,12 +171,15 @@ const wideToLong = (wideFormat) => {
 }
 
 /**
- * Return 90% confidence range and point prediction for given series
+ * Return confidence ranges and point prediction for given series
  * @param {Array} series an array of (bin start, bin end, value) triplets
  * @returns {Object} object with keys 'low', 'high' and 'point'
  */
 const parseSeries = (series) => {
   let len = series.length
+
+  // Both end trimming values for confidence intervals
+  let confidenceTrims = [0.05, 0.25]
 
   // Handle edge case for season onset 'none' bin
   if (series[len - 1][0] == 'none') {
@@ -188,8 +191,8 @@ const parseSeries = (series) => {
     high: 0
   }
   let range = {
-    low: null,
-    high: null
+    low: [null, null],
+    high: [null, null]
   }
   let maxIdx = 0,
       maxValue = series[maxIdx][2]
@@ -210,18 +213,27 @@ const parseSeries = (series) => {
     }
 
     // Update accumulators
-    if (!range.low) accumulator.low += series[i][2]
-    if (!range.high) accumulator.high += series[len - i - 1][2]
+    // if (!range.low[1])
+      accumulator.low += series[i][2]
+    // if (!range.high[1])
+      accumulator.high += series[len - i - 1][2]
 
-    if ((accumulator.low > 0.05) && (!range.low)) range.low = series[i][0]
-    if ((accumulator.high > 0.05) && (!range.high)) range.high = series[len - i - 1][1]
+    if ((accumulator.low > confidenceTrims[0]) && (!range.low[0]))
+      range.low[0] = series[i][0]
+    if ((accumulator.high > confidenceTrims[0]) && (!range.high[0]))
+      range.high[0] = series[len - i - 1][1]
+
+    if ((accumulator.low > confidenceTrims[1]) && (!range.low[1]))
+      range.low[1] = series[i][0]
+    if ((accumulator.high > confidenceTrims[1]) && (!range.high[1]))
+      range.high[1] = series[len - i - 1][1]
   }
 
   if (matches === (len - 1)) {
     // No actual prediction, skip these
     return {
-      low: -1,
-      high: -1,
+      low: [-1, -1],
+      high: [-1, -1],
       point: -1
     }
   }
