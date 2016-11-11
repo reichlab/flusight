@@ -1133,55 +1133,55 @@
             },
             {
               "week": 201632,
-              "data": 0.687024
+              "data": 0.687033
             },
             {
               "week": 201633,
-              "data": 0.705561
+              "data": 0.705526
             },
             {
               "week": 201634,
-              "data": 0.826377
+              "data": 0.825882
             },
             {
               "week": 201635,
-              "data": 0.994487
+              "data": 0.993827
             },
             {
               "week": 201636,
-              "data": 1.01909
+              "data": 1.01764
             },
             {
               "week": 201637,
-              "data": 1.06632
+              "data": 1.08008
             },
             {
               "week": 201638,
-              "data": 1.09019
+              "data": 1.10637
             },
             {
               "week": 201639,
-              "data": 1.17174
+              "data": 1.19999
             },
             {
               "week": 201640,
-              "data": 1.19698
+              "data": 1.20947
             },
             {
               "week": 201641,
-              "data": 1.23232
+              "data": 1.2343
             },
             {
               "week": 201642,
-              "data": 1.28869
+              "data": 1.27541
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 1.34104
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.37269
             },
             {
               "week": 201645,
@@ -1338,54 +1338,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
               "predictions": [
                 {
                   "onsetWeek": {
-                    "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "point": 51,
+                    "low": 47,
+                    "high": 8
                   },
                   "peakWeek": {
-                    "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "point": 4,
+                    "low": 50,
+                    "high": 20
                   },
                   "peakPercent": {
-                    "point": 3.6,
-                    "low": 3.5,
-                    "high": 4
+                    "point": 4.7,
+                    "low": 2.1,
+                    "high": 8.4
                   },
                   "oneWk": {
-                    "point": 1.8,
-                    "low": 1,
-                    "high": 2.5
+                    "point": 1.3,
+                    "low": 1.1,
+                    "high": 1.7
                   },
                   "twoWk": {
+                    "point": 1.4,
+                    "low": 1,
+                    "high": 2
+                  },
+                  "threeWk": {
                     "point": 1.5,
                     "low": 1,
+                    "high": 2.2
+                  },
+                  "fourWk": {
+                    "point": 1.5,
+                    "low": 0.9,
                     "high": 2.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 45,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 47,
+                    "high": 12
+                  },
+                  "peakPercent": {
+                    "point": 4.7,
+                    "low": 0.9,
+                    "high": 8.9
+                  },
+                  "oneWk": {
+                    "point": 1.2,
+                    "low": 0.7,
+                    "high": 2.4
+                  },
+                  "twoWk": {
+                    "point": 1.3,
+                    "low": 0.7,
+                    "high": 2.6
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 0.5,
-                    "high": 3.5
+                    "low": 0.8,
+                    "high": 2.7
                   },
                   "fourWk": {
-                    "point": 1.2,
-                    "low": 0.5,
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 2.9
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 46,
+                    "high": 3
+                  },
+                  "peakWeek": {
+                    "point": 52,
+                    "low": 51,
+                    "high": 12
+                  },
+                  "peakPercent": {
+                    "point": 4.1,
+                    "low": 2.5,
+                    "high": 7
+                  },
+                  "oneWk": {
+                    "point": 1.4,
+                    "low": 1.1,
+                    "high": 1.9
+                  },
+                  "twoWk": {
+                    "point": 1.5,
+                    "low": 1.1,
+                    "high": 2.1
+                  },
+                  "threeWk": {
+                    "point": 1.7,
+                    "low": 1.2,
+                    "high": 2.6
+                  },
+                  "fourWk": {
+                    "point": 2.1,
+                    "low": 1.4,
+                    "high": 3.3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 50.9795930032354,
+                    "low": 45,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 50.9625597209117,
+                    "low": 51,
+                    "high": 12
+                  },
+                  "peakPercent": {
+                    "point": 4.65327263758525,
+                    "low": 2.1,
+                    "high": 8.4
+                  },
+                  "oneWk": {
+                    "point": 1.30017860564934,
+                    "low": 1.1,
+                    "high": 1.7
+                  },
+                  "twoWk": {
+                    "point": 1.40042830976304,
+                    "low": 1,
+                    "high": 2
+                  },
+                  "threeWk": {
+                    "point": 1.5016975272185,
+                    "low": 1,
+                    "high": 2.2
+                  },
+                  "fourWk": {
+                    "point": 1.50294394685125,
+                    "low": 0.9,
                     "high": 2.5
                   },
-                  "week": 201642
+                  "week": 201643
                 }
               ]
             }
-          ]
+          ],
+          "baseline": 2.2
         }
       ]
     },
@@ -1656,39 +1801,39 @@
             },
             {
               "week": 201636,
-              "data": 0.58097
+              "data": 0.576958
             },
             {
               "week": 201637,
-              "data": 0.593437
+              "data": 0.58896
             },
             {
               "week": 201638,
-              "data": 0.615064
+              "data": 0.610729
             },
             {
               "week": 201639,
-              "data": 0.593629
+              "data": 0.586813
             },
             {
               "week": 201640,
-              "data": 0.628816
+              "data": 0.615302
             },
             {
               "week": 201641,
-              "data": 0.57963
+              "data": 0.547945
             },
             {
               "week": 201642,
-              "data": 0.718711
+              "data": 0.702341
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 0.635831
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 0.827237
             },
             {
               "week": 201645,
@@ -1845,15 +1990,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 52,
+                    "low": 45,
+                    "high": 15
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 47,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 2.8,
+                    "low": 1.2,
+                    "high": 8.8
+                  },
+                  "oneWk": {
+                    "point": 0.7,
+                    "low": 0.4,
+                    "high": 1.3
+                  },
+                  "twoWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 1.6
+                  },
+                  "threeWk": {
+                    "point": 0.8,
+                    "low": 0.4,
+                    "high": 1.9
+                  },
+                  "fourWk": {
+                    "point": 0.8,
+                    "low": 0.4,
+                    "high": 2.2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2,
+                    "low": 43,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 48,
+                    "high": 12
+                  },
+                  "peakPercent": {
+                    "point": 3.2,
+                    "low": 0.6,
+                    "high": 9.6
+                  },
+                  "oneWk": {
+                    "point": 0.5,
+                    "low": 0.2,
+                    "high": 1.7
+                  },
+                  "twoWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 0.7,
+                    "low": 0.2,
+                    "high": 2.1
+                  },
+                  "fourWk": {
+                    "point": 0.7,
+                    "low": 0.3,
+                    "high": 2.2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 45,
+                    "high": 7
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 51,
+                    "high": 16
+                  },
+                  "peakPercent": {
+                    "point": 4,
+                    "low": 2,
+                    "high": 8.8
+                  },
+                  "oneWk": {
+                    "point": 0.8,
+                    "low": 0.5,
+                    "high": 1.6
+                  },
+                  "twoWk": {
+                    "point": 0.8,
+                    "low": 0.4,
+                    "high": 1.7
+                  },
+                  "threeWk": {
+                    "point": 0.7,
+                    "low": 0.3,
+                    "high": 1.7
+                  },
+                  "fourWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 2.2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 3.1287196151662,
+                    "low": 43,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 5.29535171042807,
+                    "low": 48,
+                    "high": 20
+                  },
+                  "peakPercent": {
+                    "point": 3.35783094755266,
+                    "low": 1.3,
+                    "high": 9
+                  },
+                  "oneWk": {
+                    "point": 0.70001247803342,
+                    "low": 0.4,
+                    "high": 1.3
+                  },
+                  "twoWk": {
+                    "point": 0.799802488968438,
+                    "low": 0.3,
+                    "high": 1.6
+                  },
+                  "threeWk": {
+                    "point": 0.798632744107501,
+                    "low": 0.4,
+                    "high": 1.9
+                  },
+                  "fourWk": {
+                    "point": 0.800063158564771,
+                    "low": 0.4,
+                    "high": 2.2
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.4
         }
       ]
     },
@@ -2128,31 +2457,31 @@
             },
             {
               "week": 201638,
-              "data": 0.795749
+              "data": 0.794656
             },
             {
               "week": 201639,
-              "data": 1.04979
+              "data": 1.04856
             },
             {
               "week": 201640,
-              "data": 1.68394
+              "data": 1.76943
             },
             {
               "week": 201641,
-              "data": 1.86075
+              "data": 1.89046
             },
             {
               "week": 201642,
-              "data": 1.80966
+              "data": 1.87002
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 2.22754
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 2.41995
             },
             {
               "week": 201645,
@@ -2309,15 +2638,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 45,
+                    "low": 43,
+                    "high": 13
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 44,
+                    "high": 20
+                  },
+                  "peakPercent": {
+                    "point": 4.4,
+                    "low": 2.4,
+                    "high": 8.9
+                  },
+                  "oneWk": {
+                    "point": 2.2,
+                    "low": 1.4,
+                    "high": 3.6
+                  },
+                  "twoWk": {
+                    "point": 2.3,
+                    "low": 1.3,
+                    "high": 4.8
+                  },
+                  "threeWk": {
+                    "point": 2.2,
+                    "low": 1.2,
+                    "high": 5.3
+                  },
+                  "fourWk": {
+                    "point": 2.2,
+                    "low": 1.1,
+                    "high": 5.3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 52,
+                    "low": 41,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 4,
+                    "low": 44,
+                    "high": 15
+                  },
+                  "peakPercent": {
+                    "point": 4.6,
+                    "low": 1,
+                    "high": 10.7
+                  },
+                  "oneWk": {
+                    "point": 1.2,
+                    "low": 0.5,
+                    "high": 3.3
+                  },
+                  "twoWk": {
+                    "point": 1.4,
+                    "low": 0.5,
+                    "high": 3.7
+                  },
+                  "threeWk": {
+                    "point": 1.5,
+                    "low": 0.6,
+                    "high": 4.2
+                  },
+                  "fourWk": {
+                    "point": 1.7,
+                    "low": 0.6,
+                    "high": 4.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 46,
+                    "low": 43,
+                    "high": 5
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 48,
+                    "high": 14
+                  },
+                  "peakPercent": {
+                    "point": 6.6,
+                    "low": 3.2,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 2.4,
+                    "low": 1.5,
+                    "high": 3.9
+                  },
+                  "twoWk": {
+                    "point": 2,
+                    "low": 1.1,
+                    "high": 3.8
+                  },
+                  "threeWk": {
+                    "point": 2.5,
+                    "low": 1.3,
+                    "high": 4.9
+                  },
+                  "fourWk": {
+                    "point": 2.5,
+                    "low": 1.2,
+                    "high": 5.2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 47.6878332785655,
+                    "low": 43,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 3.02797724970054,
+                    "low": 44,
+                    "high": 20
+                  },
+                  "peakPercent": {
+                    "point": 4.41000667167663,
+                    "low": 2.4,
+                    "high": 8.9
+                  },
+                  "oneWk": {
+                    "point": 2.19850705016334,
+                    "low": 1.4,
+                    "high": 3.6
+                  },
+                  "twoWk": {
+                    "point": 2.28505096711751,
+                    "low": 1.2,
+                    "high": 4.8
+                  },
+                  "threeWk": {
+                    "point": 2.12809746667896,
+                    "low": 0.9,
+                    "high": 5
+                  },
+                  "fourWk": {
+                    "point": 2.15373878944441,
+                    "low": 0.8,
+                    "high": 5.1
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 3
         }
       ]
     },
@@ -2599,27 +3112,27 @@
             },
             {
               "week": 201639,
-              "data": 1.06139
+              "data": 1.17095
             },
             {
               "week": 201640,
-              "data": 1.03765
+              "data": 1.00632
             },
             {
               "week": 201641,
-              "data": 1.10533
+              "data": 1.04064
             },
             {
               "week": 201642,
-              "data": 1.08977
+              "data": 1.09752
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 1.16652
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.20504
             },
             {
               "week": 201645,
@@ -2776,15 +3289,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 44,
+                    "high": 15
+                  },
+                  "peakWeek": {
+                    "point": 7,
+                    "low": 48,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 4.4,
+                    "low": 2.2,
+                    "high": 9.7
+                  },
+                  "oneWk": {
+                    "point": 1.3,
+                    "low": 1,
+                    "high": 2.2
+                  },
+                  "twoWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 2.5
+                  },
+                  "threeWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 3.1
+                  },
+                  "fourWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 3.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 41,
+                    "high": 6
+                  },
+                  "peakWeek": {
+                    "point": 4,
+                    "low": 45,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 5.7,
+                    "low": 1.7,
+                    "high": 11.6
+                  },
+                  "oneWk": {
+                    "point": 1.4,
+                    "low": 0.7,
+                    "high": 3
+                  },
+                  "twoWk": {
+                    "point": 1.4,
+                    "low": 0.7,
+                    "high": 3.1
+                  },
+                  "threeWk": {
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 3.2
+                  },
+                  "fourWk": {
+                    "point": 1.6,
+                    "low": 0.8,
+                    "high": 3.4
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 47,
+                    "low": 44,
+                    "high": 52
+                  },
+                  "peakWeek": {
+                    "point": 52,
+                    "low": 51,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 5.8,
+                    "low": 3.2,
+                    "high": 11.1
+                  },
+                  "oneWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 2.2
+                  },
+                  "twoWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 2.4
+                  },
+                  "threeWk": {
+                    "point": 1.7,
+                    "low": 0.9,
+                    "high": 3.1
+                  },
+                  "fourWk": {
+                    "point": 2.2,
+                    "low": 1.2,
+                    "high": 4.2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 50.727538478107,
+                    "low": 44,
+                    "high": 14
+                  },
+                  "peakWeek": {
+                    "point": 4.20054169730152,
+                    "low": 45,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 5.32831706141701,
+                    "low": 2.2,
+                    "high": 11
+                  },
+                  "oneWk": {
+                    "point": 1.30100948050667,
+                    "low": 1,
+                    "high": 2.2
+                  },
+                  "twoWk": {
+                    "point": 1.4,
+                    "low": 0.9,
+                    "high": 2.5
+                  },
+                  "threeWk": {
+                    "point": 1.40230641555094,
+                    "low": 0.9,
+                    "high": 3.1
+                  },
+                  "fourWk": {
+                    "point": 1.40306136984214,
+                    "low": 0.9,
+                    "high": 3.5
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 2.2
         }
       ]
     },
@@ -3057,39 +3754,39 @@
             },
             {
               "week": 201636,
-              "data": 0.91223
+              "data": 0.911502
             },
             {
               "week": 201637,
-              "data": 1.09656
+              "data": 1.09428
             },
             {
               "week": 201638,
-              "data": 1.16202
+              "data": 1.16037
             },
             {
               "week": 201639,
-              "data": 1.33595
+              "data": 1.33384
             },
             {
               "week": 201640,
-              "data": 1.08981
+              "data": 1.17223
             },
             {
               "week": 201641,
-              "data": 1.19769
+              "data": 1.24546
             },
             {
               "week": 201642,
-              "data": 1.33973
+              "data": 1.30818
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 1.37825
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.5396
             },
             {
               "week": 201645,
@@ -3246,15 +3943,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 47,
+                    "low": 44,
+                    "high": 13
+                  },
+                  "peakWeek": {
+                    "point": 2,
+                    "low": 46,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 3.9,
+                    "low": 1.7,
+                    "high": 7.7
+                  },
+                  "oneWk": {
+                    "point": 1.4,
+                    "low": 1.1,
+                    "high": 2.1
+                  },
+                  "twoWk": {
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 2.6
+                  },
+                  "threeWk": {
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 3.3
+                  },
+                  "fourWk": {
+                    "point": 1.6,
+                    "low": 0.8,
+                    "high": 4.4
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 43,
+                    "high": 8
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 48,
+                    "high": 11
+                  },
+                  "peakPercent": {
+                    "point": 4.4,
+                    "low": 0.9,
+                    "high": 8.2
+                  },
+                  "oneWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 2.3
+                  },
+                  "twoWk": {
+                    "point": 1,
+                    "low": 0.5,
+                    "high": 2.4
+                  },
+                  "threeWk": {
+                    "point": 1.1,
+                    "low": 0.5,
+                    "high": 2.6
+                  },
+                  "fourWk": {
+                    "point": 1.2,
+                    "low": 0.5,
+                    "high": 2.8
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 45,
+                    "low": 44,
+                    "high": 51
+                  },
+                  "peakWeek": {
+                    "point": 51,
+                    "low": 49,
+                    "high": 11
+                  },
+                  "peakPercent": {
+                    "point": 4.6,
+                    "low": 2.5,
+                    "high": 9
+                  },
+                  "oneWk": {
+                    "point": 1.4,
+                    "low": 1.1,
+                    "high": 2.1
+                  },
+                  "twoWk": {
+                    "point": 1.6,
+                    "low": 1,
+                    "high": 2.5
+                  },
+                  "threeWk": {
+                    "point": 1.9,
+                    "low": 1.1,
+                    "high": 3.3
+                  },
+                  "fourWk": {
+                    "point": 2.5,
+                    "low": 1.4,
+                    "high": 4.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 50.9546424534456,
+                    "low": 43,
+                    "high": 8
+                  },
+                  "peakWeek": {
+                    "point": 49.855289463966,
+                    "low": 49,
+                    "high": 11
+                  },
+                  "peakPercent": {
+                    "point": 3.96605125858179,
+                    "low": 1.7,
+                    "high": 7.7
+                  },
+                  "oneWk": {
+                    "point": 1.39918334295694,
+                    "low": 1.1,
+                    "high": 2.1
+                  },
+                  "twoWk": {
+                    "point": 1.49998062403615,
+                    "low": 0.8,
+                    "high": 2.6
+                  },
+                  "threeWk": {
+                    "point": 1.50027999141224,
+                    "low": 0.8,
+                    "high": 3.3
+                  },
+                  "fourWk": {
+                    "point": 1.60392198810068,
+                    "low": 0.8,
+                    "high": 4.4
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.7
         }
       ]
     },
@@ -3513,51 +4394,51 @@
             },
             {
               "week": 201633,
-              "data": 0.473371
+              "data": 0.47315
             },
             {
               "week": 201634,
-              "data": 0.606182
+              "data": 0.603882
             },
             {
               "week": 201635,
-              "data": 0.575821
+              "data": 0.57252
             },
             {
               "week": 201636,
-              "data": 0.642562
+              "data": 0.637035
             },
             {
               "week": 201637,
-              "data": 0.745534
+              "data": 0.745533
             },
             {
               "week": 201638,
-              "data": 0.810904
+              "data": 0.806563
             },
             {
               "week": 201639,
-              "data": 0.947868
+              "data": 0.948649
             },
             {
               "week": 201640,
-              "data": 1.09755
+              "data": 1.03439
             },
             {
               "week": 201641,
-              "data": 1.14838
+              "data": 1.03716
             },
             {
               "week": 201642,
-              "data": 1.22074
+              "data": 1.13181
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 1.1816
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.05347
             },
             {
               "week": 201645,
@@ -3714,15 +4595,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 52,
+                    "low": 46,
+                    "high": 14
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 47,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 3.2,
+                    "low": 1.4,
+                    "high": 9.6
+                  },
+                  "oneWk": {
+                    "point": 1,
+                    "low": 0.8,
+                    "high": 1.4
+                  },
+                  "twoWk": {
+                    "point": 1,
+                    "low": 0.6,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 1.1,
+                    "low": 0.5,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.2,
+                    "low": 0.6,
+                    "high": 2.8
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2,
+                    "low": 42,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 46,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 4.3,
+                    "low": 0.7,
+                    "high": 10.9
+                  },
+                  "oneWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 2.2
+                  },
+                  "twoWk": {
+                    "point": 1,
+                    "low": 0.4,
+                    "high": 2.4
+                  },
+                  "threeWk": {
+                    "point": 1.1,
+                    "low": 0.5,
+                    "high": 2.6
+                  },
+                  "fourWk": {
+                    "point": 1.1,
+                    "low": 0.5,
+                    "high": 2.8
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 46,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 52,
+                    "low": 50,
+                    "high": 14
+                  },
+                  "peakPercent": {
+                    "point": 4.2,
+                    "low": 2.3,
+                    "high": 8.3
+                  },
+                  "oneWk": {
+                    "point": 1.2,
+                    "low": 0.8,
+                    "high": 1.7
+                  },
+                  "twoWk": {
+                    "point": 1.2,
+                    "low": 0.8,
+                    "high": 2
+                  },
+                  "threeWk": {
+                    "point": 1.3,
+                    "low": 0.7,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2.47373390567465,
+                    "low": 42,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 6.42417264444397,
+                    "low": 47,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 3.87695089023341,
+                    "low": 1.5,
+                    "high": 9.9
+                  },
+                  "oneWk": {
+                    "point": 1.00066854895492,
+                    "low": 0.8,
+                    "high": 1.4
+                  },
+                  "twoWk": {
+                    "point": 1.00579161343901,
+                    "low": 0.6,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 1.11265170455899,
+                    "low": 0.5,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.28172406129441,
+                    "low": 0.6,
+                    "high": 2.9
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.9
         }
       ]
     },
@@ -4008,23 +5073,23 @@
             },
             {
               "week": 201640,
-              "data": 1.92776
+              "data": 1.92873
             },
             {
               "week": 201641,
-              "data": 1.80902
+              "data": 1.81252
             },
             {
               "week": 201642,
-              "data": 1.68623
+              "data": 1.65871
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 2.05668
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.92106
             },
             {
               "week": 201645,
@@ -4181,15 +5246,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2,
+                    "low": 45,
+                    "high": 16
+                  },
+                  "peakWeek": {
+                    "point": 9,
+                    "low": 47,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 6.7,
+                    "low": 3.1,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 2.1,
+                    "low": 1.3,
+                    "high": 3.1
+                  },
+                  "twoWk": {
+                    "point": 2,
+                    "low": 1.2,
+                    "high": 3.9
+                  },
+                  "threeWk": {
+                    "point": 2,
+                    "low": 1,
+                    "high": 4.6
+                  },
+                  "fourWk": {
+                    "point": 2.1,
+                    "low": 0.9,
+                    "high": 6
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 44,
+                    "high": 7
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 45,
+                    "high": 12
+                  },
+                  "peakPercent": {
+                    "point": 8.2,
+                    "low": 1.7,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 1.6,
+                    "low": 0.5,
+                    "high": 5.3
+                  },
+                  "twoWk": {
+                    "point": 1.6,
+                    "low": 0.5,
+                    "high": 5.2
+                  },
+                  "threeWk": {
+                    "point": 1.5,
+                    "low": 0.5,
+                    "high": 5.2
+                  },
+                  "fourWk": {
+                    "point": 1.6,
+                    "low": 0.5,
+                    "high": 5.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 48,
+                    "low": 45,
+                    "high": 4
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 49,
+                    "high": 14
+                  },
+                  "peakPercent": {
+                    "point": 12.2,
+                    "low": 5.6,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 2.1,
+                    "low": 1.1,
+                    "high": 4
+                  },
+                  "twoWk": {
+                    "point": 2.3,
+                    "low": 1.1,
+                    "high": 5
+                  },
+                  "threeWk": {
+                    "point": 3.1,
+                    "low": 1.3,
+                    "high": 7.2
+                  },
+                  "fourWk": {
+                    "point": 3.9,
+                    "low": 1.6,
+                    "high": 9.3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 34.6985857670805,
+                    "low": 45,
+                    "high": 11
+                  },
+                  "peakWeek": {
+                    "point": 6.01572776242876,
+                    "low": 47,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 8.8889906415205,
+                    "low": 3.4,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 2.09929749363963,
+                    "low": 1.3,
+                    "high": 3.2
+                  },
+                  "twoWk": {
+                    "point": 2.00000748754088,
+                    "low": 1.2,
+                    "high": 3.9
+                  },
+                  "threeWk": {
+                    "point": 2.00132408593275,
+                    "low": 1,
+                    "high": 4.7
+                  },
+                  "fourWk": {
+                    "point": 2.10488200256206,
+                    "low": 0.9,
+                    "high": 6.1
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 4.1
         }
       ]
     },
@@ -4474,23 +5723,23 @@
             },
             {
               "week": 201640,
-              "data": 0.654379
+              "data": 0.611432
             },
             {
               "week": 201641,
-              "data": 0.811373
+              "data": 0.735488
             },
             {
               "week": 201642,
-              "data": 0.948274
+              "data": 0.833429
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 0.738851
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.06082
             },
             {
               "week": 201645,
@@ -4647,15 +5896,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 1,
+                    "low": 47,
+                    "high": 14
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 49,
+                    "high": 20
+                  },
+                  "peakPercent": {
+                    "point": 4.9,
+                    "low": 1.7,
+                    "high": 12
+                  },
+                  "oneWk": {
+                    "point": 0.8,
+                    "low": 0.4,
+                    "high": 1.3
+                  },
+                  "twoWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 1.7
+                  },
+                  "threeWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 1.9
+                  },
+                  "fourWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 2.3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2,
+                    "low": 45,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 46,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 4.8,
+                    "low": 1.2,
+                    "high": 12.3
+                  },
+                  "oneWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 2.4
+                  },
+                  "twoWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 2.6
+                  },
+                  "threeWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 2.9
+                  },
+                  "fourWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 45,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 50,
+                    "high": 14
+                  },
+                  "peakPercent": {
+                    "point": 4.8,
+                    "low": 2,
+                    "high": 12.2
+                  },
+                  "oneWk": {
+                    "point": 0.9,
+                    "low": 0.5,
+                    "high": 1.7
+                  },
+                  "twoWk": {
+                    "point": 1.1,
+                    "low": 0.5,
+                    "high": 2.3
+                  },
+                  "threeWk": {
+                    "point": 1,
+                    "low": 0.4,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.5,
+                    "low": 0.6,
+                    "high": 3.6
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2.14430778790976,
+                    "low": 45,
+                    "high": 9
+                  },
+                  "peakWeek": {
+                    "point": 3.82183359850228,
+                    "low": 49,
+                    "high": 16
+                  },
+                  "peakPercent": {
+                    "point": 4.83402543071713,
+                    "low": 1.8,
+                    "high": 12.2
+                  },
+                  "oneWk": {
+                    "point": 0.800279146498793,
+                    "low": 0.4,
+                    "high": 1.3
+                  },
+                  "twoWk": {
+                    "point": 0.800168680013523,
+                    "low": 0.3,
+                    "high": 1.7
+                  },
+                  "threeWk": {
+                    "point": 0.80039262536605,
+                    "low": 0.3,
+                    "high": 1.9
+                  },
+                  "fourWk": {
+                    "point": 0.901089259738007,
+                    "low": 0.3,
+                    "high": 2.3
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.8
         }
       ]
     },
@@ -4942,23 +6375,23 @@
             },
             {
               "week": 201640,
-              "data": 0.767153
+              "data": 0.771712
             },
             {
               "week": 201641,
-              "data": 0.918552
+              "data": 0.904815
             },
             {
               "week": 201642,
-              "data": 0.939509
+              "data": 0.922042
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 0.801631
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 0.525923
             },
             {
               "week": 201645,
@@ -5115,15 +6548,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 52,
+                    "low": 44,
+                    "high": 15
+                  },
+                  "peakWeek": {
+                    "point": 5,
+                    "low": 46,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 2.7,
+                    "low": 1.3,
+                    "high": 8.7
+                  },
+                  "oneWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 1.5
+                  },
+                  "twoWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 2.4
+                  },
+                  "fourWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 3.3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 1,
+                    "low": 45,
+                    "high": 10
+                  },
+                  "peakWeek": {
+                    "point": 4,
+                    "low": 43,
+                    "high": 13
+                  },
+                  "peakPercent": {
+                    "point": 3.5,
+                    "low": 0.5,
+                    "high": 10.1
+                  },
+                  "oneWk": {
+                    "point": 0.5,
+                    "low": 0.2,
+                    "high": 1.9
+                  },
+                  "twoWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 2.1
+                  },
+                  "threeWk": {
+                    "point": 0.7,
+                    "low": 0.2,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 0.7,
+                    "low": 0.2,
+                    "high": 2.6
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 45,
+                    "high": 7
+                  },
+                  "peakWeek": {
+                    "point": 2,
+                    "low": 50,
+                    "high": 16
+                  },
+                  "peakPercent": {
+                    "point": 4.3,
+                    "low": 1.8,
+                    "high": 11.3
+                  },
+                  "oneWk": {
+                    "point": 0.9,
+                    "low": 0.5,
+                    "high": 1.8
+                  },
+                  "twoWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 0.9,
+                    "low": 0.4,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.1,
+                    "low": 0.4,
+                    "high": 3
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 36.6838376284702,
+                    "low": 45,
+                    "high": 10
+                  },
+                  "peakWeek": {
+                    "point": 4.93669116621922,
+                    "low": 46,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 4.19636371590374,
+                    "low": 1.7,
+                    "high": 11.2
+                  },
+                  "oneWk": {
+                    "point": 0.898854261265069,
+                    "low": 0.4,
+                    "high": 1.5
+                  },
+                  "twoWk": {
+                    "point": 0.898827565970386,
+                    "low": 0.4,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 0.871056962445703,
+                    "low": 0.3,
+                    "high": 2.4
+                  },
+                  "fourWk": {
+                    "point": 0.900309090038579,
+                    "low": 0.3,
+                    "high": 3.2
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.4
         }
       ]
     },
@@ -5384,47 +7001,47 @@
             },
             {
               "week": 201634,
-              "data": 0.964319
+              "data": 0.963998
             },
             {
               "week": 201635,
-              "data": 1.21946
+              "data": 1.21886
             },
             {
               "week": 201636,
-              "data": 1.21895
+              "data": 1.21836
             },
             {
               "week": 201637,
-              "data": 1.41224
+              "data": 1.50991
             },
             {
               "week": 201638,
-              "data": 1.41166
+              "data": 1.52847
             },
             {
               "week": 201639,
-              "data": 1.32599
+              "data": 1.45276
             },
             {
               "week": 201640,
-              "data": 1.24179
+              "data": 1.26399
             },
             {
               "week": 201641,
-              "data": 1.14006
+              "data": 1.26336
             },
             {
               "week": 201642,
-              "data": 1.31262
+              "data": 1.3821
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 1.12806
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 1.15044
             },
             {
               "week": 201645,
@@ -5581,15 +7198,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 4,
+                    "low": 49,
+                    "high": 16
+                  },
+                  "peakWeek": {
+                    "point": 9,
+                    "low": 50,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 4.6,
+                    "low": 2.4,
+                    "high": 8.9
+                  },
+                  "oneWk": {
+                    "point": 1.1,
+                    "low": 0.6,
+                    "high": 1.9
+                  },
+                  "twoWk": {
+                    "point": 1.2,
+                    "low": 0.5,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 1.2,
+                    "low": 0.4,
+                    "high": 2.3
+                  },
+                  "fourWk": {
+                    "point": 1.2,
+                    "low": 0.5,
+                    "high": 2.4
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 41,
+                    "high": 6
+                  },
+                  "peakWeek": {
+                    "point": 4,
+                    "low": 44,
+                    "high": 14
+                  },
+                  "peakPercent": {
+                    "point": 5.7,
+                    "low": 2.8,
+                    "high": 100
+                  },
+                  "oneWk": {
+                    "point": 1.6,
+                    "low": 0.7,
+                    "high": 3.9
+                  },
+                  "twoWk": {
+                    "point": 1.7,
+                    "low": 0.7,
+                    "high": 4
+                  },
+                  "threeWk": {
+                    "point": 1.7,
+                    "low": 0.7,
+                    "high": 4.2
+                  },
+                  "fourWk": {
+                    "point": 1.8,
+                    "low": 0.8,
+                    "high": 4.5
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 51,
+                    "low": 47,
+                    "high": 8
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 51,
+                    "high": 18
+                  },
+                  "peakPercent": {
+                    "point": 5.5,
+                    "low": 2.7,
+                    "high": 11.7
+                  },
+                  "oneWk": {
+                    "point": 1.3,
+                    "low": 0.8,
+                    "high": 2.2
+                  },
+                  "twoWk": {
+                    "point": 1.3,
+                    "low": 0.7,
+                    "high": 2.4
+                  },
+                  "threeWk": {
+                    "point": 1.5,
+                    "low": 0.8,
+                    "high": 3
+                  },
+                  "fourWk": {
+                    "point": 1.7,
+                    "low": 0.9,
+                    "high": 3.6
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 50.8526086364205,
+                    "low": 41,
+                    "high": 6
+                  },
+                  "peakWeek": {
+                    "point": 8.94854854858979,
+                    "low": 50,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 5.45615598600253,
+                    "low": 2.6,
+                    "high": 11.7
+                  },
+                  "oneWk": {
+                    "point": 1.10176093115685,
+                    "low": 0.6,
+                    "high": 1.9
+                  },
+                  "twoWk": {
+                    "point": 1.20184134248213,
+                    "low": 0.5,
+                    "high": 1.9
+                  },
+                  "threeWk": {
+                    "point": 1.45475816585276,
+                    "low": 0.6,
+                    "high": 3.3
+                  },
+                  "fourWk": {
+                    "point": 1.56216020927407,
+                    "low": 0.6,
+                    "high": 3.6
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 2.5
         }
       ]
     },
@@ -5842,7 +7643,7 @@
             },
             {
               "week": 201632,
-              "data": 0.194775
+              "data": 0.195011
             },
             {
               "week": 201633,
@@ -5850,47 +7651,47 @@
             },
             {
               "week": 201634,
-              "data": 0.185671
+              "data": 0.183599
             },
             {
               "week": 201635,
-              "data": 0.270544
+              "data": 0.269324
             },
             {
               "week": 201636,
-              "data": 0.326947
+              "data": 0.322706
             },
             {
               "week": 201637,
-              "data": 0.324947
+              "data": 0.317609
             },
             {
               "week": 201638,
-              "data": 0.232878
+              "data": 0.231198
             },
             {
               "week": 201639,
-              "data": 0.275666
+              "data": 0.271021
             },
             {
               "week": 201640,
-              "data": 0.455747
+              "data": 0.444634
             },
             {
               "week": 201641,
-              "data": 0.518451
+              "data": 0.500267
             },
             {
               "week": 201642,
-              "data": 0.485939
+              "data": 0.48577
             },
             {
               "week": 201643,
-              "data": -1
+              "data": 0.535305
             },
             {
               "week": 201644,
-              "data": -1
+              "data": 0.502137
             },
             {
               "week": 201645,
@@ -6047,15 +7848,199 @@
           ],
           "models": [
             {
-              "id": "Foo",
+              "id": "KCDE",
               "meta": {
-                "name": "Foo",
-                "description": "Team Bar",
-                "url": "https://foo.io/"
+                "name": "SARIMA model",
+                "description": "Seasonal ARIMA model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
               },
-              "predictions": []
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 2,
+                    "low": 45,
+                    "high": 15
+                  },
+                  "peakWeek": {
+                    "point": 10,
+                    "low": 49,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 3.1,
+                    "low": 1.2,
+                    "high": 8.6
+                  },
+                  "oneWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.2
+                  },
+                  "twoWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.4
+                  },
+                  "threeWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.5
+                  },
+                  "fourWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.7
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "KDE",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 49,
+                    "low": 41,
+                    "high": 7
+                  },
+                  "peakWeek": {
+                    "point": 6,
+                    "low": 45,
+                    "high": 16
+                  },
+                  "peakPercent": {
+                    "point": 5.1,
+                    "low": 1,
+                    "high": 12.2
+                  },
+                  "oneWk": {
+                    "point": 0.8,
+                    "low": 0.3,
+                    "high": 2.7
+                  },
+                  "twoWk": {
+                    "point": 0.9,
+                    "low": 0.3,
+                    "high": 3
+                  },
+                  "threeWk": {
+                    "point": 1,
+                    "low": 0.3,
+                    "high": 3.4
+                  },
+                  "fourWk": {
+                    "point": 1.1,
+                    "low": 0.4,
+                    "high": 3.6
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "SARIMA",
+              "meta": {
+                "name": "Kernel of Truth - KDE model",
+                "description": "Kernel Density-based model from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 50,
+                    "low": 45,
+                    "high": 7
+                  },
+                  "peakWeek": {
+                    "point": 3,
+                    "low": 51,
+                    "high": 16
+                  },
+                  "peakPercent": {
+                    "point": 3.6,
+                    "low": 1.5,
+                    "high": 9.2
+                  },
+                  "oneWk": {
+                    "point": 0.4,
+                    "low": 0.2,
+                    "high": 0.9
+                  },
+                  "twoWk": {
+                    "point": 0.6,
+                    "low": 0.3,
+                    "high": 1.4
+                  },
+                  "threeWk": {
+                    "point": 0.6,
+                    "low": 0.2,
+                    "high": 1.5
+                  },
+                  "fourWk": {
+                    "point": 0.7,
+                    "low": 0.3,
+                    "high": 2
+                  },
+                  "week": 201643
+                }
+              ]
+            },
+            {
+              "id": "ensemble",
+              "meta": {
+                "name": "ensemble model",
+                "description": "Ensemble based on time-varying model weights from the Reich Lab at UMass-Amherst",
+                "url": "https://reichlab.github.io/"
+              },
+              "predictions": [
+                {
+                  "onsetWeek": {
+                    "point": 12.5756435431225,
+                    "low": 45,
+                    "high": 15
+                  },
+                  "peakWeek": {
+                    "point": 9.73817746534927,
+                    "low": 49,
+                    "high": 21
+                  },
+                  "peakPercent": {
+                    "point": 3.13643053183349,
+                    "low": 1.2,
+                    "high": 8.6
+                  },
+                  "oneWk": {
+                    "point": 0.599808056838621,
+                    "low": 0.2,
+                    "high": 1.2
+                  },
+                  "twoWk": {
+                    "point": 0.603930246577096,
+                    "low": 0.2,
+                    "high": 1.4
+                  },
+                  "threeWk": {
+                    "point": 0.601675778467125,
+                    "low": 0.2,
+                    "high": 1.5
+                  },
+                  "fourWk": {
+                    "point": 0.602039501464658,
+                    "low": 0.2,
+                    "high": 1.7
+                  },
+                  "week": 201643
+                }
+              ]
             }
-          ]
+          ],
+          "baseline": 1.1
         }
       ]
     }
@@ -6066,6 +8051,6 @@
     "sourceUrl": "https://github.com/reichlab/flusight",
     "parentUrl": "https://reichlab.github.io",
     "licenseUrl": "https://opensource.org/licenses/GPL-3.0",
-    "updateTime": "November 4th 2016, 06:14:39"
+    "updateTime": "November 11th 2016, 06:48:38"
   }
 }
