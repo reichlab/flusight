@@ -73,8 +73,8 @@ export default class Choropleth {
         regionHook = this.regionHook,
         tooltip = this.tooltip
 
-    let maxData = util.getMaxData(data.data),
-        minData = util.getMinData(data.data)
+    let minData = data.range[0],
+        maxData = data.range[1]
 
     let colormapName,
         limits = [],

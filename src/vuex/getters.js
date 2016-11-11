@@ -107,12 +107,41 @@ export function previousWeek (state) {
 }
 
 /**
+ * Return range for choropleth color scale
+ */
+function choroplethDataRange (state, choroplethId) {
+  let maxVals = [],
+      minVals = []
+
+  state.data.map(region => {
+    region.seasons.map(season => {
+
+      let actual = season.actual.map(d => d.data).filter(d => d != -1)
+
+      if (choroplethId === 1) {
+        // Use baseline scaled data
+        maxVals.push(Math.max(...actual.map(d => ((d / season.baseline) - 1) * 100)))
+        minVals.push(Math.min(...actual.map(d => ((d / season.baseline) - 1) * 100)))
+      } else {
+        maxVals.push(Math.max(...actual))
+        minVals.push(Math.min(...actual))
+      }
+    })
+  })
+
+  return [Math.min(...minVals),
+          Math.max(...maxVals)]
+}
+
+/**
  * Return actual data for all regions for current selections
  */
 export function choroplethData (state) {
 
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
+
+  let range = choroplethDataRange(state, choroplethId)
 
   let output = {
     data: [],
@@ -150,6 +179,7 @@ export function choroplethData (state) {
   })
 
   output.data = output.data.slice(1) // Skip national data
+  output.range = range
   return output
 }
 

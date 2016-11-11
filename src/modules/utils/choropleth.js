@@ -2,16 +2,6 @@
 // ---------------------------------------
 
 /**
- * Return max value in the current season
- */
-export const getMaxData = data => Math.max(...data.map(d => Math.max(...d.value.map(dd => dd.data))))
-
-/**
- * Return min value in the current season
- */
-export const getMinData = data => Math.min(...data.map(d => Math.min(...d.value.map(dd => dd.data))))
-
-/**
  * Return sibling data for given element
  */
 export const getSiblings = (element, data) => {
