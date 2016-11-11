@@ -11,5 +11,3 @@ gather.saveBaseline(baselineFile)
 
 console.log('Collecting historical data...\n')
 gather.saveHistory(historyFile)
-
-console.log('All Done')
