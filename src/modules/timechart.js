@@ -316,6 +316,17 @@ export default class TimeChart {
       }
     })
 
+    // Hard coding as of now
+    this.confidenceIntervals = ['90%', '50%']
+
+    // Confidence selection event
+    new marker.Confidence(this, (cid) => {
+      this.predictions.map(p => {
+        p.cid = cid
+        p.update(this.weekIdx)
+      })
+    })
+
     let that = this
     // Add mouse move and click events
     let bb = svg.node().getBoundingClientRect()

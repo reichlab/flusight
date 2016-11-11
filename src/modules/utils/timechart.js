@@ -10,11 +10,12 @@ export const getYMax = data => {
   // Loop over all the models
   data.models.map(mdl => {
     maxValues.push(Math.max(...mdl.predictions.map(d => Math.max(...[
-      d.oneWk.high,
-      d.twoWk.high,
-      d.threeWk.high,
-      d.fourWk.high,
-      d.peakPercent.high]))))
+      Math.max(...d.oneWk.high),
+      Math.max(...d.twoWk.high),
+      Math.max(...d.threeWk.high),
+      Math.max(...d.fourWk.high),
+      Math.max(...d.peakPercent.high)
+    ]))))
   })
 
   return 1.1 * Math.max(...maxValues)

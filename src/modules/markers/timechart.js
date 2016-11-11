@@ -93,6 +93,7 @@ export class Prediction {
     this.id = id
     this.meta = meta
     this.d3 = parent.d3
+    this.cid = 0 // Default confidence id
   }
 
   plot(parent, data, actual) {
@@ -124,6 +125,8 @@ export class Prediction {
       }
 
       this.displayedPoints = {}
+
+      let cid = this.cid
 
       // Move things
       let onset = this.data[localPosition].onsetWeek
@@ -159,20 +162,20 @@ export class Prediction {
       this.onsetGroup.select('.onset-range')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(onset.low))
-        .attr('x2', this.xScale(onset.high))
+        .attr('x1', this.xScale(onset.low[cid]))
+        .attr('x2', this.xScale(onset.high[cid]))
 
       this.onsetGroup.select('.onset-low')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(onset.low))
-        .attr('x2', this.xScale(onset.low))
+        .attr('x1', this.xScale(onset.low[cid]))
+        .attr('x2', this.xScale(onset.low[cid]))
 
       this.onsetGroup.select('.onset-high')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(onset.high))
-        .attr('x2', this.xScale(onset.high))
+        .attr('x1', this.xScale(onset.high[cid]))
+        .attr('x2', this.xScale(onset.high[cid]))
 
     let pw = this.data[localPosition].peakWeek,
         pp = this.data[localPosition].peakPercent
@@ -216,8 +219,8 @@ export class Prediction {
       this.peakGroup.select('.peak-range-x')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(pw.low))
-        .attr('x2', this.xScale(pw.high))
+        .attr('x1', this.xScale(pw.low[cid]))
+        .attr('x2', this.xScale(pw.high[cid]))
         .attr('y1', this.yScale(pp.point))
         .attr('y2', this.yScale(pp.point))
 
@@ -226,22 +229,22 @@ export class Prediction {
         .duration(200)
         .attr('x1', this.xScale(pw.point))
         .attr('x2', this.xScale(pw.point))
-        .attr('y1', this.yScale(pp.low))
-        .attr('y2', this.yScale(pp.high))
+        .attr('y1', this.yScale(pp.low[cid]))
+        .attr('y2', this.yScale(pp.high[cid]))
 
       this.peakGroup.select('.peak-low-x')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(pw.low))
-        .attr('x2', this.xScale(pw.low))
+        .attr('x1', this.xScale(pw.low[cid]))
+        .attr('x2', this.xScale(pw.low[cid]))
         .attr('y1', this.yScale(pp.point) - 5)
         .attr('y2', this.yScale(pp.point) + 5)
 
       this.peakGroup.select('.peak-high-x')
         .transition()
         .duration(200)
-        .attr('x1', this.xScale(pw.high))
-        .attr('x2', this.xScale(pw.high))
+        .attr('x1', this.xScale(pw.high[cid]))
+        .attr('x2', this.xScale(pw.high[cid]))
         .attr('y1', this.yScale(pp.point) - 5)
         .attr('y2', this.yScale(pp.point) + 5)
 
@@ -251,16 +254,16 @@ export class Prediction {
         .duration(200)
         .attr('x1', (!leftW ? 0 : leftW) - 5)
         .attr('x2', (!leftW ? 0 : leftW) + 5)
-        .attr('y1', this.yScale(pp.low))
-        .attr('y2', this.yScale(pp.low))
+        .attr('y1', this.yScale(pp.low[cid]))
+        .attr('y2', this.yScale(pp.low[cid]))
 
       this.peakGroup.select('.peak-high-y')
         .transition()
         .duration(200)
         .attr('x1', (!leftW ? 0 : leftW) - 5)
         .attr('x2', (!leftW ? 0 : leftW) + 5)
-        .attr('y1', this.yScale(pp.high))
-        .attr('y2', this.yScale(pp.high))
+        .attr('y1', this.yScale(pp.high[cid]))
+        .attr('y2', this.yScale(pp.high[cid]))
 
       // Move main pointers
       let predData = this.data[localPosition]
@@ -282,8 +285,8 @@ export class Prediction {
         data.push({
           week: item,
           data: predData[names[index]].point,
-          low: predData[names[index]].low,
-          high: predData[names[index]].high
+          low: predData[names[index]].low[cid],
+          high: predData[names[index]].high[cid]
         })
       })
 
@@ -456,6 +459,38 @@ export class HistoricalLines {
     this.group.selectAll('*')
       .transition()
       .duration(200).remove()
+  }
+}
+
+/**
+ * Confidence interval marker
+ */
+export class Confidence {
+  constructor(parent, confidenceHook) {
+    let confidenceDiv = parent.d3.select('#confidence')
+    confidenceDiv.selectAll('*').remove()
+
+    parent.confidenceIntervals.map((c, idx) => {
+      let confItem = confidenceDiv.append('div')
+          .attr('class', 'item')
+          .style('cursor', 'pointer')
+          .text(c)
+
+      confItem
+        .on('click', function() {
+          // toggle selected interval
+          confidenceDiv.selectAll('.item')
+            .classed('item-selected', false)
+          parent.d3.select(this).classed('item-selected', true)
+
+          confidenceHook(idx)
+        })
+
+      // Select first by default
+      if (idx === 0) {
+        confItem.classed('item-selected', true)
+      }
+    })
   }
 }
 

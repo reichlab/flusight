@@ -282,836 +282,1760 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 51,
-                    "high": 15
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      15,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 13,
-                    "low": 12,
-                    "high": 20
+                    "low": [
+                      12,
+                      14
+                    ],
+                    "high": [
+                      20,
+                      18
+                    ]
                   },
                   "peakPercent": {
                     "point": 5,
-                    "low": 3.5,
-                    "high": 6.5
+                    "low": [
+                      3.5,
+                      4.5
+                    ],
+                    "high": [
+                      6.5,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.8,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "week": 201549
                 },
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 51,
-                    "high": 52
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      52,
+                      52
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 3,
-                    "high": 10
+                    "low": [
+                      3,
+                      5
+                    ],
+                    "high": [
+                      10,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.8,
-                    "low": 3.5,
-                    "high": 6.5
+                    "low": [
+                      3.5,
+                      4
+                    ],
+                    "high": [
+                      6.5,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 2.8,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "twoWk": {
                     "point": 3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "threeWk": {
                     "point": 2.5,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 2.7,
-                    "low": 1.5,
-                    "high": 4.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      4.5,
+                      3.5
+                    ]
                   },
                   "week": 201550
                 },
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 51,
-                    "high": 52
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      52,
+                      52
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 2,
-                    "high": 11
+                    "low": [
+                      2,
+                      5
+                    ],
+                    "high": [
+                      11,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.5,
-                    "low": 3,
-                    "high": 6
+                    "low": [
+                      3,
+                      4
+                    ],
+                    "high": [
+                      6,
+                      5
+                    ]
                   },
                   "oneWk": {
                     "point": 3.2,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      3
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.7,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "threeWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      5,
+                      3
+                    ]
                   },
                   "fourWk": {
                     "point": 3.1,
-                    "low": 2,
-                    "high": 4.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      4.5,
+                      3.5
+                    ]
                   },
                   "week": 201551
                 },
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 51,
-                    "high": 52
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      52,
+                      52
+                    ]
                   },
                   "peakWeek": {
                     "point": 2,
-                    "low": 2,
-                    "high": 9
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      9,
+                      7
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.6,
-                    "low": 4,
-                    "high": 6.5
+                    "low": [
+                      4,
+                      4
+                    ],
+                    "high": [
+                      6.5,
+                      5
+                    ]
                   },
                   "oneWk": {
                     "point": 3.1,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      3
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 4.5,
-                    "low": 2,
-                    "high": 5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      5,
+                      5
+                    ]
                   },
                   "threeWk": {
                     "point": 4.2,
-                    "low": 2,
-                    "high": 5.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      5.5,
+                      4.5
+                    ]
                   },
                   "fourWk": {
                     "point": 3.2,
-                    "low": 2,
-                    "high": 6.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      6.5,
+                      4
+                    ]
                   },
                   "week": 201552
                 },
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 2,
-                    "high": 6
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      6,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 8.5,
-                    "low": 4,
-                    "high": 12
+                    "low": [
+                      4,
+                      7
+                    ],
+                    "high": [
+                      12,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.4,
-                    "low": 3,
-                    "high": 5.5
+                    "low": [
+                      3,
+                      3.5
+                    ],
+                    "high": [
+                      5.5,
+                      5
+                    ]
                   },
                   "oneWk": {
                     "point": 2.5,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.4,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "fourWk": {
                     "point": 3,
-                    "low": 2,
-                    "high": 4.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      4.5,
+                      3.5
+                    ]
                   },
                   "week": 201601
                 },
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 2,
-                    "high": 7
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      7,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 9,
-                    "low": 3,
-                    "high": 13
+                    "low": [
+                      3,
+                      7
+                    ],
+                    "high": [
+                      13,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 3,
-                    "high": 5.5
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      5.5,
+                      4.5
+                    ]
                   },
                   "oneWk": {
                     "point": 2.2,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.6,
-                    "low": 2,
-                    "high": 3
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.6,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "fourWk": {
                     "point": 3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "week": 201602
                 },
                 {
                   "onsetWeek": {
                     "point": 5,
-                    "low": 3,
-                    "high": 9
+                    "low": [
+                      3,
+                      5
+                    ],
+                    "high": [
+                      9,
+                      7
+                    ]
                   },
                   "peakWeek": {
                     "point": 8,
-                    "low": 6,
-                    "high": 14
+                    "low": [
+                      6,
+                      8
+                    ],
+                    "high": [
+                      14,
+                      12
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.5,
-                    "low": 3,
-                    "high": 6
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      6,
+                      4.5
+                    ]
                   },
                   "oneWk": {
                     "point": 2,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      1.5
+                    ],
+                    "high": [
+                      3.5,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.5,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.6,
-                    "low": 1.5,
-                    "high": 4
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 2.3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "week": 201603
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 9
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      9,
+                      7
+                    ]
                   },
                   "peakWeek": {
                     "point": 7,
-                    "low": 6,
-                    "high": 14
+                    "low": [
+                      6,
+                      7
+                    ],
+                    "high": [
+                      14,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.5,
-                    "low": 3,
-                    "high": 5.5
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      5.5,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.2,
-                    "low": 1.5,
-                    "high": 3
+                    "low": [
+                      1.5,
+                      1.5
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.7,
-                    "low": 1.5,
-                    "high": 4
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      4,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.8,
-                    "low": 1.5,
-                    "high": 4
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "fourWk": {
                     "point": 2.3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "week": 201604
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 2,
-                    "high": 3
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 7,
-                    "low": 7,
-                    "high": 13
+                    "low": [
+                      7,
+                      7
+                    ],
+                    "high": [
+                      13,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 3,
-                    "high": 5
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      5,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.9,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 3.5,
-                    "low": 2.5,
-                    "high": 4
+                    "low": [
+                      2.5,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "threeWk": {
                     "point": 3.2,
-                    "low": 2.5,
-                    "high": 4
+                    "low": [
+                      2.5,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 2.7,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "week": 201605
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 7,
-                    "low": 7,
-                    "high": 14
+                    "low": [
+                      7,
+                      7
+                    ],
+                    "high": [
+                      14,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.4,
-                    "low": 3,
-                    "high": 4.5
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4.5,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 3.2,
-                    "low": 2.5,
-                    "high": 4
+                    "low": [
+                      2.5,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 3.2,
-                    "low": 2.5,
-                    "high": 4
+                    "low": [
+                      2.5,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "threeWk": {
                     "point": 3.1,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 2.7,
-                    "low": 2,
-                    "high": 4
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "week": 201606
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 9,
-                    "low": 7,
-                    "high": 13
+                    "low": [
+                      7,
+                      8
+                    ],
+                    "high": [
+                      13,
+                      12
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.4,
-                    "low": 3,
-                    "high": 4.5
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4.5,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 3,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 3.1,
-                    "low": 2.5,
-                    "high": 3.5
+                    "low": [
+                      2.5,
+                      3
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "threeWk": {
                     "point": 3.1,
-                    "low": 2,
-                    "high": 4
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 3.2,
-                    "low": 1.5,
-                    "high": 4.5
+                    "low": [
+                      1.5,
+                      2.5
+                    ],
+                    "high": [
+                      4.5,
+                      3.5
+                    ]
                   },
                   "week": 201607
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 12,
-                    "low": 9,
-                    "high": 16
+                    "low": [
+                      9,
+                      10
+                    ],
+                    "high": [
+                      16,
+                      13
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.6,
-                    "low": 3,
-                    "high": 6
+                    "low": [
+                      3,
+                      3.5
+                    ],
+                    "high": [
+                      6,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 3.5,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "twoWk": {
                     "point": 3.3,
-                    "low": 2.5,
-                    "high": 4
+                    "low": [
+                      2.5,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "threeWk": {
                     "point": 2.9,
-                    "low": 2,
-                    "high": 5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      5,
+                      3.5
+                    ]
                   },
                   "fourWk": {
                     "point": 3.5,
-                    "low": 2,
-                    "high": 6
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      6,
+                      6
+                    ]
                   },
                   "week": 201608
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 12,
-                    "low": 12,
-                    "high": 15
+                    "low": [
+                      12,
+                      12
+                    ],
+                    "high": [
+                      15,
+                      14
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.7,
-                    "low": 3.5,
-                    "high": 5.5
+                    "low": [
+                      3.5,
+                      4
+                    ],
+                    "high": [
+                      5.5,
+                      5
+                    ]
                   },
                   "oneWk": {
                     "point": 3.6,
-                    "low": 2.5,
-                    "high": 4.5
+                    "low": [
+                      2.5,
+                      3
+                    ],
+                    "high": [
+                      4.5,
+                      4
+                    ]
                   },
                   "twoWk": {
                     "point": 2.7,
-                    "low": 2,
-                    "high": 5.5
+                    "low": [
+                      2,
+                      2
+                    ],
+                    "high": [
+                      5.5,
+                      5
+                    ]
                   },
                   "threeWk": {
                     "point": 5.1,
-                    "low": 2.5,
-                    "high": 6
+                    "low": [
+                      2.5,
+                      4.5
+                    ],
+                    "high": [
+                      6,
+                      6
+                    ]
                   },
                   "fourWk": {
                     "point": 5.4,
-                    "low": 2.5,
-                    "high": 6.5
+                    "low": [
+                      2.5,
+                      4
+                    ],
+                    "high": [
+                      6.5,
+                      6
+                    ]
                   },
                   "week": 201609
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 13,
-                    "low": 49,
-                    "high": 14
+                    "low": [
+                      49,
+                      13
+                    ],
+                    "high": [
+                      14,
+                      14
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.4,
-                    "low": 4.5,
-                    "high": 6.5
+                    "low": [
+                      4.5,
+                      5
+                    ],
+                    "high": [
+                      6.5,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 4.6,
-                    "low": 3,
-                    "high": 5
+                    "low": [
+                      3,
+                      4
+                    ],
+                    "high": [
+                      5,
+                      5
+                    ]
                   },
                   "twoWk": {
                     "point": 4.8,
-                    "low": 2.5,
-                    "high": 5.5
+                    "low": [
+                      2.5,
+                      2.5
+                    ],
+                    "high": [
+                      5.5,
+                      5.5
+                    ]
                   },
                   "threeWk": {
                     "point": 5.4,
-                    "low": 4,
-                    "high": 6
+                    "low": [
+                      4,
+                      5
+                    ],
+                    "high": [
+                      6,
+                      6
+                    ]
                   },
                   "fourWk": {
                     "point": 4.5,
-                    "low": 4,
-                    "high": 5
+                    "low": [
+                      4,
+                      4
+                    ],
+                    "high": [
+                      5,
+                      5
+                    ]
                   },
                   "week": 201610
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.7,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.8,
-                    "low": 2,
-                    "high": 3.5
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      1.5
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2,
-                    "low": 1,
-                    "high": 3
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.6,
-                    "low": 0.5,
-                    "high": 3
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "week": 201611
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.7,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.8,
-                    "low": 2,
-                    "high": 4
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.1,
-                    "low": 1,
-                    "high": 3.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      3.5,
+                      2.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.7,
-                    "low": 0.5,
-                    "high": 3
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "week": 201612
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.7,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.8,
-                    "low": 2,
-                    "high": 4
+                    "low": [
+                      2,
+                      2.5
+                    ],
+                    "high": [
+                      4,
+                      3.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.5,
-                    "high": 3.5
+                    "low": [
+                      1.5,
+                      2
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.1,
-                    "low": 1,
-                    "high": 3.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      3.5,
+                      2.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.7,
-                    "low": 0.5,
-                    "high": 3
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "week": 201613
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.7,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 2.1,
-                    "low": 1.5,
-                    "high": 3
+                    "low": [
+                      1.5,
+                      1.5
+                    ],
+                    "high": [
+                      3,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 1.7,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.6,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.3,
-                    "low": 0.5,
-                    "high": 2.5
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "week": 201614
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 17
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      17,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.7,
-                    "low": 3.5,
-                    "high": 4.5
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4.5,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.8,
-                    "low": 1,
-                    "high": 3
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      3,
+                      2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.7,
-                    "low": 1,
-                    "high": 4.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      4.5,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.3,
-                    "low": 1,
-                    "high": 3
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 1,
-                    "high": 3.5
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      3.5,
+                      2
+                    ]
                   },
                   "week": 201615
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 18
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      18,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 2.5,
-                    "high": 3.5
+                    "low": [
+                      2.5,
+                      2.5
+                    ],
+                    "high": [
+                      3.5,
+                      3
+                    ]
                   },
                   "oneWk": {
                     "point": 1.8,
-                    "low": 1,
-                    "high": 4.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      4.5,
+                      2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.7,
-                    "low": 1,
-                    "high": 3.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      3.5,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 1,
-                    "high": 3.5
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      3.5,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 1,
-                    "high": 3
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2
+                    ]
                   },
                   "week": 201616
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.8,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.5,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 0.5,
-                    "high": 3.5
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      3.5,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.2,
-                    "low": 0.5,
-                    "high": 2.5
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      1.5
+                    ]
                   },
                   "week": 201617
                 },
                 {
                   "onsetWeek": {
                     "point": 3,
-                    "low": 3,
-                    "high": 4
+                    "low": [
+                      3,
+                      3
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 10,
-                    "high": 11
+                    "low": [
+                      10,
+                      10
+                    ],
+                    "high": [
+                      11,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 3.5,
-                    "high": 4
+                    "low": [
+                      3.5,
+                      3.5
+                    ],
+                    "high": [
+                      4,
+                      4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.7,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1.5
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.5,
-                    "low": 1,
-                    "high": 2
+                    "low": [
+                      1,
+                      1
+                    ],
+                    "high": [
+                      2,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 0.5,
-                    "high": 3
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.3,
-                    "low": 0.5,
-                    "high": 2.5
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "week": 201618
                 }
@@ -1348,38 +2272,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 47,
-                    "high": 8
+                    "low": [
+                      47,
+                      49
+                    ],
+                    "high": [
+                      8,
+                      2
+                    ]
                   },
                   "peakWeek": {
                     "point": 4,
-                    "low": 50,
-                    "high": 20
+                    "low": [
+                      50,
+                      2
+                    ],
+                    "high": [
+                      20,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.7,
-                    "low": 2.1,
-                    "high": 8.4
+                    "low": [
+                      2.1,
+                      3.5
+                    ],
+                    "high": [
+                      8.4,
+                      6.4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.3,
-                    "low": 1.1,
-                    "high": 1.7
+                    "low": [
+                      1.1,
+                      1.2
+                    ],
+                    "high": [
+                      1.7,
+                      1.5
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 1,
-                    "high": 2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2,
+                      1.6
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 1,
-                    "high": 2.2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 0.9,
-                    "high": 2.5
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.5,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -1396,38 +2362,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 45,
-                    "high": 9
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      9,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 47,
-                    "high": 12
+                    "low": [
+                      47,
+                      1
+                    ],
+                    "high": [
+                      12,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.7,
-                    "low": 0.9,
-                    "high": 8.9
+                    "low": [
+                      0.9,
+                      3.4
+                    ],
+                    "high": [
+                      8.9,
+                      6.4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.2,
-                    "low": 0.7,
-                    "high": 2.4
+                    "low": [
+                      0.7,
+                      1
+                    ],
+                    "high": [
+                      2.4,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.3,
-                    "low": 0.7,
-                    "high": 2.6
+                    "low": [
+                      0.7,
+                      1
+                    ],
+                    "high": [
+                      2.6,
+                      1.8
+                    ]
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 0.8,
-                    "high": 2.7
+                    "low": [
+                      0.8,
+                      1.1
+                    ],
+                    "high": [
+                      2.7,
+                      1.9
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 2.9
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      2.9,
+                      2
+                    ]
                   },
                   "week": 201643
                 }
@@ -1444,38 +2452,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 46,
-                    "high": 3
+                    "low": [
+                      46,
+                      47
+                    ],
+                    "high": [
+                      3,
+                      50
+                    ]
                   },
                   "peakWeek": {
                     "point": 52,
-                    "low": 51,
-                    "high": 12
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      12,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.1,
-                    "low": 2.5,
-                    "high": 7
+                    "low": [
+                      2.5,
+                      3.4
+                    ],
+                    "high": [
+                      7,
+                      5.2
+                    ]
                   },
                   "oneWk": {
                     "point": 1.4,
-                    "low": 1.1,
-                    "high": 1.9
+                    "low": [
+                      1.1,
+                      1.3
+                    ],
+                    "high": [
+                      1.9,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.5,
-                    "low": 1.1,
-                    "high": 2.1
+                    "low": [
+                      1.1,
+                      1.3
+                    ],
+                    "high": [
+                      2.1,
+                      1.8
+                    ]
                   },
                   "threeWk": {
                     "point": 1.7,
-                    "low": 1.2,
-                    "high": 2.6
+                    "low": [
+                      1.2,
+                      1.5
+                    ],
+                    "high": [
+                      2.6,
+                      2.1
+                    ]
                   },
                   "fourWk": {
                     "point": 2.1,
-                    "low": 1.4,
-                    "high": 3.3
+                    "low": [
+                      1.4,
+                      1.8
+                    ],
+                    "high": [
+                      3.3,
+                      2.6
+                    ]
                   },
                   "week": 201643
                 }
@@ -1492,38 +2542,80 @@
                 {
                   "onsetWeek": {
                     "point": 50.9795930032354,
-                    "low": 45,
-                    "high": 9
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      9,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 50.9625597209117,
-                    "low": 51,
-                    "high": 12
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      12,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.65327263758525,
-                    "low": 2.1,
-                    "high": 8.4
+                    "low": [
+                      2.1,
+                      3.5
+                    ],
+                    "high": [
+                      8.4,
+                      6.3
+                    ]
                   },
                   "oneWk": {
                     "point": 1.30017860564934,
-                    "low": 1.1,
-                    "high": 1.7
+                    "low": [
+                      1.1,
+                      1.2
+                    ],
+                    "high": [
+                      1.7,
+                      1.5
+                    ]
                   },
                   "twoWk": {
                     "point": 1.40042830976304,
-                    "low": 1,
-                    "high": 2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2,
+                      1.6
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5016975272185,
-                    "low": 1,
-                    "high": 2.2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "fourWk": {
                     "point": 1.50294394685125,
-                    "low": 0.9,
-                    "high": 2.5
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.5,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -2000,38 +3092,80 @@
                 {
                   "onsetWeek": {
                     "point": 52,
-                    "low": 45,
-                    "high": 15
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      15,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 47,
-                    "high": 21
+                    "low": [
+                      47,
+                      52
+                    ],
+                    "high": [
+                      21,
+                      14
+                    ]
                   },
                   "peakPercent": {
                     "point": 2.8,
-                    "low": 1.2,
-                    "high": 8.8
+                    "low": [
+                      1.2,
+                      1.9
+                    ],
+                    "high": [
+                      8.8,
+                      4.5
+                    ]
                   },
                   "oneWk": {
                     "point": 0.7,
-                    "low": 0.4,
-                    "high": 1.3
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.3,
+                      1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 1.6
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.6,
+                      1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.8,
-                    "low": 0.4,
-                    "high": 1.9
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.9,
+                      1.1
+                    ]
                   },
                   "fourWk": {
                     "point": 0.8,
-                    "low": 0.4,
-                    "high": 2.2
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      2.2,
+                      1.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -2048,38 +3182,80 @@
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 43,
-                    "high": 9
+                    "low": [
+                      43,
+                      50
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 48,
-                    "high": 12
+                    "low": [
+                      48,
+                      3
+                    ],
+                    "high": [
+                      12,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.2,
-                    "low": 0.6,
-                    "high": 9.6
+                    "low": [
+                      0.6,
+                      2.1
+                    ],
+                    "high": [
+                      9.6,
+                      5.2
+                    ]
                   },
                   "oneWk": {
                     "point": 0.5,
-                    "low": 0.2,
-                    "high": 1.7
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.7,
+                      0.9
+                    ]
                   },
                   "twoWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.9
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.9,
+                      1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.7,
-                    "low": 0.2,
-                    "high": 2.1
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      2.1,
+                      1.1
+                    ]
                   },
                   "fourWk": {
                     "point": 0.7,
-                    "low": 0.3,
-                    "high": 2.2
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      2.2,
+                      1.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -2096,38 +3272,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 45,
-                    "high": 7
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      7,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 51,
-                    "high": 16
+                    "low": [
+                      51,
+                      4
+                    ],
+                    "high": [
+                      16,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 4,
-                    "low": 2,
-                    "high": 8.8
+                    "low": [
+                      2,
+                      3
+                    ],
+                    "high": [
+                      8.8,
+                      5.6
+                    ]
                   },
                   "oneWk": {
                     "point": 0.8,
-                    "low": 0.5,
-                    "high": 1.6
+                    "low": [
+                      0.5,
+                      0.7
+                    ],
+                    "high": [
+                      1.6,
+                      1.2
+                    ]
                   },
                   "twoWk": {
                     "point": 0.8,
-                    "low": 0.4,
-                    "high": 1.7
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.7,
+                      1.1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.7,
-                    "low": 0.3,
-                    "high": 1.7
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      1.7,
+                      1.1
+                    ]
                   },
                   "fourWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 2.2
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.2,
+                      1.4
+                    ]
                   },
                   "week": 201643
                 }
@@ -2144,38 +3362,80 @@
                 {
                   "onsetWeek": {
                     "point": 3.1287196151662,
-                    "low": 43,
-                    "high": 9
+                    "low": [
+                      43,
+                      50
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 5.29535171042807,
-                    "low": 48,
-                    "high": 20
+                    "low": [
+                      48,
+                      1
+                    ],
+                    "high": [
+                      20,
+                      12
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.35783094755266,
-                    "low": 1.3,
-                    "high": 9
+                    "low": [
+                      1.3,
+                      2.3
+                    ],
+                    "high": [
+                      9,
+                      5.2
+                    ]
                   },
                   "oneWk": {
                     "point": 0.70001247803342,
-                    "low": 0.4,
-                    "high": 1.3
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.3,
+                      1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.799802488968438,
-                    "low": 0.3,
-                    "high": 1.6
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.6,
+                      1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.798632744107501,
-                    "low": 0.4,
-                    "high": 1.9
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.9,
+                      1.1
+                    ]
                   },
                   "fourWk": {
                     "point": 0.800063158564771,
-                    "low": 0.4,
-                    "high": 2.2
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      2.2,
+                      1.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -2648,38 +3908,80 @@
                 {
                   "onsetWeek": {
                     "point": 45,
-                    "low": 43,
-                    "high": 13
+                    "low": [
+                      43,
+                      43
+                    ],
+                    "high": [
+                      13,
+                      51
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 44,
-                    "high": 20
+                    "low": [
+                      44,
+                      48
+                    ],
+                    "high": [
+                      20,
+                      13
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.4,
-                    "low": 2.4,
-                    "high": 8.9
+                    "low": [
+                      2.4,
+                      3.4
+                    ],
+                    "high": [
+                      8.9,
+                      5.9
+                    ]
                   },
                   "oneWk": {
                     "point": 2.2,
-                    "low": 1.4,
-                    "high": 3.6
+                    "low": [
+                      1.4,
+                      1.9
+                    ],
+                    "high": [
+                      3.6,
+                      2.7
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.3,
-                    "high": 4.8
+                    "low": [
+                      1.3,
+                      1.8
+                    ],
+                    "high": [
+                      4.8,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.2,
-                    "low": 1.2,
-                    "high": 5.3
+                    "low": [
+                      1.2,
+                      1.7
+                    ],
+                    "high": [
+                      5.3,
+                      3
+                    ]
                   },
                   "fourWk": {
                     "point": 2.2,
-                    "low": 1.1,
-                    "high": 5.3
+                    "low": [
+                      1.1,
+                      1.6
+                    ],
+                    "high": [
+                      5.3,
+                      3.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -2696,38 +3998,80 @@
                 {
                   "onsetWeek": {
                     "point": 52,
-                    "low": 41,
-                    "high": 9
+                    "low": [
+                      41,
+                      46
+                    ],
+                    "high": [
+                      9,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 4,
-                    "low": 44,
-                    "high": 15
+                    "low": [
+                      44,
+                      51
+                    ],
+                    "high": [
+                      15,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.6,
-                    "low": 1,
-                    "high": 10.7
+                    "low": [
+                      1,
+                      3.4
+                    ],
+                    "high": [
+                      10.7,
+                      6.5
+                    ]
                   },
                   "oneWk": {
                     "point": 1.2,
-                    "low": 0.5,
-                    "high": 3.3
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      3.3,
+                      1.9
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 0.5,
-                    "high": 3.7
+                    "low": [
+                      0.5,
+                      0.9
+                    ],
+                    "high": [
+                      3.7,
+                      2.1
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 0.6,
-                    "high": 4.2
+                    "low": [
+                      0.6,
+                      1
+                    ],
+                    "high": [
+                      4.2,
+                      2.3
+                    ]
                   },
                   "fourWk": {
                     "point": 1.7,
-                    "low": 0.6,
-                    "high": 4.5
+                    "low": [
+                      0.6,
+                      1.1
+                    ],
+                    "high": [
+                      4.5,
+                      2.5
+                    ]
                   },
                   "week": 201643
                 }
@@ -2744,38 +4088,80 @@
                 {
                   "onsetWeek": {
                     "point": 46,
-                    "low": 43,
-                    "high": 5
+                    "low": [
+                      43,
+                      43
+                    ],
+                    "high": [
+                      5,
+                      51
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 48,
-                    "high": 14
+                    "low": [
+                      48,
+                      52
+                    ],
+                    "high": [
+                      14,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 6.6,
-                    "low": 3.2,
-                    "high": 100
+                    "low": [
+                      3.2,
+                      4.8
+                    ],
+                    "high": [
+                      100,
+                      9.2
+                    ]
                   },
                   "oneWk": {
                     "point": 2.4,
-                    "low": 1.5,
-                    "high": 3.9
+                    "low": [
+                      1.5,
+                      1.9
+                    ],
+                    "high": [
+                      3.9,
+                      3
+                    ]
                   },
                   "twoWk": {
                     "point": 2,
-                    "low": 1.1,
-                    "high": 3.8
+                    "low": [
+                      1.1,
+                      1.6
+                    ],
+                    "high": [
+                      3.8,
+                      2.7
+                    ]
                   },
                   "threeWk": {
                     "point": 2.5,
-                    "low": 1.3,
-                    "high": 4.9
+                    "low": [
+                      1.3,
+                      1.9
+                    ],
+                    "high": [
+                      4.9,
+                      3.3
+                    ]
                   },
                   "fourWk": {
                     "point": 2.5,
-                    "low": 1.2,
-                    "high": 5.2
+                    "low": [
+                      1.2,
+                      1.9
+                    ],
+                    "high": [
+                      5.2,
+                      3.4
+                    ]
                   },
                   "week": 201643
                 }
@@ -2792,38 +4178,80 @@
                 {
                   "onsetWeek": {
                     "point": 47.6878332785655,
-                    "low": 43,
-                    "high": 9
+                    "low": [
+                      43,
+                      43
+                    ],
+                    "high": [
+                      9,
+                      52
+                    ]
                   },
                   "peakWeek": {
                     "point": 3.02797724970054,
-                    "low": 44,
-                    "high": 20
+                    "low": [
+                      44,
+                      48
+                    ],
+                    "high": [
+                      20,
+                      13
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.41000667167663,
-                    "low": 2.4,
-                    "high": 8.9
+                    "low": [
+                      2.4,
+                      3.4
+                    ],
+                    "high": [
+                      8.9,
+                      5.9
+                    ]
                   },
                   "oneWk": {
                     "point": 2.19850705016334,
-                    "low": 1.4,
-                    "high": 3.6
+                    "low": [
+                      1.4,
+                      1.9
+                    ],
+                    "high": [
+                      3.6,
+                      2.7
+                    ]
                   },
                   "twoWk": {
                     "point": 2.28505096711751,
-                    "low": 1.2,
-                    "high": 4.8
+                    "low": [
+                      1.2,
+                      1.8
+                    ],
+                    "high": [
+                      4.8,
+                      3
+                    ]
                   },
                   "threeWk": {
                     "point": 2.12809746667896,
-                    "low": 0.9,
-                    "high": 5
+                    "low": [
+                      0.9,
+                      1.6
+                    ],
+                    "high": [
+                      5,
+                      3
+                    ]
                   },
                   "fourWk": {
                     "point": 2.15373878944441,
-                    "low": 0.8,
-                    "high": 5.1
+                    "low": [
+                      0.8,
+                      1.5
+                    ],
+                    "high": [
+                      5.1,
+                      3.1
+                    ]
                   },
                   "week": 201643
                 }
@@ -3299,38 +4727,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 44,
-                    "high": 15
+                    "low": [
+                      44,
+                      48
+                    ],
+                    "high": [
+                      15,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 7,
-                    "low": 48,
-                    "high": 21
+                    "low": [
+                      48,
+                      2
+                    ],
+                    "high": [
+                      21,
+                      16
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.4,
-                    "low": 2.2,
-                    "high": 9.7
+                    "low": [
+                      2.2,
+                      3.1
+                    ],
+                    "high": [
+                      9.7,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 1.3,
-                    "low": 1,
-                    "high": 2.2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 2.5
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.5,
+                      1.8
+                    ]
                   },
                   "threeWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 3.1
+                    "low": [
+                      0.9,
+                      1.1
+                    ],
+                    "high": [
+                      3.1,
+                      1.8
+                    ]
                   },
                   "fourWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 3.5
+                    "low": [
+                      0.9,
+                      1.1
+                    ],
+                    "high": [
+                      3.5,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -3347,38 +4817,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 41,
-                    "high": 6
+                    "low": [
+                      41,
+                      45
+                    ],
+                    "high": [
+                      6,
+                      53
+                    ]
                   },
                   "peakWeek": {
                     "point": 4,
-                    "low": 45,
-                    "high": 13
+                    "low": [
+                      45,
+                      52
+                    ],
+                    "high": [
+                      13,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.7,
-                    "low": 1.7,
-                    "high": 11.6
+                    "low": [
+                      1.7,
+                      4
+                    ],
+                    "high": [
+                      11.6,
+                      8
+                    ]
                   },
                   "oneWk": {
                     "point": 1.4,
-                    "low": 0.7,
-                    "high": 3
+                    "low": [
+                      0.7,
+                      1
+                    ],
+                    "high": [
+                      3,
+                      1.9
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 0.7,
-                    "high": 3.1
+                    "low": [
+                      0.7,
+                      1.1
+                    ],
+                    "high": [
+                      3.1,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 3.2
+                    "low": [
+                      0.8,
+                      1.1
+                    ],
+                    "high": [
+                      3.2,
+                      2.1
+                    ]
                   },
                   "fourWk": {
                     "point": 1.6,
-                    "low": 0.8,
-                    "high": 3.4
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      3.4,
+                      2.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -3395,38 +4907,80 @@
                 {
                   "onsetWeek": {
                     "point": 47,
-                    "low": 44,
-                    "high": 52
+                    "low": [
+                      44,
+                      46
+                    ],
+                    "high": [
+                      52,
+                      50
+                    ]
                   },
                   "peakWeek": {
                     "point": 52,
-                    "low": 51,
-                    "high": 13
+                    "low": [
+                      51,
+                      51
+                    ],
+                    "high": [
+                      13,
+                      4
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.8,
-                    "low": 3.2,
-                    "high": 11.1
+                    "low": [
+                      3.2,
+                      4.5
+                    ],
+                    "high": [
+                      11.1,
+                      7.6
+                    ]
                   },
                   "oneWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 2.2
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 2.4
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.4,
+                      1.9
+                    ]
                   },
                   "threeWk": {
                     "point": 1.7,
-                    "low": 0.9,
-                    "high": 3.1
+                    "low": [
+                      0.9,
+                      1.3
+                    ],
+                    "high": [
+                      3.1,
+                      2.2
+                    ]
                   },
                   "fourWk": {
                     "point": 2.2,
-                    "low": 1.2,
-                    "high": 4.2
+                    "low": [
+                      1.2,
+                      1.7
+                    ],
+                    "high": [
+                      4.2,
+                      2.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -3443,38 +4997,80 @@
                 {
                   "onsetWeek": {
                     "point": 50.727538478107,
-                    "low": 44,
-                    "high": 14
+                    "low": [
+                      44,
+                      47
+                    ],
+                    "high": [
+                      14,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 4.20054169730152,
-                    "low": 45,
-                    "high": 13
+                    "low": [
+                      45,
+                      52
+                    ],
+                    "high": [
+                      13,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.32831706141701,
-                    "low": 2.2,
-                    "high": 11
+                    "low": [
+                      2.2,
+                      3.8
+                    ],
+                    "high": [
+                      11,
+                      7.4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.30100948050667,
-                    "low": 1,
-                    "high": 2.2
+                    "low": [
+                      1,
+                      1.2
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.4,
-                    "low": 0.9,
-                    "high": 2.5
+                    "low": [
+                      0.9,
+                      1.2
+                    ],
+                    "high": [
+                      2.5,
+                      1.8
+                    ]
                   },
                   "threeWk": {
                     "point": 1.40230641555094,
-                    "low": 0.9,
-                    "high": 3.1
+                    "low": [
+                      0.9,
+                      1.1
+                    ],
+                    "high": [
+                      3.1,
+                      1.8
+                    ]
                   },
                   "fourWk": {
                     "point": 1.40306136984214,
-                    "low": 0.9,
-                    "high": 3.5
+                    "low": [
+                      0.9,
+                      1.1
+                    ],
+                    "high": [
+                      3.5,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -3953,38 +5549,80 @@
                 {
                   "onsetWeek": {
                     "point": 47,
-                    "low": 44,
-                    "high": 13
+                    "low": [
+                      44,
+                      44
+                    ],
+                    "high": [
+                      13,
+                      50
+                    ]
                   },
                   "peakWeek": {
                     "point": 2,
-                    "low": 46,
-                    "high": 21
+                    "low": [
+                      46,
+                      49
+                    ],
+                    "high": [
+                      21,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.9,
-                    "low": 1.7,
-                    "high": 7.7
+                    "low": [
+                      1.7,
+                      2.6
+                    ],
+                    "high": [
+                      7.7,
+                      5.8
+                    ]
                   },
                   "oneWk": {
                     "point": 1.4,
-                    "low": 1.1,
-                    "high": 2.1
+                    "low": [
+                      1.1,
+                      1.2
+                    ],
+                    "high": [
+                      2.1,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 2.6
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      2.6,
+                      1.9
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 3.3
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      3.3,
+                      2.1
+                    ]
                   },
                   "fourWk": {
                     "point": 1.6,
-                    "low": 0.8,
-                    "high": 4.4
+                    "low": [
+                      0.8,
+                      1.3
+                    ],
+                    "high": [
+                      4.4,
+                      2.4
+                    ]
                   },
                   "week": 201643
                 }
@@ -4001,38 +5639,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 43,
-                    "high": 8
+                    "low": [
+                      43,
+                      47
+                    ],
+                    "high": [
+                      8,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 48,
-                    "high": 11
+                    "low": [
+                      48,
+                      52
+                    ],
+                    "high": [
+                      11,
+                      7
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.4,
-                    "low": 0.9,
-                    "high": 8.2
+                    "low": [
+                      0.9,
+                      3.2
+                    ],
+                    "high": [
+                      8.2,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 2.3
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.3,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 1,
-                    "low": 0.5,
-                    "high": 2.4
+                    "low": [
+                      0.5,
+                      0.7
+                    ],
+                    "high": [
+                      2.4,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1.1,
-                    "low": 0.5,
-                    "high": 2.6
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.6,
+                      1.6
+                    ]
                   },
                   "fourWk": {
                     "point": 1.2,
-                    "low": 0.5,
-                    "high": 2.8
+                    "low": [
+                      0.5,
+                      0.9
+                    ],
+                    "high": [
+                      2.8,
+                      1.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -4049,38 +5729,80 @@
                 {
                   "onsetWeek": {
                     "point": 45,
-                    "low": 44,
-                    "high": 51
+                    "low": [
+                      44,
+                      44
+                    ],
+                    "high": [
+                      51,
+                      48
+                    ]
                   },
                   "peakWeek": {
                     "point": 51,
-                    "low": 49,
-                    "high": 11
+                    "low": [
+                      49,
+                      51
+                    ],
+                    "high": [
+                      11,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.6,
-                    "low": 2.5,
-                    "high": 9
+                    "low": [
+                      2.5,
+                      3.6
+                    ],
+                    "high": [
+                      9,
+                      6.1
+                    ]
                   },
                   "oneWk": {
                     "point": 1.4,
-                    "low": 1.1,
-                    "high": 2.1
+                    "low": [
+                      1.1,
+                      1.3
+                    ],
+                    "high": [
+                      2.1,
+                      1.8
+                    ]
                   },
                   "twoWk": {
                     "point": 1.6,
-                    "low": 1,
-                    "high": 2.5
+                    "low": [
+                      1,
+                      1.3
+                    ],
+                    "high": [
+                      2.5,
+                      2
+                    ]
                   },
                   "threeWk": {
                     "point": 1.9,
-                    "low": 1.1,
-                    "high": 3.3
+                    "low": [
+                      1.1,
+                      1.5
+                    ],
+                    "high": [
+                      3.3,
+                      2.4
+                    ]
                   },
                   "fourWk": {
                     "point": 2.5,
-                    "low": 1.4,
-                    "high": 4.5
+                    "low": [
+                      1.4,
+                      2
+                    ],
+                    "high": [
+                      4.5,
+                      3.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -4097,38 +5819,80 @@
                 {
                   "onsetWeek": {
                     "point": 50.9546424534456,
-                    "low": 43,
-                    "high": 8
+                    "low": [
+                      43,
+                      47
+                    ],
+                    "high": [
+                      8,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 49.855289463966,
-                    "low": 49,
-                    "high": 11
+                    "low": [
+                      49,
+                      51
+                    ],
+                    "high": [
+                      11,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.96605125858179,
-                    "low": 1.7,
-                    "high": 7.7
+                    "low": [
+                      1.7,
+                      2.7
+                    ],
+                    "high": [
+                      7.7,
+                      5.8
+                    ]
                   },
                   "oneWk": {
                     "point": 1.39918334295694,
-                    "low": 1.1,
-                    "high": 2.1
+                    "low": [
+                      1.1,
+                      1.2
+                    ],
+                    "high": [
+                      2.1,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.49998062403615,
-                    "low": 0.8,
-                    "high": 2.6
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      2.6,
+                      1.9
+                    ]
                   },
                   "threeWk": {
                     "point": 1.50027999141224,
-                    "low": 0.8,
-                    "high": 3.3
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      3.3,
+                      2.1
+                    ]
                   },
                   "fourWk": {
                     "point": 1.60392198810068,
-                    "low": 0.8,
-                    "high": 4.4
+                    "low": [
+                      0.8,
+                      1.3
+                    ],
+                    "high": [
+                      4.4,
+                      2.4
+                    ]
                   },
                   "week": 201643
                 }
@@ -4605,38 +6369,80 @@
                 {
                   "onsetWeek": {
                     "point": 52,
-                    "low": 46,
-                    "high": 14
+                    "low": [
+                      46,
+                      50
+                    ],
+                    "high": [
+                      14,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 47,
-                    "high": 21
+                    "low": [
+                      47,
+                      52
+                    ],
+                    "high": [
+                      21,
+                      13
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.2,
-                    "low": 1.4,
-                    "high": 9.6
+                    "low": [
+                      1.4,
+                      2.2
+                    ],
+                    "high": [
+                      9.6,
+                      5.1
+                    ]
                   },
                   "oneWk": {
                     "point": 1,
-                    "low": 0.8,
-                    "high": 1.4
+                    "low": [
+                      0.8,
+                      0.9
+                    ],
+                    "high": [
+                      1.4,
+                      1.2
+                    ]
                   },
                   "twoWk": {
                     "point": 1,
-                    "low": 0.6,
-                    "high": 1.9
+                    "low": [
+                      0.6,
+                      0.8
+                    ],
+                    "high": [
+                      1.9,
+                      1.4
+                    ]
                   },
                   "threeWk": {
                     "point": 1.1,
-                    "low": 0.5,
-                    "high": 2.3
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.3,
+                      1.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.2,
-                    "low": 0.6,
-                    "high": 2.8
+                    "low": [
+                      0.6,
+                      0.8
+                    ],
+                    "high": [
+                      2.8,
+                      1.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -4653,38 +6459,80 @@
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 42,
-                    "high": 9
+                    "low": [
+                      42,
+                      51
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 46,
-                    "high": 13
+                    "low": [
+                      46,
+                      1
+                    ],
+                    "high": [
+                      13,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.3,
-                    "low": 0.7,
-                    "high": 10.9
+                    "low": [
+                      0.7,
+                      3.1
+                    ],
+                    "high": [
+                      10.9,
+                      6.7
+                    ]
                   },
                   "oneWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 2.2
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.2,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 1,
-                    "low": 0.4,
-                    "high": 2.4
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.4,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1.1,
-                    "low": 0.5,
-                    "high": 2.6
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.6,
+                      1.6
+                    ]
                   },
                   "fourWk": {
                     "point": 1.1,
-                    "low": 0.5,
-                    "high": 2.8
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.8,
+                      1.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -4701,38 +6549,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 46,
-                    "high": 9
+                    "low": [
+                      46,
+                      47
+                    ],
+                    "high": [
+                      9,
+                      51
+                    ]
                   },
                   "peakWeek": {
                     "point": 52,
-                    "low": 50,
-                    "high": 14
+                    "low": [
+                      50,
+                      51
+                    ],
+                    "high": [
+                      14,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.2,
-                    "low": 2.3,
-                    "high": 8.3
+                    "low": [
+                      2.3,
+                      3.3
+                    ],
+                    "high": [
+                      8.3,
+                      5.6
+                    ]
                   },
                   "oneWk": {
                     "point": 1.2,
-                    "low": 0.8,
-                    "high": 1.7
+                    "low": [
+                      0.8,
+                      1
+                    ],
+                    "high": [
+                      1.7,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 1.2,
-                    "low": 0.8,
-                    "high": 2
+                    "low": [
+                      0.8,
+                      1
+                    ],
+                    "high": [
+                      2,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1.3,
-                    "low": 0.7,
-                    "high": 2.3
+                    "low": [
+                      0.7,
+                      1
+                    ],
+                    "high": [
+                      2.3,
+                      1.7
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 3
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      3,
+                      2.1
+                    ]
                   },
                   "week": 201643
                 }
@@ -4749,38 +6639,80 @@
                 {
                   "onsetWeek": {
                     "point": 2.47373390567465,
-                    "low": 42,
-                    "high": 9
+                    "low": [
+                      42,
+                      51
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 6.42417264444397,
-                    "low": 47,
-                    "high": 13
+                    "low": [
+                      47,
+                      1
+                    ],
+                    "high": [
+                      13,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.87695089023341,
-                    "low": 1.5,
-                    "high": 9.9
+                    "low": [
+                      1.5,
+                      2.8
+                    ],
+                    "high": [
+                      9.9,
+                      5.8
+                    ]
                   },
                   "oneWk": {
                     "point": 1.00066854895492,
-                    "low": 0.8,
-                    "high": 1.4
+                    "low": [
+                      0.8,
+                      0.9
+                    ],
+                    "high": [
+                      1.4,
+                      1.2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.00579161343901,
-                    "low": 0.6,
-                    "high": 1.9
+                    "low": [
+                      0.6,
+                      0.9
+                    ],
+                    "high": [
+                      1.9,
+                      1.4
+                    ]
                   },
                   "threeWk": {
                     "point": 1.11265170455899,
-                    "low": 0.5,
-                    "high": 2.3
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.3,
+                      1.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.28172406129441,
-                    "low": 0.6,
-                    "high": 2.9
+                    "low": [
+                      0.6,
+                      0.9
+                    ],
+                    "high": [
+                      2.9,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -5256,38 +7188,80 @@
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 45,
-                    "high": 16
+                    "low": [
+                      45,
+                      50
+                    ],
+                    "high": [
+                      16,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 9,
-                    "low": 47,
-                    "high": 21
+                    "low": [
+                      47,
+                      2
+                    ],
+                    "high": [
+                      21,
+                      17
+                    ]
                   },
                   "peakPercent": {
                     "point": 6.7,
-                    "low": 3.1,
-                    "high": 100
+                    "low": [
+                      3.1,
+                      4.7
+                    ],
+                    "high": [
+                      100,
+                      9.6
+                    ]
                   },
                   "oneWk": {
                     "point": 2.1,
-                    "low": 1.3,
-                    "high": 3.1
+                    "low": [
+                      1.3,
+                      1.8
+                    ],
+                    "high": [
+                      3.1,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2,
-                    "low": 1.2,
-                    "high": 3.9
+                    "low": [
+                      1.2,
+                      1.6
+                    ],
+                    "high": [
+                      3.9,
+                      2.6
+                    ]
                   },
                   "threeWk": {
                     "point": 2,
-                    "low": 1,
-                    "high": 4.6
+                    "low": [
+                      1,
+                      1.6
+                    ],
+                    "high": [
+                      4.6,
+                      2.7
+                    ]
                   },
                   "fourWk": {
                     "point": 2.1,
-                    "low": 0.9,
-                    "high": 6
+                    "low": [
+                      0.9,
+                      1.6
+                    ],
+                    "high": [
+                      6,
+                      3
+                    ]
                   },
                   "week": 201643
                 }
@@ -5304,38 +7278,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 44,
-                    "high": 7
+                    "low": [
+                      44,
+                      49
+                    ],
+                    "high": [
+                      7,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 45,
-                    "high": 12
+                    "low": [
+                      45,
+                      51
+                    ],
+                    "high": [
+                      12,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 8.2,
-                    "low": 1.7,
-                    "high": 100
+                    "low": [
+                      1.7,
+                      5.9
+                    ],
+                    "high": [
+                      100,
+                      10.6
+                    ]
                   },
                   "oneWk": {
                     "point": 1.6,
-                    "low": 0.5,
-                    "high": 5.3
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      5.3,
+                      2.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.6,
-                    "low": 0.5,
-                    "high": 5.2
+                    "low": [
+                      0.5,
+                      0.9
+                    ],
+                    "high": [
+                      5.2,
+                      2.6
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 0.5,
-                    "high": 5.2
+                    "low": [
+                      0.5,
+                      0.9
+                    ],
+                    "high": [
+                      5.2,
+                      2.6
+                    ]
                   },
                   "fourWk": {
                     "point": 1.6,
-                    "low": 0.5,
-                    "high": 5.5
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      5.5,
+                      2.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -5352,38 +7368,80 @@
                 {
                   "onsetWeek": {
                     "point": 48,
-                    "low": 45,
-                    "high": 4
+                    "low": [
+                      45,
+                      46
+                    ],
+                    "high": [
+                      4,
+                      50
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 49,
-                    "high": 14
+                    "low": [
+                      49,
+                      52
+                    ],
+                    "high": [
+                      14,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 12.2,
-                    "low": 5.6,
-                    "high": 100
+                    "low": [
+                      5.6,
+                      8.8
+                    ],
+                    "high": [
+                      100,
+                      100
+                    ]
                   },
                   "oneWk": {
                     "point": 2.1,
-                    "low": 1.1,
-                    "high": 4
+                    "low": [
+                      1.1,
+                      1.6
+                    ],
+                    "high": [
+                      4,
+                      2.8
+                    ]
                   },
                   "twoWk": {
                     "point": 2.3,
-                    "low": 1.1,
-                    "high": 5
+                    "low": [
+                      1.1,
+                      1.7
+                    ],
+                    "high": [
+                      5,
+                      3.2
+                    ]
                   },
                   "threeWk": {
                     "point": 3.1,
-                    "low": 1.3,
-                    "high": 7.2
+                    "low": [
+                      1.3,
+                      2.2
+                    ],
+                    "high": [
+                      7.2,
+                      4.5
+                    ]
                   },
                   "fourWk": {
                     "point": 3.9,
-                    "low": 1.6,
-                    "high": 9.3
+                    "low": [
+                      1.6,
+                      2.7
+                    ],
+                    "high": [
+                      9.3,
+                      5.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -5400,38 +7458,80 @@
                 {
                   "onsetWeek": {
                     "point": 34.6985857670805,
-                    "low": 45,
-                    "high": 11
+                    "low": [
+                      45,
+                      47
+                    ],
+                    "high": [
+                      11,
+                      53
+                    ]
                   },
                   "peakWeek": {
                     "point": 6.01572776242876,
-                    "low": 47,
-                    "high": 21
+                    "low": [
+                      47,
+                      52
+                    ],
+                    "high": [
+                      21,
+                      12
+                    ]
                   },
                   "peakPercent": {
                     "point": 8.8889906415205,
-                    "low": 3.4,
-                    "high": 100
+                    "low": [
+                      3.4,
+                      5.9
+                    ],
+                    "high": [
+                      100,
+                      11.9
+                    ]
                   },
                   "oneWk": {
                     "point": 2.09929749363963,
-                    "low": 1.3,
-                    "high": 3.2
+                    "low": [
+                      1.3,
+                      1.8
+                    ],
+                    "high": [
+                      3.2,
+                      2.5
+                    ]
                   },
                   "twoWk": {
                     "point": 2.00000748754088,
-                    "low": 1.2,
-                    "high": 3.9
+                    "low": [
+                      1.2,
+                      1.6
+                    ],
+                    "high": [
+                      3.9,
+                      2.6
+                    ]
                   },
                   "threeWk": {
                     "point": 2.00132408593275,
-                    "low": 1,
-                    "high": 4.7
+                    "low": [
+                      1,
+                      1.6
+                    ],
+                    "high": [
+                      4.7,
+                      2.7
+                    ]
                   },
                   "fourWk": {
                     "point": 2.10488200256206,
-                    "low": 0.9,
-                    "high": 6.1
+                    "low": [
+                      0.9,
+                      1.6
+                    ],
+                    "high": [
+                      6.1,
+                      3
+                    ]
                   },
                   "week": 201643
                 }
@@ -5906,38 +8006,80 @@
                 {
                   "onsetWeek": {
                     "point": 1,
-                    "low": 47,
-                    "high": 14
+                    "low": [
+                      47,
+                      51
+                    ],
+                    "high": [
+                      14,
+                      4
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 49,
-                    "high": 20
+                    "low": [
+                      49,
+                      2
+                    ],
+                    "high": [
+                      20,
+                      13
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.9,
-                    "low": 1.7,
-                    "high": 12
+                    "low": [
+                      1.7,
+                      3.1
+                    ],
+                    "high": [
+                      12,
+                      7.1
+                    ]
                   },
                   "oneWk": {
                     "point": 0.8,
-                    "low": 0.4,
-                    "high": 1.3
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.3,
+                      1.1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 1.7
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.7,
+                      1.1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 1.9
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.9,
+                      1.2
+                    ]
                   },
                   "fourWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 2.3
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      2.3,
+                      1.3
+                    ]
                   },
                   "week": 201643
                 }
@@ -5954,38 +8096,80 @@
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 45,
-                    "high": 9
+                    "low": [
+                      45,
+                      51
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 46,
-                    "high": 13
+                    "low": [
+                      46,
+                      1
+                    ],
+                    "high": [
+                      13,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.8,
-                    "low": 1.2,
-                    "high": 12.3
+                    "low": [
+                      1.2,
+                      3.1
+                    ],
+                    "high": [
+                      12.3,
+                      7.3
+                    ]
                   },
                   "oneWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 2.4
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      2.4,
+                      1.3
+                    ]
                   },
                   "twoWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 2.6
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      2.6,
+                      1.4
+                    ]
                   },
                   "threeWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 2.9
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      2.9,
+                      1.5
+                    ]
                   },
                   "fourWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 3
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      3,
+                      1.6
+                    ]
                   },
                   "week": 201643
                 }
@@ -6002,38 +8186,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 45,
-                    "high": 9
+                    "low": [
+                      45,
+                      48
+                    ],
+                    "high": [
+                      9,
+                      51
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 50,
-                    "high": 14
+                    "low": [
+                      50,
+                      52
+                    ],
+                    "high": [
+                      14,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.8,
-                    "low": 2,
-                    "high": 12.2
+                    "low": [
+                      2,
+                      3.3
+                    ],
+                    "high": [
+                      12.2,
+                      7
+                    ]
                   },
                   "oneWk": {
                     "point": 0.9,
-                    "low": 0.5,
-                    "high": 1.7
+                    "low": [
+                      0.5,
+                      0.7
+                    ],
+                    "high": [
+                      1.7,
+                      1.2
+                    ]
                   },
                   "twoWk": {
                     "point": 1.1,
-                    "low": 0.5,
-                    "high": 2.3
+                    "low": [
+                      0.5,
+                      0.8
+                    ],
+                    "high": [
+                      2.3,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1,
-                    "low": 0.4,
-                    "high": 2.3
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.3,
+                      1.5
+                    ]
                   },
                   "fourWk": {
                     "point": 1.5,
-                    "low": 0.6,
-                    "high": 3.6
+                    "low": [
+                      0.6,
+                      1
+                    ],
+                    "high": [
+                      3.6,
+                      2.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -6050,38 +8276,80 @@
                 {
                   "onsetWeek": {
                     "point": 2.14430778790976,
-                    "low": 45,
-                    "high": 9
+                    "low": [
+                      45,
+                      51
+                    ],
+                    "high": [
+                      9,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 3.82183359850228,
-                    "low": 49,
-                    "high": 16
+                    "low": [
+                      49,
+                      52
+                    ],
+                    "high": [
+                      16,
+                      11
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.83402543071713,
-                    "low": 1.8,
-                    "high": 12.2
+                    "low": [
+                      1.8,
+                      3.2
+                    ],
+                    "high": [
+                      12.2,
+                      7.2
+                    ]
                   },
                   "oneWk": {
                     "point": 0.800279146498793,
-                    "low": 0.4,
-                    "high": 1.3
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.3,
+                      1.1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.800168680013523,
-                    "low": 0.3,
-                    "high": 1.7
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.7,
+                      1.1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.80039262536605,
-                    "low": 0.3,
-                    "high": 1.9
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      1.9,
+                      1.2
+                    ]
                   },
                   "fourWk": {
                     "point": 0.901089259738007,
-                    "low": 0.3,
-                    "high": 2.3
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      2.3,
+                      1.3
+                    ]
                   },
                   "week": 201643
                 }
@@ -6558,38 +8826,80 @@
                 {
                   "onsetWeek": {
                     "point": 52,
-                    "low": 44,
-                    "high": 15
+                    "low": [
+                      44,
+                      49
+                    ],
+                    "high": [
+                      15,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 5,
-                    "low": 46,
-                    "high": 21
+                    "low": [
+                      46,
+                      51
+                    ],
+                    "high": [
+                      21,
+                      14
+                    ]
                   },
                   "peakPercent": {
                     "point": 2.7,
-                    "low": 1.3,
-                    "high": 8.7
+                    "low": [
+                      1.3,
+                      1.9
+                    ],
+                    "high": [
+                      8.7,
+                      4.2
+                    ]
                   },
                   "oneWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 1.5
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      1.5,
+                      1.1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 1.9
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      1.9,
+                      1.2
+                    ]
                   },
                   "threeWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 2.4
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      2.4,
+                      1.2
+                    ]
                   },
                   "fourWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 3.3
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      3.3,
+                      1.3
+                    ]
                   },
                   "week": 201643
                 }
@@ -6606,38 +8916,80 @@
                 {
                   "onsetWeek": {
                     "point": 1,
-                    "low": 45,
-                    "high": 10
+                    "low": [
+                      45,
+                      50
+                    ],
+                    "high": [
+                      10,
+                      6
+                    ]
                   },
                   "peakWeek": {
                     "point": 4,
-                    "low": 43,
-                    "high": 13
+                    "low": [
+                      43,
+                      52
+                    ],
+                    "high": [
+                      13,
+                      9
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.5,
-                    "low": 0.5,
-                    "high": 10.1
+                    "low": [
+                      0.5,
+                      2.3
+                    ],
+                    "high": [
+                      10.1,
+                      5.1
+                    ]
                   },
                   "oneWk": {
                     "point": 0.5,
-                    "low": 0.2,
-                    "high": 1.9
+                    "low": [
+                      0.2,
+                      0.3
+                    ],
+                    "high": [
+                      1.9,
+                      1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 2.1
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      2.1,
+                      1.1
+                    ]
                   },
                   "threeWk": {
                     "point": 0.7,
-                    "low": 0.2,
-                    "high": 2.3
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      2.3,
+                      1.2
+                    ]
                   },
                   "fourWk": {
                     "point": 0.7,
-                    "low": 0.2,
-                    "high": 2.6
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      2.6,
+                      1.3
+                    ]
                   },
                   "week": 201643
                 }
@@ -6654,38 +9006,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 45,
-                    "high": 7
+                    "low": [
+                      45,
+                      47
+                    ],
+                    "high": [
+                      7,
+                      52
+                    ]
                   },
                   "peakWeek": {
                     "point": 2,
-                    "low": 50,
-                    "high": 16
+                    "low": [
+                      50,
+                      52
+                    ],
+                    "high": [
+                      16,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.3,
-                    "low": 1.8,
-                    "high": 11.3
+                    "low": [
+                      1.8,
+                      3
+                    ],
+                    "high": [
+                      11.3,
+                      6.4
+                    ]
                   },
                   "oneWk": {
                     "point": 0.9,
-                    "low": 0.5,
-                    "high": 1.8
+                    "low": [
+                      0.5,
+                      0.7
+                    ],
+                    "high": [
+                      1.8,
+                      1.3
+                    ]
                   },
                   "twoWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 1.9
+                    "low": [
+                      0.4,
+                      0.6
+                    ],
+                    "high": [
+                      1.9,
+                      1.3
+                    ]
                   },
                   "threeWk": {
                     "point": 0.9,
-                    "low": 0.4,
-                    "high": 2.3
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      2.3,
+                      1.4
+                    ]
                   },
                   "fourWk": {
                     "point": 1.1,
-                    "low": 0.4,
-                    "high": 3
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      3,
+                      1.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -6702,38 +9096,80 @@
                 {
                   "onsetWeek": {
                     "point": 36.6838376284702,
-                    "low": 45,
-                    "high": 10
+                    "low": [
+                      45,
+                      48
+                    ],
+                    "high": [
+                      10,
+                      2
+                    ]
                   },
                   "peakWeek": {
                     "point": 4.93669116621922,
-                    "low": 46,
-                    "high": 21
+                    "low": [
+                      46,
+                      51
+                    ],
+                    "high": [
+                      21,
+                      14
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.19636371590374,
-                    "low": 1.7,
-                    "high": 11.2
+                    "low": [
+                      1.7,
+                      2.9
+                    ],
+                    "high": [
+                      11.2,
+                      6.3
+                    ]
                   },
                   "oneWk": {
                     "point": 0.898854261265069,
-                    "low": 0.4,
-                    "high": 1.5
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      1.5,
+                      1.1
+                    ]
                   },
                   "twoWk": {
                     "point": 0.898827565970386,
-                    "low": 0.4,
-                    "high": 1.9
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      1.9,
+                      1.2
+                    ]
                   },
                   "threeWk": {
                     "point": 0.871056962445703,
-                    "low": 0.3,
-                    "high": 2.4
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      2.4,
+                      1.3
+                    ]
                   },
                   "fourWk": {
                     "point": 0.900309090038579,
-                    "low": 0.3,
-                    "high": 3.2
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      3.2,
+                      1.3
+                    ]
                   },
                   "week": 201643
                 }
@@ -7208,38 +9644,80 @@
                 {
                   "onsetWeek": {
                     "point": 4,
-                    "low": 49,
-                    "high": 16
+                    "low": [
+                      49,
+                      2
+                    ],
+                    "high": [
+                      16,
+                      7
+                    ]
                   },
                   "peakWeek": {
                     "point": 9,
-                    "low": 50,
-                    "high": 21
+                    "low": [
+                      50,
+                      3
+                    ],
+                    "high": [
+                      21,
+                      18
+                    ]
                   },
                   "peakPercent": {
                     "point": 4.6,
-                    "low": 2.4,
-                    "high": 8.9
+                    "low": [
+                      2.4,
+                      3.4
+                    ],
+                    "high": [
+                      8.9,
+                      6
+                    ]
                   },
                   "oneWk": {
                     "point": 1.1,
-                    "low": 0.6,
-                    "high": 1.9
+                    "low": [
+                      0.6,
+                      1
+                    ],
+                    "high": [
+                      1.9,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 1.2,
-                    "low": 0.5,
-                    "high": 1.9
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      1.9,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1.2,
-                    "low": 0.4,
-                    "high": 2.3
+                    "low": [
+                      0.4,
+                      0.9
+                    ],
+                    "high": [
+                      2.3,
+                      1.6
+                    ]
                   },
                   "fourWk": {
                     "point": 1.2,
-                    "low": 0.5,
-                    "high": 2.4
+                    "low": [
+                      0.5,
+                      0.9
+                    ],
+                    "high": [
+                      2.4,
+                      1.6
+                    ]
                   },
                   "week": 201643
                 }
@@ -7256,38 +9734,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 41,
-                    "high": 6
+                    "low": [
+                      41,
+                      49
+                    ],
+                    "high": [
+                      6,
+                      2
+                    ]
                   },
                   "peakWeek": {
                     "point": 4,
-                    "low": 44,
-                    "high": 14
+                    "low": [
+                      44,
+                      52
+                    ],
+                    "high": [
+                      14,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.7,
-                    "low": 2.8,
-                    "high": 100
+                    "low": [
+                      2.8,
+                      4.4
+                    ],
+                    "high": [
+                      100,
+                      8
+                    ]
                   },
                   "oneWk": {
                     "point": 1.6,
-                    "low": 0.7,
-                    "high": 3.9
+                    "low": [
+                      0.7,
+                      1.1
+                    ],
+                    "high": [
+                      3.9,
+                      2.3
+                    ]
                   },
                   "twoWk": {
                     "point": 1.7,
-                    "low": 0.7,
-                    "high": 4
+                    "low": [
+                      0.7,
+                      1.2
+                    ],
+                    "high": [
+                      4,
+                      2.4
+                    ]
                   },
                   "threeWk": {
                     "point": 1.7,
-                    "low": 0.7,
-                    "high": 4.2
+                    "low": [
+                      0.7,
+                      1.2
+                    ],
+                    "high": [
+                      4.2,
+                      2.6
+                    ]
                   },
                   "fourWk": {
                     "point": 1.8,
-                    "low": 0.8,
-                    "high": 4.5
+                    "low": [
+                      0.8,
+                      1.3
+                    ],
+                    "high": [
+                      4.5,
+                      2.7
+                    ]
                   },
                   "week": 201643
                 }
@@ -7304,38 +9824,80 @@
                 {
                   "onsetWeek": {
                     "point": 51,
-                    "low": 47,
-                    "high": 8
+                    "low": [
+                      47,
+                      50
+                    ],
+                    "high": [
+                      8,
+                      3
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 51,
-                    "high": 18
+                    "low": [
+                      51,
+                      3
+                    ],
+                    "high": [
+                      18,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.5,
-                    "low": 2.7,
-                    "high": 11.7
+                    "low": [
+                      2.7,
+                      4.1
+                    ],
+                    "high": [
+                      11.7,
+                      7.5
+                    ]
                   },
                   "oneWk": {
                     "point": 1.3,
-                    "low": 0.8,
-                    "high": 2.2
+                    "low": [
+                      0.8,
+                      1.1
+                    ],
+                    "high": [
+                      2.2,
+                      1.7
+                    ]
                   },
                   "twoWk": {
                     "point": 1.3,
-                    "low": 0.7,
-                    "high": 2.4
+                    "low": [
+                      0.7,
+                      1
+                    ],
+                    "high": [
+                      2.4,
+                      1.7
+                    ]
                   },
                   "threeWk": {
                     "point": 1.5,
-                    "low": 0.8,
-                    "high": 3
+                    "low": [
+                      0.8,
+                      1.2
+                    ],
+                    "high": [
+                      3,
+                      2.1
+                    ]
                   },
                   "fourWk": {
                     "point": 1.7,
-                    "low": 0.9,
-                    "high": 3.6
+                    "low": [
+                      0.9,
+                      1.3
+                    ],
+                    "high": [
+                      3.6,
+                      2.4
+                    ]
                   },
                   "week": 201643
                 }
@@ -7352,38 +9914,80 @@
                 {
                   "onsetWeek": {
                     "point": 50.8526086364205,
-                    "low": 41,
-                    "high": 6
+                    "low": [
+                      41,
+                      49
+                    ],
+                    "high": [
+                      6,
+                      2
+                    ]
                   },
                   "peakWeek": {
                     "point": 8.94854854858979,
-                    "low": 50,
-                    "high": 21
+                    "low": [
+                      50,
+                      3
+                    ],
+                    "high": [
+                      21,
+                      18
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.45615598600253,
-                    "low": 2.6,
-                    "high": 11.7
+                    "low": [
+                      2.6,
+                      4
+                    ],
+                    "high": [
+                      11.7,
+                      7.4
+                    ]
                   },
                   "oneWk": {
                     "point": 1.10176093115685,
-                    "low": 0.6,
-                    "high": 1.9
+                    "low": [
+                      0.6,
+                      1
+                    ],
+                    "high": [
+                      1.9,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 1.20184134248213,
-                    "low": 0.5,
-                    "high": 1.9
+                    "low": [
+                      0.5,
+                      1
+                    ],
+                    "high": [
+                      1.9,
+                      1.5
+                    ]
                   },
                   "threeWk": {
                     "point": 1.45475816585276,
-                    "low": 0.6,
-                    "high": 3.3
+                    "low": [
+                      0.6,
+                      1.1
+                    ],
+                    "high": [
+                      3.3,
+                      2
+                    ]
                   },
                   "fourWk": {
                     "point": 1.56216020927407,
-                    "low": 0.6,
-                    "high": 3.6
+                    "low": [
+                      0.6,
+                      1.1
+                    ],
+                    "high": [
+                      3.6,
+                      2.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -7858,38 +10462,80 @@
                 {
                   "onsetWeek": {
                     "point": 2,
-                    "low": 45,
-                    "high": 15
+                    "low": [
+                      45,
+                      50
+                    ],
+                    "high": [
+                      15,
+                      7
+                    ]
                   },
                   "peakWeek": {
                     "point": 10,
-                    "low": 49,
-                    "high": 21
+                    "low": [
+                      49,
+                      4
+                    ],
+                    "high": [
+                      21,
+                      18
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.1,
-                    "low": 1.2,
-                    "high": 8.6
+                    "low": [
+                      1.2,
+                      2
+                    ],
+                    "high": [
+                      8.6,
+                      4.4
+                    ]
                   },
                   "oneWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.2
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.2,
+                      0.8
+                    ]
                   },
                   "twoWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.4
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.4,
+                      0.8
+                    ]
                   },
                   "threeWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.5
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.5,
+                      0.9
+                    ]
                   },
                   "fourWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.7
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.7,
+                      1
+                    ]
                   },
                   "week": 201643
                 }
@@ -7906,38 +10552,80 @@
                 {
                   "onsetWeek": {
                     "point": 49,
-                    "low": 41,
-                    "high": 7
+                    "low": [
+                      41,
+                      45
+                    ],
+                    "high": [
+                      7,
+                      2
+                    ]
                   },
                   "peakWeek": {
                     "point": 6,
-                    "low": 45,
-                    "high": 16
+                    "low": [
+                      45,
+                      3
+                    ],
+                    "high": [
+                      16,
+                      10
+                    ]
                   },
                   "peakPercent": {
                     "point": 5.1,
-                    "low": 1,
-                    "high": 12.2
+                    "low": [
+                      1,
+                      3.3
+                    ],
+                    "high": [
+                      12.2,
+                      7.9
+                    ]
                   },
                   "oneWk": {
                     "point": 0.8,
-                    "low": 0.3,
-                    "high": 2.7
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      2.7,
+                      1.4
+                    ]
                   },
                   "twoWk": {
                     "point": 0.9,
-                    "low": 0.3,
-                    "high": 3
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      3,
+                      1.6
+                    ]
                   },
                   "threeWk": {
                     "point": 1,
-                    "low": 0.3,
-                    "high": 3.4
+                    "low": [
+                      0.3,
+                      0.6
+                    ],
+                    "high": [
+                      3.4,
+                      1.7
+                    ]
                   },
                   "fourWk": {
                     "point": 1.1,
-                    "low": 0.4,
-                    "high": 3.6
+                    "low": [
+                      0.4,
+                      0.7
+                    ],
+                    "high": [
+                      3.6,
+                      1.9
+                    ]
                   },
                   "week": 201643
                 }
@@ -7954,38 +10642,80 @@
                 {
                   "onsetWeek": {
                     "point": 50,
-                    "low": 45,
-                    "high": 7
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      7,
+                      53
+                    ]
                   },
                   "peakWeek": {
                     "point": 3,
-                    "low": 51,
-                    "high": 16
+                    "low": [
+                      51,
+                      1
+                    ],
+                    "high": [
+                      16,
+                      8
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.6,
-                    "low": 1.5,
-                    "high": 9.2
+                    "low": [
+                      1.5,
+                      2.5
+                    ],
+                    "high": [
+                      9.2,
+                      5.3
+                    ]
                   },
                   "oneWk": {
                     "point": 0.4,
-                    "low": 0.2,
-                    "high": 0.9
+                    "low": [
+                      0.2,
+                      0.3
+                    ],
+                    "high": [
+                      0.9,
+                      0.7
+                    ]
                   },
                   "twoWk": {
                     "point": 0.6,
-                    "low": 0.3,
-                    "high": 1.4
+                    "low": [
+                      0.3,
+                      0.4
+                    ],
+                    "high": [
+                      1.4,
+                      0.9
+                    ]
                   },
                   "threeWk": {
                     "point": 0.6,
-                    "low": 0.2,
-                    "high": 1.5
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.5,
+                      0.9
+                    ]
                   },
                   "fourWk": {
                     "point": 0.7,
-                    "low": 0.3,
-                    "high": 2
+                    "low": [
+                      0.3,
+                      0.5
+                    ],
+                    "high": [
+                      2,
+                      1.2
+                    ]
                   },
                   "week": 201643
                 }
@@ -8002,38 +10732,80 @@
                 {
                   "onsetWeek": {
                     "point": 12.5756435431225,
-                    "low": 45,
-                    "high": 15
+                    "low": [
+                      45,
+                      49
+                    ],
+                    "high": [
+                      15,
+                      5
+                    ]
                   },
                   "peakWeek": {
                     "point": 9.73817746534927,
-                    "low": 49,
-                    "high": 21
+                    "low": [
+                      49,
+                      3
+                    ],
+                    "high": [
+                      21,
+                      17
+                    ]
                   },
                   "peakPercent": {
                     "point": 3.13643053183349,
-                    "low": 1.2,
-                    "high": 8.6
+                    "low": [
+                      1.2,
+                      2
+                    ],
+                    "high": [
+                      8.6,
+                      4.5
+                    ]
                   },
                   "oneWk": {
                     "point": 0.599808056838621,
-                    "low": 0.2,
-                    "high": 1.2
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.2,
+                      0.8
+                    ]
                   },
                   "twoWk": {
                     "point": 0.603930246577096,
-                    "low": 0.2,
-                    "high": 1.4
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.4,
+                      0.8
+                    ]
                   },
                   "threeWk": {
                     "point": 0.601675778467125,
-                    "low": 0.2,
-                    "high": 1.5
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.5,
+                      0.9
+                    ]
                   },
                   "fourWk": {
                     "point": 0.602039501464658,
-                    "low": 0.2,
-                    "high": 1.7
+                    "low": [
+                      0.2,
+                      0.4
+                    ],
+                    "high": [
+                      1.7,
+                      1
+                    ]
                   },
                   "week": 201643
                 }
@@ -8051,6 +10823,6 @@
     "sourceUrl": "https://github.com/reichlab/flusight",
     "parentUrl": "https://reichlab.github.io",
     "licenseUrl": "https://opensource.org/licenses/GPL-3.0",
-    "updateTime": "November 11th 2016, 06:48:38"
+    "updateTime": "November 11th 2016, 07:36:27"
   }
 }

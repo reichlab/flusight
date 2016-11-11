@@ -162,6 +162,7 @@ $accent: rgb(24, 129, 127);
     a {
         box-shadow: 1px 1px 1px #ccc;
         margin: 2px 0px;
+        width: 28px;
         &.legend-btn {
             border-width: 1px;
             border-color: #3273dc;
@@ -182,11 +183,11 @@ $accent: rgb(24, 129, 127);
     }
 }
 
-#legend {
+.nav-drawer {
     user-select: none;
     position: absolute;
     right: 58px;
-    top: 25px;
+    top: 22px;
     box-shadow: 1px 1px 2px #ccc;
     background-color: white;
     border-radius: 2px;
@@ -194,6 +195,15 @@ $accent: rgb(24, 129, 127);
     border-width: 1px;
     border-color: #ccc;
     font-size: 11px;
+
+    hr {
+        height: 1px;
+        margin: 5px 0;
+        border: 0;
+        border-bottom: 1px dashed rgb(204, 204, 204);
+        background: rgba(153, 153, 153, 0);
+    }
+
     .item {
         padding: 5px 10px;
         .fa {
@@ -220,12 +230,9 @@ $accent: rgb(24, 129, 127);
         }
     }
 
-    hr {
-        height: 1px;
-        margin: 5px 0;
-        border: 0;
-        border-bottom: 1px dashed rgb(204, 204, 204);
-        background: rgba(153, 153, 153, 0);
+    .item-selected {
+        background-color: #3273dc;
+        color: white;
     }
 }
 
@@ -234,12 +241,28 @@ $accent: rgb(24, 129, 127);
 <template>
     <div id="timechart">
     </div>
-    <div id="legend" v-show="show">
+    <div class="nav-drawer" id="legend" v-show="legendShow">
+    </div>
+    <div class="nav-drawer" id="confidence" v-show="confidenceShow">
+        <div class="item item-selected">
+            90%
+        </div>
+        <div class="item">
+            50%
+        </div>
     </div>
     <div id="nav-controls">
-        <a class="button is-small is-info legend-btn" v-on:click="toggle" v-bind:class="[show ? 'is-outlined' : '']">
+        <a class="button is-small is-info legend-btn" v-on:click="toggleLegend"
+    v-bind:class="[legendShow ? '' : 'is-outlined']">
             <span class="icon is-small">
                 <i class="fa fa-map-o"></i>
+            </span>
+        </a>
+        <br>
+        <a class="button is-small is-info confidence-btn"
+    v-on:click="toggleConfidence" v-bind:class="[confidenceShow ? '' : 'is-outlined']">
+            <span class="icon is-small">
+                <i class="fa fa-area-chart"></i>
             </span>
         </a>
         <br>
@@ -271,12 +294,24 @@ $accent: rgb(24, 129, 127);
   export default {
     data() {
       return {
-        show: true
+        legendShow: true,
+        confidenceShow: false,
+        legendShowHistory: true
       }
     },
     methods: {
-      toggle() {
-        this.show = !this.show
+      toggleLegend() {
+        this.legendShow = !this.legendShow
+        this.legendShowHistory = this.legendShow
+
+        // Hide confidence drawer in any case
+        this.confidenceShow = false
+      },
+      toggleConfidence() {
+        if (this.legendShowHistory) {
+          this.legendShow = !this.legendShow
+        }
+        this.confidenceShow = !this.confidenceShow
       }
     },
     vuex: {
@@ -308,7 +343,8 @@ $accent: rgb(24, 129, 127);
       let elems = [
         ['.legend-btn', 'Toggle legend'],
         ['#forward-btn', 'Move forward'],
-        ['#backward-btn', 'Move backward']
+        ['#backward-btn', 'Move backward'],
+        ['.confidence-btn', 'Select confidence interval']
       ]
 
       elems.map(e => d3.select(e[0])
