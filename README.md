@@ -27,7 +27,7 @@ it [here](https://nodejs.org/en/download/).
 
   `git clone git@github.com:reichlab/flusight.git && cd ./flusight`
 
-+ Install dependencies
++ Install dependencies (you only need to run this when first installing the app)
 
   `npm install`
   
@@ -40,6 +40,10 @@ it [here](https://nodejs.org/en/download/).
 + Bundle production build
 
   `npm run build`
+
++ Run/test the app locally
+
+  `npm run dev`
 
 + Host. Copy over contents from `./dist` to your hosting service.
 
