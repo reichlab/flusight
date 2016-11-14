@@ -32,26 +32,19 @@ $accent: rgb(24, 129, 127);
 // Onset markers
 .onset-group {
     .onset-mark {
-        stroke-width: 10px;
-        opacity: 0.7;
-        &:hover {
-            opacity: 1.0;
-        }
+        stroke-width: 6px;
     }
 }
 
 .onset-paint {
     fill: white;
-    stroke: #ccc;
-    stroke-width: 0.5;
-    stroke-dasharray: 5 5;
 }
 
 // Peak markers
 .peak-group {
     .peak-mark {
         stroke-width: 10px;
-        opacity: 0.7;
+        opacity: 0.9;
         &:hover {
             opacity: 1.0;
         }

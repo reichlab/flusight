@@ -2,6 +2,7 @@
 
 import * as util from './utils/timechart'
 import * as marker from './markers/timechart'
+import textures from 'textures'
 
 export default class TimeChart {
   constructor(d3, elementId, weekHook) {
@@ -75,6 +76,14 @@ export default class TimeChart {
     // Hard coding as of now
     this.confidenceIntervals = ['90%', '50%']
     this.cid = 1 // Use 50% as default
+
+    this.onsetTexture = textures.lines()
+      .lighter()
+      .strokeWidth(0.5)
+      .size(8)
+      .stroke('#ccc')
+      .background('white')
+    svg.call(this.onsetTexture)
   }
 
   /**
@@ -195,10 +204,18 @@ export default class TimeChart {
   paintOnsetOffset() {
     this.svg.append('rect')
       .attr('class', 'onset-paint')
+      .attr('height', this.onsetOffset + 5)
+      .attr('width', this.width)
+      .attr('x', 0)
+      .attr('y', - this.onsetOffset - 5)
+
+    this.svg.append('rect')
+      .attr('class', 'onset-texture')
       .attr('height', this.onsetOffset)
       .attr('width', this.width)
       .attr('x', 0)
-      .attr('y', -this.onsetOffset - 5)
+      .attr('y', - this.onsetOffset - 5)
+      .style('fill', this.onsetTexture.url())
   }
 
   // plot data
@@ -316,10 +333,10 @@ export default class TimeChart {
     let colors = d3.schemeCategory10 // TODO: handle more than 10 colors
 
     let totalModels = data.models.length
-    let onsetDiff =  this.onsetOffset / (totalModels + 1)
+    let onsetDiff =  (this.onsetOffset - 2) / (totalModels + 1)
 
     data.models.forEach((m, idx) => {
-      let onsetYPos = - (idx + 1) * onsetDiff - 5
+      let onsetYPos = - (idx + 1) * onsetDiff - 6
       let predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
       predMarker.plot(this, m.predictions, data.actual)
       predMarker.hideMarkers()
