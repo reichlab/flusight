@@ -111,6 +111,7 @@ $accent: rgb(24, 129, 127);
 }
 
 #chart-tooltip {
+    z-index: 100;
     position: fixed;
     box-shadow: 0px 0px 2px;
     border-radius: 1px;
@@ -141,6 +142,7 @@ $accent: rgb(24, 129, 127);
 }
 
 #legend-tooltip {
+    z-index: 100;
     position: fixed;
     box-shadow: 0px 0px 2px;
     border-radius: 1px;
