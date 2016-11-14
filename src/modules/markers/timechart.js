@@ -3,7 +3,7 @@
 import * as util from '../utils/timechart'
 
 export class Prediction {
-  constructor(parent, id, meta, color) {
+  constructor(parent, id, meta, color, cy) {
 
     // Prediction group
     let predictionGroup = parent.svg.append('g')
@@ -31,8 +31,7 @@ export class Prediction {
         .attr('class', 'onset-group')
         .attr('id', id + '-marker')
 
-    let stp = 10,
-        cy = parent.height - 15
+    let stp = 6
 
     onsetGroup.append('line')
       .attr('y1', cy)
@@ -53,7 +52,7 @@ export class Prediction {
       .style('stroke', util.hexToRgba(color, 0.6))
 
     onsetGroup.append('circle')
-      .attr('r', 5)
+      .attr('r', 3)
       .attr('cy', cy)
       .attr('class', 'onset-mark')
       .style('stroke', 'transparent')
@@ -169,6 +168,11 @@ export class Prediction {
           d3.select('#chart-tooltip')
             .style('display', 'none')
         })
+        .on('mousemove', function() {
+          d3.select('#chart-tooltip')
+            .style('top', (event.clientY + 20) + 'px')
+            .style('left', (event.clientX + 20) + 'px')
+        })
 
       this.onsetGroup.select('.onset-range')
         .transition()
@@ -227,6 +231,11 @@ export class Prediction {
             .style('stroke', 'transparent')
           d3.select('#chart-tooltip')
             .style('display', 'none')
+        })
+        .on('mousemove', function() {
+          d3.select('#chart-tooltip')
+            .style('top', (event.clientY + 20) + 'px')
+            .style('left', (event.clientX + 20) + 'px')
         })
 
       this.peakGroup.select('.peak-range-x')

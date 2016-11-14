@@ -36,6 +36,14 @@ $accent: rgb(24, 129, 127);
     }
 }
 
+.onset-paint {
+    fill: white;
+    stroke: #ccc;
+    stroke-width: 0.5;
+    stroke-dasharray: 5 5;
+}
+
+
 // Peak markers
 .peak-group {
     .peak-mark {

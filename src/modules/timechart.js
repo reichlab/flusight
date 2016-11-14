@@ -18,9 +18,11 @@ export default class TimeChart {
     // Limits
     divHeight = Math.min(Math.max(350, divHeight), 600)
 
+    let onsetOffset = 30
+
     // Create blank chart
     let margin = {
-      top: 30, right: 50, bottom: 70, left: 40
+      top: 1 + onsetOffset + 5, right: 50, bottom: 70, left: 40
     },
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom
@@ -53,6 +55,7 @@ export default class TimeChart {
     this.xScaleDate = xScaleDate
     this.height = height
     this.width = width
+    this.onsetOffset = onsetOffset
     this.weekHook = weekHook
 
     // Add axes
@@ -189,6 +192,15 @@ export default class TimeChart {
       })
   }
 
+  paintOnsetOffset() {
+    this.svg.append('rect')
+      .attr('class', 'onset-paint')
+      .attr('height', this.onsetOffset)
+      .attr('width', this.width)
+      .attr('x', 0)
+      .attr('y', -this.onsetOffset - 5)
+  }
+
   // plot data
   plot(data) {
     let d3 = this.d3,
@@ -295,13 +307,20 @@ export default class TimeChart {
     // if (this.history) this.history.clear()
     this.history.plot(this, data.history)
 
+    // Paint the top region
+    this.paintOnsetOffset()
+
     // Reset predictions
     this.predictions.map(p => p.clear())
     this.predictions = []
     let colors = d3.schemeCategory10 // TODO: handle more than 10 colors
 
+    let totalModels = data.models.length
+    let onsetDiff =  this.onsetOffset / (totalModels + 1)
+
     data.models.forEach((m, idx) => {
-      let predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx])
+      let onsetYPos = - (idx + 1) * onsetDiff - 5
+      let predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
       predMarker.plot(this, m.predictions, data.actual)
       predMarker.hideMarkers()
       this.predictions.push(predMarker)
