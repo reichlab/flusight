@@ -1,12 +1,13 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO [#B] Fix position of choropleth elements
+** [#B] Fix position of choropleth elements
 SCHEDULED: <2016-11-07 Mon>
-** TODO [#B] Reorder prediction markers
+** [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
-** TODO [#C] Smoother prediction transition with selector changes
+** DONE Smoother prediction transition with selector changes
+CLOSED: [2016-11-14 Mon 04:57]
 ** DONE Hide tooltip on point mouseout
 CLOSED: [2016-11-14 Mon 02:37]
 ** DONE Persist map settings
@@ -79,13 +80,15 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
 * Enhancements
-** TODO Move onset predictions to top
-*** Add offsets
+** [#B] Confidence ranges in tooltips
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Move onset predictions to top
+CLOSED: [2016-11-14 Mon 04:58]
+*** Add offsets
 ** DONE Colors to confidence ranges
 CLOSED: [2016-11-11 Fri 04:53]
 ** DONE Add axes description content from email
@@ -110,4 +113,3 @@ CLOSED: [2016-11-04 Fri 00:53]
 Use the font-awesome one
 ** DONE Skip first prediction circle
 CLOSED: [2016-11-04 Fri 01:02]
-** [#B] Confidence ranges in tooltips
