@@ -33,6 +33,10 @@ $accent: rgb(24, 129, 127);
 .onset-group {
     .onset-mark {
         stroke-width: 10px;
+        opacity: 0.7;
+        &:hover {
+            opacity: 1.0;
+        }
     }
 }
 
@@ -43,11 +47,14 @@ $accent: rgb(24, 129, 127);
     stroke-dasharray: 5 5;
 }
 
-
 // Peak markers
 .peak-group {
     .peak-mark {
         stroke-width: 10px;
+        opacity: 0.7;
+        &:hover {
+            opacity: 1.0;
+        }
     }
     .range {
         stroke-width: 0.5px;
