@@ -597,9 +597,9 @@ export class Legend {
           .attr('id', 'legend-' + p.id)
           .style('cursor', 'pointer')
 
-      predItem.append('i')
-        .attr('class', 'fa fa-circle selected-icon')
-        .style('color', p.color)
+      let predIcon = predItem.append('i')
+          .attr('class', 'fa fa-circle selected-icon')
+          .style('color', p.color)
 
       predItem.append('span')
         .attr('class', 'item-title')
@@ -612,13 +612,20 @@ export class Legend {
           .attr('class', 'fa fa-external-link model-url')
           .style('color', p.color)
 
+      urlItem
+        .on('mousemove', function() {
+          tooltip.style('display', 'none')
+        })
+        .on('click', function() {
+          parent.d3.event.stopPropagation()
+        })
+
       predItem
         .on('click', function() {
-          let iElem = parent.d3.select(this).select('.selected-icon')
-          let isActive = iElem.classed('fa-circle')
+          let isActive = predIcon.classed('fa-circle')
 
-          iElem.classed('fa-circle', !isActive)
-          iElem.classed('fa-circle-o', isActive)
+          predIcon.classed('fa-circle', !isActive)
+          predIcon.classed('fa-circle-o', isActive)
 
           legendHook(p.id, isActive)
         })
@@ -635,11 +642,6 @@ export class Legend {
             .style('top', (event.clientY + 20) + 'px')
             .style('left', (event.clientX - 150 - 20) + 'px')
             .html(util.legendTooltip(p.meta))
-        })
-
-      urlItem
-        .on('mousemove', function() {
-          tooltip.style('display', 'none')
         })
     })
 
