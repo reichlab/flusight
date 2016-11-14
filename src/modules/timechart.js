@@ -77,6 +77,9 @@ export default class TimeChart {
     this.confidenceIntervals = ['90%', '50%']
     this.cid = 1 // Use 50% as default
 
+    // History toggle state
+    this.historyShow = true
+
     this.onsetTexture = textures.lines()
       .lighter()
       .strokeWidth(0.5)
@@ -321,7 +324,6 @@ export default class TimeChart {
     this.actual.plot(this, data.actual)
 
     // Reset history lines
-    // if (this.history) this.history.clear()
     this.history.plot(this, data.history)
 
     // Paint the top region
@@ -346,6 +348,7 @@ export default class TimeChart {
     this.legend = new marker.Legend(this, (pid, hide) => {
 
       if (pid === 'legend:history') {
+        this.historyShow = !hide
         if (hide) this.history.hide()
         else this.history.show()
       } else {

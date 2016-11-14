@@ -432,7 +432,10 @@ export class HistoricalLines {
 
   plot(parent, data) {
     this.clear()
-    this.show()
+    if (parent.historyShow)
+      this.show()
+    else
+      this.hide()
 
     let line = parent.d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
@@ -544,41 +547,45 @@ export class Legend {
           .attr('id', 'legend-history')
           .style('cursor', 'pointer')
 
-      historyItem.append('i')
-        .attr('class', 'fa fa-circle')
+    let historyIcon = historyItem.append('i')
+        .attr('class', 'fa')
         .style('color', '#ccc')
 
-      historyItem.append('span')
-        .attr('class', 'item-title')
-        .html('History')
+    if (parent.historyShow)
+      historyIcon.classed('fa-circle', true)
+    else
+      historyIcon.classed('fa-circle-o', true)
 
-      historyItem
-        .on('click', function() {
-          let iElem = parent.d3.select(this).select('i')
-          let isActive = iElem.classed('fa-circle')
+    historyItem.append('span')
+      .attr('class', 'item-title')
+      .html('History')
 
-          iElem.classed('fa-circle', !isActive)
-          iElem.classed('fa-circle-o', isActive)
+    historyItem
+      .on('click', function() {
+        let isActive = historyIcon.classed('fa-circle')
 
-          legendHook('legend:history', isActive)
-        })
+        historyIcon.classed('fa-circle', !isActive)
+        historyIcon.classed('fa-circle-o', isActive)
 
-      historyItem
-        .on('mouseover', function() {
-          tooltip.style('display', null)
-        })
-        .on('mouseout', function() {
-          tooltip.style('display', 'none')
-        })
-        .on('mousemove', function() {
-          tooltip
-            .style('top', (event.clientY + 20) + 'px')
-            .style('left', (event.clientX - 150 - 20) + 'px')
-            .html(util.legendTooltip({
-              name: 'Historical Data',
-              description: 'Toggle historical data lines'
-            }))
-        })
+        legendHook('legend:history', isActive)
+      })
+
+    historyItem
+      .on('mouseover', function() {
+        tooltip.style('display', null)
+      })
+      .on('mouseout', function() {
+        tooltip.style('display', 'none')
+      })
+      .on('mousemove', function() {
+        tooltip
+          .style('top', (event.clientY + 20) + 'px')
+          .style('left', (event.clientX - 150 - 20) + 'px')
+          .html(util.legendTooltip({
+            name: 'Historical Data',
+            description: 'Toggle historical data lines'
+          }))
+      })
 
     legendDiv.append('hr')
 
