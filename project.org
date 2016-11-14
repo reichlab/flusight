@@ -2,7 +2,6 @@
 
 * Issues
 ** [#B] Fix position of choropleth elements
-SCHEDULED: <2016-11-07 Mon>
 ** [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
