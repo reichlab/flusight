@@ -7,7 +7,9 @@ SCHEDULED: <2016-11-07 Mon>
 *** Put shades first
 *** Circles second
 ** TODO [#C] Smoother prediction transition with selector changes
-** DONE [#A] Persist map settings
+** DONE Hide tooltip on point mouseout
+CLOSED: [2016-11-14 Mon 02:37]
+** DONE Persist map settings
 CLOSED: [2016-11-14 Mon 02:27]
 ** DONE Week counts for years
 CLOSED: [2016-11-11 Fri 17:13]

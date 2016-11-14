@@ -20,7 +20,7 @@ export default class TimeChart {
 
     // Create blank chart
     let margin = {
-      top: 10, right: 50, bottom: 70, left: 40
+      top: 30, right: 50, bottom: 70, left: 40
     },
         width = divWidth - margin.left - margin.right,
         height = divHeight - margin.top - margin.bottom

@@ -166,6 +166,8 @@ export class Prediction {
             .transition()
             .duration(200)
             .style('stroke', 'transparent')
+          d3.select('#chart-tooltip')
+            .style('display', 'none')
         })
 
       this.onsetGroup.select('.onset-range')
@@ -223,6 +225,8 @@ export class Prediction {
             .transition()
             .duration(200)
             .style('stroke', 'transparent')
+          d3.select('#chart-tooltip')
+            .style('display', 'none')
         })
 
       this.peakGroup.select('.peak-range-x')
