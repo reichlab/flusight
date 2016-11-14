@@ -162,8 +162,8 @@ $accent: rgb(24, 129, 127);
 #nav-controls {
     position: absolute;
     background-color: white;
-    right: 0px;
-    top: 20px;
+    right: 10px;
+    top: 10px;
     .icon {
         margin-left: 0px !important;
     }
@@ -194,8 +194,8 @@ $accent: rgb(24, 129, 127);
 .nav-drawer {
     user-select: none;
     position: absolute;
-    right: 58px;
-    top: 22px;
+    right: 60px;
+    top: 12px;
     box-shadow: 1px 1px 2px #ccc;
     background-color: white;
     border-radius: 2px;
