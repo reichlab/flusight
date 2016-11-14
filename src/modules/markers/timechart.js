@@ -102,7 +102,7 @@ export class Prediction {
     this.id = id
     this.meta = meta
     this.d3 = parent.d3
-    this.cid = 0 // Default confidence id
+    this.cid = parent.cid
   }
 
   plot(parent, data, actual) {
@@ -496,7 +496,7 @@ export class Confidence {
         })
 
       // Select first by default
-      if (idx === 0) {
+      if (idx === parent.cid) {
         confItem.classed('item-selected', true)
       }
     })

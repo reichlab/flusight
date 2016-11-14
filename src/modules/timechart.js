@@ -68,6 +68,10 @@ export default class TimeChart {
     this.baseline = new marker.Baseline(this)
     this.actual = new marker.Actual(this)
     this.predictions = []
+
+    // Hard coding as of now
+    this.confidenceIntervals = ['90%', '50%']
+    this.cid = 1 // Use 50% as default
   }
 
   /**
@@ -316,13 +320,10 @@ export default class TimeChart {
       }
     })
 
-    // Hard coding as of now
-    this.confidenceIntervals = ['90%', '50%']
-
     // Confidence selection event
     new marker.Confidence(this, (cid) => {
       this.predictions.map(p => {
-        p.cid = cid
+        this.cid = p.cid = cid
         p.update(this.weekIdx)
       })
     })
