@@ -247,6 +247,10 @@ $accent: rgb(24, 129, 127);
 </style>
 
 <template>
+    <div id="legend-tooltip">
+    </div>
+    <div id="chart-tooltip">
+    </div>
     <div id="timechart">
     </div>
     <div class="nav-drawer" id="legend" v-show="legendShow">

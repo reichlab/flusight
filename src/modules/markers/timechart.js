@@ -111,6 +111,7 @@ export class Prediction {
     this.yScale = parent.yScale
     this.weeks = parent.weeks
     this.legendHidden = false
+    this.tooltip = parent.chartTooltip
 
     this.displayedData = Array(this.weeks.length).fill(false)
   }
@@ -134,7 +135,8 @@ export class Prediction {
 
       this.displayedPoints = {}
 
-      let cid = this.cid
+      let cid = this.cid,
+          tooltip = this.tooltip
 
       // Move things
       let onset = this.data[localPosition].onsetWeek
@@ -151,7 +153,7 @@ export class Prediction {
             .transition()
             .duration(300)
             .style('stroke', util.hexToRgba(color, 0.3))
-          d3.select('#chart-tooltip')
+          tooltip
             .style('display', null)
             .html(util.pointTooltip(id, [
               {
@@ -165,11 +167,11 @@ export class Prediction {
             .transition()
             .duration(200)
             .style('stroke', 'transparent')
-          d3.select('#chart-tooltip')
+          tooltip
             .style('display', 'none')
         })
         .on('mousemove', function() {
-          d3.select('#chart-tooltip')
+          tooltip
             .style('top', (event.clientY + 20) + 'px')
             .style('left', (event.clientX + 20) + 'px')
         })
@@ -211,7 +213,7 @@ export class Prediction {
             .transition()
             .duration(300)
             .style('stroke', util.hexToRgba(color, 0.3))
-          d3.select('#chart-tooltip')
+          tooltip
             .style('display', null)
             .html(util.pointTooltip(id, [
               {
@@ -229,11 +231,11 @@ export class Prediction {
             .transition()
             .duration(200)
             .style('stroke', 'transparent')
-          d3.select('#chart-tooltip')
+          tooltip
             .style('display', 'none')
         })
         .on('mousemove', function() {
-          d3.select('#chart-tooltip')
+          tooltip
             .style('top', (event.clientY + 20) + 'px')
             .style('left', (event.clientX + 20) + 'px')
         })
@@ -428,6 +430,7 @@ export class HistoricalLines {
   constructor(parent) {
     this.group = parent.svg.append('g')
       .attr('class', 'history-group')
+    this.tooltip = parent.chartTooltip
   }
 
   plot(parent, data) {
@@ -436,6 +439,8 @@ export class HistoricalLines {
       this.show()
     else
       this.hide()
+
+    let tooltip = this.tooltip
 
     let line = parent.d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
@@ -454,15 +459,15 @@ export class HistoricalLines {
       path.on('mouseover', function() {
         parent.d3.select(this)
           .classed('highlight', true)
-        parent.d3.select('#chart-tooltip')
+        tooltip
           .style('display', null)
       }).on('mouseout', function() {
         parent.d3.select(this)
           .classed('highlight', false)
-        parent.d3.select('#chart-tooltip')
+        tooltip
           .style('display', 'none')
       }).on('mousemove', function() {
-        parent.d3.select('#chart-tooltip')
+        tooltip
           .style('top', (event.clientY + 20) + 'px')
           .style('left', (event.clientX + 20) + 'px')
           .html('<div class="point">' + d.id + '</div>')
@@ -537,10 +542,7 @@ export class Legend {
       .html('Actual')
 
     // Meta data info tooltip
-    let tooltip = parent.d3.select('body')
-        .append('div')
-        .attr('id', 'legend-tooltip')
-        .style('display', 'none')
+    let tooltip = parent.legendTooltip
 
     let historyItem = legendDiv.append('div')
           .attr('class', 'item')

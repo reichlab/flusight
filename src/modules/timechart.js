@@ -43,9 +43,11 @@ export default class TimeChart {
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    // Add tooltip
-    this.tooltip = d3.select('body').append('div')
-      .attr('id', 'chart-tooltip')
+    // Add tooltips
+    this.chartTooltip = d3.select('#chart-tooltip')
+      .style('display', 'none')
+
+    this.legendTooltip = d3.select('#legend-tooltip')
       .style('display', 'none')
 
     // Save variables
@@ -87,6 +89,9 @@ export default class TimeChart {
       .stroke('#ccc')
       .background('white')
     svg.call(this.onsetTexture)
+
+    // Paint the top region
+    this.paintOnsetOffset()
   }
 
   /**
@@ -176,7 +181,7 @@ export default class TimeChart {
     let svg = this.svg,
         height = this.height,
         width = this.width,
-        tooltip = this.tooltip
+        tooltip = this.chartTooltip
 
     // Add vertical line
     let line = svg.append('line')
@@ -228,7 +233,7 @@ export default class TimeChart {
         xScale = this.xScale,
         yScale = this.yScale,
         xScaleDate = this.xScaleDate,
-        tooltip = this.tooltip,
+        tooltip = this.chartTooltip,
         weekHook = this.weekHook
 
     // Reset scales and axes
@@ -326,23 +331,36 @@ export default class TimeChart {
     // Reset history lines
     this.history.plot(this, data.history)
 
-    // Paint the top region
-    this.paintOnsetOffset()
-
     // Reset predictions
-    this.predictions.map(p => p.clear())
-    this.predictions = []
-    let colors = d3.schemeCategory10 // TODO: handle more than 10 colors
+    let colors = d3.schemeCategory10
 
     let totalModels = data.models.length
     let onsetDiff =  (this.onsetOffset - 2) / (totalModels + 1)
 
+    // Filter marker not needed
+    let currentPredictionIds = data.models.map(m => m.id)
+    this.predictions = this.predictions.filter(p => {
+      if (currentPredictionIds.indexOf(p.id) === -1) {
+        p.clear()
+        return false
+      } else {
+        return true
+      }
+    })
+
     data.models.forEach((m, idx) => {
-      let onsetYPos = - (idx + 1) * onsetDiff - 6
-      let predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
+      // Add marker if not present
+      let predMarker,
+          markerIndex = this.predictions.map(p => p.id).indexOf(m.id)
+      if (markerIndex === -1) {
+        let onsetYPos = - (idx + 1) * onsetDiff - 6
+        predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
+        this.predictions.push(predMarker)
+      } else {
+        predMarker = this.predictions[markerIndex]
+      }
       predMarker.plot(this, m.predictions, data.actual)
       predMarker.hideMarkers()
-      this.predictions.push(predMarker)
     })
 
     this.legend = new marker.Legend(this, (pid, hide) => {
