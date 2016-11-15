@@ -5,6 +5,8 @@
 ** [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
+** DONE Save toggle states for each prediction marker
+CLOSED: [2016-11-15 Tue 01:56]
 ** DONE Smoother prediction transition with selector changes
 CLOSED: [2016-11-14 Mon 04:57]
 ** DONE Hide tooltip on point mouseout

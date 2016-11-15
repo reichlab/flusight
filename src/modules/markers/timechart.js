@@ -110,7 +110,7 @@ export class Prediction {
     this.xScale = parent.xScaleWeek
     this.yScale = parent.yScale
     this.weeks = parent.weeks
-    this.legendHidden = false
+    this.legendHidden = !parent.predictionsShow[this.id]
     this.tooltip = parent.chartTooltip
 
     this.displayedData = Array(this.weeks.length).fill(false)
@@ -598,8 +598,12 @@ export class Legend {
           .style('cursor', 'pointer')
 
       let predIcon = predItem.append('i')
-          .attr('class', 'fa fa-circle selected-icon')
+          .attr('class', 'fa')
           .style('color', p.color)
+
+      let showThis = parent.predictionsShow[p.id]
+      predIcon.classed('fa-circle', showThis)
+      predIcon.classed('fa-circle-o', !showThis)
 
       predItem.append('span')
         .attr('class', 'item-title')

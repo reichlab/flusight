@@ -79,8 +79,9 @@ export default class TimeChart {
     this.confidenceIntervals = ['90%', '50%']
     this.cid = 1 // Use 50% as default
 
-    // History toggle state
+    // Legend toggle state
     this.historyShow = true
+    this.predictionsShow = {}
 
     this.onsetTexture = textures.lines()
       .lighter()
@@ -337,7 +338,8 @@ export default class TimeChart {
     let totalModels = data.models.length
     let onsetDiff =  (this.onsetOffset - 2) / (totalModels + 1)
 
-    // Filter marker not needed
+    // Filter markers not needed
+
     let currentPredictionIds = data.models.map(m => m.id)
     this.predictions = this.predictions.filter(p => {
       if (currentPredictionIds.indexOf(p.id) === -1) {
@@ -356,6 +358,9 @@ export default class TimeChart {
         let onsetYPos = - (idx + 1) * onsetDiff - 6
         predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
         this.predictions.push(predMarker)
+
+        if (!(m.id in this.predictionsShow))
+          this.predictionsShow[m.id] = true
       } else {
         predMarker = this.predictions[markerIndex]
       }
@@ -363,22 +368,26 @@ export default class TimeChart {
       predMarker.hideMarkers()
     })
 
+    // Legend and hook
     this.legend = new marker.Legend(this, (pid, hide) => {
-
       if (pid === 'legend:history') {
+        // On history toggle action
         this.historyShow = !hide
         if (hide) this.history.hide()
         else this.history.show()
       } else {
-        let pred = this.predictions.filter(p => p.id == pid)[0]
+        // On prediction toggle action
+        let pred = this.predictions[this.predictions.map(p => p.id).indexOf(pid)]
+        this.predictionsShow[pid] = !hide
         pred.legendHidden = hide
+
         if (hide) pred.hideMarkers()
         else pred.showMarkers()
       }
     })
 
     // Confidence selection event
-    new marker.Confidence(this, (cid) => {
+    this.confidenceMarker = new marker.Confidence(this, (cid) => {
       this.predictions.map(p => {
         this.cid = p.cid = cid
         p.update(this.weekIdx)
