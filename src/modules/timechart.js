@@ -252,7 +252,16 @@ export default class TimeChart {
         .range([0, this.width])
 
     // Week domain scale for easy mapping
-    let xScaleWeek = (d) => xScale(weeks.indexOf(Math.floor(d))) + d % 1
+    let xScaleWeek = (d) => {
+      let dInt = Math.floor(d),
+          dFloat = d % 1
+      // [0, 1) point fix without changing the scale
+      if (dInt === 0)
+        dInt = Math.max(...weeks)
+      if (dInt === 29)
+        dFloat = 0
+      return xScale(weeks.indexOf(dInt) + dFloat)
+    }
 
     // Week to date parser
     let dateParser = d3.timeParse('%Y-%U')
