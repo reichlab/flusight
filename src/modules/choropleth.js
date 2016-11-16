@@ -132,8 +132,8 @@ export default class Choropleth {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (event.clientY + 20) + 'px')
-          .style('left', (event.clientX + 20) + 'px')
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX + 20) + 'px')
           .html(util.tooltipText(this, data.data))
       })
       .on('click', function() {

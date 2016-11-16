@@ -172,8 +172,8 @@ export class Prediction {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (event.clientY + 20) + 'px')
-            .style('left', (event.clientX + 20) + 'px')
+            .style('top', (d3.event.pageY + 20) + 'px')
+            .style('left', (d3.event.pageX + 20) + 'px')
         })
 
       this.onsetGroup.select('.onset-range')
@@ -236,8 +236,8 @@ export class Prediction {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (event.clientY + 20) + 'px')
-            .style('left', (event.clientX + 20) + 'px')
+            .style('top', (d3.event.pageY + 20) + 'px')
+            .style('left', (d3.event.pageX + 20) + 'px')
         })
 
       this.peakGroup.select('.peak-range-x')
@@ -440,9 +440,10 @@ export class HistoricalLines {
     else
       this.hide()
 
-    let tooltip = this.tooltip
+    let tooltip = this.tooltip,
+        d3 = parent.d3
 
-    let line = parent.d3.line()
+    let line = d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
         .y(d => parent.yScale(d.data))
 
@@ -457,19 +458,19 @@ export class HistoricalLines {
         .attr('d', line)
 
       path.on('mouseover', function() {
-        parent.d3.select(this)
+        d3.select(this)
           .classed('highlight', true)
         tooltip
           .style('display', null)
       }).on('mouseout', function() {
-        parent.d3.select(this)
+        d3.select(this)
           .classed('highlight', false)
         tooltip
           .style('display', 'none')
       }).on('mousemove', function() {
         tooltip
-          .style('top', (event.clientY + 20) + 'px')
-          .style('left', (event.clientX + 20) + 'px')
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX + 20) + 'px')
           .html('<div class="point">' + d.id + '</div>')
       })
     })
@@ -541,6 +542,8 @@ export class Legend {
       .attr('class', 'item-title')
       .html('Actual')
 
+    let d3 = parent.d3
+
     // Meta data info tooltip
     let tooltip = parent.legendTooltip
 
@@ -581,8 +584,8 @@ export class Legend {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (event.clientY + 20) + 'px')
-          .style('left', (event.clientX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX - 150 - 20) + 'px')
           .html(util.legendTooltip({
             name: 'Historical Data',
             description: 'Toggle historical data lines'
@@ -616,12 +619,14 @@ export class Legend {
           .attr('class', 'fa fa-external-link model-url')
           .style('color', p.color)
 
+      let d3 = parent.d3
+
       urlItem
         .on('mousemove', function() {
           tooltip.style('display', 'none')
         })
         .on('click', function() {
-          parent.d3.event.stopPropagation()
+          d3.event.stopPropagation()
         })
 
       predItem
@@ -643,8 +648,8 @@ export class Legend {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (event.clientY + 20) + 'px')
-            .style('left', (event.clientX - 150 - 20) + 'px')
+            .style('top', (d3.event.pageY + 20) + 'px')
+            .style('left', (d3.event.pageX - 150 - 20) + 'px')
             .html(util.legendTooltip(p.meta))
         })
     })

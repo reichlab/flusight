@@ -366,8 +366,8 @@ $accent: rgb(24, 129, 127);
                 .on('mouseout', () => tooltip.style('display', 'none').style('width', null))
                 .on('mousemove', () => {
                   tooltip
-                    .style('top', event.clientY + 'px')
-                    .style('left', (event.clientX - 100 - 20) + 'px')
+                    .style('top', d3.event.pageY + 'px')
+                    .style('left', (d3.event.pageX - 100 - 20) + 'px')
                     .html(e[1])
                 }))
     }

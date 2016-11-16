@@ -5,6 +5,8 @@
 ** [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
+** DONE Fix tooltip position for non-chromium browsers
+CLOSED: [2016-11-16 Wed 17:32]
 ** DONE Save toggle states for each prediction marker
 CLOSED: [2016-11-15 Tue 01:56]
 ** DONE Smoother prediction transition with selector changes
@@ -81,6 +83,7 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
 * Enhancements
+** TODO Chropleth selector on hover description
 ** [#B] Confidence ranges in tooltips
 ** Fix Large screen layout
 Possible fixes
