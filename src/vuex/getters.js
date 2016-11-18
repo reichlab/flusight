@@ -50,6 +50,24 @@ export function choropleth (state) {
 }
 
 /**
+ * Get data with maximum lag
+ * First element of the lag array
+ */
+function getMaxLagData (actual) {
+  return actual.map(d => {
+    let dataToReturn = -1
+    // Handle zero length values
+    if (d.data.length !== 0) {
+      dataToReturn = d.data[0].value
+    }
+    return {
+      week: d.week,
+      data: dataToReturn
+    }
+  })
+}
+
+/**
  * Trim history data to fit in length 'numWeeks'
  */
 function trimHistory (historyActual, numWeeks) {
@@ -94,13 +112,14 @@ export function timeChartData (state) {
   for (let i = 0; i < currentSeasonId; i++) {
     historicalData.push({
       id: regionSubset.seasons[i].id,
-      actual: trimHistory(regionSubset.seasons[i].actual, selectedWeeksCount)
+      actual: trimHistory(getMaxLagData(regionSubset.seasons[i].actual),
+                          selectedWeeksCount)
     })
   }
 
   return {
     region: regionSubset.subId, // Submission ids are concise
-    actual: seasonSubset.actual,
+    actual: getMaxLagData(seasonSubset.actual),
     baseline: seasonSubset.baseline,
     models: seasonSubset.models, // All model predictions
     history: historicalData
@@ -131,7 +150,7 @@ function choroplethDataRange (state, choroplethId) {
   state.data.map(region => {
     region.seasons.map(season => {
 
-      let actual = season.actual.map(d => d.data).filter(d => d != -1)
+      let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
       if (choroplethId === 1) {
         // Use baseline scaled data
@@ -164,7 +183,7 @@ export function choroplethData (state) {
   }
 
   state.data.map(r => {
-    let values = r.seasons[seasonId].actual
+    let values = getMaxLagData(r.seasons[seasonId].actual)
 
     if (choroplethId === 1) {
       if (r.seasons[seasonId].baseline) {

@@ -25,7 +25,7 @@ const seasonWeeksData = (season) => {
   for (let i = 30; i <= firstMaxWeek; i++) {
     weeks.push({
       week: parseInt(first + '' + i),
-      data: -1
+      data: []
     })
   }
 
@@ -38,7 +38,7 @@ const seasonWeeksData = (season) => {
 
     weeks.push({
       week: week,
-      data: -1
+      data: []
     })
   }
   return weeks
@@ -83,24 +83,41 @@ const getActual = (seasons, callback) => {
     })
   })
 
-  // Request API
-  delphiAPI.Epidata.fluview((res, message, data) => {
-    data.forEach(d => {
-      let sub = output[d['region']][weekToSeason(d['epiweek'])]
-      let dataIndex
-      for (let i = 0; i < sub.length; i++) {
-        if (sub[i].week == d['epiweek']) {
-          dataIndex = i
-          break
-        }
-      }
-      output[d['region']][weekToSeason(d['epiweek'])][dataIndex].data = d['wili']
-    })
+  // Fetch data from delphi api for given lag
+  const laggedRequest = (lag) => {
 
-    callback(output)
-  },
-                            regionIdentifiers,
-                            [delphiAPI.Epidata.range(start, end)])
+    // Request API
+    delphiAPI.Epidata.fluview((res, message, data) => {
+      data.forEach(d => {
+        let sub = output[d.region][weekToSeason(d.epiweek)]
+        let dataIndex
+        for (let i = 0; i < sub.length; i++) {
+          if (sub[i].week === d.epiweek) {
+            dataIndex = i
+            break
+          }
+        }
+        output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
+          lag: lag,
+          value: d.wili
+        })
+      })
+
+      console.log('Collecting data with lag: ' + lag)
+
+      if (lag === 0)
+        callback(output)
+      else
+        laggedRequest(lag - 1)
+    },
+                              regionIdentifiers,
+                              [delphiAPI.Epidata.range(start, end)],
+                              null,
+                              lag)
+  }
+
+  // Go upto 51 weeks back
+  laggedRequest(51)
 }
 
 exports.getActual = getActual
