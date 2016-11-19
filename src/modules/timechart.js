@@ -73,6 +73,7 @@ export default class TimeChart {
     this.history = new marker.HistoricalLines(this)
     this.baseline = new marker.Baseline(this)
     this.actual = new marker.Actual(this)
+    this.observed = new marker.Observed(this)
     this.predictions = []
 
     // Hard coding as of now
@@ -337,6 +338,7 @@ export default class TimeChart {
     this.timerect.plot(this, data.actual)
     this.baseline.plot(this, data.baseline)
     this.actual.plot(this, data.actual)
+    this.observed.plot(this, data.observed)
 
     // Reset history lines
     this.history.plot(this, data.history)
@@ -348,7 +350,6 @@ export default class TimeChart {
     let onsetDiff =  (this.onsetOffset - 2) / (totalModels + 1)
 
     // Filter markers not needed
-
     let currentPredictionIds = data.models.map(m => m.id)
     this.predictions = this.predictions.filter(p => {
       if (currentPredictionIds.indexOf(p.id) === -1) {
@@ -356,6 +357,19 @@ export default class TimeChart {
         return false
       } else {
         return true
+      }
+    })
+
+    // Collect values with zero lags for starting point of prediction markers
+    let zeroLagData = data.observed.map(d => {
+      let dataToReturn = -1
+      // Handle zero length values
+      if (d.data.length !== 0) {
+        dataToReturn = d.data.filter(ld => ld.lag === 0)[0].value
+      }
+      return {
+        week: d.week,
+        data: dataToReturn
       }
     })
 
@@ -373,7 +387,7 @@ export default class TimeChart {
       } else {
         predMarker = this.predictions[markerIndex]
       }
-      predMarker.plot(this, m.predictions, data.actual)
+      predMarker.plot(this, m.predictions, zeroLagData)
       predMarker.hideMarkers()
     })
 
@@ -443,6 +457,8 @@ export default class TimeChart {
     this.predictions.forEach(p => {
       p.update(idx)
     })
+
+    this.observed.update(idx)
 
     this.legend.update(this.predictions)
   }

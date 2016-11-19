@@ -536,11 +536,57 @@ export class Legend {
 
     actualItem.append('i')
       .attr('class', 'fa fa-circle')
-      .style('color', 'green')
+      .style('color', '#66d600')
 
     actualItem.append('span')
       .attr('class', 'item-title')
       .html('Actual')
+
+    actualItem
+      .on('mouseover', function() {
+        tooltip.style('display', null)
+      })
+      .on('mouseout', function() {
+        tooltip.style('display', 'none')
+      })
+      .on('mousemove', function() {
+        tooltip
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .html(util.legendTooltip({
+            name: 'Actual Data',
+            description: 'Latest data available for the week'
+          }))
+      })
+
+    let observedItem = legendDiv.append('div')
+        .attr('class', 'item')
+        .attr('id', 'legend-actual')
+
+    observedItem.append('i')
+      .attr('class', 'fa fa-circle')
+      .style('color', 'rgb(24, 129, 127)')
+
+    observedItem.append('span')
+      .attr('class', 'item-title')
+      .html('Observed')
+
+    observedItem
+      .on('mouseover', function() {
+        tooltip.style('display', null)
+      })
+      .on('mouseout', function() {
+        tooltip.style('display', 'none')
+      })
+      .on('mousemove', function() {
+        tooltip
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .html(util.legendTooltip({
+            name: 'Observed Data',
+            description: 'Data available for weeks when the predictions were made'
+          }))
+      })
 
     let d3 = parent.d3
 
@@ -548,9 +594,9 @@ export class Legend {
     let tooltip = parent.legendTooltip
 
     let historyItem = legendDiv.append('div')
-          .attr('class', 'item')
-          .attr('id', 'legend-history')
-          .style('cursor', 'pointer')
+        .attr('class', 'item')
+        .attr('id', 'legend-history')
+        .style('cursor', 'pointer')
 
     let historyIcon = historyItem.append('i')
         .attr('class', 'fa')
@@ -748,11 +794,6 @@ export class Actual {
     group.append('path')
       .attr('class', 'line-actual')
 
-    group.selectAll('.point-actual')
-      .enter()
-      .append('circle')
-      .attr('class', 'point-actual')
-
     this.group = group
   }
 
@@ -788,5 +829,76 @@ export class Actual {
 
   query(idx) {
     return this.data[idx].data
+  }
+}
+
+/**
+ * Observed (at the time of prediction) line
+ */
+export class Observed {
+  constructor(parent) {
+    let group = parent.svg.append('g')
+        .attr('class', 'observed-group')
+
+    group.append('path')
+      .attr('class', 'line-observed')
+
+    this.group = group
+    this.d3 = parent.d3
+  }
+
+  plot(parent, data) {
+    // Save data for queries and updates
+    this.data = data
+    this.xScale = parent.xScaleWeek
+    this.yScale = parent.yScale
+    this.weeks = parent.weeks
+  }
+
+  query(idx) {
+    try {
+      return this.filteredData[idx].data
+    } catch (e) {
+      return false
+    }
+  }
+
+  update(idx) {
+    let filteredData = []
+
+    for (let i = 0; i <= idx; i++) {
+      filteredData.push({
+        week: this.data[idx - i].week,
+        data: this.data[idx - i].data.filter(d => d.lag === i)[0].value
+      })
+    }
+
+    let circles = this.group.selectAll('.point-observed')
+        .data(filteredData)
+
+    circles.exit().remove()
+
+    circles.enter().append('circle')
+      .merge(circles)
+      .attr('class', 'point-observed')
+      .transition()
+      .duration(200)
+      .ease(this.d3.easeQuadOut)
+      .attr('cx', d => this.xScale(d.week % 100))
+      .attr('cy', d => this.yScale(d.data))
+      .attr('r', 2)
+
+    let line = this.d3.line()
+        .x(d => this.xScale(d.week % 100))
+        .y(d => this.yScale(d.data))
+
+    this.group.select('.line-observed')
+      .datum(filteredData)
+      .transition()
+      .duration(200)
+      .attr('d', line)
+
+    filteredData.reverse()
+    this.filteredData = filteredData
   }
 }

@@ -43,6 +43,14 @@ export const tooltipText = (object, idx, y) => {
 
   let text = ''
 
+  // Ask for observed value
+  let observedValue = object.observed.query(idx)
+
+  if (observedValue) {
+    text += '<div class="actual" style="background:white">Observed <span class="bold">'
+    text += observedValue.toFixed(2) + '</span></div>'
+  }
+
   // Ask actual
   let actualValue = object.actual.query(idx)
 

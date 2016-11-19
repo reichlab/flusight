@@ -72,20 +72,37 @@ $accent: rgb(24, 129, 127);
     }
 }
 
-// Actual data
-.actual-group {
+// Observed line and dots
+.observed-group {
     pointer-events: none;
-    .line-actual {
+    .line-observed {
         fill: none;
         stroke: $accent;
         stroke-width: 1.5px;
         opacity: 0.4;
     }
 
-    .point-actual {
+    .point-observed {
         stroke: $accent;
         fill: $accent;
         opacity: 0.7;
+    }
+}
+
+// Actual data
+.actual-group {
+    pointer-events: none;
+    .line-actual {
+        fill: none;
+        stroke: #66d600;
+        stroke-width: 2.5px;
+        opacity: 0.4;
+    }
+
+    .point-actual {
+        stroke: #66d600;
+        fill: #66d600;
+        opacity: 0.4;
     }
 }
 

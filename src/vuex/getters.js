@@ -119,7 +119,8 @@ export function timeChartData (state) {
 
   return {
     region: regionSubset.subId, // Submission ids are concise
-    actual: getMaxLagData(seasonSubset.actual),
+    observed: seasonSubset.actual,
+    actual: getMaxLagData(seasonSubset.actual), // Using this to avoid confusion
     baseline: seasonSubset.baseline,
     models: seasonSubset.models, // All model predictions
     history: historicalData
