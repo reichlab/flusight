@@ -112,8 +112,6 @@ export class Prediction {
     this.weeks = parent.weeks
     this.legendHidden = !parent.predictionsShow[this.id]
     this.tooltip = parent.chartTooltip
-
-    this.displayedData = Array(this.weeks.length).fill(false)
   }
 
   update(idx) {
@@ -315,9 +313,9 @@ export class Prediction {
       })
 
       // Save week indexed data
+      this.displayedData = Array(this.weeks.length).fill(false)
       data.forEach((d, index) => {
         if (index > 0) this.displayedData[this.weeks.indexOf(d.week)] = d.data
-        else this.displayedData[this.weeks.indexOf(d.week)] = false
       })
 
       let circles = this.predictionGroup.selectAll('.point-prediction')
