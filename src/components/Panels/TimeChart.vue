@@ -1,6 +1,9 @@
 <style lang="scss">
 
-$accent: rgb(24, 129, 127);
+// Palette
+$observed: rgb(24, 129, 127);
+$actual: #66d600;
+$accent: #3273dc;
 
 // Mouse overlay
 .overlay {
@@ -77,14 +80,14 @@ $accent: rgb(24, 129, 127);
     pointer-events: none;
     .line-observed {
         fill: none;
-        stroke: $accent;
+        stroke: $observed;
         stroke-width: 1.5px;
         opacity: 0.4;
     }
 
     .point-observed {
-        stroke: $accent;
-        fill: $accent;
+        stroke: $observed;
+        fill: $observed;
         opacity: 0.7;
     }
 }
@@ -94,14 +97,14 @@ $accent: rgb(24, 129, 127);
     pointer-events: none;
     .line-actual {
         fill: none;
-        stroke: #66d600;
+        stroke: $actual;
         stroke-width: 2.5px;
         opacity: 0.4;
     }
 
     .point-actual {
-        stroke: #66d600;
-        fill: #66d600;
+        stroke: $actual;
+        fill: $actual;
         opacity: 0.4;
     }
 }
@@ -192,7 +195,7 @@ $accent: rgb(24, 129, 127);
         width: 28px;
         &.legend-btn {
             border-width: 1px;
-            border-color: #3273dc;
+            border-color: $accent;
         }
     }
 }
@@ -259,7 +262,7 @@ $accent: rgb(24, 129, 127);
     }
 
     .item-selected {
-        background-color: #3273dc;
+        background-color: $accent;
         color: white;
     }
 }
