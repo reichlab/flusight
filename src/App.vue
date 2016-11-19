@@ -145,16 +145,16 @@ body {
           title: 'Legend',
           content: `You can interact with the legend to display different
                     combinations of models, or to toggle the historical data
-                    lines. Click on the links next to the models for more
-                    information about the models themselves.`,
+                    lines and change confidence interval. Click on the links
+                    next to the models for more information about the models
+                    themselves.`,
           direction: 'left',
           element: '#legend'
         },
         {
           title: 'Other controls',
-          content: `You can use these buttons to hide the legend, select the
-                    type of confidence interval to display, or move the graph
-                    forward or backward in time.`,
+          content: `You can use these buttons to hide the legend, or move the
+                    graph forward or backward in time.`,
           direction: 'left',
           element: '#nav-controls'
         },
