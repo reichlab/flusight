@@ -400,29 +400,31 @@ export default class TimeChart {
     })
 
     // Legend and hook
-    this.legend = new marker.Legend(this, (pid, hide) => {
-      if (pid === 'legend:history') {
+    this.legend = new marker.Legend(this, (event, payload) => {
+      if (event === 'legend:history') {
         // On history toggle action
-        this.historyShow = !hide
-        if (hide) this.history.hide()
+        // payload is `hide`
+        this.historyShow = !payload
+        if (payload) this.history.hide()
         else this.history.show()
+      } else if (event == 'legend:ci') {
+        // On ci change events
+        // payload is `cid`
+        this.predictions.map(p => {
+          this.cid = p.cid = payload
+          p.update(this.weekIdx)
+        })
       } else {
         // On prediction toggle action
-        let pred = this.predictions[this.predictions.map(p => p.id).indexOf(pid)]
-        this.predictionsShow[pid] = !hide
-        pred.legendHidden = hide
+        // payload is `hide`
+        let pred = this.predictions[this.predictions.map(p => p.id)
+                                    .indexOf(event)]
+        this.predictionsShow[event] = !payload
+        pred.legendHidden = payload
 
-        if (hide) pred.hideMarkers()
+        if (payload) pred.hideMarkers()
         else pred.showMarkers()
       }
-    })
-
-    // Confidence selection event
-    this.confidenceMarker = new marker.Confidence(this, (cid) => {
-      this.predictions.map(p => {
-        this.cid = p.cid = cid
-        p.update(this.weekIdx)
-      })
     })
 
     let that = this

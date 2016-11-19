@@ -236,7 +236,7 @@ $accent: #3273dc;
     }
 
     .item {
-        padding: 5px 10px;
+        padding: 4px 10px;
         .fa {
             display: inline-block;
             vertical-align: middle;
@@ -265,6 +265,35 @@ $accent: #3273dc;
         background-color: $accent;
         color: white;
     }
+
+    #legend-ci-container {
+        text-align: center;
+
+        #legend-ci-buttons {
+            margin-left: 10px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: #ccc;
+            border-radius: 2px;
+            padding: 2px 0px;
+            .ci-button {
+                padding: 2px 6px;
+                &.selected {
+                    background-color: $accent;
+                    color: white;
+                }
+
+                &:first-child {
+                    border-top-left-radius: 2px;
+                    border-bottom-left-radius: 2px;
+                }
+                &:last-child {
+                    border-top-right-radius: 2px;
+                    border-bottom-right-radius: 2px;
+                }
+            }
+        }
+    }
 }
 
 </style>
@@ -277,27 +306,25 @@ $accent: #3273dc;
     <div id="timechart">
     </div>
     <div class="nav-drawer" id="legend" v-show="legendShow">
-    </div>
-    <div class="nav-drawer" id="confidence" v-show="confidenceShow">
-        <div class="item item-selected">
-            90%
+        <div id="legend-actual-container">
         </div>
-        <div class="item">
-            50%
+        <hr>
+        <div id="legend-ci-container">
+            <div class="item">
+                <span>CI</span>
+                <span id="legend-ci-buttons">
+                </span>
+            </div>
+        </div>
+        <hr>
+        <div id="legend-prediction-container">
         </div>
     </div>
     <div id="nav-controls">
         <a class="button is-small is-info legend-btn" v-on:click="toggleLegend"
-    v-bind:class="[legendShow ? '' : 'is-outlined']">
+           v-bind:class="[legendShow ? '' : 'is-outlined']">
             <span class="icon is-small">
                 <i class="fa fa-map-o"></i>
-            </span>
-        </a>
-        <br>
-        <a class="button is-small is-info confidence-btn"
-    v-on:click="toggleConfidence" v-bind:class="[confidenceShow ? '' : 'is-outlined']">
-            <span class="icon is-small">
-                <i class="fa fa-area-chart"></i>
             </span>
         </a>
         <br>
@@ -329,24 +356,12 @@ $accent: #3273dc;
   export default {
     data() {
       return {
-        legendShow: true,
-        confidenceShow: false,
-        legendShowHistory: true
+        legendShow: true
       }
     },
     methods: {
       toggleLegend() {
         this.legendShow = !this.legendShow
-        this.legendShowHistory = this.legendShow
-
-        // Hide confidence drawer in any case
-        this.confidenceShow = false
-      },
-      toggleConfidence() {
-        if (this.legendShowHistory) {
-          this.legendShow = !this.legendShow
-        }
-        this.confidenceShow = !this.confidenceShow
       }
     },
     vuex: {
@@ -378,8 +393,7 @@ $accent: #3273dc;
       let elems = [
         ['.legend-btn', 'Toggle legend'],
         ['#forward-btn', 'Move forward'],
-        ['#backward-btn', 'Move backward'],
-        ['.confidence-btn', 'Select confidence interval']
+        ['#backward-btn', 'Move backward']
       ]
 
       elems.map(e => d3.select(e[0])

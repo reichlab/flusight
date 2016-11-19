@@ -1,6 +1,7 @@
 #+TITLE: Project Board
 
 * Issues
+** TODO Show legend while demoing
 ** [#B] Fix position of choropleth elements
 ** [#B] Reorder prediction markers
 *** Put shades first
@@ -46,9 +47,6 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12]
 * Features
-** TODO [#B] Show data used for prediction
-*** Get reported data for each week
-*** Plot as default backtrace on movements
 ** Choropleth
 *** DONE Relative Weighted ILI (%)
 CLOSED: [2016-11-06 Sun 03:08]
@@ -57,13 +55,17 @@ CLOSED: [2016-11-06 Sun 03:08]
 *** [#B] Peak week
 *** [#B] Peak percent
 ** [#B] Histogram for onset prediction
-** DONE [#A] Gather historical data
+** DONE Show data used for prediction
+CLOSED: [2016-11-18 Fri 23:43]
+*** Get reported data for each week
+*** Plot as default backtrace on movements
+** DONE Gather historical data
 CLOSED: [2016-11-11 Fri 17:12] SCHEDULED: <2016-11-11 Fri>
-** DONE [#A] Allow option for choosing confidence interval
+** DONE Allow option for choosing confidence interval
 CLOSED: [2016-11-11 Fri 04:25]
 ** DONE Add intro content
 CLOSED: [2016-11-11 Fri 01:26]
-** DONE [#A] First run demo
+** DONE First run demo
 CLOSED: [2016-11-10 Thu 03:58]
 ** DONE Update baseline file automatically
 CLOSED: [2016-11-06 Sun 22:16]
@@ -75,10 +77,10 @@ CLOSED: [2016-11-06 Sun 16:15]
 CLOSED: [2016-11-06 Sun 01:49]
 *** Highlight on hover
 *** Legend entry
-** DONE [#A] Model metadata file
+** DONE Model metadata file
 CLOSED: [2016-11-04 Fri 02:15]
 *** Legend “onmouseover” tooltip
-** DONE [#A] Data collection
+** DONE Data collection
 CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
@@ -90,6 +92,8 @@ Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Move CI buttons inside legend 
+CLOSED: [2016-11-19 Sat 02:53]
 ** DONE Move onset predictions to top
 CLOSED: [2016-11-14 Mon 04:58]
 *** Add offsets

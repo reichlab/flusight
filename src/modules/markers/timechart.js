@@ -2,6 +2,13 @@
 
 import * as util from '../utils/timechart'
 
+/**
+ * Prediction markers
+ * - Area
+ * - Line and dots
+ * - Onset
+ * - Peak
+ */
 export class Prediction {
   constructor(parent, id, meta, color, cy) {
 
@@ -424,6 +431,10 @@ export class TimeRect {
   }
 }
 
+
+/**
+ * Historical lines
+ */
 export class HistoricalLines {
   constructor(parent) {
     this.group = parent.svg.append('g')
@@ -498,43 +509,20 @@ export class HistoricalLines {
 }
 
 /**
- * Confidence interval marker
+ * Legend and controls
  */
-export class Confidence {
-  constructor(parent, confidenceHook) {
-    let confidenceDiv = parent.d3.select('#confidence')
-    confidenceDiv.selectAll('*').remove()
-
-    parent.confidenceIntervals.map((c, idx) => {
-      let confItem = confidenceDiv.append('div')
-          .attr('class', 'item')
-          .style('cursor', 'pointer')
-          .text(c)
-
-      confItem
-        .on('click', function() {
-          // toggle selected interval
-          confidenceDiv.selectAll('.item')
-            .classed('item-selected', false)
-          parent.d3.select(this).classed('item-selected', true)
-
-          confidenceHook(idx)
-        })
-
-      // Select first by default
-      if (idx === parent.cid) {
-        confItem.classed('item-selected', true)
-      }
-    })
-  }
-}
-
 export class Legend {
   constructor(parent, legendHook) {
-    let legendDiv = parent.d3.select('#legend')
-    legendDiv.selectAll('*').remove()
+    let actualContainer = parent.d3.select('#legend-actual-container'),
+        predictionContainer = parent.d3.select('#legend-prediction-container'),
+        ciButtons = parent.d3.select('#legend-ci-buttons')
 
-    let actualItem = legendDiv.append('div')
+    // Clear entries
+    actualContainer.selectAll('*').remove()
+    predictionContainer.selectAll('*').remove()
+    ciButtons.selectAll('*').remove()
+
+    let actualItem = actualContainer.append('div')
         .attr('class', 'item')
         .attr('id', 'legend-actual')
 
@@ -563,7 +551,7 @@ export class Legend {
           }))
       })
 
-    let observedItem = legendDiv.append('div')
+    let observedItem = actualContainer.append('div')
         .attr('class', 'item')
         .attr('id', 'legend-actual')
 
@@ -598,7 +586,7 @@ export class Legend {
     // Meta data info tooltip
     let tooltip = parent.legendTooltip
 
-    let historyItem = legendDiv.append('div')
+    let historyItem = actualContainer.append('div')
         .attr('class', 'item')
         .attr('id', 'legend-history')
         .style('cursor', 'pointer')
@@ -643,10 +631,48 @@ export class Legend {
           }))
       })
 
-    legendDiv.append('hr')
 
+    // Add confidence buttons
+    parent.confidenceIntervals.map((c, idx) => {
+      let confButton = ciButtons.append('span')
+          .attr('class', 'ci-button')
+          .style('cursor', 'pointer')
+          .text(c)
+
+      confButton
+        .on('click', function() {
+          ciButtons.selectAll('.ci-button')
+            .classed('selected', false)
+          parent.d3.select(this).classed('selected', true)
+
+          legendHook('legend:ci', idx)
+        })
+        .on('mouseover', function() {
+          tooltip.style('display', null)
+        })
+        .on('mouseout', function() {
+          tooltip.style('display', 'none')
+        })
+        .on('mousemove', function() {
+          tooltip
+            .style('top', (d3.event.pageY + 20) + 'px')
+            .style('left', (d3.event.pageX - 150 - 20) + 'px')
+            .html(util.legendTooltip({
+              name: 'Confidence Interval',
+              description: 'Select confidence interval for prediction markers'
+            }))
+        })
+
+      // Select first by default
+      if (idx === parent.cid) {
+        confButton.classed('selected', true)
+      }
+    })
+
+
+    // Add prediction items
     parent.predictions.forEach(p => {
-      let predItem = legendDiv.append('div')
+      let predItem = predictionContainer.append('div')
           .attr('class', 'item')
           .attr('id', 'legend-' + p.id)
           .style('cursor', 'pointer')
@@ -706,16 +732,16 @@ export class Legend {
     })
 
     this.tooltip = tooltip
-    this.legendDiv = legendDiv
+    this.predictionContainer = predictionContainer
     this.d3 = parent.d3
   }
 
   update(predictions) {
     let d3 = this.d3,
-        legendDiv = this.legendDiv
+        predictionContainer = this.predictionContainer
 
     predictions.forEach(p => {
-      let pDiv = legendDiv.select('#legend-' + p.id)
+      let pDiv = predictionContainer.select('#legend-' + p.id)
       if (p.hidden) {
         pDiv
           .classed('na', true)
