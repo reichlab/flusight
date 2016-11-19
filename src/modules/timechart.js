@@ -142,10 +142,12 @@ export default class TimeChart {
         infoTooltip
           .style('top', (d3.event.pageY - 20) + 'px')
           .style('left', (d3.event.pageX - 150 - 20) + 'px')
-          .html('Week of the calendar year, as measured by the CDC.<br><br><em>Click to know more</em>')
+          .html(`Week of the calendar year, as measured by the CDC.
+                 <br><br><em>Click to know more</em>`)
       })
       .on('click', function() {
-        window.open('https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf', '_blank')
+        window.open('https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf',
+                    '_blank')
       })
 
     svg.append('g')
@@ -169,10 +171,12 @@ export default class TimeChart {
         infoTooltip
           .style('top', d3.event.pageY + 'px')
           .style('left', (d3.event.pageX + 20) + 'px')
-          .html('Percentage of outpatient doctor visits for influenza-like illness, weighted by state population.<br><br><em>Click to know more</em>')
+          .html(`Percentage of outpatient doctor visits for influenza-like
+                 illness, weighted by state population.<br><br><em>Click to know
+                 more</em>`)
       })
       .on('click', function() {
-        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank') // TODO: Add link
+        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank')
       })
   }
 
@@ -379,7 +383,11 @@ export default class TimeChart {
           markerIndex = this.predictions.map(p => p.id).indexOf(m.id)
       if (markerIndex === -1) {
         let onsetYPos = - (idx + 1) * onsetDiff - 6
-        predMarker = new marker.Prediction(this, m.id, m.meta, colors[idx], onsetYPos)
+        predMarker = new marker.Prediction(this,
+                                           m.id,
+                                           m.meta,
+                                           colors[idx],
+                                           onsetYPos)
         this.predictions.push(predMarker)
 
         if (!(m.id in this.predictionsShow))
@@ -481,7 +489,8 @@ export default class TimeChart {
    * Return next week idx and name for vuex store
    */
   getNextWeekData() {
-    let nextIdx = this.capToActual(Math.min(this.weeks.length - 1, this.weekIdx + 1))
+    let nextIdx = this.capToActual(Math.min(this.weeks.length - 1,
+                                            this.weekIdx + 1))
     return {
       idx: nextIdx,
       name: this.weeks[nextIdx]

@@ -47,7 +47,8 @@ export const tooltipText = (object, idx, y) => {
   let observedValue = object.observed.query(idx)
 
   if (observedValue) {
-    text += '<div class="actual" style="background:white">Observed <span class="bold">'
+    text += '<div class="actual" style="background:white">'
+    text += 'Observed <span class="bold">'
     text += observedValue.toFixed(2) + '</span></div>'
   }
 
@@ -55,7 +56,8 @@ export const tooltipText = (object, idx, y) => {
   let actualValue = object.actual.query(idx)
 
   if (actualValue != -1) {
-    text += '<div class="actual" style="background:white">Actual <span class="bold">'
+    text += '<div class="actual" style="background:white">'
+    text += 'Actual <span class="bold">'
     text += actualValue.toFixed(2) + '</span></div>'
   }
 
@@ -77,7 +79,8 @@ export const tooltipText = (object, idx, y) => {
 export const pointTooltip = (id, data, color) => {
   let text = ''
 
-  text += '<div class="point head" style="background:' + color + '">' + id + '</div>'
+  text += '<div class="point head" style="background:' + color + '">'
+  text += id + '</div>'
 
   data.map(d => {
     text += '<div class="point">'
@@ -108,5 +111,8 @@ export const hexToRgba = (hex, alpha) => {
   if (c.length == 3) c = [c[0], c[0], c[1], c[1], c[2], c[2]]
   c = '0x'+c.join('')
 
-  return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')'
+  let rgba = 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',')
+  rgba += ',' + alpha + ')'
+
+  return rgba
 }

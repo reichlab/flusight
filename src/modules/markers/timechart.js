@@ -582,7 +582,8 @@ export class Legend {
           .style('left', (d3.event.pageX - 150 - 20) + 'px')
           .html(util.legendTooltip({
             name: 'Observed Data',
-            description: 'Data available for weeks when the predictions were made'
+            description: `Data available for weeks when the predictions were
+                          made`
           }))
       })
 
