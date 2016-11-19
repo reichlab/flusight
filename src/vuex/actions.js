@@ -7,7 +7,13 @@ export const updateSelectedSeason = ({ dispatch, state }, val) => {
 }
 
 export const updateSelectedRegion = ({ dispatch, state }, val) => {
-  dispatch('UPDATE_SELECTED_REGION', val)
+  if (get.selectedRegion(state) === val) {
+    // Trigger deselection
+    // Select `national` region
+    dispatch('UPDATE_SELECTED_REGION', 0)
+  } else {
+    dispatch('UPDATE_SELECTED_REGION', val)
+  }
 }
 
 export const updateSelectedWeek = ({ dispatch, state }, val) => {

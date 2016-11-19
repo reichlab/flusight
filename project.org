@@ -1,11 +1,12 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO Show legend while demoing
 ** [#B] Fix position of choropleth elements
 ** [#B] Reorder prediction markers
 *** Put shades first
 *** Circles second
+** DONE Show legend while demoing
+CLOSED: [2016-11-19 Sat 03:48]
 ** DONE Fix tooltip position for non-chromium browsers
 CLOSED: [2016-11-16 Wed 17:32]
 ** DONE Save toggle states for each prediction marker
@@ -92,6 +93,8 @@ Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Choropleth deselection
+CLOSED: [2016-11-19 Sat 03:53]
 ** DONE Move CI buttons inside legend 
 CLOSED: [2016-11-19 Sat 02:53]
 ** DONE Move onset predictions to top
