@@ -28,16 +28,22 @@ const state = {
   // All the metadata!
   metadata: jsonData.metadata,
 
-  // Introduction steps data
-  introData: [{
-    title: 'Welcome to flusight',
-    content: 'Click <strong>Next</strong> to proceed. Click <strong>Finish</strong> to exit this demo.',
-    element: '',
-    direction: ''
-  }],
+  // Toggles
+  toggles: {
+    legend: true,
+    intro: true
+  },
 
-  introPointer: 0,
-  introShow: true
+  // Intro data
+  intro: {
+    data: [{
+      title: 'Welcome to flusight',
+      content: 'Click <strong>Next</strong> to proceed. Click <strong>Finish</strong> to exit this demo.',
+      element: '',
+      direction: ''
+    }],
+    pointer: 0
+  }
 }
 
 const mutations = {
@@ -66,27 +72,31 @@ const mutations = {
   },
 
   INCREMENT_INTRO_POINTER (state) {
-    state.introPointer += 1
+    state.intro.pointer += 1
   },
 
   DECREMENT_INTRO_POINTER (state) {
-    state.introPointer -= 1
+    state.intro.pointer -= 1
   },
 
   RESET_INTRO_POINTER (state) {
-    state.introPointer = 0
+    state.intro.pointer = 0
   },
 
   HIDE_INTRO (state) {
-    state.introShow = false
+    state.toggles.intro = false
   },
 
   SHOW_INTRO (state) {
-    state.introShow = true
+    state.toggles.intro = true
   },
 
   APPEND_INTRO_ITEM (state, val) {
-    state.introData.push(val)
+    state.intro.data.push(val)
+  },
+
+  TOGGLE_LEGEND (state) {
+    state.toggles.legend = !state.toggles.legend
   }
 }
 

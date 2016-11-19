@@ -218,21 +218,25 @@ export function choroplethData (state) {
   return output
 }
 
+export function legendShow (state) {
+  return state.toggles.legend
+}
+
 // Introduction getters
 export function currentIntro (state) {
-  return state.introData[introStep(state)]
+  return state.intro.data[introStep(state)]
 }
 
 export function introStep (state) {
-  return state.introPointer
+  return state.intro.pointer
 }
 
 export function introLength (state) {
-  return state.introData.length
+  return state.intro.data.length
 }
 
 export function introShow (state) {
-  return state.introShow
+  return state.toggles.intro
 }
 
 export function introAtFirst (state) {

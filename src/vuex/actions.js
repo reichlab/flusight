@@ -86,6 +86,13 @@ export const backward = ({ dispatch, state }) => {
   updateSelectedWeek({ dispatch, state }, get.previousWeek(state))
 }
 
+/**
+ * Toggle display of legend control
+ */
+export const toggleLegend = ({ dispatch, state }) => {
+  dispatch('TOGGLE_LEGEND')
+}
+
 // Introduction actions
 
 export const appendIntroItems = ({ dispatch, state }, items) => {
@@ -97,6 +104,9 @@ export const appendIntroItems = ({ dispatch, state }, items) => {
 export const moveIntroStart = ({ dispatch, state }) => {
   dispatch('RESET_INTRO_POINTER')
   dispatch('SHOW_INTRO')
+  if (!get.legendShow(state)) {
+    toggleLegend({ dispatch, state })
+  }
 }
 
 export const moveIntroForward = ({ dispatch, state }) => {
@@ -106,10 +116,18 @@ export const moveIntroForward = ({ dispatch, state }) => {
   } else {
     dispatch('INCREMENT_INTRO_POINTER')
   }
+
+  if (!get.legendShow(state)) {
+    toggleLegend({ dispatch, state })
+  }
 }
 
 export const moveIntroBackward = ({ dispatch, state }) => {
   dispatch('DECREMENT_INTRO_POINTER')
+
+  if (!get.legendShow(state)) {
+    toggleLegend({ dispatch, state })
+  }
 }
 
 export const moveIntroFinish = ({ dispatch, state }) => {

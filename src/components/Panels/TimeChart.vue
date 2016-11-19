@@ -344,26 +344,18 @@ $accent: #3273dc;
 
 <script>
   import TimeChart from '../../modules/timechart'
+  import { legendShow } from '../../vuex/getters'
   import {
     initTimeChart,
     updateSelectedWeek,
     plotTimeChart,
     updateTimeChart,
     backward,
-    forward
+    forward,
+    toggleLegend
   } from '../../vuex/actions'
 
   export default {
-    data() {
-      return {
-        legendShow: true
-      }
-    },
-    methods: {
-      toggleLegend() {
-        this.legendShow = !this.legendShow
-      }
-    },
     vuex: {
       actions: {
         initTimeChart,
@@ -371,7 +363,11 @@ $accent: #3273dc;
         plotTimeChart,
         updateTimeChart,
         backward,
-        forward
+        forward,
+        toggleLegend
+      },
+      getters: {
+        legendShow
       }
     },
     ready() {
