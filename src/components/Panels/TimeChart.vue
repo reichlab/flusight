@@ -206,6 +206,7 @@ $accent: rgb(24, 129, 127);
         &.highlight {
             stroke: #ddd;
             stroke-width: 3px;
+            pointer-events: none;
         }
     }
 }

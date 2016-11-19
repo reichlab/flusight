@@ -456,13 +456,15 @@ export class HistoricalLines {
         .attr('d', line)
 
       path.on('mouseover', function() {
-        d3.select(this)
-          .classed('highlight', true)
+        d3.select('.line-history.highlight')
+          .datum(d.actual)
+          .attr('d', line)
         tooltip
           .style('display', null)
       }).on('mouseout', function() {
-        d3.select(this)
-          .classed('highlight', false)
+        d3.select('.line-history.highlight')
+          .datum([])
+          .attr('d', line)
         tooltip
           .style('display', 'none')
       }).on('mousemove', function() {
@@ -472,6 +474,10 @@ export class HistoricalLines {
           .html('<div class="point">' + d.id + '</div>')
       })
     })
+
+    // Add highlight overlay
+    this.group.append('path')
+      .attr('class', 'line-history highlight')
   }
 
   hide() {
