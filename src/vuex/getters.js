@@ -35,10 +35,15 @@ export function regions (state) {
 
 export function choropleths (state) {
   // TODO: Parse from data
-  return [
+
+  let actualChoropleths = [
     'Actual Weighted ILI (%)',
     'Relative Weighted ILI (%)'
   ]
+
+  let seasonId = selectedSeason(state)
+
+  return actualChoropleths
 }
 
 export function timeChart (state) {

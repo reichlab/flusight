@@ -3,78 +3,67 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:800');
 
 .brand.title {
-    font-size: 20px;
+  font-size: 20px;
+  color: #72caf9;
+  .brand-link{
     color: #72caf9;
-
-    .brand-link{
-        color: #72caf9;
-        &:hover {
-            border: none;
-        }
+    &:hover {
+      border: none;
     }
-
-    .thick {
-        font-family: "Open Sans";
-        color: #aaa;
-        font-weight: 800;
-        &:hover {
-            color: #888;
-        }
+  }
+  .thick {
+    font-family: "Open Sans";
+    color: #aaa;
+    font-weight: 800;
+    &:hover {
+      color: #888;
     }
+  }
 }
+
 </style>
 
-<template>
-    <div class="hero-head">
-    <div class="container">
-      <nav class="nav">
-        <div class="nav-left">
-            <span class="nav-item is-brand">
-                <span class="brand title">
-                    <a href="#" class="brand-link">
-                        <i class="fa fa-bar-chart"></i> {{ metadata.title }}
-                    </a>
-                        |
-                    <a class="thick brand-link" v-bind:href="metadata.parentUrl">
-                        {{ metadata.parent }}
-                </a>
-            </span>
-        </div>
+<template lang="pug">
+.hero-head
+  .container
+    nav.nav
+      // Logo
+      .nav-left
+        span.nav-item.is-brand
+          span.brand.title
+            a.brand-link(href="#")
+              i.fa.fa-bar-chart
+              |  {{ metadata.title }}
+            |  |
+            a.thick.brand-link(v-bind:href="metadata.parentUrl")
+              |  {{ metadata.parent }}
 
-  <div id="nav-menu" class="nav-right nav-menu">
-      <span class="nav-item">
-        <a class="button is-small" v-on:click="moveIntroStart">
-                    <span class="icon is-small">
-                        <i class="fa fa-question"></i>
-                    </span>
-                    <span>Help</span>
-                </a>
-                <a class="button is-dark is-small" v-bind:href="metadata.sourceUrl">
-                   <span class="icon is-small">
-                       <i class="fa fa-github"></i>
-                   </span>
-                   <span>Source</span>
-               </a>
-      </span>
-  </div>
-</nav>
+      // Right side buttons
+      #nav-menu.nav-right.nav-menu
+        span.nav-item
+          a.button.is-small(v-on:click="moveIntroStart")
+            span.icon.is-small
+              i.fa.fa-question
+            span Help
 
-    </div>
-  </div>
+          a.button.is-dark.is-small(v-bind:href="metadata.sourceUrl")
+            span.icon.is-small
+              i.fa.fa-github
+            span Source
 </template>
 
 <script>
-  import { metadata } from '../vuex/getters'
-  import { moveIntroStart } from '../vuex/actions'
+import { metadata } from '../vuex/getters'
+import { moveIntroStart } from '../vuex/actions'
 
-  export default {
-    vuex: {
-      getters: {
-        metadata
-      },
-      actions: {
-        moveIntroStart
-      }
+export default {
+  vuex: {
+    getters: {
+      metadata
+    },
+    actions: {
+      moveIntroStart
     }
   }
+}
 </script>

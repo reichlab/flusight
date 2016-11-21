@@ -1,96 +1,93 @@
 <style lang="scss" scoped>
+
 .columns {
-    .column {
-        position: relative;
-    }
+  .column {
+    position: relative;
+  }
 }
 
 #choropleth-container, #timechart-container {
-    background: white;
+  background: white;
 }
 
 </style>
 
-<template>
-    <div class="columns">
-        <div class="column is-5" id="choropleth-container">
-            <choropleth></choropleth>
-        </div>
-
-        <div class="column id-7" id="timechart-container">
-            <time-chart></time-chart>
-        </div>
-    </div>
+<template lang="pug">
+.columns
+  #choropleth-container.column.is-5
+    choropleth
+  #timechart-container.column.is-7
+    time-chart
 </template>
 
 <script>
-  import Choropleth from './Panels/Choropleth'
-  import TimeChart from './Panels/TimeChart'
-  import {
-    selectedRegion,
-    selectedSeason,
-    selectedWeekIdx,
-    selectedChoropleth
-  } from '../vuex/getters'
-  import {
-    updateTimeChart,
-    updateChoropleth,
-    plotTimeChart,
-    plotChoropleth
-  } from '../vuex/actions'
+import Choropleth from './Panels/Choropleth'
+import TimeChart from './Panels/TimeChart'
+import {
+  selectedRegion,
+  selectedSeason,
+  selectedWeekIdx,
+  selectedChoropleth
+} from '../vuex/getters'
+import {
+  updateTimeChart,
+  updateChoropleth,
+  plotTimeChart,
+  plotChoropleth
+} from '../vuex/actions'
 
-  export default {
-    components: {
-      Choropleth,
-      TimeChart
+export default {
+  components: {
+    Choropleth,
+    TimeChart
+  },
+  vuex: {
+    getters: {
+      selectedRegion,
+      selectedSeason,
+      selectedWeekIdx,
+      selectedChoropleth
     },
-    vuex: {
-      getters: {
-        selectedRegion,
-        selectedSeason,
-        selectedWeekIdx,
-        selectedChoropleth
-      },
-      actions: {
-        updateTimeChart,
-        updateChoropleth,
-        plotChoropleth,
-        plotTimeChart
-      }
+    actions: {
+      updateTimeChart,
+      updateChoropleth,
+      plotChoropleth,
+      plotTimeChart
+    }
+  },
+  watch: {
+    selectedRegion: function() {
+      // Triggered by
+      // - selector
+      // - map clicks
+      // Time series gets new data
+      // Choropleth gets highlight
+      this.plotTimeChart()
+      this.updateChoropleth()
+      this.updateTimeChart()
     },
-    watch: {
-      selectedRegion: function() {
-        // Triggered by
-        // - selector
-        // - map clicks
-        // Time series gets new data
-        // Choropleth gets highlight
-        this.plotTimeChart()
-        this.updateChoropleth()
-        this.updateTimeChart()
-      },
-      selectedSeason: function() {
-        // Triggered by selector
-        // Choropleth gets new plot
-        // Time series gets new data
-        this.plotTimeChart()
-        this.plotChoropleth()
-      },
-      selectedChoropleth: function() {
-        // Triggered by selector
-        // Use specific choropleth getter and do a plot
-        this.plotChoropleth()
-      },
-      selectedWeekIdx: function() {
-        // Triggered by
-        // - nav buttons
-        // - mouse jumps
-        // - keyboard
-        // Choropleth gets transitions
-        // Time series gets transitions
-        this.updateChoropleth()
-        this.updateTimeChart()
-      }
+    selectedSeason: function() {
+      // Triggered by selector
+      // Choropleth gets new plot
+      // Time series gets new data
+      this.plotTimeChart()
+      this.plotChoropleth()
+    },
+    selectedChoropleth: function() {
+      // Triggered by selector
+      // Use specific choropleth getter and do a plot
+      this.plotChoropleth()
+    },
+    selectedWeekIdx: function() {
+      // Triggered by
+      // - nav buttons
+      // - mouse jumps
+      // - keyboard
+      // Choropleth gets transitions
+      // Time series gets transitions
+      this.updateChoropleth()
+      this.updateTimeChart()
     }
   }
+}
 </script>
