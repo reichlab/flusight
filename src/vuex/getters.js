@@ -37,6 +37,18 @@ export function regions (state) {
 }
 
 /**
+ * Scale given (week, data) pairs using the baseline
+ */
+function baselineScale (values, baseline) {
+  return values.map(d => {
+    return {
+      week: d.week,
+      data: baseline ? ((d.data / baseline) - 1) * 100 : -1
+    }
+  })
+}
+
+/**
  * Return choropleth data for model
  */
 function modelChoroplethData (state, modelId, dataType, relative = false) {
@@ -61,24 +73,15 @@ function actualChoroplethData (state, relative = false) {
 
   let output = {
     data: [],
-    type: 'sequential'
+    type: relative ? 'diverging' : 'sequential'
   }
 
   state.data.map(r => {
     let values = getMaxLagData(r.seasons[seasonId].actual)
 
-    if (relative) {
-      if (r.seasons[seasonId].baseline) {
-        // Rescale by baseline
-        values = values.map(d => {
-          return {
-            week: d.week,
-            data: ((d.data / r.seasons[seasonId].baseline) - 1) * 100
-          }
-        })
-      }
-      output.type = 'diverging'
-    }
+    if (relative)
+      values = baselineScale(values, r.seasons[seasonId].baseline)
+
     output.data.push({
       region: r.subId,
       states: r.states,
