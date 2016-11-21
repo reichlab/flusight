@@ -167,7 +167,7 @@ export default class Choropleth {
     data.map(d => {
       let value = d.value[ids.weekIdx].data
       let color = '#ccc'
-      if (value) color = cmap[Math.floor(colorScale(value))]
+      if (value !== -1) color = cmap[Math.floor(colorScale(value))]
 
       d.states.map(s => {
         let d3State = d3.select('.' + s)
