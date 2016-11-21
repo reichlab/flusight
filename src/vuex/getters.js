@@ -36,6 +36,61 @@ export function regions (state) {
   return state.data.map(d => d.region)
 }
 
+/**
+ * Return choropleth data for model
+ */
+function modelChoroplethData (state, modelId, dataType, relative = false) {
+  let seasonId = selectedSeason(state)
+
+  let output = {
+    data: [],
+    type: 'sequential'
+  }
+
+  state.data.map(r => {
+    let preds = r.seasons[seasonId].models[modelId].predictions
+    let weeks = getMaxLagData(r.seasons[seasonId].actual).map(d => d.week)
+  })
+}
+
+/**
+ * Return data for choropleth using actual values
+ */
+function actualChoroplethData (state, relative = false) {
+  let seasonId = selectedSeason(state)
+
+  let output = {
+    data: [],
+    type: 'sequential'
+  }
+
+  state.data.map(r => {
+    let values = getMaxLagData(r.seasons[seasonId].actual)
+
+    if (relative) {
+      if (r.seasons[seasonId].baseline) {
+        // Rescale by baseline
+        values = values.map(d => {
+          return {
+            week: d.week,
+            data: ((d.data / r.seasons[seasonId].baseline) - 1) * 100
+          }
+        })
+      }
+      output.type = 'diverging'
+    }
+    output.data.push({
+      region: r.subId,
+      states: r.states,
+      value: values
+    })
+  })
+
+  output.data = output.data.slice(1) // Remove national data
+
+  return output
+}
+
 export function choropleths (state) {
   // TODO: Parse from data
 
@@ -44,7 +99,7 @@ export function choropleths (state) {
     'Relative Weighted ILI (%)'
   ]
 
-  let seasonId = selectedSeason(state)
+  modelChoroplethData(state, 0)
 
   return actualChoropleths
 }
@@ -184,45 +239,9 @@ export function choroplethData (state) {
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
 
-  let range = choroplethDataRange(state, choroplethId)
+  let output = actualChoroplethData(state, choroplethId === 1)
 
-  let output = {
-    data: [],
-    type: 'sequential'
-  }
-
-  state.data.map(r => {
-    let values = getMaxLagData(r.seasons[seasonId].actual)
-
-    if (choroplethId === 1) {
-      if (r.seasons[seasonId].baseline) {
-        // Rescale by baseline
-        // Return percentage
-        values = values.map(d => {
-          return {
-            week: d.week,
-            data: ((d.data / r.seasons[seasonId].baseline) - 1) * 100
-          }
-        })
-      } else {
-        values = values.map(d => {
-          return {
-            week: d.week,
-            data: null
-          }
-        })
-      }
-      output.type = 'diverging'
-    }
-    output.data.push({
-      region: r.subId,
-      states: r.states,
-      value: values
-    })
-  })
-
-  output.data = output.data.slice(1) // Skip national data
-  output.range = range
+  output.range = choroplethDataRange(state, choroplethId)
   return output
 }
 
