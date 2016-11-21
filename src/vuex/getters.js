@@ -17,7 +17,10 @@ export function selectedWeekIdx (state) {
 }
 
 export function selectedWeekName (state) {
-  return state.selected.week.name
+  if (state.selected.week.name)
+    return state.selected.week.name
+  else
+    return 'NA'
 }
 
 export function selectedChoropleth (state) {

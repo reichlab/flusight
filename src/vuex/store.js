@@ -17,7 +17,7 @@ const state = {
     season: 0, // Handle season selector
     week: {
       idx: 0,
-      name: 'NA'
+      name: null
     }, // Week pointer
     choropleth: 0 // Choropleth selector
   },
