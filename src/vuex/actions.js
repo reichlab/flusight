@@ -99,6 +99,13 @@ export const toggleLegend = ({ dispatch, state }) => {
   dispatch('TOGGLE_LEGEND')
 }
 
+/**
+ * Toggle relative display in choropleth
+ */
+export const toggleRelative = ({ dispatch, state }) => {
+  dispatch('TOGGLE_CHOROPLETH_RELATIVE')
+}
+
 // Introduction actions
 
 export const appendIntroItems = ({ dispatch, state }, items) => {

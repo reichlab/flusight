@@ -36,6 +36,10 @@ export function regions (state) {
   return state.data.map(d => d.region)
 }
 
+export function choroplethRelative (state) {
+  return state.toggles.choroplethRelative
+}
+
 /**
  * Scale given (week, data) pairs using the baseline
  */

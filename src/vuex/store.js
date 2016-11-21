@@ -31,7 +31,8 @@ const state = {
   // Toggles
   toggles: {
     legend: true,
-    intro: true
+    intro: true,
+    choroplethRelative: false
   },
 
   // Intro data
@@ -97,6 +98,10 @@ const mutations = {
 
   TOGGLE_LEGEND (state) {
     state.toggles.legend = !state.toggles.legend
+  },
+
+  TOGGLE_CHOROPLETH_RELATIVE (state) {
+    state.toggles.choroplethRelative = !state.toggles.choroplethRelative
   }
 }
 
