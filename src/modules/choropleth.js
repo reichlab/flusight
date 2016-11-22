@@ -4,6 +4,7 @@ import * as util from './utils/choropleth'
 import colormap from 'colormap'
 import * as marker from './markers/choropleth'
 import textures from 'textures'
+import tinycolor from 'tinycolor2'
 
 // Map interaction functions
 
@@ -56,13 +57,13 @@ export default class Choropleth {
         .attr('width', divWidth)
 
     this.selectedTexture = textures.lines()
-      .size(12)
+      .size(10)
       .background('white')
     svg.call(this.selectedTexture)
 
     // Override datamaps css
     d3.select('#' + this.selectedTexture.id() + ' path')
-      .style('stroke-width', '2px')
+      .style('stroke-width', '1px')
 
     this.width = svg.node().getBoundingClientRect().width
     this.height = svg.node().getBoundingClientRect().height
@@ -190,10 +191,16 @@ export default class Choropleth {
         if (highlightedStates.indexOf(s) > -1) {
 
           // Setup selected pattern
+          let strokeColor = tinycolor(color).getLuminance() < 0.5 ?
+              'white' : '#444'
+
           d3.select('#' + selectedTexture.id() + ' rect')
             .attr('fill', color)
 
-          d3State.style('stroke', '#333')
+          d3.select('#' + selectedTexture.id() + ' path')
+            .style('stroke', strokeColor)
+
+          d3State.style('stroke', strokeColor)
             .style('stroke-opacity', 1)
             .style('fill', selectedTexture.url())
         } else {
