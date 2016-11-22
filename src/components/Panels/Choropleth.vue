@@ -63,13 +63,16 @@ import {
   initChoropleth,
   updateSelectedRegion,
   updateSelectedChoropleth,
+  updateSelectedModel,
   plotChoropleth,
   updateChoropleth
 } from '../../vuex/actions'
 import {
   selectedChoropleth,
   selectedWeekName,
-  choropleths
+  selectedModel,
+  choropleths,
+  models
 } from '../../vuex/getters'
 
 export default {
@@ -78,13 +81,16 @@ export default {
       initChoropleth,
       updateSelectedRegion,
       updateSelectedChoropleth,
+      updateSelectedModel,
       plotChoropleth,
       updateChoropleth
     },
     getters: {
       selectedChoropleth,
       selectedWeekName,
-      choropleths
+      selectedModel,
+      choropleths,
+      models
     }
   },
   computed: {
@@ -94,6 +100,14 @@ export default {
       },
       set(val) {
         this.updateSelectedChoropleth(this.choropleths.indexOf(val))
+      }
+    },
+    currentModel: {
+      get() {
+        return this.models[this.selectedModel]
+      },
+      set(val) {
+        this.updateSelectedModel(this.models.indexOf(val))
       }
     }
   },

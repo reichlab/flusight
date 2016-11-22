@@ -15,6 +15,7 @@ const state = {
   selected: {
     region: 0, // Handle region selector
     season: 0, // Handle season selector
+    model: 0, // Choropleth model selector
     week: {
       idx: 0,
       name: null
@@ -62,6 +63,10 @@ const mutations = {
 
   UPDATE_SELECTED_CHOROPLETH (state, val) {
     state.selected.choropleth = val
+  },
+
+  UPDATE_SELECTED_MODEL (state, val) {
+    state.selected.model = val
   },
 
   SET_TIMECHART (state, val) {

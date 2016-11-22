@@ -27,13 +27,25 @@ export function selectedChoropleth (state) {
   return state.selected.choropleth
 }
 
+export function selectedModel (state) {
+  return state.selected.model
+}
+
 export function seasons (state) {
-  // Assuming each region has all the seasons
-  return state.data[0].seasons.map(s => s.id)
+  return state.data[selectedRegion(state)].seasons.map(s => s.id)
 }
 
 export function regions (state) {
   return state.data.map(d => d.region)
+}
+
+/**
+ * Return list of all models for current season
+ */
+export function models (state) {
+  return state.data[selectedRegion(state)]
+    .seasons[selectedSeason(state)]
+    .models.map(m => m.id)
 }
 
 export function choroplethRelative (state) {
