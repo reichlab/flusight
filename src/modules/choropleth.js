@@ -3,6 +3,7 @@ import Datamap from 'datamaps/dist/datamaps.usa'
 import * as util from './utils/choropleth'
 import colormap from 'colormap'
 import * as marker from './markers/choropleth'
+import textures from 'textures'
 
 // Map interaction functions
 
@@ -53,6 +54,16 @@ export default class Choropleth {
     let svg = d3.select('#' + elementId + ' svg')
         .attr('height', divHeight)
         .attr('width', divWidth)
+
+    this.selectedTexture = textures.lines()
+      .size(12)
+      .background('white')
+    svg.call(this.selectedTexture)
+
+    // Override datamaps css
+    d3.select('#' + this.selectedTexture.id() + ' path')
+      .style('stroke-width', '2px')
+
     this.width = svg.node().getBoundingClientRect().width
     this.height = svg.node().getBoundingClientRect().height
     this.svg = svg
@@ -155,6 +166,7 @@ export default class Choropleth {
     let d3 = this.d3,
         data = this.data,
         colorScale = this.colorScale,
+        selectedTexture = this.selectedTexture,
         cmap = this.cmap
 
     let highlightedStates = [],
@@ -172,16 +184,22 @@ export default class Choropleth {
       d.states.map(s => {
         let d3State = d3.select('.' + s)
 
+        d3State.style('fill', color)
+        d3State.attr('data-value', value)
+
         if (highlightedStates.indexOf(s) > -1) {
+
+          // Setup selected pattern
+          d3.select('#' + selectedTexture.id() + ' rect')
+            .attr('fill', color)
+
           d3State.style('stroke', '#333')
             .style('stroke-opacity', 1)
+            .style('fill', selectedTexture.url())
         } else {
           d3State.style('stroke', 'white')
             .style('stroke-opacity', 0)
         }
-
-        d3State.style('fill', color)
-        d3State.attr('data-value', value)
       })
     })
   }
