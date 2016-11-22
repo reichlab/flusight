@@ -14,9 +14,9 @@
 
 <template lang="pug">
 .columns
-  #choropleth-container.column.is-5
+  #choropleth-container.column.is-4
     choropleth
-  #timechart-container.column.is-7
+  #timechart-container.column.is-8
     time-chart
 </template>
 
