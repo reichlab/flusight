@@ -35,7 +35,10 @@
               i.fa.fa-bar-chart
               |  {{ metadata.title }}
             |  |
-            a.thick.brand-link(v-bind:href="metadata.parentUrl")
+            a.thick.brand-link(
+              v-bind:href="metadata.parentUrl"
+              target="_blank"
+            )
               |  {{ metadata.parent }}
 
       // Right side buttons
@@ -46,12 +49,15 @@
               i.fa.fa-question
             span Help
 
-          a.button.is-info.is-small(v-bind:href="#")
+          a.button.is-info.is-small(v-bind:href="tweetBody", target="_blank")
             span.icon.is-small
               i.fa.fa-twitter
             span Tweet
 
-          a.button.is-dark.is-small(v-bind:href="metadata.sourceUrl")
+          a.button.is-dark.is-small(
+            v-bind:href="metadata.sourceUrl"
+            target="_blank"
+          )
             span.icon.is-small
               i.fa.fa-github
             span Source
@@ -68,6 +74,14 @@ export default {
     },
     actions: {
       moveIntroStart
+    }
+  },
+  data() {
+    let tweetBody = 'https://twitter.com/intent/tweet?text=Flusight.%20'
+    + 'Real-time%20Influenza%20Forecasts.%20https%3A%2F%2Freichlab'
+    + '.github.io%2Fflusight%2F%20%40reichlab&source=webclient'
+    return {
+      tweetBody
     }
   }
 }
