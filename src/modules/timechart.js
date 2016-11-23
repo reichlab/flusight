@@ -468,6 +468,20 @@ export default class TimeChart {
       p.update(idx)
     })
 
+    let noPredText = this.d3.select('#no-pred')
+    // Set no
+    if (this.predictions.filter(p => p.hidden).length !== 0) {
+      noPredText
+        .transition()
+        .duration(100)
+        .style('display', null)
+    } else {
+      noPredText
+        .transition()
+        .duration(100)
+        .style('display', 'none')
+    }
+
     this.observed.update(idx)
 
     this.legend.update(this.predictions)
