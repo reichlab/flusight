@@ -21,6 +21,10 @@
   }
 }
 
+nav.nav {
+    box-shadow: 0px 5px 30px -20px;
+}
+
 </style>
 
 <template lang="pug">
