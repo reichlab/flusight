@@ -285,6 +285,20 @@ $accent: #3273dc;
   top: 60px;
   left: 70px;
   line-height: 25px;
+  font-size: 10px;
+}
+
+.now-group {
+  .now-line {
+    stroke: black;
+    stroke-width: 1px;
+    stroke-dasharray: 10 5;
+  }
+  .now-text {
+    fill: #666;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
 }
 
 </style>

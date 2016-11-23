@@ -198,6 +198,24 @@ export default class TimeChart {
         .attr('y2', height)
         .style('display', 'none')
 
+    // Add now line
+    let nowGroup = svg.append('g')
+        .attr('class', 'now-group')
+
+    nowGroup.append('line')
+      .attr('class', 'now-line')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', height)
+    nowGroup.append('text')
+      .attr('class', 'now-text')
+      .attr('transform', 'translate(15, 10) rotate(-90)')
+      .style('text-anchor', 'end')
+      .text('Current Week')
+
+    this.nowGroup = nowGroup
+
     // Get bounding box
     let bb = svg.node().getBoundingClientRect()
 
@@ -316,6 +334,20 @@ export default class TimeChart {
                    .indexOf(m.predictions[m.predictions.length - 1].week % 100)
                }
              }))
+
+      // Display now line
+      let nowIndex = actualIndices[actualIndices.length - 1]
+      let nowPos = this.xScaleWeek(this.weeks[nowIndex])
+      this.nowGroup.select('.now-line')
+        .attr('x1', nowPos)
+        .attr('x2', nowPos)
+
+      this.nowGroup.select('.now-text')
+        .attr('dy', nowPos)
+
+      this.nowGroup
+        .style('display', null)
+
     } else {
       // Start at the oldest prediction
       let modelPredictions = data.models
@@ -332,6 +364,9 @@ export default class TimeChart {
       } else {
         this.weekIdx = Math.min(...modelPredictions)
       }
+
+      this.nowGroup
+        .style('display', 'none')
     }
     this.weekHook({
       idx: this.weekIdx,
