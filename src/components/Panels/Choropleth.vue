@@ -23,11 +23,12 @@
 
 #selectors {
   .level {
-      margin-bottom: 0px;
+    margin-bottom: 0px;
   }
 }
 
 #choropleth-tooltip {
+  z-index: 1001;
   position: fixed;
   padding: 10px;
   box-shadow: 0px 0px 2px;
