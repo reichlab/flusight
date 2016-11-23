@@ -46,6 +46,11 @@
               i.fa.fa-question
             span Help
 
+          a.button.is-info.is-small(v-bind:href="#")
+            span.icon.is-small
+              i.fa.fa-twitter
+            span Tweet
+
           a.button.is-dark.is-small(v-bind:href="metadata.sourceUrl")
             span.icon.is-small
               i.fa.fa-github
