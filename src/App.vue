@@ -50,7 +50,7 @@ body {
   padding: 30px 20px !important;
 
   &#panel-section {
-    padding-bottom: 0px !important;
+    padding-bottom: 10px !important;
   }
 }
 
