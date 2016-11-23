@@ -8,16 +8,16 @@
   text-align: center;
 
   #relative-button {
-      position: absolute;
-      text-align: left;
-      font-size: 12px;
-      .icon {
-          margin-right: 10px;
-          cursor: pointer;
-      }
-      span {
-          vertical-align: middle;
-      }
+    position: absolute;
+    text-align: left;
+    font-size: 12px;
+    .icon {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    span {
+      vertical-align: middle;
+    }
   }
 }
 
@@ -150,6 +150,27 @@ export default {
 
     // Hot start
     this.updateChoropleth()
+
+    let d3 = this.$d3
+    let infoTooltip = d3.select('#info-tooltip')
+
+    // Info tooltip
+    d3.select('#relative-button')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', (d3.event.pageY + 20) + 'px')
+          .style('left', (d3.event.pageX + 20) + 'px')
+          .html(`Show relative weighted ILI values in map as percentage
+                 above/below the regional CDC baseline`)
+      })
   }
 }
 </script>
