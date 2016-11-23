@@ -280,12 +280,23 @@ $accent: #3273dc;
   }
 }
 
+#no-pred {
+  position: absolute;
+  top: 60px;
+  left: 70px;
+  line-height: 25px;
+  visibility: hidden;
+}
+
 </style>
 
 <template lang="pug">
 // Tooltips
 #legend-tooltip
 #chart-tooltip
+
+// No predictions text
+#no-pred.heading No predictions available <br> for current week
 
 // Main plotting div
 #timechart
