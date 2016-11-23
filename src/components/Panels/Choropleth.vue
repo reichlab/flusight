@@ -139,6 +139,7 @@ export default {
 
     // Hot start
     this.updateChoropleth()
+    this.updateSelectedSeason(this.seasons.length - 1)
 
     let d3 = this.$d3
     let infoTooltip = d3.select('#info-tooltip')
