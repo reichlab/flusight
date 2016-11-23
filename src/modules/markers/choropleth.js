@@ -16,7 +16,7 @@ export class ColorBar {
       height: 15,
       width: svgBB.width / 4,
       x: (svgBB.width * 3 / 4) - 20,
-      y: svgBB.height - 50
+      y: svgBB.height - 20
     }
 
     let eachWidth = bar.width / cmap.length

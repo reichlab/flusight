@@ -20,19 +20,21 @@ export default class Choropleth {
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
-    divHeight -= 50
+    divHeight -= 60
 
     // Limits
-    divHeight = Math.min(Math.max(350, divHeight), 600)
+    divHeight = Math.min(Math.max(200, divHeight), 300)
+    divWidth = Math.min(divWidth, 400)
 
     // Initialized datamap
     let datamap = new Datamap({
       element: document.getElementById(elementId),
       scope: 'usa',
+      height: divHeight,
       setProjection: (element, options) => {
         let projection = d3.geoAlbersUsa()
-          .scale(divWidth)
-          .translate([divWidth / 2, divHeight / 2])
+            .scale(divWidth)
+            .translate([divWidth / 2, divHeight / 2])
         return {
           path: d3.geoPath().projection(projection),
           projection: projection

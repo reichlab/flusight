@@ -14,7 +14,7 @@ export default class TimeChart {
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
-    divHeight -= 50
+    divHeight -= 20
 
     // Limits
     divHeight = Math.min(Math.max(350, divHeight), 600)

@@ -4,20 +4,27 @@
   cursor: pointer;
 }
 
-#choropleth-info {
-  position: absolute;
-  top: 0px;
-  left: 10px;
+#choropleth {
+  text-align: center;
+
+  #relative-button {
+      position: absolute;
+      text-align: left;
+      font-size: 12px;
+      .icon {
+          margin-right: 10px;
+          cursor: pointer;
+      }
+      span {
+          vertical-align: middle;
+      }
+  }
 }
 
-#week-number {
-  font-size: 26px;
-  color: #aaa;
-  #number {
-    color: #666;
-    font-weight: bold;
+#selectors {
+  .level {
+      margin-bottom: 0px;
   }
-  margin-bottom: 5px;
 }
 
 #choropleth-tooltip {
@@ -44,17 +51,40 @@
 </style>
 
 <template lang="pug">
-  // Info and selector
-  #choropleth-info
-    #week-number Week <span id="number">{{ selectedWeekName }}</span>
+div
+  // Title
+  h1.title
+    | Real-time <b>Influenza Forecasts</b>
+  h2.subtitle
+    | CDC FluSight Challenge
 
-    #choropleth-selector.control
-      span.select.is-small
-        select(v-model="currentChoropleth")
-          option(v-for="choropleth in choropleths") {{ choropleth }}
+  hr
+
+  // Info and selector
+  #selectors
+    .level.is-mobile
+      .level-left
+        .level-item
+          .heading Week <b>{{ selectedWeekName }}</b>
+          .subtitle {{ regions[selectedRegion] }}
+
+
+      .level-right
+        .level-item
+            p.heading Season
+            p.control.title
+              span.select.is-small
+                select(v-model="currentSeason")
+                  option(v-for="season in seasons") {{ season }}
+
 
   // Main plotting div
   #choropleth
+
+    #relative-button
+      span.icon
+        i.fa.fa-toggle-off
+      span Show relative values
 </template>
 
 <script>
@@ -62,6 +92,7 @@ import Choropleth from '../../modules/choropleth'
 import {
   initChoropleth,
   updateSelectedRegion,
+  updateSelectedSeason,
   updateSelectedChoropleth,
   updateSelectedModel,
   plotChoropleth,
@@ -71,8 +102,12 @@ import {
   selectedChoropleth,
   selectedWeekName,
   selectedModel,
+  selectedSeason,
+  selectedRegion,
   choropleths,
-  models
+  models,
+  seasons,
+  regions
 } from '../../vuex/getters'
 
 export default {
@@ -81,6 +116,7 @@ export default {
       initChoropleth,
       updateSelectedRegion,
       updateSelectedChoropleth,
+      updateSelectedSeason,
       updateSelectedModel,
       plotChoropleth,
       updateChoropleth
@@ -89,8 +125,12 @@ export default {
       selectedChoropleth,
       selectedWeekName,
       selectedModel,
+      selectedSeason,
+      selectedRegion,
       choropleths,
-      models
+      models,
+      seasons,
+      regions
     }
   },
   computed: {
@@ -108,6 +148,14 @@ export default {
       },
       set(val) {
         this.updateSelectedModel(this.models.indexOf(val))
+      }
+    },
+    currentSeason: {
+      get() {
+        return this.seasons[this.selectedSeason]
+      },
+      set(val) {
+        this.updateSelectedSeason(this.seasons.indexOf(val))
       }
     }
   },

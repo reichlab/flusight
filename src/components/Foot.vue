@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
   
 .footer {
-  padding: 20px 20px 20px !important;
+  padding: 10px 20px !important;
   font-weight: 100;
   font-size: 13px;
   line-height: 20px;

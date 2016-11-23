@@ -59,7 +59,6 @@ intro
 
 // Main layout components
 navbar
-selectors
 .section
   #app.container
     panels
@@ -70,7 +69,6 @@ foot
 import Navbar from './components/Navbar'
 import Intro from './components/Intro'
 import Panels from './components/Panels'
-import Selectors from './components/Selectors'
 import Foot from './components/Foot'
 import store from './vuex/store'
 import { forward, backward, appendIntroItems } from './vuex/actions'
@@ -84,7 +82,6 @@ export default {
     Navbar,
     Intro,
     Panels,
-    Selectors,
     Foot
   },
   vuex: {
