@@ -295,7 +295,7 @@ $accent: #3273dc;
 #chart-tooltip
 
 // No predictions text
-#no-pred.heading Predictions not available <br> for current week
+#no-pred.heading Predictions not available <br> for selected week
 
 // Main plotting div
 #timechart

@@ -92,14 +92,14 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
 * Enhancements
-** TODO No predictions note
-SCHEDULED: <2016-11-23 Wed>
 ** Confidence ranges in tooltips
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE No predictions note
+CLOSED: [2016-11-23 Wed 05:30] SCHEDULED: <2016-11-23 Wed>
 ** DONE Update demo divisions for new layout
 CLOSED: [2016-11-23 Wed 04:36]
 ** DONE Chropleth selector on hover description
