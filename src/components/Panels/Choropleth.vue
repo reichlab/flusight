@@ -83,7 +83,11 @@ div
 
     #relative-button
       span.icon
-        i.fa.fa-toggle-off
+        i(
+          v-bind:class=`[choroplethRelative ? 'fa-toggle-on' : 'fa-toggle-off',
+                        'fa']`
+          v-on:click="toggleRelative"
+         )
       span Show relative values
 </template>
 
@@ -93,19 +97,15 @@ import {
   initChoropleth,
   updateSelectedRegion,
   updateSelectedSeason,
-  updateSelectedChoropleth,
-  updateSelectedModel,
   plotChoropleth,
-  updateChoropleth
+  updateChoropleth,
+  toggleRelative
 } from '../../vuex/actions'
 import {
-  selectedChoropleth,
   selectedWeekName,
-  selectedModel,
   selectedSeason,
   selectedRegion,
-  choropleths,
-  models,
+  choroplethRelative,
   seasons,
   regions
 } from '../../vuex/getters'
@@ -115,41 +115,21 @@ export default {
     actions: {
       initChoropleth,
       updateSelectedRegion,
-      updateSelectedChoropleth,
       updateSelectedSeason,
-      updateSelectedModel,
       plotChoropleth,
-      updateChoropleth
+      updateChoropleth,
+      toggleRelative
     },
     getters: {
-      selectedChoropleth,
       selectedWeekName,
-      selectedModel,
       selectedSeason,
       selectedRegion,
-      choropleths,
-      models,
+      choroplethRelative,
       seasons,
       regions
     }
   },
   computed: {
-    currentChoropleth: {
-      get() {
-        return this.choropleths[this.selectedChoropleth]
-      },
-      set(val) {
-        this.updateSelectedChoropleth(this.choropleths.indexOf(val))
-      }
-    },
-    currentModel: {
-      get() {
-        return this.models[this.selectedModel]
-      },
-      set(val) {
-        this.updateSelectedModel(this.models.indexOf(val))
-      }
-    },
     currentSeason: {
       get() {
         return this.seasons[this.selectedSeason]

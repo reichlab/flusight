@@ -27,7 +27,7 @@ import {
   selectedRegion,
   selectedSeason,
   selectedWeekIdx,
-  selectedChoropleth
+  choroplethRelative
 } from '../vuex/getters'
 import {
   updateTimeChart,
@@ -46,7 +46,7 @@ export default {
       selectedRegion,
       selectedSeason,
       selectedWeekIdx,
-      selectedChoropleth
+      choroplethRelative
     },
     actions: {
       updateTimeChart,
@@ -73,8 +73,8 @@ export default {
       this.plotTimeChart()
       this.plotChoropleth()
     },
-    selectedChoropleth: function() {
-      // Triggered by selector
+    choroplethRelative: function() {
+      // Triggered by relative selector
       // Use specific choropleth getter and do a plot
       this.plotChoropleth()
     },

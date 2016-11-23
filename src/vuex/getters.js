@@ -67,12 +67,12 @@ function baselineScale (values, baseline) {
 /**
  * Return choropleth data for model
  */
-function modelChoroplethData (state, modelId, predictionType, relative = false) {
+function modelChoroplethData (state, modelId, predictionType) {
   let seasonId = selectedSeason(state)
 
   let output = {
     data: [],
-    type: relative ? 'diverging' : 'sequential'
+    type: choroplethRelative(state) ? 'diverging' : 'sequential'
   }
 
   state.data.map(r => {
@@ -92,7 +92,7 @@ function modelChoroplethData (state, modelId, predictionType, relative = false) 
       }
     })
 
-    if (relative)
+    if (choroplethRelative(state))
       values = baselineScale(values, r.seasons[seasonId].baseline)
 
     output.data.push({
@@ -110,8 +110,9 @@ function modelChoroplethData (state, modelId, predictionType, relative = false) 
 /**
  * Return data for choropleth using actual values
  */
-function actualChoroplethData (state, relative = false) {
+function actualChoroplethData (state) {
   let seasonId = selectedSeason(state)
+  let relative = choroplethRelative(state)
 
   let output = {
     data: [],
@@ -251,7 +252,7 @@ export function previousWeek (state) {
 /**
  * Return range for choropleth color scale
  */
-function choroplethDataRange (state, choroplethId) {
+function choroplethDataRange (state) {
   let maxVals = [],
       minVals = []
 
@@ -260,7 +261,7 @@ function choroplethDataRange (state, choroplethId) {
 
       let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
-      if (choroplethId === 1) {
+      if (choroplethRelative(state)) {
         // Use baseline scaled data
         maxVals.push(Math.max(...actual.map(d => ((d / season.baseline) - 1) * 100)))
         minVals.push(Math.min(...actual.map(d => ((d / season.baseline) - 1) * 100)))
@@ -283,9 +284,9 @@ export function choroplethData (state) {
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
 
-  let output = actualChoroplethData(state, choroplethId === 1)
+  let output = actualChoroplethData(state)
 
-  output.range = choroplethDataRange(state, choroplethId)
+  output.range = choroplethDataRange(state)
   return output
 }
 
