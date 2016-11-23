@@ -3,50 +3,55 @@
 $accent: #268bd2;
 
 ::selection {
-    background: $accent;
-    color: white;
+  background: $accent;
+  color: white;
 }
 
 ::-moz-selection {
-    background: $accent;
-    color: white;
+  background: $accent;
+  color: white;
 }
+
 svg text::selection {
-    fill: white;
+  fill: white;
 }
 
 body {
-    background-color: white;
+  background-color: white;
 }
 
 #info-tooltip {
-    z-index: 100;
-    position: fixed;
-    box-shadow: 0px 0px 2px;
-    border-radius: 1px;
-    padding: 5px 10px;
-    color: #333;
-    font-size: 11px;
-    background-color: white;
-    width: 150px;
+  z-index: 100;
+  position: fixed;
+  box-shadow: 0px 0px 2px;
+  border-radius: 1px;
+  padding: 5px 10px;
+  color: #333;
+  font-size: 11px;
+  background-color: white;
+  width: 150px;
 
-    .bold {
-        font-weight: bold;
-    }
+  .bold {
+    font-weight: bold;
+  }
 }
 
 #loader {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background-color: $accent;
-    z-index: 999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: $accent;
+  z-index: 999;
 }
 
 .section {
-    padding: 30px 20px !important;
+  padding: 30px 20px !important;
+
+  &#panel-section {
+    padding-bottom: 0px !important;
+  }
 }
 
 </style>
@@ -59,7 +64,7 @@ intro
 
 // Main layout components
 navbar
-.section
+.section#panel-section
   #app.container
     panels
 foot

@@ -17,7 +17,7 @@ export default class TimeChart {
     divHeight -= 20
 
     // Limits
-    divHeight = Math.min(Math.max(350, divHeight), 600)
+    divHeight = Math.min(Math.max(350, divHeight), 550)
 
     let onsetOffset = 30
 
