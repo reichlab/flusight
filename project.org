@@ -1,10 +1,8 @@
 #+TITLE: Project Board
 
 * Issues
-** [#B] Fix position of choropleth elements
-** [#B] Reorder prediction markers
-*** Put shades first
-*** Circles second
+** DONE Fix position of choropleth elements
+CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Show legend while demoing
 CLOSED: [2016-11-19 Sat 03:48]
 ** DONE Fix tooltip position for non-chromium browsers
@@ -48,6 +46,9 @@ CLOSED: [2016-11-05 Sat 23:50]
 ** DONE Update workflow wiki and email
 CLOSED: [2016-11-03 Thu 22:12]
 * Features
+** TODO Today marker with text
+SCHEDULED: <2016-11-23 Wed>
+** [#B] Histogram for onset prediction
 ** Choropleth
 *** DONE Relative Weighted ILI (%)
 CLOSED: [2016-11-06 Sun 03:08]
@@ -55,7 +56,12 @@ CLOSED: [2016-11-06 Sun 03:08]
 **** Use a diverging color scale
 *** [#B] Peak week
 *** [#B] Peak percent
-** [#B] Histogram for onset prediction
+*** DONE Switch for relative thing
+CLOSED: [2016-11-23 Wed 03:53]
+** DONE Tweet content
+CLOSED: [2016-11-23 Wed 04:35]
+** DONE Layout
+CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Show data used for prediction
 CLOSED: [2016-11-18 Fri 23:43]
 *** Get reported data for each week
@@ -86,13 +92,18 @@ CLOSED: [2016-11-04 Fri 00:43]
 *** Get all weeks for actual (with negative filler)
 *** Skip uniform predictions
 * Enhancements
-** TODO Chropleth selector on hover description
-** [#B] Confidence ranges in tooltips
+** TODO No predictions note
+SCHEDULED: <2016-11-23 Wed>
+** Confidence ranges in tooltips
 ** Fix Large screen layout
 Possible fixes
 *** Set max-height
 *** Remove max-width
 ** Increase mobile view width threshold
+** DONE Update demo divisions for new layout
+CLOSED: [2016-11-23 Wed 04:36]
+** DONE Chropleth selector on hover description
+CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Choropleth deselection
 CLOSED: [2016-11-19 Sat 03:53]
 ** DONE Move CI buttons inside legend 
