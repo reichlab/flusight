@@ -115,11 +115,10 @@ export default {
     // Append intro items
     this.appendIntroItems([
       {
-        title: 'Region and Season',
-        content: `Use these pull-down menus to select the HHS region and flu
-                  season`,
-        direction: 'left',
-        element: '#main-selectors'
+        title: 'Season',
+        content: `Use this pull-down menu to select the flu season`,
+        direction: 'right',
+        element: '#season-selector'
       },
       {
         title: 'Predictions',
@@ -156,20 +155,20 @@ export default {
                   <p>You can also click on the map to see predictions for a
                   particular region.</p>`,
         direction: 'right',
-        element: '#choropleth-container'
+        element: '#map-intro'
       },
-      {
-        title: 'Choose mapped data',
-        content: `You can select the data you want to see on the map using
-                  this dropdown menu.`,
-        direction: 'right',
-        element: '#choropleth-selector'
-      },
+      // {
+      //   title: 'Choose mapped data',
+      //   content: `You can select the data you want to see on the map using
+      //             this dropdown menu.`,
+      //   direction: 'right',
+      //   element: '#relative-button'
+      // },
       {
         title: 'Finished',
         content: `Check out the source for this app and provide feedback on
                   the project's github page <a href="` +
-                  this.metadata.sourceUrl + `">here</a>.`,
+                  this.metadata.sourceUrl + `" target="_blank">here</a>.`,
         direction: 'left',
         element: ''
       }

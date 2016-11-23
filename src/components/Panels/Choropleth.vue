@@ -51,44 +51,32 @@
 </style>
 
 <template lang="pug">
-div
-  // Title
-  h1.title
-    | Real-time <b>Influenza Forecasts</b>
-  h2.subtitle
-    | CDC FluSight Challenge
+#selectors
+  .level.is-mobile
+    .level-left
+      .level-item
+        .heading Week <b>{{ selectedWeekName }}</b>
+        .subtitle {{ regions[selectedRegion] }}
 
-  hr
-
-  // Info and selector
-  #selectors
-    .level.is-mobile
-      .level-left
-        .level-item
-          .heading Week <b>{{ selectedWeekName }}</b>
-          .subtitle {{ regions[selectedRegion] }}
+    .level-right
+      .level-item
+          p.heading Season
+          p.control.title
+            span#season-selector.select.is-small
+              select(v-model="currentSeason")
+                option(v-for="season in seasons") {{ season }}
 
 
-      .level-right
-        .level-item
-            p.heading Season
-            p.control.title
-              span.select.is-small
-                select(v-model="currentSeason")
-                  option(v-for="season in seasons") {{ season }}
-
-
-  // Main plotting div
-  #choropleth
-
-    #relative-button
-      span.icon
-        i(
-          v-bind:class=`[choroplethRelative ? 'fa-toggle-on' : 'fa-toggle-off',
-                        'fa']`
-          v-on:click="toggleRelative"
-         )
-      span Show relative values
+// Main plotting div
+#choropleth
+  #relative-button
+    span.icon
+      i(
+        v-bind:class=`[choroplethRelative ? 'fa-toggle-on' : 'fa-toggle-off',
+                      'fa']`
+        v-on:click="toggleRelative"
+       )
+    span Show relative values
 </template>
 
 <script>

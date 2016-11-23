@@ -14,8 +14,16 @@
 
 <template lang="pug">
 .columns
-  #choropleth-container.column.is-4
-    choropleth
+  #map-intro.column.is-4
+    // Title
+    h1.title
+      | Real-time <b>Influenza Forecasts</b>
+    h2.subtitle
+      | CDC FluSight Challenge
+    hr
+
+    #choropleth-container
+      choropleth
   #timechart-container.column.is-8
     time-chart
 </template>
