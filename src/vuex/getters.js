@@ -36,7 +36,7 @@ export function seasons (state) {
 }
 
 export function regions (state) {
-  return state.data.map(d => d.region)
+  return state.data.map(d => d.subId)
 }
 
 /**
