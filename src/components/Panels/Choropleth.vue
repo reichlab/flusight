@@ -11,9 +11,10 @@
     position: absolute;
     text-align: left;
     font-size: 12px;
+    cursor: pointer;
+    user-select: none;
     .icon {
       margin-right: 10px;
-      cursor: pointer;
     }
     span {
       vertical-align: middle;
@@ -70,12 +71,11 @@
 
 // Main plotting div
 #choropleth
-  #relative-button
+  #relative-button(v-on:click="toggleRelative")
     span.icon
       i(
         v-bind:class=`[choroplethRelative ? 'fa-toggle-on' : 'fa-toggle-off',
                       'fa']`
-        v-on:click="toggleRelative"
        )
     span Show relative values
 </template>
