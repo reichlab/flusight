@@ -177,8 +177,8 @@ export class Prediction {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (d3.event.pageY + 20) + 'px')
-            .style('left', (d3.event.pageX + 20) + 'px')
+            .style('top', (d3.event.pageY + 15) + 'px')
+            .style('left', (d3.event.pageX + 15) + 'px')
         })
 
       this.onsetGroup.select('.onset-range')
@@ -241,8 +241,8 @@ export class Prediction {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (d3.event.pageY + 20) + 'px')
-            .style('left', (d3.event.pageX + 20) + 'px')
+            .style('top', (d3.event.pageY + 15) + 'px')
+            .style('left', (d3.event.pageX + 15) + 'px')
         })
 
       this.peakGroup.select('.peak-range-x')
@@ -480,8 +480,8 @@ export class HistoricalLines {
           .style('display', 'none')
       }).on('mousemove', function() {
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html('<div class="point">' + d.id + '</div>')
       })
     })
@@ -543,8 +543,8 @@ export class Legend {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(util.legendTooltip({
             name: 'Actual Data',
             description: 'Latest data available for the week'
@@ -572,8 +572,8 @@ export class Legend {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(util.legendTooltip({
             name: 'Observed Data',
             description: `Data available for weeks when the predictions were
@@ -623,8 +623,8 @@ export class Legend {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(util.legendTooltip({
             name: 'Historical Data',
             description: 'Toggle historical data lines'
@@ -655,8 +655,8 @@ export class Legend {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (d3.event.pageY + 20) + 'px')
-            .style('left', (d3.event.pageX - 150 - 20) + 'px')
+            .style('top', (d3.event.pageY + 15) + 'px')
+            .style('left', (d3.event.pageX - 150 - 15) + 'px')
             .html(util.legendTooltip({
               name: 'Confidence Interval',
               description: 'Select confidence interval for prediction markers'
@@ -725,8 +725,8 @@ export class Legend {
         })
         .on('mousemove', function() {
           tooltip
-            .style('top', (d3.event.pageY + 20) + 'px')
-            .style('left', (d3.event.pageX - 150 - 20) + 'px')
+            .style('top', (d3.event.pageY + 15) + 'px')
+            .style('left', (d3.event.pageX - 150 - 15) + 'px')
             .html(util.legendTooltip(p.meta))
         })
     })

@@ -399,7 +399,7 @@ export default {
               .on('mousemove', () => {
                 tooltip
                   .style('top', d3.event.pageY + 'px')
-                  .style('left', (d3.event.pageX - 100 - 20) + 'px')
+                  .style('left', (d3.event.pageX - 100 - 15) + 'px')
                   .html(e[1])
               }))
   }

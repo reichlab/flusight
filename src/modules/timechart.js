@@ -140,8 +140,8 @@ export default class TimeChart {
       })
       .on('mousemove', function() {
         infoTooltip
-          .style('top', (d3.event.pageY - 20) + 'px')
-          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY - 15) + 'px')
+          .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(`Week of the calendar year, as measured by the CDC.
                  <br><br><em>Click to know more</em>`)
       })
@@ -170,7 +170,7 @@ export default class TimeChart {
       .on('mousemove', function() {
         infoTooltip
           .style('top', d3.event.pageY + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html(`Percentage of outpatient doctor visits for influenza-like
                  illness, weighted by state population.<br><br><em>Click to know
                  more</em>`)
@@ -478,8 +478,8 @@ export default class TimeChart {
           .attr('x2', snappedX)
 
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function() {
