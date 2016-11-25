@@ -34,6 +34,20 @@ body {
   .bold {
     font-weight: bold;
   }
+  ul {
+    list-style: disc inside none;
+    display: table;
+
+    li {
+      display: table-row;
+      &::before {
+        content: '•';
+        display: table-cell;
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+  }
 }
 
 #loader {

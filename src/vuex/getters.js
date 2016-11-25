@@ -117,7 +117,7 @@ function actualChoroplethData (state) {
   let output = {
     data: [],
     type: relative ? 'diverging' : 'sequential',
-    decorator: relative ? x => x + ' % (baseline)' : x => x + ' % (wili)'
+    decorator: relative ? x => x + ' % (baseline)' : x => x + ' %'
   }
 
   state.data.map(r => {

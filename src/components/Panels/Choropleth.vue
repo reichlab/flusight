@@ -7,17 +7,26 @@
 #choropleth {
   text-align: center;
 
+  #relative-button-title {
+    padding-top: 10px;
+    text-align: left;
+    font-size: 12px;
+  }
+
   #relative-button {
     position: absolute;
     text-align: left;
-    font-size: 12px;
+    font-size: 11px;
     cursor: pointer;
     user-select: none;
     .icon {
-      margin-right: 10px;
+      margin: 0px 10px;
     }
     span {
       vertical-align: middle;
+      &.disabled {
+        color: #aaa;
+      }
     }
   }
 }
@@ -71,13 +80,15 @@
 
 // Main plotting div
 #choropleth
+  #relative-button-title Actual Weighted ILI %
   #relative-button(v-on:click="toggleRelative")
+    span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
     span.icon
       i(
-        v-bind:class=`[choroplethRelative ? 'fa-toggle-on' : 'fa-toggle-off',
-                      'fa']`
+        v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
+                      'fa fa-toggle-on']`
        )
-    span Show relative values
+    span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
 </template>
 
 <script>
@@ -158,8 +169,12 @@ export default {
         infoTooltip
           .style('top', (d3.event.pageY + 20) + 'px')
           .style('left', (d3.event.pageX + 20) + 'px')
-          .html(`Show relative weighted ILI values in map as percentage
-                 above/below the regional CDC baseline`)
+          .html(`Choose between
+                 <ul>
+                 <li><b>Absolute</b> weighted ILI % values or</li>
+                 <li><b>Relative</b> values as the percent above/below the
+                 regional CDC baseline
+                 </ul>`)
       })
   }
 }
