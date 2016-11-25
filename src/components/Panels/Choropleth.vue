@@ -11,6 +11,9 @@
     padding-top: 10px;
     text-align: left;
     font-size: 12px;
+    span {
+      cursor: pointer
+    }
   }
 
   #relative-button {
@@ -80,7 +83,8 @@
 
 // Main plotting div
 #choropleth
-  #relative-button-title Actual Weighted ILI %
+  #relative-button-title
+    span Weighted ILI (%)
   #relative-button(v-on:click="toggleRelative")
     span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
     span.icon
@@ -167,14 +171,35 @@ export default {
       })
       .on('mousemove', function() {
         infoTooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html(`Choose between
                  <ul>
                  <li><b>Absolute</b> weighted ILI % values or</li>
                  <li><b>Relative</b> values as the percent above/below the
                  regional CDC baseline
                  </ul>`)
+      })
+
+    d3.select('#relative-button-title span')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
+          .html(`Percentage of outpatient doctor visits for influenza-like
+                 illness, weighted by state population.<br><br><em>Click to know
+                 more</em>`)
+      })
+      .on('click', function() {
+        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank')
       })
   }
 }
