@@ -3,6 +3,7 @@
 import * as util from './utils/timechart'
 import * as marker from './markers/timechart'
 import textures from 'textures'
+import * as mmwr from 'mmwr-week'
 
 export default class TimeChart {
   constructor(d3, elementId, weekHook) {
@@ -212,7 +213,7 @@ export default class TimeChart {
       .attr('class', 'now-text')
       .attr('transform', 'translate(15, 10) rotate(-90)')
       .style('text-anchor', 'end')
-      .text('Current Week')
+      .text('Today')
 
     this.nowGroup = nowGroup
 
@@ -264,6 +265,7 @@ export default class TimeChart {
     yScale.domain([0, Math.min(13, util.getYMax(data))])
     // Assuming actual data has all the weeks
     let weeks = data.actual.map(d => d.week % 100)
+
     let actualIndices = data.actual
         .filter(d => d.data !== -1)
         .map(d => weeks.indexOf(d.week % 100))
@@ -281,6 +283,8 @@ export default class TimeChart {
       // [0, 1) point fix without changing the scale
       if (dInt === 0)
         dInt = Math.max(...weeks)
+      if (dInt === 53)
+        dInt = 1
       if (dInt === 29)
         dFloat = 0
       return xScale(weeks.indexOf(dInt) + dFloat)
@@ -289,8 +293,9 @@ export default class TimeChart {
     // Week to date parser
     let dateParser = d3.timeParse('%Y-%U')
     xScaleDate.domain(d3.extent(data.actual.map(d => {
-      let formattedDate = Math.floor(d.week / 100) + '-' + d.week % 100
-      return dateParser(formattedDate)
+      let year = Math.floor(d.week / 100),
+          week = d.week % 100
+      return mmwr.MMWRWeekToDate(year, week).toDate()
     })))
 
     let xAxis = d3.axisBottom(xScalePoint)
@@ -336,8 +341,7 @@ export default class TimeChart {
              }))
 
       // Display now line
-      let nowIndex = actualIndices[actualIndices.length - 1]
-      let nowPos = this.xScaleWeek(this.weeks[nowIndex])
+      let nowPos = this.xScaleDate(new Date())
       this.nowGroup.select('.now-line')
         .attr('x1', nowPos)
         .attr('x2', nowPos)

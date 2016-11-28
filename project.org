@@ -57,7 +57,7 @@ CLOSED: [2016-11-06 Sun 03:08]
 *** DONE Switch for relative thing
 CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Today marker with text
-CLOSED: [2016-11-23 Wed 06:14] SCHEDULED: <2016-11-23 Wed>
+CLOSED: [2016-11-23 Wed 06:14]
 ** DONE Tweet content
 CLOSED: [2016-11-23 Wed 04:35]
 ** DONE Layout
@@ -67,7 +67,7 @@ CLOSED: [2016-11-18 Fri 23:43]
 *** Get reported data for each week
 *** Plot as default backtrace on movements
 ** DONE Gather historical data
-CLOSED: [2016-11-11 Fri 17:12] SCHEDULED: <2016-11-11 Fri>
+CLOSED: [2016-11-11 Fri 17:12]
 ** DONE Allow option for choosing confidence interval
 CLOSED: [2016-11-11 Fri 04:25]
 ** DONE Add intro content
@@ -99,7 +99,7 @@ Possible fixes
 *** Remove max-width
 ** Increase mobile view width threshold
 ** DONE No predictions note
-CLOSED: [2016-11-23 Wed 05:30] SCHEDULED: <2016-11-23 Wed>
+CLOSED: [2016-11-23 Wed 05:30]
 ** DONE Update demo divisions for new layout
 CLOSED: [2016-11-23 Wed 04:36]
 ** DONE Chropleth selector on hover description

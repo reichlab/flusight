@@ -3,7 +3,7 @@
 
 const delphiAPI = require('./assets/delphi_epidata')
 const metadata = require('./metadata')
-const moment = require('moment')
+const mmwr = require('mmwr-week')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
 
@@ -17,8 +17,7 @@ const seasonWeeksData = (season) => {
       second = parseInt(season.split('-')[1])
 
   // Check the number of weeks in first year
-  let firstMaxWeek = Math.max(moment(new Date(first, 11, 31)).week(),
-                              moment(new Date(first, 11, 24)).week())
+  let firstMaxWeek = mmwr.MMWRWeeksInYear(first)
 
   let weeks = []
   // Weeks for first year
