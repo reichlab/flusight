@@ -24,6 +24,10 @@ export const updateSelectedChoropleth = ({ dispatch, state}, val) => {
   dispatch('UPDATE_SELECTED_CHOROPLETH', val)
 }
 
+export const updateSelectedModel = ({ dispatch, state }, val) => {
+  dispatch('UPDATE_SELECTED_MODEL', val)
+}
+
 // Initializations
 // ---------------
 
@@ -97,6 +101,13 @@ export const backward = ({ dispatch, state }) => {
  */
 export const toggleLegend = ({ dispatch, state }) => {
   dispatch('TOGGLE_LEGEND')
+}
+
+/**
+ * Toggle relative display in choropleth
+ */
+export const toggleRelative = ({ dispatch, state }) => {
+  dispatch('TOGGLE_CHOROPLETH_RELATIVE')
 }
 
 // Introduction actions

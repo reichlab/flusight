@@ -1,6 +1,8 @@
 // Utility functions for timechart family
 // --------------------------------------
 
+import tinycolor from 'tinycolor2'
+
 /**
  * Return maximum value to be displayed (y axis) in the given subset
  */
@@ -106,13 +108,7 @@ export const legendTooltip = (meta) => {
  * Return rgba for hex
  */
 export const hexToRgba = (hex, alpha) => {
-  let c = hex.substring(1).split('')
-
-  if (c.length == 3) c = [c[0], c[0], c[1], c[1], c[2], c[2]]
-  c = '0x'+c.join('')
-
-  let rgba = 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',')
-  rgba += ',' + alpha + ')'
-
-  return rgba
+  let color = tinycolor(hex)
+  color.setAlpha(alpha)
+  return color.toRgbString()
 }

@@ -3,6 +3,8 @@ import Datamap from 'datamaps/dist/datamaps.usa'
 import * as util from './utils/choropleth'
 import colormap from 'colormap'
 import * as marker from './markers/choropleth'
+import textures from 'textures'
+import tinycolor from 'tinycolor2'
 
 // Map interaction functions
 
@@ -18,19 +20,21 @@ export default class Choropleth {
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
-    divHeight -= 50
+    divHeight -= 60
 
     // Limits
-    divHeight = Math.min(Math.max(350, divHeight), 600)
+    divHeight = Math.min(Math.max(200, divHeight), 300)
+    divWidth = Math.min(divWidth, 400)
 
     // Initialized datamap
     let datamap = new Datamap({
       element: document.getElementById(elementId),
       scope: 'usa',
+      height: divHeight,
       setProjection: (element, options) => {
         let projection = d3.geoAlbersUsa()
-          .scale(divWidth)
-          .translate([divWidth / 2, divHeight / 2])
+            .scale(divWidth)
+            .translate([divWidth / 2, divHeight / 2])
         return {
           path: d3.geoPath().projection(projection),
           projection: projection
@@ -53,6 +57,16 @@ export default class Choropleth {
     let svg = d3.select('#' + elementId + ' svg')
         .attr('height', divHeight)
         .attr('width', divWidth)
+
+    this.selectedTexture = textures.lines()
+      .size(10)
+      .background('white')
+    svg.call(this.selectedTexture)
+
+    // Override datamaps css
+    d3.select('#' + this.selectedTexture.id() + ' path')
+      .style('stroke-width', '1px')
+
     this.width = svg.node().getBoundingClientRect().width
     this.height = svg.node().getBoundingClientRect().height
     this.svg = svg
@@ -132,9 +146,9 @@ export default class Choropleth {
       })
       .on('mousemove', function() {
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
-          .html(util.tooltipText(this, data.data))
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
+          .html(util.tooltipText(this, data.data, data.decorator))
       })
       .on('click', function() {
         // Change the region selector
@@ -155,6 +169,7 @@ export default class Choropleth {
     let d3 = this.d3,
         data = this.data,
         colorScale = this.colorScale,
+        selectedTexture = this.selectedTexture,
         cmap = this.cmap
 
     let highlightedStates = [],
@@ -167,21 +182,33 @@ export default class Choropleth {
     data.map(d => {
       let value = d.value[ids.weekIdx].data
       let color = '#ccc'
-      if (value) color = cmap[Math.floor(colorScale(value))]
+      if (value !== -1) color = cmap[Math.floor(colorScale(value))]
 
       d.states.map(s => {
         let d3State = d3.select('.' + s)
 
+        d3State.style('fill', color)
+        d3State.attr('data-value', value)
+
         if (highlightedStates.indexOf(s) > -1) {
-          d3State.style('stroke', '#333')
+
+          // Setup selected pattern
+          let strokeColor = tinycolor(color).getLuminance() < 0.5 ?
+              'white' : '#444'
+
+          d3.select('#' + selectedTexture.id() + ' rect')
+            .attr('fill', color)
+
+          d3.select('#' + selectedTexture.id() + ' path')
+            .style('stroke', strokeColor)
+
+          d3State.style('stroke', strokeColor)
             .style('stroke-opacity', 1)
+            .style('fill', selectedTexture.url())
         } else {
           d3State.style('stroke', 'white')
             .style('stroke-opacity', 0)
         }
-
-        d3State.style('fill', color)
-        d3State.attr('data-value', value)
       })
     })
   }

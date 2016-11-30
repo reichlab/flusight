@@ -14,9 +14,17 @@
 
 <template lang="pug">
 .columns
-  #choropleth-container.column.is-5
-    choropleth
-  #timechart-container.column.is-7
+  #map-intro.column.is-4
+    // Title
+    h1.title
+      | Real-time <b>Influenza Forecasts</b>
+    h2.subtitle
+      | CDC FluSight Challenge
+    hr
+
+    #choropleth-container
+      choropleth
+  #timechart-container.column.is-8
     time-chart
 </template>
 
@@ -27,7 +35,7 @@ import {
   selectedRegion,
   selectedSeason,
   selectedWeekIdx,
-  selectedChoropleth
+  choroplethRelative
 } from '../vuex/getters'
 import {
   updateTimeChart,
@@ -46,7 +54,7 @@ export default {
       selectedRegion,
       selectedSeason,
       selectedWeekIdx,
-      selectedChoropleth
+      choroplethRelative
     },
     actions: {
       updateTimeChart,
@@ -73,8 +81,8 @@ export default {
       this.plotTimeChart()
       this.plotChoropleth()
     },
-    selectedChoropleth: function() {
-      // Triggered by selector
+    choroplethRelative: function() {
+      // Triggered by relative selector
       // Use specific choropleth getter and do a plot
       this.plotChoropleth()
     },

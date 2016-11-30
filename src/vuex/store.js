@@ -15,9 +15,10 @@ const state = {
   selected: {
     region: 0, // Handle region selector
     season: 0, // Handle season selector
+    model: 0, // Choropleth model selector
     week: {
       idx: 0,
-      name: 'NA'
+      name: null
     }, // Week pointer
     choropleth: 0 // Choropleth selector
   },
@@ -31,7 +32,8 @@ const state = {
   // Toggles
   toggles: {
     legend: true,
-    intro: true
+    intro: true,
+    choroplethRelative: false
   },
 
   // Intro data
@@ -61,6 +63,10 @@ const mutations = {
 
   UPDATE_SELECTED_CHOROPLETH (state, val) {
     state.selected.choropleth = val
+  },
+
+  UPDATE_SELECTED_MODEL (state, val) {
+    state.selected.model = val
   },
 
   SET_TIMECHART (state, val) {
@@ -97,6 +103,10 @@ const mutations = {
 
   TOGGLE_LEGEND (state) {
     state.toggles.legend = !state.toggles.legend
+  },
+
+  TOGGLE_CHOROPLETH_RELATIVE (state) {
+    state.toggles.choroplethRelative = !state.toggles.choroplethRelative
   }
 }
 

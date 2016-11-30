@@ -17,20 +17,125 @@ export function selectedWeekIdx (state) {
 }
 
 export function selectedWeekName (state) {
-  return state.selected.week.name
+  if (state.selected.week.name)
+    return state.selected.week.name
+  else
+    return 'NA'
 }
 
 export function selectedChoropleth (state) {
   return state.selected.choropleth
 }
 
+export function selectedModel (state) {
+  return state.selected.model
+}
+
 export function seasons (state) {
-  // Assuming each region has all the seasons
-  return state.data[0].seasons.map(s => s.id)
+  return state.data[selectedRegion(state)].seasons.map(s => s.id)
 }
 
 export function regions (state) {
-  return state.data.map(d => d.region)
+  return state.data.map(d => d.subId)
+}
+
+/**
+ * Return list of all models for current season
+ */
+export function models (state) {
+  return state.data[selectedRegion(state)]
+    .seasons[selectedSeason(state)]
+    .models.map(m => m.id)
+}
+
+export function choroplethRelative (state) {
+  return state.toggles.choroplethRelative
+}
+
+/**
+ * Scale given (week, data) pairs using the baseline
+ */
+function baselineScale (values, baseline) {
+  return values.map(d => {
+    return {
+      week: d.week,
+      data: baseline ? ((d.data / baseline) - 1) * 100 : -1
+    }
+  })
+}
+
+/**
+ * Return choropleth data for model
+ */
+function modelChoroplethData (state, modelId, predictionType) {
+  let seasonId = selectedSeason(state)
+
+  let output = {
+    data: [],
+    type: choroplethRelative(state) ? 'diverging' : 'sequential'
+  }
+
+  state.data.map(r => {
+    let preds = {}
+
+    r.seasons[seasonId].models[modelId].predictions
+      .forEach(p => {
+        preds[p.week] = p[predictionType].point
+      })
+
+    let weeks = getMaxLagData(r.seasons[seasonId].actual).map(d => d.week)
+
+    let values = weeks.map(w => {
+      return {
+        week: w,
+        data: preds[w] ? preds[w] : -1
+      }
+    })
+
+    if (choroplethRelative(state))
+      values = baselineScale(values, r.seasons[seasonId].baseline)
+
+    output.data.push({
+      region: r.subId,
+      states: r.states,
+      value: values
+    })
+  })
+
+  output.data = output.data.slice(1) // Remove national data
+
+  return output
+}
+
+/**
+ * Return data for choropleth using actual values
+ */
+function actualChoroplethData (state) {
+  let seasonId = selectedSeason(state)
+  let relative = choroplethRelative(state)
+
+  let output = {
+    data: [],
+    type: relative ? 'diverging' : 'sequential',
+    decorator: relative ? x => x + ' % (baseline)' : x => x + ' %'
+  }
+
+  state.data.map(r => {
+    let values = getMaxLagData(r.seasons[seasonId].actual)
+
+    if (relative)
+      values = baselineScale(values, r.seasons[seasonId].baseline)
+
+    output.data.push({
+      region: r.subId,
+      states: r.states,
+      value: values
+    })
+  })
+
+  output.data = output.data.slice(1) // Remove national data
+
+  return output
 }
 
 export function choropleths (state) {
@@ -40,8 +145,6 @@ export function choropleths (state) {
     'Actual Weighted ILI (%)',
     'Relative Weighted ILI (%)'
   ]
-
-  let seasonId = selectedSeason(state)
 
   return actualChoropleths
 }
@@ -149,7 +252,7 @@ export function previousWeek (state) {
 /**
  * Return range for choropleth color scale
  */
-function choroplethDataRange (state, choroplethId) {
+function choroplethDataRange (state) {
   let maxVals = [],
       minVals = []
 
@@ -158,7 +261,7 @@ function choroplethDataRange (state, choroplethId) {
 
       let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
-      if (choroplethId === 1) {
+      if (choroplethRelative(state)) {
         // Use baseline scaled data
         maxVals.push(Math.max(...actual.map(d => ((d / season.baseline) - 1) * 100)))
         minVals.push(Math.min(...actual.map(d => ((d / season.baseline) - 1) * 100)))
@@ -181,45 +284,9 @@ export function choroplethData (state) {
   let choroplethId = selectedChoropleth(state),
       seasonId = selectedSeason(state)
 
-  let range = choroplethDataRange(state, choroplethId)
+  let output = actualChoroplethData(state)
 
-  let output = {
-    data: [],
-    type: 'sequential'
-  }
-
-  state.data.map(r => {
-    let values = getMaxLagData(r.seasons[seasonId].actual)
-
-    if (choroplethId === 1) {
-      if (r.seasons[seasonId].baseline) {
-        // Rescale by baseline
-        // Return percentage
-        values = values.map(d => {
-          return {
-            week: d.week,
-            data: ((d.data / r.seasons[seasonId].baseline) - 1) * 100
-          }
-        })
-      } else {
-        values = values.map(d => {
-          return {
-            week: d.week,
-            data: null
-          }
-        })
-      }
-      output.type = 'diverging'
-    }
-    output.data.push({
-      region: r.subId,
-      states: r.states,
-      value: values
-    })
-  })
-
-  output.data = output.data.slice(1) // Skip national data
-  output.range = range
+  output.range = choroplethDataRange(state)
   return output
 }
 

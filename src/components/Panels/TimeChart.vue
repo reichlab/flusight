@@ -280,12 +280,36 @@ $accent: #3273dc;
   }
 }
 
+#no-pred {
+  position: absolute;
+  top: 60px;
+  left: 70px;
+  line-height: 25px;
+  font-size: 10px;
+}
+
+.now-group {
+  .now-line {
+    stroke: black;
+    stroke-width: 1px;
+    stroke-dasharray: 10 5;
+  }
+  .now-text {
+    fill: #666;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+}
+
 </style>
 
 <template lang="pug">
 // Tooltips
 #legend-tooltip
 #chart-tooltip
+
+// No predictions text
+#no-pred.heading Predictions not available <br> for selected week
 
 // Main plotting div
 #timechart
@@ -375,7 +399,7 @@ export default {
               .on('mousemove', () => {
                 tooltip
                   .style('top', d3.event.pageY + 'px')
-                  .style('left', (d3.event.pageX - 100 - 20) + 'px')
+                  .style('left', (d3.event.pageX - 100 - 15) + 'px')
                   .html(e[1])
               }))
   }

@@ -3,6 +3,7 @@
 import * as util from './utils/timechart'
 import * as marker from './markers/timechart'
 import textures from 'textures'
+import * as mmwr from 'mmwr-week'
 
 export default class TimeChart {
   constructor(d3, elementId, weekHook) {
@@ -14,10 +15,10 @@ export default class TimeChart {
         divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
-    divHeight -= 50
+    divHeight -= 20
 
     // Limits
-    divHeight = Math.min(Math.max(350, divHeight), 600)
+    divHeight = Math.min(Math.max(350, divHeight), 550)
 
     let onsetOffset = 30
 
@@ -140,8 +141,8 @@ export default class TimeChart {
       })
       .on('mousemove', function() {
         infoTooltip
-          .style('top', (d3.event.pageY - 20) + 'px')
-          .style('left', (d3.event.pageX - 150 - 20) + 'px')
+          .style('top', (d3.event.pageY - 15) + 'px')
+          .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(`Week of the calendar year, as measured by the CDC.
                  <br><br><em>Click to know more</em>`)
       })
@@ -170,7 +171,7 @@ export default class TimeChart {
       .on('mousemove', function() {
         infoTooltip
           .style('top', d3.event.pageY + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html(`Percentage of outpatient doctor visits for influenza-like
                  illness, weighted by state population.<br><br><em>Click to know
                  more</em>`)
@@ -197,6 +198,24 @@ export default class TimeChart {
         .attr('x2', 0)
         .attr('y2', height)
         .style('display', 'none')
+
+    // Add now line
+    let nowGroup = svg.append('g')
+        .attr('class', 'now-group')
+
+    nowGroup.append('line')
+      .attr('class', 'now-line')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', height)
+    nowGroup.append('text')
+      .attr('class', 'now-text')
+      .attr('transform', 'translate(15, 10) rotate(-90)')
+      .style('text-anchor', 'end')
+      .text('Today')
+
+    this.nowGroup = nowGroup
 
     // Get bounding box
     let bb = svg.node().getBoundingClientRect()
@@ -246,6 +265,7 @@ export default class TimeChart {
     yScale.domain([0, Math.min(13, util.getYMax(data))])
     // Assuming actual data has all the weeks
     let weeks = data.actual.map(d => d.week % 100)
+
     let actualIndices = data.actual
         .filter(d => d.data !== -1)
         .map(d => weeks.indexOf(d.week % 100))
@@ -263,6 +283,8 @@ export default class TimeChart {
       // [0, 1) point fix without changing the scale
       if (dInt === 0)
         dInt = Math.max(...weeks)
+      if (dInt === 53)
+        dInt = 1
       if (dInt === 29)
         dFloat = 0
       return xScale(weeks.indexOf(dInt) + dFloat)
@@ -271,8 +293,9 @@ export default class TimeChart {
     // Week to date parser
     let dateParser = d3.timeParse('%Y-%U')
     xScaleDate.domain(d3.extent(data.actual.map(d => {
-      let formattedDate = Math.floor(d.week / 100) + '-' + d.week % 100
-      return dateParser(formattedDate)
+      let year = Math.floor(d.week / 100),
+          week = d.week % 100
+      return mmwr.MMWRWeekToDate(year, week).toDate()
     })))
 
     let xAxis = d3.axisBottom(xScalePoint)
@@ -316,6 +339,19 @@ export default class TimeChart {
                    .indexOf(m.predictions[m.predictions.length - 1].week % 100)
                }
              }))
+
+      // Display now line
+      let nowPos = this.xScaleDate(new Date())
+      this.nowGroup.select('.now-line')
+        .attr('x1', nowPos)
+        .attr('x2', nowPos)
+
+      this.nowGroup.select('.now-text')
+        .attr('dy', nowPos)
+
+      this.nowGroup
+        .style('display', null)
+
     } else {
       // Start at the oldest prediction
       let modelPredictions = data.models
@@ -332,6 +368,9 @@ export default class TimeChart {
       } else {
         this.weekIdx = Math.min(...modelPredictions)
       }
+
+      this.nowGroup
+        .style('display', 'none')
     }
     this.weekHook({
       idx: this.weekIdx,
@@ -443,8 +482,8 @@ export default class TimeChart {
           .attr('x2', snappedX)
 
         tooltip
-          .style('top', (d3.event.pageY + 20) + 'px')
-          .style('left', (d3.event.pageX + 20) + 'px')
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
           .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function() {
@@ -467,6 +506,20 @@ export default class TimeChart {
     this.predictions.forEach(p => {
       p.update(idx)
     })
+
+    let noPredText = this.d3.select('#no-pred')
+    // Set no
+    if (this.predictions.filter(p => p.hidden).length !== 0) {
+      noPredText
+        .transition()
+        .duration(100)
+        .style('display', null)
+    } else {
+      noPredText
+        .transition()
+        .duration(100)
+        .style('display', 'none')
+    }
 
     this.observed.update(idx)
 

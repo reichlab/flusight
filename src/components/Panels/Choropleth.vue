@@ -4,23 +4,44 @@
   cursor: pointer;
 }
 
-#choropleth-info {
-  position: absolute;
-  top: 0px;
-  left: 10px;
+#choropleth {
+  text-align: center;
+
+  #relative-button-title {
+    padding-top: 10px;
+    text-align: left;
+    font-size: 12px;
+    span {
+      cursor: pointer
+    }
+  }
+
+  #relative-button {
+    position: absolute;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+    .icon {
+      margin: 0px 10px;
+    }
+    span {
+      vertical-align: middle;
+      &.disabled {
+        color: #aaa;
+      }
+    }
+  }
 }
 
-#week-number {
-  font-size: 26px;
-  color: #aaa;
-  #number {
-    color: #666;
-    font-weight: bold;
+#selectors {
+  .level {
+    margin-bottom: 0px;
   }
-  margin-bottom: 5px;
 }
 
 #choropleth-tooltip {
+  z-index: 1001;
   position: fixed;
   padding: 10px;
   box-shadow: 0px 0px 2px;
@@ -44,17 +65,34 @@
 </style>
 
 <template lang="pug">
-  // Info and selector
-  #choropleth-info
-    #week-number Week <span id="number">{{ selectedWeekName }}</span>
+#selectors
+  .level.is-mobile
+    .level-left
+      .level-item
+        .heading Week <b>{{ selectedWeekName }}</b>
+        .subtitle {{ regions[selectedRegion] }}
 
-    #choropleth-selector.control
-      span.select.is-small
-        select(v-model="currentChoropleth")
-          option(v-for="choropleth in choropleths") {{ choropleth }}
+    .level-right
+      .level-item
+          p.heading Season
+          p.control.title
+            span#season-selector.select.is-small
+              select(v-model="currentSeason")
+                option(v-for="season in seasons") {{ season }}
 
-  // Main plotting div
-  #choropleth
+
+// Main plotting div
+#choropleth
+  #relative-button-title
+    span Weighted ILI (%)
+  #relative-button(v-on:click="toggleRelative")
+    span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
+    span.icon
+      i(
+        v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
+                      'fa fa-toggle-on']`
+       )
+    span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
 </template>
 
 <script>
@@ -62,14 +100,18 @@ import Choropleth from '../../modules/choropleth'
 import {
   initChoropleth,
   updateSelectedRegion,
-  updateSelectedChoropleth,
+  updateSelectedSeason,
   plotChoropleth,
-  updateChoropleth
+  updateChoropleth,
+  toggleRelative
 } from '../../vuex/actions'
 import {
-  selectedChoropleth,
   selectedWeekName,
-  choropleths
+  selectedSeason,
+  selectedRegion,
+  choroplethRelative,
+  seasons,
+  regions
 } from '../../vuex/getters'
 
 export default {
@@ -77,23 +119,27 @@ export default {
     actions: {
       initChoropleth,
       updateSelectedRegion,
-      updateSelectedChoropleth,
+      updateSelectedSeason,
       plotChoropleth,
-      updateChoropleth
+      updateChoropleth,
+      toggleRelative
     },
     getters: {
-      selectedChoropleth,
       selectedWeekName,
-      choropleths
+      selectedSeason,
+      selectedRegion,
+      choroplethRelative,
+      seasons,
+      regions
     }
   },
   computed: {
-    currentChoropleth: {
+    currentSeason: {
       get() {
-        return this.choropleths[this.selectedChoropleth]
+        return this.seasons[this.selectedSeason]
       },
       set(val) {
-        this.updateSelectedChoropleth(this.choropleths.indexOf(val))
+        this.updateSelectedSeason(this.seasons.indexOf(val))
       }
     }
   },
@@ -108,6 +154,53 @@ export default {
 
     // Hot start
     this.updateChoropleth()
+    this.updateSelectedSeason(this.seasons.length - 1)
+
+    let d3 = this.$d3
+    let infoTooltip = d3.select('#info-tooltip')
+
+    // Info tooltip
+    d3.select('#relative-button')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
+          .html(`Choose between
+                 <ul>
+                 <li><b>Absolute</b> weighted ILI % values or</li>
+                 <li><b>Relative</b> values as the percent above/below the
+                 regional CDC baseline
+                 </ul>`)
+      })
+
+    d3.select('#relative-button-title span')
+      .on('mouseover', function() {
+        infoTooltip
+          .style('display', null)
+      })
+      .on('mouseout', function() {
+        infoTooltip
+          .style('display', 'none')
+      })
+      .on('mousemove', function() {
+        infoTooltip
+          .style('top', (d3.event.pageY + 15) + 'px')
+          .style('left', (d3.event.pageX + 15) + 'px')
+          .html(`Percentage of outpatient doctor visits for influenza-like
+                 illness, weighted by state population.<br><br><em>Click to know
+                 more</em>`)
+      })
+      .on('click', function() {
+        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank')
+      })
   }
 }
 </script>
