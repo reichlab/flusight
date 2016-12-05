@@ -1,6 +1,7 @@
 // Module for format transformation
 
 const Papa = require('papaparse')
+const d3 = require('d3')
 
 /**
  * Convert wide format content to long.
@@ -172,19 +173,25 @@ const wideToLong = (wideFormat) => {
 
 /**
  * Return confidence ranges and point prediction for given series
- * @param {Array} series an array of (bin start, bin end, value) triplets
+ * @param {Array} series an array of (unit type, bin start, bin end, value)
  * @returns {Object} object with keys 'low', 'high' and 'point'
  */
 const parseSeries = (series) => {
-  let len = series.length
+
+  if (series.length === 1)
+    return null
+
+  // Partition series into point and bin predictions
+  let pointRows = series.filter(row => row[0] === 'Point')
+  let binRows = series.filter(row => row[0] === 'Bin')
+
+  // Skip 'none' bin for season onset
+  binRows = binRows.filter(row => row[1] !== 'none')
+
+  let len = binRows.length
 
   // Both end trimming values for confidence intervals
   let confidenceTrims = [0.05, 0.25]
-
-  // Handle edge case for season onset 'none' bin
-  if (series[len - 1][0] == 'none') {
-    len -= 1
-  }
 
   let accumulator = {
     low: 0,
@@ -195,38 +202,38 @@ const parseSeries = (series) => {
     high: [null, null]
   }
   let maxIdx = 0,
-      maxValue = series[maxIdx][2]
+      maxValue = binRows[maxIdx][3]
 
   // Checking if everything is same
   let matches = 0
 
   for (let i = 0; i < len; i++) {
     // Look for max
-    if (series[i][2] > maxValue) {
+    if (binRows[i][3] > maxValue) {
       maxIdx = i
-      maxValue = series[maxIdx][2]
+      maxValue = binRows[maxIdx][3]
     }
 
-    // Skip last value which can be (slightly) different
-    if ((i < (len - 1)) && (series[0][2] == series[i][2])) {
+    // Skip last value which can be (slightly, weirdly) different
+    if ((i < (len - 1)) && (binRows[0][3] == binRows[i][3])) {
       matches += 1
     }
 
     // Update accumulators
     // if (!range.low[1])
-      accumulator.low += series[i][2]
+      accumulator.low += binRows[i][3]
     // if (!range.high[1])
-      accumulator.high += series[len - i - 1][2]
+      accumulator.high += binRows[len - i - 1][3]
 
     if ((accumulator.low > confidenceTrims[0]) && (!range.low[0]))
-      range.low[0] = series[i][0]
+      range.low[0] = binRows[i][1]
     if ((accumulator.high > confidenceTrims[0]) && (!range.high[0]))
-      range.high[0] = series[len - i - 1][1]
+      range.high[0] = binRows[len - i - 1][2]
 
     if ((accumulator.low > confidenceTrims[1]) && (!range.low[1]))
-      range.low[1] = series[i][0]
+      range.low[1] = binRows[i][1]
     if ((accumulator.high > confidenceTrims[1]) && (!range.high[1]))
-      range.high[1] = series[len - i - 1][1]
+      range.high[1] = binRows[len - i - 1][2]
   }
 
   if (matches === (len - 1)) {
@@ -238,10 +245,13 @@ const parseSeries = (series) => {
     }
   }
   else {
+    // Overwrite point prediction if it was explicitly specified
+    let point = pointRows.length !== 0 ? pointRows[0][3] : binRows[maxIdx][1]
+
     return {
       low: range.low,
       high: range.high,
-      point: series[maxIdx][0]
+      point: point
     }
   }
 }
@@ -256,44 +266,31 @@ const longToJson = (longFormat) => {
     dynamicTyping: true
   })
 
-  data = data.data
+  data = data.data.slice(1)
 
+  grouped = d3.nest()
+    .key(d => d[0])
+    .key(d => d[1])
+    .rollup(leaves => parseSeries(leaves.map(l => [l[2], l[4], l[5], l[6]])))
+    .entries(data)
+
+  // Format data according to pipeline requirements
+  // Unroll two key levels
   let output = []
 
-  // Hot start last target accumulator
-  let accumulator = {
-    region: data[1][0],
-    target: data[1][1],
-    point: data[1][6],
-    bins: []
-  }
-
-  // Start after leaving the first (collected) row and header
-  for (let i = 2; i < data.length; i++) {
-    if ((data[i][2] == "Point") || (i == (data.length - 1))) {
-      // Whenever we reach another point prediction or at end,
-      // pack up last data and push to output
-      let parsed = parseSeries(accumulator.bins)
-      accumulator.low = parsed.low
-      accumulator.high = parsed.high
-
-      // If point prediction is NA, use the calculated one
-      if ((accumulator.point == '') || (accumulator.point == 'NA')) {
-        accumulator.point = parsed.point
+  grouped.forEach(regionGroup => {
+    regionGroup.values.forEach(targetGroup => {
+      if (targetGroup.value) {
+        output.push({
+          region: regionGroup.key,
+          target: targetGroup.key,
+          point: targetGroup.value.point,
+          low: targetGroup.value.low,
+          high: targetGroup.value.high
+        })
       }
-      delete accumulator.bins
-      output.push(accumulator)
-      // Reset accumulator
-      accumulator = {
-        region: data[i][0],
-        target: data[i][1],
-        point: data[i][6],
-        bins: []
-      }
-    } else {
-      accumulator.bins.push([data[i][4], data[i][5], data[i][6]])
-    }
-  }
+    })
+  })
 
   return output
 }

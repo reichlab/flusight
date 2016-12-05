@@ -36,18 +36,18 @@ const getWeekFiles = (directory) => {
 const regionFilter = (data, region) => {
   let filtered = {}
 
-  let keyOrder = [
-    'onsetWeek',
-    'peakWeek',
-    'peakPercent',
-    'oneWk',
-    'twoWk',
-    'threeWk',
-    'fourWk'
-  ]
+  let keyMap = {
+    'Season onset': 'onsetWeek',
+    'Season peak week': 'peakWeek',
+    'Season peak percentage': 'peakPercent',
+    '1 wk ahead': 'oneWk',
+    '2 wk ahead': 'twoWk',
+    '3 wk ahead': 'threeWk',
+    '4 wk ahead': 'fourWk'
+  }
 
-  data.filter(d => d.region == region).forEach((d, idx) => {
-    filtered[keyOrder[idx]] = {
+  data.filter(d => d.region === region).forEach((d, idx) => {
+    filtered[keyMap[d.target]] = {
       point: d.point,
       low: d.low,
       high: d.high
