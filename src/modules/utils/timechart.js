@@ -7,7 +7,18 @@ import tinycolor from 'tinycolor2'
  * Return maximum value to be displayed (y axis) in the given subset
  */
 export const getYMax = data => {
+  // Max from actual data
   let maxValues = [Math.max(...data.actual.map(d => d.data))]
+
+  // Max from observed data
+  maxValues.push(Math.max(...data.observed.map(d => {
+    return Math.max(...d.data.map(dl => dl.value))
+  })))
+
+  // Max from historical data
+  data.history.forEach(h => {
+    maxValues.push(Math.max(...h.actual.map(d => d.data)))
+  })
 
   // Loop over all the models
   data.models.map(mdl => {
