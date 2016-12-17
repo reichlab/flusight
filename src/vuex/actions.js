@@ -20,14 +20,6 @@ export const updateSelectedWeek = ({ dispatch, state }, val) => {
   dispatch('UPDATE_SELECTED_WEEK', val)
 }
 
-export const updateSelectedChoropleth = ({ dispatch, state }, val) => {
-  dispatch('UPDATE_SELECTED_CHOROPLETH', val)
-}
-
-export const updateSelectedModel = ({ dispatch, state }, val) => {
-  dispatch('UPDATE_SELECTED_MODEL', val)
-}
-
 // Initializations
 // ---------------
 

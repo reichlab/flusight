@@ -15,12 +15,10 @@ const state = {
   selected: {
     region: 0, // Handle region selector
     season: 0, // Handle season selector
-    model: 0, // Choropleth model selector
     week: {
       idx: 0,
       name: null
-    }, // Week pointer
-    choropleth: 0 // Choropleth selector
+    } // Week pointer
   },
 
   // All the data!
@@ -40,7 +38,8 @@ const state = {
   intro: {
     data: [{
       title: 'Welcome to flusight',
-      content: 'Click <strong>Next</strong> to proceed. Click <strong>Finish</strong> to exit this demo.',
+      content: `Click <strong>Next</strong> to proceed. Click
+                <strong>Finish</strong> to exit this demo.`,
       element: '',
       direction: ''
     }],
@@ -59,14 +58,6 @@ const mutations = {
 
   UPDATE_SELECTED_WEEK (state, val) {
     state.selected.week = val
-  },
-
-  UPDATE_SELECTED_CHOROPLETH (state, val) {
-    state.selected.choropleth = val
-  },
-
-  UPDATE_SELECTED_MODEL (state, val) {
-    state.selected.model = val
   },
 
   SET_TIMECHART (state, val) {

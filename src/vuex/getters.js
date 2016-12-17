@@ -21,14 +21,6 @@ export function selectedWeekName (state) {
   else return 'NA'
 }
 
-export function selectedChoropleth (state) {
-  return state.selected.choropleth
-}
-
-export function selectedModel (state) {
-  return state.selected.model
-}
-
 export function seasons (state) {
   return state.data[selectedRegion(state)].seasons.map(s => s.id)
 }
