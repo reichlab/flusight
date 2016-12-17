@@ -10,8 +10,7 @@ import * as util from '../utils/timechart'
  * - Peak
  */
 export class Prediction {
-  constructor(parent, id, meta, color, cy) {
-
+  constructor (parent, id, meta, color, cy) {
     // Prediction group
     let predictionGroup = parent.svg.append('g')
         .attr('class', 'prediction-group')
@@ -111,7 +110,7 @@ export class Prediction {
     this.cid = parent.cid
   }
 
-  plot(parent, data, actual) {
+  plot (parent, data, actual) {
     this.data = data
     this.actual = actual
     this.xScale = parent.xScaleWeek
@@ -121,7 +120,7 @@ export class Prediction {
     this.tooltip = parent.chartTooltip
   }
 
-  update(idx) {
+  update (idx) {
     let d3 = this.d3
     let color = this.color
     let id = this.id
@@ -129,7 +128,7 @@ export class Prediction {
 
     let localPosition = this.data.map(d => d.week % 100).indexOf(week)
 
-    if (localPosition == -1) {
+    if (localPosition === -1) {
       this.hidden = true
       this.hideMarkers()
     } else {
@@ -140,8 +139,8 @@ export class Prediction {
 
       this.displayedPoints = {}
 
-      let cid = this.cid,
-          tooltip = this.tooltip
+      let cid = this.cid
+      let tooltip = this.tooltip
 
       // Move things
       let onset = this.data[localPosition].onsetWeek
@@ -153,7 +152,7 @@ export class Prediction {
         .attr('cx', this.xScale(onset.point))
 
       this.onsetGroup.select('.onset-mark')
-        .on('mouseover', function() {
+        .on('mouseover', function () {
           d3.select(this)
             .transition()
             .duration(300)
@@ -167,7 +166,7 @@ export class Prediction {
               }
             ], color))
         })
-        .on('mouseout', function() {
+        .on('mouseout', function () {
           d3.select(this)
             .transition()
             .duration(200)
@@ -175,7 +174,7 @@ export class Prediction {
           tooltip
             .style('display', 'none')
         })
-        .on('mousemove', function() {
+        .on('mousemove', function () {
           tooltip
             .style('top', (d3.event.pageY + 15) + 'px')
             .style('left', (d3.event.pageX + 15) + 'px')
@@ -199,13 +198,13 @@ export class Prediction {
         .attr('x1', this.xScale(onset.high[cid]))
         .attr('x2', this.xScale(onset.high[cid]))
 
-    let pw = this.data[localPosition].peakWeek,
-        pp = this.data[localPosition].peakPercent
+      let pw = this.data[localPosition].peakWeek
+      let pp = this.data[localPosition].peakPercent
 
       this.displayedPoints.peak = pw.point
 
-      let leftW = this.xScale(pw.point),
-          leftP = this.yScale(pp.point)
+      let leftW = this.xScale(pw.point)
+      let leftP = this.yScale(pp.point)
       this.peakGroup.select('.peak-mark')
         .transition()
         .duration(200)
@@ -213,7 +212,7 @@ export class Prediction {
         .attr('cy', leftP)
 
       this.peakGroup.select('.peak-mark')
-        .on('mouseover', function() {
+        .on('mouseover', function () {
           d3.select(this)
             .transition()
             .duration(300)
@@ -231,7 +230,7 @@ export class Prediction {
               }
             ], color))
         })
-        .on('mouseout', function() {
+        .on('mouseout', function () {
           d3.select(this)
             .transition()
             .duration(200)
@@ -239,7 +238,7 @@ export class Prediction {
           tooltip
             .style('display', 'none')
         })
-        .on('mousemove', function() {
+        .on('mousemove', function () {
           tooltip
             .style('top', (d3.event.pageY + 15) + 'px')
             .style('left', (d3.event.pageX + 15) + 'px')
@@ -297,8 +296,8 @@ export class Prediction {
       // Move main pointers
       let predData = this.data[localPosition]
 
-      let startWeek = predData.week,
-          startData = this.actual.filter(d => d.week == startWeek)[0].data
+      let startWeek = predData.week
+      let startData = this.actual.filter(d => d.week === startWeek)[0].data
 
       let data = [{
         week: startWeek % 100,
@@ -364,7 +363,7 @@ export class Prediction {
     }
   }
 
-  hideMarkers() {
+  hideMarkers () {
     this.onsetGroup
       .style('visibility', 'hidden')
 
@@ -375,7 +374,7 @@ export class Prediction {
       .style('visibility', 'hidden')
   }
 
-  showMarkers() {
+  showMarkers () {
     // Only show if not hidden
     if (this.hidden) return
 
@@ -389,14 +388,13 @@ export class Prediction {
       .style('visibility', null)
   }
 
-  clear() {
-    this.onsetGroup.remove();
-    this.peakGroup.remove();
-    this.predictionGroup.remove();
+  clear () {
+    this.onsetGroup.remove()
+    this.peakGroup.remove()
+    this.predictionGroup.remove()
   }
 
-  query(idx) {
-
+  query (idx) {
     // Don't show anything if predictions are hidden
     if (this.hidden || this.legendHidden) return false
 
@@ -408,7 +406,7 @@ export class Prediction {
  * Time rectangle for navigation guidance
  */
 export class TimeRect {
-  constructor(parent) {
+  constructor (parent) {
     this.rect = parent.svg.append('rect')
       .attr('x', 0)
       .attr('y', 0)
@@ -417,13 +415,13 @@ export class TimeRect {
       .attr('class', 'timerect')
   }
 
-  plot(parent, data) {
+  plot (parent, data) {
     // Save local data
     this.data = data
     this.scale = parent.xScaleWeek
   }
 
-  update(idx) {
+  update (idx) {
     this.rect
       .transition()
       .duration(200)
@@ -431,26 +429,23 @@ export class TimeRect {
   }
 }
 
-
 /**
  * Historical lines
  */
 export class HistoricalLines {
-  constructor(parent) {
+  constructor (parent) {
     this.group = parent.svg.append('g')
       .attr('class', 'history-group')
     this.tooltip = parent.chartTooltip
   }
 
-  plot(parent, data) {
+  plot (parent, data) {
     this.clear()
-    if (parent.historyShow)
-      this.show()
-    else
-      this.hide()
+    if (parent.historyShow) this.show()
+    else this.hide()
 
-    let tooltip = this.tooltip,
-        d3 = parent.d3
+    let tooltip = this.tooltip
+    let d3 = parent.d3
 
     let line = d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
@@ -466,19 +461,19 @@ export class HistoricalLines {
         .duration(200)
         .attr('d', line)
 
-      path.on('mouseover', function() {
+      path.on('mouseover', function () {
         d3.select('.line-history.highlight')
           .datum(d.actual)
           .attr('d', line)
         tooltip
           .style('display', null)
-      }).on('mouseout', function() {
+      }).on('mouseout', function () {
         d3.select('.line-history.highlight')
           .datum([])
           .attr('d', line)
         tooltip
           .style('display', 'none')
-      }).on('mousemove', function() {
+      }).on('mousemove', function () {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX + 15) + 'px')
@@ -491,17 +486,17 @@ export class HistoricalLines {
       .attr('class', 'line-history highlight')
   }
 
-  hide() {
+  hide () {
     this.group
       .style('visibility', 'hidden')
   }
 
-  show() {
+  show () {
     this.group
       .style('visibility', null)
   }
 
-  clear() {
+  clear () {
     this.group.selectAll('*')
       .transition()
       .duration(200).remove()
@@ -512,10 +507,10 @@ export class HistoricalLines {
  * Legend and controls
  */
 export class Legend {
-  constructor(parent, legendHook) {
-    let actualContainer = parent.d3.select('#legend-actual-container'),
-        predictionContainer = parent.d3.select('#legend-prediction-container'),
-        ciButtons = parent.d3.select('#legend-ci-buttons')
+  constructor (parent, legendHook) {
+    let actualContainer = parent.d3.select('#legend-actual-container')
+    let predictionContainer = parent.d3.select('#legend-prediction-container')
+    let ciButtons = parent.d3.select('#legend-ci-buttons')
 
     // Clear entries
     actualContainer.selectAll('*').remove()
@@ -535,13 +530,13 @@ export class Legend {
       .html('Actual')
 
     actualItem
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         tooltip.style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX - 150 - 15) + 'px')
@@ -564,13 +559,13 @@ export class Legend {
       .html('Observed')
 
     observedItem
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         tooltip.style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX - 150 - 15) + 'px')
@@ -595,17 +590,15 @@ export class Legend {
         .attr('class', 'fa')
         .style('color', '#ccc')
 
-    if (parent.historyShow)
-      historyIcon.classed('fa-circle', true)
-    else
-      historyIcon.classed('fa-circle-o', true)
+    if (parent.historyShow) historyIcon.classed('fa-circle', true)
+    else historyIcon.classed('fa-circle-o', true)
 
     historyItem.append('span')
       .attr('class', 'item-title')
       .html('History')
 
     historyItem
-      .on('click', function() {
+      .on('click', function () {
         let isActive = historyIcon.classed('fa-circle')
 
         historyIcon.classed('fa-circle', !isActive)
@@ -615,13 +608,13 @@ export class Legend {
       })
 
     historyItem
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         tooltip.style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX - 150 - 15) + 'px')
@@ -631,7 +624,6 @@ export class Legend {
           }))
       })
 
-
     // Add confidence buttons
     parent.confidenceIntervals.map((c, idx) => {
       let confButton = ciButtons.append('span')
@@ -640,20 +632,20 @@ export class Legend {
           .text(c)
 
       confButton
-        .on('click', function() {
+        .on('click', function () {
           ciButtons.selectAll('.ci-button')
             .classed('selected', false)
           parent.d3.select(this).classed('selected', true)
 
           legendHook('legend:ci', idx)
         })
-        .on('mouseover', function() {
+        .on('mouseover', function () {
           tooltip.style('display', null)
         })
-        .on('mouseout', function() {
+        .on('mouseout', function () {
           tooltip.style('display', 'none')
         })
-        .on('mousemove', function() {
+        .on('mousemove', function () {
           tooltip
             .style('top', (d3.event.pageY + 15) + 'px')
             .style('left', (d3.event.pageX - 150 - 15) + 'px')
@@ -668,7 +660,6 @@ export class Legend {
         confButton.classed('selected', true)
       }
     })
-
 
     // Add prediction items
     parent.predictions.forEach(p => {
@@ -699,15 +690,15 @@ export class Legend {
       let d3 = parent.d3
 
       urlItem
-        .on('mousemove', function() {
+        .on('mousemove', function () {
           tooltip.style('display', 'none')
         })
-        .on('click', function() {
+        .on('click', function () {
           d3.event.stopPropagation()
         })
 
       predItem
-        .on('click', function() {
+        .on('click', function () {
           let isActive = predIcon.classed('fa-circle')
 
           predIcon.classed('fa-circle', !isActive)
@@ -717,13 +708,13 @@ export class Legend {
         })
 
       predItem
-        .on('mouseover', function() {
+        .on('mouseover', function () {
           tooltip.style('display', null)
         })
-        .on('mouseout', function() {
+        .on('mouseout', function () {
           tooltip.style('display', 'none')
         })
-        .on('mousemove', function() {
+        .on('mousemove', function () {
           tooltip
             .style('top', (d3.event.pageY + 15) + 'px')
             .style('left', (d3.event.pageX - 150 - 15) + 'px')
@@ -736,9 +727,8 @@ export class Legend {
     this.d3 = parent.d3
   }
 
-  update(predictions) {
-    let d3 = this.d3,
-        predictionContainer = this.predictionContainer
+  update (predictions) {
+    let predictionContainer = this.predictionContainer
 
     predictions.forEach(p => {
       let pDiv = predictionContainer.select('#legend-' + p.id)
@@ -757,7 +747,7 @@ export class Legend {
  * CDC Baseline
  */
 export class Baseline {
-  constructor(parent) {
+  constructor (parent) {
     let group = parent.svg.append('g')
       .attr('class', 'baseline-group')
 
@@ -782,7 +772,7 @@ export class Baseline {
     this.group = group
   }
 
-  plot(parent, data) {
+  plot (parent, data) {
     if (data) this.show()
     else {
       this.hide()
@@ -802,13 +792,13 @@ export class Baseline {
   }
 
   // Hide baseline
-  hide() {
+  hide () {
     this.group
       .style('visibility', 'hidden')
   }
 
   // Show baseline
-  show() {
+  show () {
     this.group
       .style('visibility', null)
   }
@@ -818,7 +808,7 @@ export class Baseline {
  * Actual line
  */
 export class Actual {
-  constructor(parent) {
+  constructor (parent) {
     let group = parent.svg.append('g')
         .attr('class', 'actual-group')
 
@@ -828,7 +818,7 @@ export class Actual {
     this.group = group
   }
 
-  plot(parent, data) {
+  plot (parent, data) {
     let line = parent.d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
         .y(d => parent.yScale(d.data))
@@ -837,14 +827,14 @@ export class Actual {
     this.data = data
 
     this.group.select('.line-actual')
-      .datum(this.data.filter(d => d.data != -1))
+      .datum(this.data.filter(d => d.data !== -1))
       .transition()
       .duration(200)
       .attr('d', line)
 
     // Only plot non -1
     let circles = this.group.selectAll('.point-actual')
-        .data(this.data.filter(d => d.data != -1))
+        .data(this.data.filter(d => d.data !== -1))
 
     circles.exit().remove()
 
@@ -858,7 +848,7 @@ export class Actual {
       .attr('r', 2)
   }
 
-  query(idx) {
+  query (idx) {
     return this.data[idx].data
   }
 }
@@ -867,7 +857,7 @@ export class Actual {
  * Observed (at the time of prediction) line
  */
 export class Observed {
-  constructor(parent) {
+  constructor (parent) {
     let group = parent.svg.append('g')
         .attr('class', 'observed-group')
 
@@ -878,7 +868,7 @@ export class Observed {
     this.d3 = parent.d3
   }
 
-  plot(parent, data) {
+  plot (parent, data) {
     // Save data for queries and updates
     this.data = data
     this.xScale = parent.xScaleWeek
@@ -886,7 +876,7 @@ export class Observed {
     this.weeks = parent.weeks
   }
 
-  query(idx) {
+  query (idx) {
     try {
       return this.filteredData[idx].data
     } catch (e) {
@@ -894,7 +884,7 @@ export class Observed {
     }
   }
 
-  update(idx) {
+  update (idx) {
     let filteredData = []
 
     for (let i = 0; i <= idx; i++) {

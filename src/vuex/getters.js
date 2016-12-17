@@ -17,10 +17,8 @@ export function selectedWeekIdx (state) {
 }
 
 export function selectedWeekName (state) {
-  if (state.selected.week.name)
-    return state.selected.week.name
-  else
-    return 'NA'
+  if (state.selected.week.name) return state.selected.week.name
+  else return 'NA'
 }
 
 export function selectedChoropleth (state) {
@@ -80,8 +78,7 @@ function actualChoroplethData (state) {
   state.data.map(r => {
     let values = getMaxLagData(r.seasons[seasonId].actual)
 
-    if (relative)
-      values = baselineScale(values, r.seasons[seasonId].baseline)
+    if (relative) values = baselineScale(values, r.seasons[seasonId].baseline)
 
     output.data.push({
       region: r.subId,
@@ -138,10 +135,10 @@ function getMaxLagData (actual) {
 function trimHistory (historyActual, numWeeks) {
   let historyTrimmed = historyActual.slice()
 
-  if (numWeeks == 52) {
+  if (numWeeks === 52) {
     // Clip everyone else to remove 53rd week
-    historyTrimmed = historyTrimmed.filter(d => d.week % 100 != 53)
-  } else if (historyTrimmed.length == 52) {
+    historyTrimmed = historyTrimmed.filter(d => d.week % 100 !== 53)
+  } else if (historyTrimmed.length === 52) {
     // Expand to add 53rd week
     // Adding a dummy year 1000, this will also help identify the adjustment
     historyTrimmed.splice(23, 0, {
@@ -157,7 +154,6 @@ function trimHistory (historyActual, numWeeks) {
  * Return data subset for chart as specified in region/season selected
  */
 export function timeChartData (state) {
-
   let regionSubset = state.data[selectedRegion(state)]
   let currentSeasonId = selectedSeason(state)
   let seasonSubset = regionSubset.seasons[currentSeasonId]
@@ -210,12 +206,11 @@ export function previousWeek (state) {
  * Return range for choropleth color scale
  */
 function choroplethDataRange (state) {
-  let maxVals = [],
-      minVals = []
+  let maxVals = []
+  let minVals = []
 
   state.data.map(region => {
     region.seasons.map(season => {
-
       let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
       if (choroplethRelative(state)) {
@@ -229,20 +224,14 @@ function choroplethDataRange (state) {
     })
   })
 
-  return [Math.min(...minVals),
-          Math.max(...maxVals)]
+  return [Math.min(...minVals), Math.max(...maxVals)]
 }
 
 /**
  * Return actual data for all regions for current selections
  */
 export function choroplethData (state) {
-
-  let choroplethId = selectedChoropleth(state),
-      seasonId = selectedSeason(state)
-
   let output = actualChoroplethData(state)
-
   output.range = choroplethDataRange(state)
   return output
 }

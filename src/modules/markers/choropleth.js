@@ -1,8 +1,7 @@
 // Markers for choropleth
 
 export class ColorBar {
-  constructor(d3, svg, cmap) {
-
+  constructor (d3, svg, cmap) {
     let svgBB = svg.node().getBoundingClientRect()
 
     // Clear
@@ -45,7 +44,7 @@ export class ColorBar {
   }
 
   // Update scale of colorbar
-  update(range) {
+  update (range) {
     this.scale.domain(range)
 
     let axis = this.d3.axisTop(this.scale)
