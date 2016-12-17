@@ -29,8 +29,10 @@ const state = {
 
   // Toggles
   toggles: {
-    legend: true,
-    stats: false,
+    panels: {
+      legend: true,
+      stats: false
+    },
     intro: true,
     choroplethRelative: false
   },
@@ -93,12 +95,12 @@ const mutations = {
     state.intro.data.push(val)
   },
 
-  TOGGLE_LEGEND (state) {
-    state.toggles.legend = !state.toggles.legend
-  },
-
-  TOGGLE_STATS (state) {
-    state.toggles.stats = !state.toggles.stats
+  TOGGLE_PANEL (state, val) {
+    // Hide everything else
+    for (let panel in state.toggles.panels) {
+      if (panel === val) state.toggles.panels[panel] = !state.toggles.panels[panel]
+      else state.toggles.panels[panel] = false
+    }
   },
 
   TOGGLE_CHOROPLETH_RELATIVE (state) {

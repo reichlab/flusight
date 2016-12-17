@@ -276,11 +276,11 @@ export function modelStats (state) {
 }
 
 export function legendShow (state) {
-  return state.toggles.legend
+  return state.toggles.panels.legend
 }
 
 export function statsShow (state) {
-  return state.toggles.stats
+  return state.toggles.panels.stats
 }
 
 // Introduction getters
