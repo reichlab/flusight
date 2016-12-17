@@ -438,6 +438,7 @@ export default {
 
     let elems = [
       ['#legend-btn', 'Toggle legend'],
+      ['#stats-btn', 'Toggle Stats'],
       ['#forward-btn', 'Move forward'],
       ['#backward-btn', 'Move backward']
     ]
