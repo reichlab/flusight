@@ -228,8 +228,22 @@ export function choroplethData (state) {
   return output
 }
 
+/**
+ * Return stats related to models
+ */
+export function modelStats (state) {
+  let models = models(state)
+  console.log(state.data)
+
+  return 'sdsd'
+}
+
 export function legendShow (state) {
   return state.toggles.legend
+}
+
+export function statsShow (state) {
+  return state.toggles.stats
 }
 
 // Introduction getters

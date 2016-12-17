@@ -96,6 +96,13 @@ export const toggleLegend = ({ dispatch, state }) => {
 }
 
 /**
+ * Toggle display of stats panel
+ */
+export const toggleStats = ({ dispatch, state }) => {
+  dispatch('TOGGLE_STATS')
+}
+
+/**
  * Toggle relative display in choropleth
  */
 export const toggleRelative = ({ dispatch, state }) => {

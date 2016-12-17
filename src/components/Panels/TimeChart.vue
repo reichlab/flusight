@@ -186,7 +186,7 @@ $accent: #3273dc;
     box-shadow: 1px 1px 1px #ccc;
     margin: 2px 0px;
     width: 28px;
-    &.legend-btn {
+    &#legend-btn {
       border-width: 1px;
       border-color: $accent;
     }
@@ -325,14 +325,26 @@ $accent: #3273dc;
   hr
   #legend-prediction-container
 
+// Stats
+#stats.nav-drawer(v-show="statsShow")
+
 // Controls
 #nav-controls
-  a.button.is-small.is-info.legend-btn(
+  a#legend-btn.button.is-small.is-info(
     v-on:click="toggleLegend"
     v-bind:class="[legendShow ? '' : 'is-outlined']"
   )
     span.icon.is-small
       i.fa.fa-map-o
+
+  br
+  a#stats-btn.button.is-small.is-info(
+    v-on:click="toggleStats"
+    v-bind:class="[statsShow ? '' : 'is-outlined']"
+  )
+    span.icon.is-small
+      i.fa.fa-percent
+
   br
   a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backward")
     span.icon.is-small
@@ -345,7 +357,11 @@ $accent: #3273dc;
 
 <script>
 import TimeChart from '../../modules/timechart'
-import { legendShow } from '../../vuex/getters'
+import {
+  legendShow,
+  statsShow,
+  modelStats
+  } from '../../vuex/getters'
 import {
   initTimeChart,
   updateSelectedWeek,
@@ -353,7 +369,8 @@ import {
   updateTimeChart,
   backward,
   forward,
-  toggleLegend
+  toggleLegend,
+  toggleStats
 } from '../../vuex/actions'
 
 export default {
@@ -365,10 +382,13 @@ export default {
       updateTimeChart,
       backward,
       forward,
-      toggleLegend
+      toggleLegend,
+      toggleStats
     },
     getters: {
-      legendShow
+      legendShow,
+      statsShow,
+      modelStats
     }
   },
   ready() {
@@ -388,7 +408,7 @@ export default {
     let tooltip = d3.select('#info-tooltip')
 
     let elems = [
-      ['.legend-btn', 'Toggle legend'],
+      ['#legend-btn', 'Toggle legend'],
       ['#forward-btn', 'Move forward'],
       ['#backward-btn', 'Move backward']
     ]
