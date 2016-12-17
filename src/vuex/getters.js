@@ -229,13 +229,50 @@ export function choroplethData (state) {
 }
 
 /**
+ * Return mean absolute error between preds and actual data
+ * Assumes `preds` weeks are in actual
+ */
+function maeStats (preds, actual) {
+  let diffs = [
+    [], // oneWk
+    [], // twoWk
+    [], // threeWk
+    []  // fourWk
+  ]
+
+  let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+
+  preds.forEach(p => {
+    let actualIndex = actual.map(d => d.week).indexOf(p.week)
+
+    keys.forEach((key, idx) => {
+      let actualData = actual[actualIndex + 1 + idx].data
+      if (actualData !== -1) diffs[idx].push(Math.abs(actualData - p[key].point))
+    })
+  })
+
+  return diffs.map(d => d.reduce((a, b) => a + b) / d.length)
+}
+
+/**
  * Return stats related to models
  */
 export function modelStats (state) {
-  let models = models(state)
-  console.log(state.data)
+  let regionSubset = state.data[selectedRegion(state)]
+  let seasonSubset = regionSubset.seasons[selectedSeason(state)]
 
-  return 'sdsd'
+  let actual = getMaxLagData(seasonSubset.actual)
+  let modelPreds = seasonSubset.models
+
+  return {
+    name: 'Mean Absolute Error',
+    data: modelPreds.map(m => {
+      return {
+        id: m.id,
+        value: maeStats(m.predictions, actual)
+      }
+    })
+  }
 }
 
 export function legendShow (state) {

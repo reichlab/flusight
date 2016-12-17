@@ -278,6 +278,16 @@ $accent: #3273dc;
       }
     }
   }
+  table {
+    margin: 0px;
+  }
+  .stat-heading {
+    text-align: center;
+    margin: 10px 10px !important;
+  }
+  .center {
+    text-align: center;
+  }
 }
 
 #no-pred {
@@ -327,6 +337,25 @@ $accent: #3273dc;
 
 // Stats
 #stats.nav-drawer(v-show="statsShow")
+  .stat-heading.title.is-6 {{ modelStats.name }}
+  table.table.is-striped.is-bordered
+    thead
+      tr
+        th.center Model
+        th(colspan="4").center Weekly predictions
+      tr
+        th
+        th 1 week
+        th 2 weeks
+        th 3 weeks
+        th 4 weeks
+    tbody
+      tr(v-for="model in modelStats.data")
+        td {{ model.id }}
+        td {{ model.value[0].toFixed(4) }}
+        td {{ model.value[1].toFixed(4) }}
+        td {{ model.value[2].toFixed(4) }}
+        td {{ model.value[3].toFixed(4) }}
 
 // Controls
 #nav-controls
