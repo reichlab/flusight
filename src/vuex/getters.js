@@ -65,49 +65,6 @@ function baselineScale (values, baseline) {
 }
 
 /**
- * Return choropleth data for model
- */
-function modelChoroplethData (state, modelId, predictionType) {
-  let seasonId = selectedSeason(state)
-
-  let output = {
-    data: [],
-    type: choroplethRelative(state) ? 'diverging' : 'sequential'
-  }
-
-  state.data.map(r => {
-    let preds = {}
-
-    r.seasons[seasonId].models[modelId].predictions
-      .forEach(p => {
-        preds[p.week] = p[predictionType].point
-      })
-
-    let weeks = getMaxLagData(r.seasons[seasonId].actual).map(d => d.week)
-
-    let values = weeks.map(w => {
-      return {
-        week: w,
-        data: preds[w] ? preds[w] : -1
-      }
-    })
-
-    if (choroplethRelative(state))
-      values = baselineScale(values, r.seasons[seasonId].baseline)
-
-    output.data.push({
-      region: r.subId,
-      states: r.states,
-      value: values
-    })
-  })
-
-  output.data = output.data.slice(1) // Remove national data
-
-  return output
-}
-
-/**
  * Return data for choropleth using actual values
  */
 function actualChoroplethData (state) {
