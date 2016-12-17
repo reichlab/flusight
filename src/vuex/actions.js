@@ -92,7 +92,6 @@ export const backward = ({ dispatch, state }) => {
  * Toggle display of legend control
  */
 export const toggleLegend = ({ dispatch, state }) => {
-  // If anyother
   dispatch('TOGGLE_PANEL', 'legend')
 }
 

@@ -350,8 +350,8 @@ $accent: #3273dc;
         th 3 weeks
         th 4 weeks
     tbody
-      tr(v-for="model in modelStats.data")
-        td {{ model.id }}
+      tr(v-for="(index, model) in modelStats.data")
+        td(v-bind:style="{ color: colors[index] }") {{ model.id }}
         td {{ model.value[0].toFixed(4) }}
         td {{ model.value[1].toFixed(4) }}
         td {{ model.value[2].toFixed(4) }}
@@ -418,6 +418,11 @@ export default {
       legendShow,
       statsShow,
       modelStats
+    }
+  },
+  computed: {
+    colors() {
+      return this.$d3.schemeCategory10
     }
   },
   ready() {
