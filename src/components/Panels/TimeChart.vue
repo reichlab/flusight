@@ -345,17 +345,17 @@ $accent: #3273dc;
         th(colspan="4").center Weekly predictions
       tr
         th
-        th 1 week
-        th 2 weeks
-        th 3 weeks
-        th 4 weeks
+        th 1 wk
+        th 2 wk
+        th 3 wk
+        th 4 wk
     tbody
       tr(v-for="(index, model) in modelStats.data")
         td(v-bind:style="{ color: colors[index] }") {{ model.id }}
-        td {{ model.value[0].toFixed(4) }}
-        td {{ model.value[1].toFixed(4) }}
-        td {{ model.value[2].toFixed(4) }}
-        td {{ model.value[3].toFixed(4) }}
+        td {{ model.value[0].toFixed(2) }}
+        td {{ model.value[1].toFixed(2) }}
+        td {{ model.value[2].toFixed(2) }}
+        td {{ model.value[3].toFixed(2) }}
 
 // Controls
 #nav-controls
