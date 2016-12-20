@@ -20,14 +20,6 @@ export const updateSelectedWeek = ({ dispatch, state }, val) => {
   dispatch('UPDATE_SELECTED_WEEK', val)
 }
 
-export const updateSelectedChoropleth = ({ dispatch, state}, val) => {
-  dispatch('UPDATE_SELECTED_CHOROPLETH', val)
-}
-
-export const updateSelectedModel = ({ dispatch, state }, val) => {
-  dispatch('UPDATE_SELECTED_MODEL', val)
-}
-
 // Initializations
 // ---------------
 
@@ -100,7 +92,14 @@ export const backward = ({ dispatch, state }) => {
  * Toggle display of legend control
  */
 export const toggleLegend = ({ dispatch, state }) => {
-  dispatch('TOGGLE_LEGEND')
+  dispatch('TOGGLE_PANEL', 'legend')
+}
+
+/**
+ * Toggle display of stats panel
+ */
+export const toggleStats = ({ dispatch, state }) => {
+  dispatch('TOGGLE_PANEL', 'stats')
 }
 
 /**

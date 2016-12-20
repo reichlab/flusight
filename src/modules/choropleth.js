@@ -11,13 +11,12 @@ import tinycolor from 'tinycolor2'
 // Draw map on given element
 // Takes d3 instance
 export default class Choropleth {
-  constructor(d3, elementId, regionHook) {
+  constructor (d3, elementId, regionHook) {
+    let footBB = d3.select('.footer').node().getBoundingClientRect()
+    let chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
 
-    let footBB = d3.select('.footer').node().getBoundingClientRect(),
-        chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
-
-    let divWidth = chartBB.width,
-        divHeight = window.innerHeight - chartBB.top - footBB.height
+    let divWidth = chartBB.width
+    let divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
     divHeight -= 60
@@ -27,7 +26,7 @@ export default class Choropleth {
     divWidth = Math.min(divWidth, 400)
 
     // Initialized datamap
-    let datamap = new Datamap({
+    new Datamap({
       element: document.getElementById(elementId),
       scope: 'usa',
       height: divHeight,
@@ -80,19 +79,17 @@ export default class Choropleth {
    *   - Choropleth selector change
    *   - Season selector change
    */
-  plot(data) {
+  plot (data) {
+    let d3 = this.d3
+    let svg = this.svg
+    let regionHook = this.regionHook
+    let tooltip = this.tooltip
 
-    let d3 = this.d3,
-        svg = this.svg,
-        regionHook = this.regionHook,
-        tooltip = this.tooltip
+    let minData = data.range[0]
+    let maxData = data.range[1]
 
-    let minData = data.range[0],
-        maxData = data.range[1]
-
-    let colormapName,
-        limits = [],
-        barLimits = []
+    let limits = []
+    let barLimits = []
 
     if (data.type === 'sequential') {
       // Set a 0 to max ranged colorscheme
@@ -104,7 +101,6 @@ export default class Choropleth {
 
       limits = [maxData, 0]
       barLimits = [0, maxData]
-
     } else if (data.type === 'diverging') {
       this.cmap = colormap({
         colormap: 'RdBu',
@@ -126,31 +122,29 @@ export default class Choropleth {
     this.colorBar = new marker.ColorBar(d3, svg, this.cmap)
     this.colorBar.update(barLimits)
 
-    let bb = svg.node().getBoundingClientRect()
-
     // Set on hover items
     d3.selectAll('.datamaps-subunit')
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         d3.selectAll('.datamaps-subunit')
           .filter(d => util.getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '0.4')
         tooltip.style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         d3.selectAll('.datamaps-subunit')
           .filter(d => util.getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '1.0')
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX + 15) + 'px')
           .html(util.tooltipText(this, data.data, data.decorator))
       })
-      .on('click', function() {
+      .on('click', function () {
         // Change the region selector
         regionHook(util.getRegionId(util.getSiblings(this, data.data).region))
       })
@@ -165,15 +159,14 @@ export default class Choropleth {
    *   - Week change
    *   - Region selector change
    */
-  update(ids) {
-    let d3 = this.d3,
-        data = this.data,
-        colorScale = this.colorScale,
-        selectedTexture = this.selectedTexture,
-        cmap = this.cmap
+  update (ids) {
+    let d3 = this.d3
+    let data = this.data
+    let colorScale = this.colorScale
+    let selectedTexture = this.selectedTexture
+    let cmap = this.cmap
 
-    let highlightedStates = [],
-        color = null
+    let highlightedStates = []
     if (ids.regionIdx >= 0) {
       highlightedStates = data[ids.regionIdx].states
     }
@@ -191,10 +184,9 @@ export default class Choropleth {
         d3State.attr('data-value', value)
 
         if (highlightedStates.indexOf(s) > -1) {
-
           // Setup selected pattern
-          let strokeColor = tinycolor(color).getLuminance() < 0.5 ?
-              'white' : '#444'
+          let strokeColor = tinycolor(color).getLuminance() < 0.5
+              ? 'white' : '#444'
 
           d3.select('#' + selectedTexture.id() + ' rect')
             .attr('fill', color)

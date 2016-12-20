@@ -176,13 +176,6 @@ export default {
         direction: 'right',
         element: '#map-intro'
       },
-      // {
-      //   title: 'Choose mapped data',
-      //   content: `You can select the data you want to see on the map using
-      //             this dropdown menu.`,
-      //   direction: 'right',
-      //   element: '#relative-button'
-      // },
       {
         title: 'Finished',
         content: `Check out the source for this app and provide feedback on

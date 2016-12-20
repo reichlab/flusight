@@ -8,7 +8,6 @@ import 'font-awesome/css/font-awesome.css'
 import './assets/fakeLoader.css'
 import './assets/favicon.ico'
 
-
 Vue.use(D3)
 
 new Vue({

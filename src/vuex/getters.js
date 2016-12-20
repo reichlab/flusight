@@ -17,18 +17,8 @@ export function selectedWeekIdx (state) {
 }
 
 export function selectedWeekName (state) {
-  if (state.selected.week.name)
-    return state.selected.week.name
-  else
-    return 'NA'
-}
-
-export function selectedChoropleth (state) {
-  return state.selected.choropleth
-}
-
-export function selectedModel (state) {
-  return state.selected.model
+  if (state.selected.week.name) return state.selected.week.name
+  else return 'NA'
 }
 
 export function seasons (state) {
@@ -65,49 +55,6 @@ function baselineScale (values, baseline) {
 }
 
 /**
- * Return choropleth data for model
- */
-function modelChoroplethData (state, modelId, predictionType) {
-  let seasonId = selectedSeason(state)
-
-  let output = {
-    data: [],
-    type: choroplethRelative(state) ? 'diverging' : 'sequential'
-  }
-
-  state.data.map(r => {
-    let preds = {}
-
-    r.seasons[seasonId].models[modelId].predictions
-      .forEach(p => {
-        preds[p.week] = p[predictionType].point
-      })
-
-    let weeks = getMaxLagData(r.seasons[seasonId].actual).map(d => d.week)
-
-    let values = weeks.map(w => {
-      return {
-        week: w,
-        data: preds[w] ? preds[w] : -1
-      }
-    })
-
-    if (choroplethRelative(state))
-      values = baselineScale(values, r.seasons[seasonId].baseline)
-
-    output.data.push({
-      region: r.subId,
-      states: r.states,
-      value: values
-    })
-  })
-
-  output.data = output.data.slice(1) // Remove national data
-
-  return output
-}
-
-/**
  * Return data for choropleth using actual values
  */
 function actualChoroplethData (state) {
@@ -123,8 +70,7 @@ function actualChoroplethData (state) {
   state.data.map(r => {
     let values = getMaxLagData(r.seasons[seasonId].actual)
 
-    if (relative)
-      values = baselineScale(values, r.seasons[seasonId].baseline)
+    if (relative) values = baselineScale(values, r.seasons[seasonId].baseline)
 
     output.data.push({
       region: r.subId,
@@ -181,10 +127,10 @@ function getMaxLagData (actual) {
 function trimHistory (historyActual, numWeeks) {
   let historyTrimmed = historyActual.slice()
 
-  if (numWeeks == 52) {
+  if (numWeeks === 52) {
     // Clip everyone else to remove 53rd week
-    historyTrimmed = historyTrimmed.filter(d => d.week % 100 != 53)
-  } else if (historyTrimmed.length == 52) {
+    historyTrimmed = historyTrimmed.filter(d => d.week % 100 !== 53)
+  } else if (historyTrimmed.length === 52) {
     // Expand to add 53rd week
     // Adding a dummy year 1000, this will also help identify the adjustment
     historyTrimmed.splice(23, 0, {
@@ -200,7 +146,6 @@ function trimHistory (historyActual, numWeeks) {
  * Return data subset for chart as specified in region/season selected
  */
 export function timeChartData (state) {
-
   let regionSubset = state.data[selectedRegion(state)]
   let currentSeasonId = selectedSeason(state)
   let seasonSubset = regionSubset.seasons[currentSeasonId]
@@ -253,12 +198,11 @@ export function previousWeek (state) {
  * Return range for choropleth color scale
  */
 function choroplethDataRange (state) {
-  let maxVals = [],
-      minVals = []
+  let maxVals = []
+  let minVals = []
 
   state.data.map(region => {
     region.seasons.map(season => {
-
       let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
       if (choroplethRelative(state)) {
@@ -272,26 +216,71 @@ function choroplethDataRange (state) {
     })
   })
 
-  return [Math.min(...minVals),
-          Math.max(...maxVals)]
+  return [Math.min(...minVals), Math.max(...maxVals)]
 }
 
 /**
  * Return actual data for all regions for current selections
  */
 export function choroplethData (state) {
-
-  let choroplethId = selectedChoropleth(state),
-      seasonId = selectedSeason(state)
-
   let output = actualChoroplethData(state)
-
   output.range = choroplethDataRange(state)
   return output
 }
 
+/**
+ * Return mean absolute error between preds and actual data
+ * Assumes `preds` weeks are in actual
+ */
+function maeStats (preds, actual) {
+  let diffs = [
+    [], // oneWk
+    [], // twoWk
+    [], // threeWk
+    []  // fourWk
+  ]
+
+  let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+
+  preds.forEach(p => {
+    let actualIndex = actual.map(d => d.week).indexOf(p.week)
+
+    keys.forEach((key, idx) => {
+      let actualData = actual[actualIndex + 1 + idx].data
+      if (actualData !== -1) diffs[idx].push(Math.abs(actualData - p[key].point))
+    })
+  })
+
+  return diffs.map(d => d.reduce((a, b) => a + b) / d.length)
+}
+
+/**
+ * Return stats related to models
+ */
+export function modelStats (state) {
+  let regionSubset = state.data[selectedRegion(state)]
+  let seasonSubset = regionSubset.seasons[selectedSeason(state)]
+
+  let actual = getMaxLagData(seasonSubset.actual)
+  let modelPreds = seasonSubset.models
+
+  return {
+    name: 'Mean Absolute Error',
+    data: modelPreds.map(m => {
+      return {
+        id: m.id,
+        value: maeStats(m.predictions, actual)
+      }
+    })
+  }
+}
+
 export function legendShow (state) {
-  return state.toggles.legend
+  return state.toggles.panels.legend
+}
+
+export function statsShow (state) {
+  return state.toggles.panels.stats
 }
 
 // Introduction getters

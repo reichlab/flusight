@@ -170,7 +170,7 @@ export default {
     introStep: function() {
       this.demoStep(this.currentIntro)
       // Un-highlight previous div
-      if (this.lastElement != '') {
+      if (this.lastElement !== '') {
         this.$d3.select(this.lastElement)
           .style('z-index', null)
       }

@@ -6,13 +6,13 @@ import textures from 'textures'
 import * as mmwr from 'mmwr-week'
 
 export default class TimeChart {
-  constructor(d3, elementId, weekHook) {
+  constructor (d3, elementId, weekHook) {
     // Get div dimensions
-    let footBB = d3.select('.footer').node().getBoundingClientRect(),
-        chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
+    let footBB = d3.select('.footer').node().getBoundingClientRect()
+    let chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
 
-    let divWidth = chartBB.width,
-        divHeight = window.innerHeight - chartBB.top - footBB.height
+    let divWidth = chartBB.width
+    let divHeight = window.innerHeight - chartBB.top - footBB.height
 
     // Padding offsets
     divHeight -= 20
@@ -25,16 +25,16 @@ export default class TimeChart {
     // Create blank chart
     let margin = {
       top: 1 + onsetOffset + 5, right: 50, bottom: 70, left: 40
-    },
-        width = divWidth - margin.left - margin.right,
-        height = divHeight - margin.top - margin.bottom
+    }
+    let width = divWidth - margin.left - margin.right
+    let height = divHeight - margin.top - margin.bottom
 
     // Initialize scales and stuff
     let xScale = d3.scaleLinear()
-        .range([0, width]),
-        yScale = d3.scaleLinear()
-        .range([height, 0]),
-        xScaleDate = d3.scaleTime()
+        .range([0, width])
+    let yScale = d3.scaleLinear()
+        .range([height, 0])
+    let xScaleDate = d3.scaleTime()
         .range([0, width])
 
     // Add svg
@@ -100,11 +100,11 @@ export default class TimeChart {
   /**
    * Setup axes
    */
-  setupAxes() {
-    let svg = this.svg,
-        d3 = this.d3,
-        width = this.width,
-        height = this.height
+  setupAxes () {
+    let svg = this.svg
+    let d3 = this.d3
+    let width = this.width
+    let height = this.height
 
     let infoTooltip = d3.select('#info-tooltip')
 
@@ -131,22 +131,22 @@ export default class TimeChart {
       .attr('dy', '1em')
 
     xText.style('cursor', 'pointer')
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         infoTooltip
           .style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         infoTooltip
           .style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         infoTooltip
           .style('top', (d3.event.pageY - 15) + 'px')
           .style('left', (d3.event.pageX - 150 - 15) + 'px')
           .html(`Week of the calendar year, as measured by the CDC.
                  <br><br><em>Click to know more</em>`)
       })
-      .on('click', function() {
+      .on('click', function () {
         window.open('https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf',
                     '_blank')
       })
@@ -160,15 +160,15 @@ export default class TimeChart {
       .style('text-anchor', 'middle')
       .text('Weighted ILI (%)')
       .style('cursor', 'pointer')
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         infoTooltip
           .style('display', null)
       })
-      .on('mouseout', function() {
+      .on('mouseout', function () {
         infoTooltip
           .style('display', 'none')
       })
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         infoTooltip
           .style('top', d3.event.pageY + 'px')
           .style('left', (d3.event.pageX + 15) + 'px')
@@ -176,7 +176,7 @@ export default class TimeChart {
                  illness, weighted by state population.<br><br><em>Click to know
                  more</em>`)
       })
-      .on('click', function() {
+      .on('click', function () {
         window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank')
       })
   }
@@ -184,11 +184,11 @@ export default class TimeChart {
   /**
    * Setup overlay for mouse events
    */
-  setupOverlay() {
-    let svg = this.svg,
-        height = this.height,
-        width = this.width,
-        tooltip = this.chartTooltip
+  setupOverlay () {
+    let svg = this.svg
+    let height = this.height
+    let width = this.width
+    let tooltip = this.chartTooltip
 
     // Add vertical line
     let line = svg.append('line')
@@ -216,10 +216,6 @@ export default class TimeChart {
       .text('Today')
 
     this.nowGroup = nowGroup
-
-    // Get bounding box
-    let bb = svg.node().getBoundingClientRect()
-
     svg.append('rect')
       .attr('class', 'overlay')
       .attr('height', height)
@@ -234,32 +230,32 @@ export default class TimeChart {
       })
   }
 
-  paintOnsetOffset() {
+  paintOnsetOffset () {
     this.svg.append('rect')
       .attr('class', 'onset-paint')
       .attr('height', this.onsetOffset + 5)
       .attr('width', this.width)
       .attr('x', 0)
-      .attr('y', - this.onsetOffset - 5)
+      .attr('y', -this.onsetOffset - 5)
 
     this.svg.append('rect')
       .attr('class', 'onset-texture')
       .attr('height', this.onsetOffset)
       .attr('width', this.width)
       .attr('x', 0)
-      .attr('y', - this.onsetOffset - 5)
+      .attr('y', -this.onsetOffset - 5)
       .style('fill', this.onsetTexture.url())
   }
 
   // plot data
-  plot(data) {
-    let d3 = this.d3,
-        svg = this.svg,
-        xScale = this.xScale,
-        yScale = this.yScale,
-        xScaleDate = this.xScaleDate,
-        tooltip = this.chartTooltip,
-        weekHook = this.weekHook
+  plot (data) {
+    let d3 = this.d3
+    let svg = this.svg
+    let xScale = this.xScale
+    let yScale = this.yScale
+    let xScaleDate = this.xScaleDate
+    let tooltip = this.chartTooltip
+    let weekHook = this.weekHook
 
     // Reset scales and axes
     yScale.domain([0, Math.min(13, util.getYMax(data))])
@@ -278,23 +274,19 @@ export default class TimeChart {
 
     // Week domain scale for easy mapping
     let xScaleWeek = (d) => {
-      let dInt = Math.floor(d),
-          dFloat = d % 1
+      let dInt = Math.floor(d)
+      let dFloat = d % 1
       // [0, 1) point fix without changing the scale
-      if (dInt === 0)
-        dInt = Math.max(...weeks)
-      if (dInt === 53)
-        dInt = 1
-      if (dInt === 29)
-        dFloat = 0
+      if (dInt === 0) dInt = Math.max(...weeks)
+      if (dInt === 53) dInt = 1
+      if (dInt === 29) dFloat = 0
       return xScale(weeks.indexOf(dInt) + dFloat)
     }
 
     // Week to date parser
-    let dateParser = d3.timeParse('%Y-%U')
     xScaleDate.domain(d3.extent(data.actual.map(d => {
-      let year = Math.floor(d.week / 100),
-          week = d.week % 100
+      let year = Math.floor(d.week / 100)
+      let week = d.week % 100
       return mmwr.MMWRWeekToDate(year, week).toDate()
     })))
 
@@ -351,7 +343,6 @@ export default class TimeChart {
 
       this.nowGroup
         .style('display', null)
-
     } else {
       // Start at the oldest prediction
       let modelPredictions = data.models
@@ -360,7 +351,7 @@ export default class TimeChart {
             else {
               return weeks.indexOf(m.predictions[0].week % 100)
             }
-          }).filter(d => d != -1)
+          }).filter(d => d !== -1)
 
       if (modelPredictions.length === 0) {
         // Start at the most recent actual data
@@ -390,7 +381,7 @@ export default class TimeChart {
     let colors = d3.schemeCategory10
 
     let totalModels = data.models.length
-    let onsetDiff =  (this.onsetOffset - 2) / (totalModels + 1)
+    let onsetDiff = (this.onsetOffset - 2) / (totalModels + 1)
 
     // Filter markers not needed
     let currentPredictionIds = data.models.map(m => m.id)
@@ -418,10 +409,10 @@ export default class TimeChart {
 
     data.models.forEach((m, idx) => {
       // Add marker if not present
-      let predMarker,
-          markerIndex = this.predictions.map(p => p.id).indexOf(m.id)
+      let predMarker
+      let markerIndex = this.predictions.map(p => p.id).indexOf(m.id)
       if (markerIndex === -1) {
-        let onsetYPos = - (idx + 1) * onsetDiff - 6
+        let onsetYPos = -(idx + 1) * onsetDiff - 6
         predMarker = new marker.Prediction(this,
                                            m.id,
                                            m.meta,
@@ -429,8 +420,7 @@ export default class TimeChart {
                                            onsetYPos)
         this.predictions.push(predMarker)
 
-        if (!(m.id in this.predictionsShow))
-          this.predictionsShow[m.id] = true
+        if (!(m.id in this.predictionsShow)) this.predictionsShow[m.id] = true
       } else {
         predMarker = this.predictions[markerIndex]
       }
@@ -446,7 +436,7 @@ export default class TimeChart {
         this.historyShow = !payload
         if (payload) this.history.hide()
         else this.history.show()
-      } else if (event == 'legend:ci') {
+      } else if (event === 'legend:ci') {
         // On ci change events
         // payload is `cid`
         this.predictions.map(p => {
@@ -456,8 +446,7 @@ export default class TimeChart {
       } else {
         // On prediction toggle action
         // payload is `hide`
-        let pred = this.predictions[this.predictions.map(p => p.id)
-                                    .indexOf(event)]
+        let pred = this.predictions[this.predictions.map(p => p.id).indexOf(event)]
         this.predictionsShow[event] = !payload
         pred.legendHidden = payload
 
@@ -468,9 +457,8 @@ export default class TimeChart {
 
     let that = this
     // Add mouse move and click events
-    let bb = svg.node().getBoundingClientRect()
     d3.select('.overlay')
-      .on('mousemove', function() {
+      .on('mousemove', function () {
         let mouse = d3.mouse(this)
         // Snap x to nearest tick
         let index = Math.round(xScale.invert(mouse[0]))
@@ -486,7 +474,7 @@ export default class TimeChart {
           .style('left', (d3.event.pageX + 15) + 'px')
           .html(util.tooltipText(that, index, mouse[1]))
       })
-      .on('click', function() {
+      .on('click', function () {
         let idx = that.capToActual(Math.round(xScale.invert(d3.mouse(this)[0])))
         weekHook({
           idx: idx,
@@ -498,7 +486,7 @@ export default class TimeChart {
   /**
    * Update marker position
    */
-  update(idx) {
+  update (idx) {
     // Change self index
     this.weekIdx = idx
     this.timerect.update(idx)
@@ -530,7 +518,7 @@ export default class TimeChart {
    * Return capped week index using actual values only
    * Assuming continuos actual data sequence
    */
-  capToActual(idx) {
+  capToActual (idx) {
     return Math.max(
       Math.min(this.actualIndices[this.actualIndices.length - 1], idx),
       this.actualIndices[0]
@@ -543,7 +531,7 @@ export default class TimeChart {
   /**
    * Return next week idx and name for vuex store
    */
-  getNextWeekData() {
+  getNextWeekData () {
     let nextIdx = this.capToActual(Math.min(this.weeks.length - 1,
                                             this.weekIdx + 1))
     return {
@@ -555,7 +543,7 @@ export default class TimeChart {
   /**
    * Return preview week idx and name for vuex store
    */
-  getPreviousWeekData() {
+  getPreviousWeekData () {
     let previousIdx = this.capToActual(Math.max(0, this.weekIdx - 1))
     return {
       idx: previousIdx,

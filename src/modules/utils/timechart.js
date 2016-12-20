@@ -34,7 +34,6 @@ export const getYMax = data => {
   return 1.1 * Math.max(...maxValues)
 }
 
-
 /**
  * Return next four week numbers for given week
  */
@@ -68,7 +67,7 @@ export const tooltipText = (object, idx, y) => {
   // Ask actual
   let actualValue = object.actual.query(idx)
 
-  if (actualValue != -1) {
+  if (actualValue !== -1) {
     text += '<div class="actual" style="background:white">'
     text += 'Actual <span class="bold">'
     text += actualValue.toFixed(2) + '</span></div>'
@@ -78,7 +77,7 @@ export const tooltipText = (object, idx, y) => {
     let data = p.query(idx)
 
     if (data) {
-      text += '<div class="prediction" style="background:' + p.color +  '">'
+      text += '<div class="prediction" style="background:' + p.color + '">'
       text += p.id + ' <span class="bold">' + data.toFixed(2) + '</span></div>'
     }
   })

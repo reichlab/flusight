@@ -186,7 +186,7 @@ $accent: #3273dc;
     box-shadow: 1px 1px 1px #ccc;
     margin: 2px 0px;
     width: 28px;
-    &.legend-btn {
+    &#legend-btn {
       border-width: 1px;
       border-color: $accent;
     }
@@ -278,6 +278,16 @@ $accent: #3273dc;
       }
     }
   }
+  table {
+    margin: 0px;
+  }
+  .stat-heading {
+    text-align: center;
+    margin: 10px 10px !important;
+  }
+  .center {
+    text-align: center;
+  }
 }
 
 #no-pred {
@@ -325,14 +335,45 @@ $accent: #3273dc;
   hr
   #legend-prediction-container
 
+// Stats
+#stats.nav-drawer(v-show="statsShow")
+  .stat-heading.title.is-6 {{ modelStats.name }}
+  table.table.is-striped.is-bordered
+    thead
+      tr
+        th.center Model
+        th(colspan="4").center Weekly predictions
+      tr
+        th
+        th 1 week
+        th 2 weeks
+        th 3 weeks
+        th 4 weeks
+    tbody
+      tr(v-for="(index, model) in modelStats.data")
+        td(v-bind:style="{ color: colors[index] }") {{ model.id }}
+        td {{ model.value[0].toFixed(4) }}
+        td {{ model.value[1].toFixed(4) }}
+        td {{ model.value[2].toFixed(4) }}
+        td {{ model.value[3].toFixed(4) }}
+
 // Controls
 #nav-controls
-  a.button.is-small.is-info.legend-btn(
+  a#legend-btn.button.is-small.is-info(
     v-on:click="toggleLegend"
     v-bind:class="[legendShow ? '' : 'is-outlined']"
   )
     span.icon.is-small
       i.fa.fa-map-o
+
+  br
+  a#stats-btn.button.is-small.is-info(
+    v-on:click="toggleStats"
+    v-bind:class="[statsShow ? '' : 'is-outlined']"
+  )
+    span.icon.is-small
+      i.fa.fa-percent
+
   br
   a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backward")
     span.icon.is-small
@@ -345,7 +386,11 @@ $accent: #3273dc;
 
 <script>
 import TimeChart from '../../modules/timechart'
-import { legendShow } from '../../vuex/getters'
+import {
+  legendShow,
+  statsShow,
+  modelStats
+  } from '../../vuex/getters'
 import {
   initTimeChart,
   updateSelectedWeek,
@@ -353,7 +398,8 @@ import {
   updateTimeChart,
   backward,
   forward,
-  toggleLegend
+  toggleLegend,
+  toggleStats
 } from '../../vuex/actions'
 
 export default {
@@ -365,10 +411,18 @@ export default {
       updateTimeChart,
       backward,
       forward,
-      toggleLegend
+      toggleLegend,
+      toggleStats
     },
     getters: {
-      legendShow
+      legendShow,
+      statsShow,
+      modelStats
+    }
+  },
+  computed: {
+    colors() {
+      return this.$d3.schemeCategory10
     }
   },
   ready() {
@@ -388,7 +442,8 @@ export default {
     let tooltip = d3.select('#info-tooltip')
 
     let elems = [
-      ['.legend-btn', 'Toggle legend'],
+      ['#legend-btn', 'Toggle legend'],
+      ['#stats-btn', 'Toggle Stats'],
       ['#forward-btn', 'Move forward'],
       ['#backward-btn', 'Move backward']
     ]
