@@ -113,6 +113,7 @@ import {
   seasons,
   regions
 } from '../../vuex/getters'
+import * as d3 from 'd3'
 
 export default {
   vuex: {
@@ -145,7 +146,7 @@ export default {
   },
   ready() {
     // Setup map
-    this.initChoropleth(new Choropleth(this.$d3, 'choropleth', (regionId) => {
+    this.initChoropleth(new Choropleth(d3, 'choropleth', (regionId) => {
       this.updateSelectedRegion(regionId)
     }))
 
@@ -156,7 +157,6 @@ export default {
     this.updateChoropleth()
     this.updateSelectedSeason(this.seasons.length - 1)
 
-    let d3 = this.$d3
     let infoTooltip = d3.select('#info-tooltip')
 
     // Info tooltip

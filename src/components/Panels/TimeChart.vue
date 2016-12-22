@@ -401,6 +401,7 @@ import {
   toggleLegend,
   toggleStats
 } from '../../vuex/actions'
+import * as d3 from 'd3'
 
 export default {
   vuex: {
@@ -422,12 +423,12 @@ export default {
   },
   computed: {
     colors() {
-      return this.$d3.schemeCategory10
+      return d3.schemeCategory10
     }
   },
   ready() {
     // Initialize time chart
-    this.initTimeChart(new TimeChart(this.$d3, 'timechart', (weekData) => {
+    this.initTimeChart(new TimeChart(d3, 'timechart', (weekData) => {
       this.updateSelectedWeek(weekData)
     }))
 
@@ -438,7 +439,6 @@ export default {
     this.updateTimeChart()
 
     // Add tooltips to nav icons
-    let d3 = this.$d3
     let tooltip = d3.select('#info-tooltip')
 
     let elems = [
