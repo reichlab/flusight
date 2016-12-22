@@ -65,34 +65,35 @@
 </style>
 
 <template lang="pug">
-#selectors
-  .level.is-mobile
-    .level-left
-      .level-item
-        .heading Week <b>{{ selectedWeekName }}</b>
-        .subtitle {{ regions[selectedRegion] }}
+div
+  #selectors
+    .level.is-mobile
+      .level-left
+        .level-item
+          .heading Week <b>{{ selectedWeekName }}</b>
+          .subtitle {{ regions[selectedRegion] }}
 
-    .level-right
-      .level-item
-          p.heading Season
-          p.control.title
-            span#season-selector.select.is-small
-              select(v-model="currentSeason")
-                option(v-for="season in seasons") {{ season }}
+      .level-right
+        .level-item
+            p.heading Season
+            p.control.title
+              span#season-selector.select.is-small
+                select(v-model="currentSeason")
+                  option(v-for="season in seasons") {{ season }}
 
 
-// Main plotting div
-#choropleth
-  #relative-button-title
-    span Weighted ILI (%)
-  #relative-button(v-on:click="toggleRelative")
-    span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
-    span.icon
-      i(
-        v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
-                      'fa fa-toggle-on']`
-       )
-    span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
+  // Main plotting div
+  #choropleth
+    #relative-button-title
+      span Weighted ILI (%)
+    #relative-button(v-on:click="toggleRelative")
+      span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
+      span.icon
+        i(
+          v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
+                        'fa fa-toggle-on']`
+         )
+      span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
 </template>
 
 <script>

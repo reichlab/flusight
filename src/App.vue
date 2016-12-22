@@ -71,17 +71,18 @@ body {
 </style>
 
 <template lang="pug">
-// Fixed position components
-#info-tooltip
-#loader
-intro
+div
+  // Fixed position components
+  #info-tooltip
+  #loader
+  intro
 
-// Main layout components
-navbar
-.section#panel-section
-  #app.container
-    panels
-foot
+  // Main layout components
+  navbar
+  .section#panel-section
+    #app.container
+      panels
+  foot
 </template>
 
 <script>

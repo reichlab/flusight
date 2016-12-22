@@ -314,74 +314,75 @@ $accent: #3273dc;
 </style>
 
 <template lang="pug">
-// Tooltips
-#legend-tooltip
-#chart-tooltip
+div
+  // Tooltips
+  #legend-tooltip
+  #chart-tooltip
 
-// No predictions text
-#no-pred.heading Predictions not available <br> for selected week
+  // No predictions text
+  #no-pred.heading Predictions not available <br> for selected week
 
-// Main plotting div
-#timechart
+  // Main plotting div
+  #timechart
 
-// Legend
-#legend.nav-drawer(v-show="legendShow")
-  #legend-actual-container
-  hr
-  #legend-ci-container
-    .item
-      span CI
-      span#legend-ci-buttons
-  hr
-  #legend-prediction-container
+  // Legend
+  #legend.nav-drawer(v-show="legendShow")
+    #legend-actual-container
+    hr
+    #legend-ci-container
+      .item
+        span CI
+        span#legend-ci-buttons
+    hr
+    #legend-prediction-container
 
-// Stats
-#stats.nav-drawer(v-show="statsShow")
-  .stat-heading.title.is-6 {{ modelStats.name }}
-  table.table.is-striped.is-bordered
-    thead
-      tr
-        th.center Model
-        th(colspan="4").center Weekly predictions
-      tr
-        th
-        th 1 wk
-        th 2 wk
-        th 3 wk
-        th 4 wk
-    tbody
-      tr(v-for="(index, model) in modelStats.data")
-        td(v-bind:style="{ color: colors[index] }") {{ model.id }}
-        td {{ model.value[0].toFixed(2) }}
-        td {{ model.value[1].toFixed(2) }}
-        td {{ model.value[2].toFixed(2) }}
-        td {{ model.value[3].toFixed(2) }}
+  // Stats
+  #stats.nav-drawer(v-show="statsShow")
+    .stat-heading.title.is-6 {{ modelStats.name }}
+    table.table.is-striped.is-bordered
+      thead
+        tr
+          th.center Model
+          th(colspan="4").center Weekly predictions
+        tr
+          th
+          th 1 wk
+          th 2 wk
+          th 3 wk
+          th 4 wk
+      tbody
+        tr(v-for="(index, model) in modelStats.data")
+          td(v-bind:style="{ color: colors[index] }") {{ model.id }}
+          td {{ model.value[0].toFixed(2) }}
+          td {{ model.value[1].toFixed(2) }}
+          td {{ model.value[2].toFixed(2) }}
+          td {{ model.value[3].toFixed(2) }}
 
-// Controls
-#nav-controls
-  a#legend-btn.button.is-small.is-info(
-    v-on:click="toggleLegend"
-    v-bind:class="[legendShow ? '' : 'is-outlined']"
-  )
-    span.icon.is-small
-      i.fa.fa-map-o
+  // Controls
+  #nav-controls
+    a#legend-btn.button.is-small.is-info(
+      v-on:click="toggleLegend"
+      v-bind:class="[legendShow ? '' : 'is-outlined']"
+    )
+      span.icon.is-small
+        i.fa.fa-map-o
 
-  br
-  a#stats-btn.button.is-small.is-info(
-    v-on:click="toggleStats"
-    v-bind:class="[statsShow ? '' : 'is-outlined']"
-  )
-    span.icon.is-small
-      i.fa.fa-percent
+    br
+    a#stats-btn.button.is-small.is-info(
+      v-on:click="toggleStats"
+      v-bind:class="[statsShow ? '' : 'is-outlined']"
+    )
+      span.icon.is-small
+        i.fa.fa-percent
 
-  br
-  a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backward")
-    span.icon.is-small
-      i.fa.fa-arrow-left
-  br
-  a#forward-btn.button.is-small.is-outlined.is-info(v-on:click="forward")
-    span.icon.is-small
-      i.fa.fa-arrow-right
+    br
+    a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backward")
+      span.icon.is-small
+        i.fa.fa-arrow-left
+    br
+    a#forward-btn.button.is-small.is-outlined.is-info(v-on:click="forward")
+      span.icon.is-small
+        i.fa.fa-arrow-right
 </template>
 
 <script>

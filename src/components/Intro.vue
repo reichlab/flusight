@@ -42,39 +42,40 @@
 </style>
 
 <template lang="pug">
-// Dark overlay during demo
-#intro-overlay(v-on:click="moveIntroFinish" v-show="introShow")
+div
+  // Dark overlay during demo
+  #intro-overlay(v-on:click="moveIntroFinish" v-show="introShow")
 
-#intro-tooltip(v-show="introShow")
-  #intro-title {{ currentIntro.title }}
-  #intro-content(v-html="currentIntro.content")
-  #intro-buttons
+  #intro-tooltip(v-show="introShow")
+    #intro-title {{ currentIntro.title }}
+    #intro-content(v-html="currentIntro.content")
+    #intro-buttons
 
-    // Close intro button
-    a.button.is-small(v-on:click="moveIntroFinish")
-      span.icon.is-small
-        i.fa.fa-times
-      span Finish
-
-    span.right
-      // Movement buttons
-      a(
-        v-bind:class=`[introAtFirst ? 'is-disabled' : '',
-                      'button is-info is-small is-outlined']`
-        v-on:click="moveIntroBackward"
-       )
+      // Close intro button
+      a.button.is-small(v-on:click="moveIntroFinish")
         span.icon.is-small
-          i.fa.fa-angle-left
-        span Previous
+          i.fa.fa-times
+        span Finish
 
-      a(
-        v-bind:class=`[introAtLast ? 'is-disabled' : '',
-                      'button is-info is-small']`
-        v-on:click="moveIntroForward"
-       )
-        span.icon.is-small
-          i.fa.fa-angle-right
-        span Next
+      span.right
+        // Movement buttons
+        a(
+          v-bind:class=`[introAtFirst ? 'is-disabled' : '',
+                        'button is-info is-small is-outlined']`
+          v-on:click="moveIntroBackward"
+         )
+          span.icon.is-small
+            i.fa.fa-angle-left
+          span Previous
+
+        a(
+          v-bind:class=`[introAtLast ? 'is-disabled' : '',
+                        'button is-info is-small']`
+          v-on:click="moveIntroForward"
+         )
+          span.icon.is-small
+            i.fa.fa-angle-right
+          span Next
 </template>
 
 <script>
