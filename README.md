@@ -30,27 +30,29 @@ it [here](https://nodejs.org/en/download/).
 
 + Install dependencies (you only need to run this when first installing the app)
 
-  `npm install`
+  `npm i -g yarn`
+
+  `yarn`
   
 + Put prediction submission files in `./data`
 
 + Parse prediction files
 
-  `npm run parse`
+  `yarn run parse`
   
 + Bundle production build
 
-  `npm run build`
+  `yarn run build`
 
 + Run/test the app locally
 
-  `npm run dev`
+  `yarn run dev`
 
 + Host. Copy over contents from `./dist` to your hosting service.
 
 + Alternatively, a quick deploy to github pages can be done by running
   
-  `npm run deploy`
+  `yarn run deploy`
   
   *Remember to point git remote origin to the repository where you want the
   deployment to take place*
@@ -63,8 +65,8 @@ it [here](https://nodejs.org/en/download/).
 
 ``` shell
 # serve with hot reload at localhost:8080
-npm run dev
+yarn run dev
 
 # build for production with minification
-npm run build
+yarn run build
 ```

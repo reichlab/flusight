@@ -4,8 +4,8 @@ set -e # Exit with nonzero exit code if anything fails
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]; then
     echo "Skipping deploy; just doing a build."
-    npm run parse
-    npm run build
+    yarn run parse
+    yarn run build
     exit 0
 fi
 
@@ -18,8 +18,8 @@ SHA=`git rev-parse --verify HEAD`
 git checkout gh-pages || git checkout --orphan gh-pages
 rm -rf ./dist/* || exit 0
 
-npm run parse
-npm run build
+yarn run parse
+yarn run build
 cp -r ./dist/* ./
 
 git config user.name "CI auto deploy"

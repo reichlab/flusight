@@ -1,9 +1,15 @@
 language: node_js
+
 node_js:
-- stable
+  - stable
+
+cache: yarn
 
 env:
   global:
   - ENCRYPTION_LABEL: "de7331c916d1"
+
+before_script:
+  - npm install -g yarn
 
 script: bash ./travis-deploy.sh
