@@ -21,16 +21,15 @@ to the website.
 ## Deploying
 
 Flusight works as a static webpage and needs a static hosting service (like
-github’s). Building the project and bundling data files requires node.js, get
-it [here](https://nodejs.org/en/download/).
+github’s). Building the project and bundling data files
+requires [node.js](https://nodejs.org/en/download/)
+and [yarn](https://yarnpkg.com/en/docs/install).
 
 + Clone this repository
 
   `git clone git@github.com:reichlab/flusight.git && cd ./flusight`
 
 + Install dependencies (you only need to run this when first installing the app)
-
-  `npm i -g yarn`
 
   `yarn`
   
