@@ -506,15 +506,4 @@ export default class TimeChart {
 
     this.legend.update(this.predictions)
   }
-
-  /**
-   * Return capped week index using actual values only
-   * Assuming continuos actual data sequence
-   */
-  capToActual (idx) {
-    return Math.max(
-      Math.min(this.actualIndices[this.actualIndices.length - 1], idx),
-      this.actualIndices[0]
-    )
-  }
 }
