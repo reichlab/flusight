@@ -2,40 +2,29 @@ import * as utils from './utils'
 
 // Selected items
 export const metadata = state => state.metadata
-export const selectedSeason = state => state.selected.season
-export const selectedRegion = state => state.selected.region
-export const selectedWeekIdx = state => state.selected.week.idx
-export const selectedWeekName = state => {
-  return state.selected.week.name ? state.selected.week.name : 'NA'
-}
 export const seasons = (state, getters) => {
-  return state.data[getters.selectedRegion].seasons.map(s => s.id)
+  return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
 }
 export const regions = state => state.data.map(d => d.subId)
 export const models = (state, getters) => {
-  return state.data[getters.selectedRegion]
-    .seasons[getters.selectedSeason]
+  return state.data[getters['switches/selectedRegion']]
+    .seasons[getters['switches/selectedSeason']]
     .models.map(m => m.id)
 }
+export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weighted ILI (%)']
+
 export const timeChart = state => state.timeChart
 export const choropleth = state => state.choropleth
 
-// Toggles
-export const choroplethRelative = state => state.toggles.choroplethRelative
-export const legendShow = state => state.toggles.panels.legend
-export const statsShow = state => state.toggles.panels.stats
-
 export const nextWeek = (state, getters) => getters.timeChart.getNextWeekData()
 export const previousWeek = (state, getters) => getters.timeChart.getPreviousWeekData()
-
-export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weighted ILI (%)']
 
 /**
  * Return data subset for chart as specified in region/season selected
  */
 export const timeChartData = (state, getters) => {
-  let regionSubset = state.data[getters.selectedRegion]
-  let currentSeasonId = getters.selectedSeason
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  let currentSeasonId = getters['switches/selectedSeason']
   let seasonSubset = regionSubset.seasons[currentSeasonId]
 
   let selectedWeeksCount = seasonSubset.actual.length
@@ -72,8 +61,8 @@ export const timeChartData = (state, getters) => {
  * Return actual data for all regions for current selections
  */
 export const choroplethData = (state, getters) => {
-  let seasonId = getters.selectedSeason
-  let relative = getters.choroplethRelative
+  let seasonId = getters['switches/selectedSeason']
+  let relative = getters['switches/choroplethRelative']
 
   let output = {
     data: [],
@@ -103,8 +92,8 @@ export const choroplethData = (state, getters) => {
  * Return stats related to models
  */
 export const modelStats = (state, getters) => {
-  let regionSubset = state.data[getters.selectedRegion]
-  let seasonSubset = regionSubset.seasons[getters.selectedSeason]
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
 
   let actual = utils.getMaxLagData(seasonSubset.actual)
   let modelPreds = seasonSubset.models

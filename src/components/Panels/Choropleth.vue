@@ -104,12 +104,16 @@ import * as d3 from 'd3'
 export default {
   computed: {
     ...mapGetters([
-      'selectedWeekName',
-      'selectedSeason',
-      'selectedRegion',
-      'choroplethRelative',
       'seasons',
       'regions'
+    ]),
+    ...mapGetters('switches', [
+      'selectedSeason',
+      'selectedRegion',
+      'choroplethRelative'
+    ]),
+    ...mapGetters('weeks', [
+      'selectedWeekName'
     ]),
     currentSeason: {
       get () {
@@ -123,10 +127,12 @@ export default {
   methods: {
     ...mapActions([
       'initChoropleth',
+      'plotChoropleth',
+      'updateChoropleth'
+    ]),
+    ...mapActions('switches', [
       'updateSelectedRegion',
       'updateSelectedSeason',
-      'plotChoropleth',
-      'updateChoropleth',
       'toggleRelative'
     ])
   },

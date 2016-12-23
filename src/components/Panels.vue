@@ -39,11 +39,13 @@ export default {
     TimeChart
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('switches', [
       'selectedRegion',
       'selectedSeason',
-      'selectedWeekIdx',
       'choroplethRelative'
+    ]),
+    ...mapGetters('weeks', [
+      'selectedWeekIdx'
     ])
   },
   methods: {

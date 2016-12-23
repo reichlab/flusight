@@ -393,9 +393,11 @@ import * as d3 from 'd3'
 export default {
   computed: {
     ...mapGetters([
-      'legendShow',
-      'statsShow',
       'modelStats'
+    ]),
+    ...mapGetters('switches', [
+      'legendShow',
+      'statsShow'
     ]),
     colors() {
       return d3.schemeCategory10
@@ -404,13 +406,17 @@ export default {
   methods: {
     ...mapActions([
       'initTimeChart',
-      'updateSelectedWeek',
       'plotTimeChart',
       'updateTimeChart',
       'backward',
-      'forward',
+      'forward'
+    ]),
+    ...mapActions('switches', [
       'toggleLegend',
       'toggleStats'
+    ]),
+    ...mapActions('weeks', [
+      'updateSelectedWeek'
     ])
   },
   ready() {

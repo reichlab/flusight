@@ -62,7 +62,7 @@ export const choroplethDataRange = (state, getters) => {
     region.seasons.map(season => {
       let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
 
-      if (getters.choroplethRelative) {
+      if (getters['switches/choroplethRelative']) {
         // Use baseline scaled data
         maxVals.push(Math.max(...actual.map(d => ((d / season.baseline) - 1) * 100)))
         minVals.push(Math.min(...actual.map(d => ((d / season.baseline) - 1) * 100)))
