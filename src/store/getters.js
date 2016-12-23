@@ -72,7 +72,29 @@ export const timeChartData = (state, getters) => {
  * Return actual data for all regions for current selections
  */
 export const choroplethData = (state, getters) => {
-  let output = utils.actualChoroplethData(state, getters)
+  let seasonId = getters.selectedSeason
+  let relative = getters.choroplethRelative
+
+  let output = {
+    data: [],
+    type: relative ? 'diverging' : 'sequential',
+    decorator: relative ? x => x + ' % (baseline)' : x => x + ' %'
+  }
+
+  state.data.map(r => {
+    let values = utils.getMaxLagData(r.seasons[seasonId].actual)
+
+    if (relative) values = utils.baselineScale(values, r.seasons[seasonId].baseline)
+
+    output.data.push({
+      region: r.subId,
+      states: r.states,
+      value: values
+    })
+  })
+
+  output.data = output.data.slice(1) // Remove national data
+
   output.range = utils.choroplethDataRange(state, getters)
   return output
 }

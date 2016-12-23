@@ -55,7 +55,7 @@ export default {
     ])
   },
   watch: {
-    selectedRegion: function() {
+    selectedRegion: function () {
       // Triggered by
       // - selector
       // - map clicks
@@ -65,19 +65,19 @@ export default {
       this.updateChoropleth()
       this.updateTimeChart()
     },
-    selectedSeason: function() {
+    selectedSeason: function () {
       // Triggered by selector
       // Choropleth gets new plot
       // Time series gets new data
       this.plotTimeChart()
       this.plotChoropleth()
     },
-    choroplethRelative: function() {
+    choroplethRelative: function () {
       // Triggered by relative selector
       // Use specific choropleth getter and do a plot
       this.plotChoropleth()
     },
-    selectedWeekIdx: function() {
+    selectedWeekIdx: function () {
       // Triggered by
       // - nav buttons
       // - mouse jumps

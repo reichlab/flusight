@@ -112,10 +112,10 @@ export default {
       'regions'
     ]),
     currentSeason: {
-      get() {
+      get () {
         return this.seasons[this.selectedSeason]
       },
-      set(val) {
+      set (val) {
         this.updateSelectedSeason(this.seasons.indexOf(val))
       }
     }
@@ -130,9 +130,9 @@ export default {
       'toggleRelative'
     ])
   },
-  ready() {
+  ready () {
     // Setup map
-    this.initChoropleth(new Choropleth(d3, 'choropleth', (regionId) => {
+    this.initChoropleth(new Choropleth(d3, 'choropleth', regionId => {
       this.updateSelectedRegion(regionId)
     }))
 

@@ -75,7 +75,7 @@ export default {
     ...mapGetters(['metadata'])
   },
   methods: {
-    ...mapActions(['moveIntroStart'])
+    ...mapActions('intro', ['moveIntroStart'])
   },
   data() {
     let tweetBody = 'https://twitter.com/intent/tweet?text=Flusight.%20'

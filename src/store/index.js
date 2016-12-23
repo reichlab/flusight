@@ -52,8 +52,10 @@ const mutations = {
   },
 
   [types.UPDATE_SELECTED_WEEK] (state, val) {
-    state.selected.week.idx = val.idx
-    state.selected.week.name = val.name
+    if (val) {
+      state.selected.week.idx = val.idx
+      state.selected.week.name = val.name
+    }
   },
 
   [types.SET_TIMECHART] (state, val) {

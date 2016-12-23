@@ -31,36 +31,6 @@ export const getMaxLagData = actual => {
 }
 
 /**
- * Return data for choropleth using actual values
- */
-export const actualChoroplethData = (state, getters) => {
-  let seasonId = getters.selectedSeason
-  let relative = getters.choroplethRelative
-
-  let output = {
-    data: [],
-    type: relative ? 'diverging' : 'sequential',
-    decorator: relative ? x => x + ' % (baseline)' : x => x + ' %'
-  }
-
-  state.data.map(r => {
-    let values = getMaxLagData(r.seasons[seasonId].actual)
-
-    if (relative) values = baselineScale(values, r.seasons[seasonId].baseline)
-
-    output.data.push({
-      region: r.subId,
-      states: r.states,
-      value: values
-    })
-  })
-
-  output.data = output.data.slice(1) // Remove national data
-
-  return output
-}
-
-/**
  * Trim history data to fit in length 'numWeeks'
  */
 export const trimHistory = (historyActual, numWeeks) => {
