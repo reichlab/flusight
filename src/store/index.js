@@ -1,12 +1,16 @@
+// Main vuex store
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import * as actions from './actions'
+import * as getters from './getters'
+import intro from './modules/intro'
 import jsonData from '!json!../assets/data.json'
+import * as types from './mutation-types'
 
 Vue.use(Vuex)
 
 const state = {
-
   // D3 plot objects
   timeChart: null,
   choropleth: null,
@@ -33,69 +37,34 @@ const state = {
       legend: true,
       stats: false
     },
-    intro: true,
     choroplethRelative: false
-  },
-
-  // Intro data
-  intro: {
-    data: [{
-      title: 'Welcome to flusight',
-      content: `Click <strong>Next</strong> to proceed. Click
-                <strong>Finish</strong> to exit this demo.`,
-      element: '',
-      direction: ''
-    }],
-    pointer: 0
   }
 }
 
+// mutations
 const mutations = {
-  UPDATE_SELECTED_REGION (state, val) {
+  [types.UPDATE_SELECTED_REGION] (state, val) {
     state.selected.region = val
   },
 
-  UPDATE_SELECTED_SEASON (state, val) {
+  [types.UPDATE_SELECTED_SEASON] (state, val) {
     state.selected.season = val
   },
 
-  UPDATE_SELECTED_WEEK (state, val) {
-    state.selected.week = val
+  [types.UPDATE_SELECTED_WEEK] (state, val) {
+    state.selected.week.idx = val.idx
+    state.selected.week.name = val.name
   },
 
-  SET_TIMECHART (state, val) {
+  [types.SET_TIMECHART] (state, val) {
     state.timeChart = val
   },
 
-  SET_CHOROPLETH (state, val) {
+  [types.SET_CHOROPLETH] (state, val) {
     state.choropleth = val
   },
 
-  INCREMENT_INTRO_POINTER (state) {
-    state.intro.pointer += 1
-  },
-
-  DECREMENT_INTRO_POINTER (state) {
-    state.intro.pointer -= 1
-  },
-
-  RESET_INTRO_POINTER (state) {
-    state.intro.pointer = 0
-  },
-
-  HIDE_INTRO (state) {
-    state.toggles.intro = false
-  },
-
-  SHOW_INTRO (state) {
-    state.toggles.intro = true
-  },
-
-  APPEND_INTRO_ITEM (state, val) {
-    state.intro.data.push(val)
-  },
-
-  TOGGLE_PANEL (state, val) {
+  [types.TOGGLE_PANEL] (state, val) {
     // Hide everything else
     for (let panel in state.toggles.panels) {
       if (panel === val) state.toggles.panels[panel] = !state.toggles.panels[panel]
@@ -103,12 +72,17 @@ const mutations = {
     }
   },
 
-  TOGGLE_CHOROPLETH_RELATIVE (state) {
+  [types.TOGGLE_CHOROPLETH_RELATIVE] (state) {
     state.toggles.choroplethRelative = !state.toggles.choroplethRelative
   }
 }
 
 export default new Vuex.Store({
   state,
-  mutations
+  actions,
+  getters,
+  mutations,
+  modules: {
+    intro
+  }
 })

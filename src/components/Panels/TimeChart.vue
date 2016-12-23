@@ -387,45 +387,31 @@ div
 
 <script>
 import TimeChart from '../../modules/timechart'
-import {
-  legendShow,
-  statsShow,
-  modelStats
-  } from '../../vuex/getters'
-import {
-  initTimeChart,
-  updateSelectedWeek,
-  plotTimeChart,
-  updateTimeChart,
-  backward,
-  forward,
-  toggleLegend,
-  toggleStats
-} from '../../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
 import * as d3 from 'd3'
 
 export default {
-  vuex: {
-    actions: {
-      initTimeChart,
-      updateSelectedWeek,
-      plotTimeChart,
-      updateTimeChart,
-      backward,
-      forward,
-      toggleLegend,
-      toggleStats
-    },
-    getters: {
-      legendShow,
-      statsShow,
-      modelStats
-    }
-  },
   computed: {
+    ...mapGetters([
+      'legendShow',
+      'statsShow',
+      'modelStats'
+    ]),
     colors() {
       return d3.schemeCategory10
     }
+  },
+  methods: {
+    ...mapActions([
+      'initTimeChart',
+      'updateSelectedWeek',
+      'plotTimeChart',
+      'updateTimeChart',
+      'backward',
+      'forward',
+      'toggleLegend',
+      'toggleStats'
+    ])
   },
   ready() {
     // Initialize time chart

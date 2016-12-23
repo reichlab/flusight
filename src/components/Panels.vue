@@ -31,37 +31,28 @@
 <script>
 import Choropleth from './Panels/Choropleth'
 import TimeChart from './Panels/TimeChart'
-import {
-  selectedRegion,
-  selectedSeason,
-  selectedWeekIdx,
-  choroplethRelative
-} from '../vuex/getters'
-import {
-  updateTimeChart,
-  updateChoropleth,
-  plotTimeChart,
-  plotChoropleth
-} from '../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Choropleth,
     TimeChart
   },
-  vuex: {
-    getters: {
-      selectedRegion,
-      selectedSeason,
-      selectedWeekIdx,
-      choroplethRelative
-    },
-    actions: {
-      updateTimeChart,
-      updateChoropleth,
-      plotChoropleth,
-      plotTimeChart
-    }
+  computed: {
+    ...mapGetters([
+      'selectedRegion',
+      'selectedSeason',
+      'selectedWeekIdx',
+      'choroplethRelative'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'updateTimeChart',
+      'updateChoropleth',
+      'plotChoropleth',
+      'plotTimeChart'
+    ])
   },
   watch: {
     selectedRegion: function() {

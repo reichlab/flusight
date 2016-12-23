@@ -79,38 +79,26 @@ div
 </template>
 
 <script>
-import {
-  currentIntro,
-  introAtFirst,
-  introAtLast,
-  introShow,
-  introStep
-} from '../vuex/getters'
-import {
-  moveIntroForward,
-  moveIntroBackward,
-  moveIntroFinish,
-  moveIntroStart
-} from '../vuex/actions'
 import * as d3 from 'd3'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  vuex: {
-    getters: {
-      currentIntro,
-      introAtFirst,
-      introAtLast,
-      introShow,
-      introStep
-    },
-    actions: {
-      moveIntroForward,
-      moveIntroBackward,
-      moveIntroFinish,
-      moveIntroStart
-    }
+  computed: {
+    ...mapGetters('intro', [
+      'currentIntro',
+      'introAtFirst',
+      'introAtLast',
+      'introShow',
+      'introStep'
+    ])
   },
   methods: {
+    ...mapActions('intro', [
+      'moveIntroForward',
+      'moveIntroBackward',
+      'moveIntroFinish',
+      'moveIntroStart'
+    ]),
     demoStep(data) {
       let tooltip = d3.select('#intro-tooltip')
       let tooltipBB = tooltip.node().getBoundingClientRect()
@@ -168,7 +156,7 @@ export default {
     }
   },
   watch: {
-    introStep: function() {
+    introStep: function () {
       this.demoStep(this.currentIntro)
       // Un-highlight previous div
       if (this.lastElement !== '') {

@@ -98,44 +98,19 @@ div
 
 <script>
 import Choropleth from '../../modules/choropleth'
-import {
-  initChoropleth,
-  updateSelectedRegion,
-  updateSelectedSeason,
-  plotChoropleth,
-  updateChoropleth,
-  toggleRelative
-} from '../../vuex/actions'
-import {
-  selectedWeekName,
-  selectedSeason,
-  selectedRegion,
-  choroplethRelative,
-  seasons,
-  regions
-} from '../../vuex/getters'
+import { mapGetters, mapActions } from 'vuex'
 import * as d3 from 'd3'
 
 export default {
-  vuex: {
-    actions: {
-      initChoropleth,
-      updateSelectedRegion,
-      updateSelectedSeason,
-      plotChoropleth,
-      updateChoropleth,
-      toggleRelative
-    },
-    getters: {
-      selectedWeekName,
-      selectedSeason,
-      selectedRegion,
-      choroplethRelative,
-      seasons,
-      regions
-    }
-  },
   computed: {
+    ...mapGetters([
+      'selectedWeekName',
+      'selectedSeason',
+      'selectedRegion',
+      'choroplethRelative',
+      'seasons',
+      'regions'
+    ]),
     currentSeason: {
       get() {
         return this.seasons[this.selectedSeason]
@@ -144,6 +119,16 @@ export default {
         this.updateSelectedSeason(this.seasons.indexOf(val))
       }
     }
+  },
+  methods: {
+    ...mapActions([
+      'initChoropleth',
+      'updateSelectedRegion',
+      'updateSelectedSeason',
+      'plotChoropleth',
+      'updateChoropleth',
+      'toggleRelative'
+    ])
   },
   ready() {
     // Setup map

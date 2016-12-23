@@ -26,13 +26,11 @@ footer.footer
 </template>
 
 <script>
-import { metadata } from '../vuex/getters'
+import { mapGetters } from 'vuex'
 
 export default {
-  vuex: {
-    getters: {
-      metadata
-    }
+  computed: {
+    ...mapGetters(['metadata'])
   }
 }
 </script>

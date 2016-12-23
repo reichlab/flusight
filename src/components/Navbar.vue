@@ -68,17 +68,14 @@ nav.nav {
 </template>
 
 <script>
-import { metadata } from '../vuex/getters'
-import { moveIntroStart } from '../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  vuex: {
-    getters: {
-      metadata
-    },
-    actions: {
-      moveIntroStart
-    }
+  computed: {
+    ...mapGetters(['metadata'])
+  },
+  methods: {
+    ...mapActions(['moveIntroStart'])
   },
   data() {
     let tweetBody = 'https://twitter.com/intent/tweet?text=Flusight.%20'
