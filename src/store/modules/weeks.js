@@ -8,11 +8,17 @@ const state = {
 const getters = {
   selectedWeekIdx: state => state.pointer,
   selectedWeekName: (state, getters) => {
-    if (getters.weeks[state.pointer]) return getters.weeks[state.pointer]
-    else return 'NA'
+    let text = getters.weeks[getters.selectedWeekIdx]
+    text += ' ('
+    text += Math.floor(getters.years[getters.selectedWeekIdx])
+    text += ')'
+    return text
   },
   weeks: (state, getters, rootState, rootGetters) => {
     return rootGetters.actual.map(d => d.week % 100)
+  },
+  years: (state, getters, rootState, rootGetters) => {
+    return rootGetters.actual.map(d => d.week / 100)
   },
   actualIndices: (state, getters, rootState, rootGetters) => {
     return rootGetters.actual
