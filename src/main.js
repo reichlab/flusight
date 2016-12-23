@@ -1,16 +1,15 @@
 import Vue from 'vue'
-import D3 from 'vue-d3'
 
 import App from './App'
+import store from './store'
 
 import 'bulma/css/bulma.css'
 import 'font-awesome/css/font-awesome.css'
 import './assets/fakeLoader.css'
 import './assets/favicon.ico'
 
-Vue.use(D3)
-
 new Vue({
   el: 'body',
+  store,
   components: { App }
 })

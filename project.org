@@ -1,6 +1,7 @@
 #+TITLE: Project Board
 
 * Issues
+** TODO Fix stats panel for no data
 ** DONE Fix position of choropleth elements
 CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Show legend while demoing

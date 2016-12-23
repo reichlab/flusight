@@ -31,40 +31,33 @@
 <script>
 import Choropleth from './Panels/Choropleth'
 import TimeChart from './Panels/TimeChart'
-import {
-  selectedRegion,
-  selectedSeason,
-  selectedWeekIdx,
-  choroplethRelative
-} from '../vuex/getters'
-import {
-  updateTimeChart,
-  updateChoropleth,
-  plotTimeChart,
-  plotChoropleth
-} from '../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Choropleth,
     TimeChart
   },
-  vuex: {
-    getters: {
-      selectedRegion,
-      selectedSeason,
-      selectedWeekIdx,
-      choroplethRelative
-    },
-    actions: {
-      updateTimeChart,
-      updateChoropleth,
-      plotChoropleth,
-      plotTimeChart
-    }
+  computed: {
+    ...mapGetters('switches', [
+      'selectedRegion',
+      'selectedSeason',
+      'choroplethRelative'
+    ]),
+    ...mapGetters('weeks', [
+      'selectedWeekIdx'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'updateTimeChart',
+      'updateChoropleth',
+      'plotChoropleth',
+      'plotTimeChart'
+    ])
   },
   watch: {
-    selectedRegion: function() {
+    selectedRegion: function () {
       // Triggered by
       // - selector
       // - map clicks
@@ -74,19 +67,19 @@ export default {
       this.updateChoropleth()
       this.updateTimeChart()
     },
-    selectedSeason: function() {
+    selectedSeason: function () {
       // Triggered by selector
       // Choropleth gets new plot
       // Time series gets new data
       this.plotTimeChart()
       this.plotChoropleth()
     },
-    choroplethRelative: function() {
+    choroplethRelative: function () {
       // Triggered by relative selector
       // Use specific choropleth getter and do a plot
       this.plotChoropleth()
     },
-    selectedWeekIdx: function() {
+    selectedWeekIdx: function () {
       // Triggered by
       // - nav buttons
       // - mouse jumps

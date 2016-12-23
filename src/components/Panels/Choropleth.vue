@@ -65,87 +65,80 @@
 </style>
 
 <template lang="pug">
-#selectors
-  .level.is-mobile
-    .level-left
-      .level-item
-        .heading Week <b>{{ selectedWeekName }}</b>
-        .subtitle {{ regions[selectedRegion] }}
+div
+  #selectors
+    .level.is-mobile
+      .level-left
+        .level-item
+          .heading Week <b>{{ selectedWeekName }}</b>
+          .subtitle {{ regions[selectedRegion] }}
 
-    .level-right
-      .level-item
-          p.heading Season
-          p.control.title
-            span#season-selector.select.is-small
-              select(v-model="currentSeason")
-                option(v-for="season in seasons") {{ season }}
+      .level-right
+        .level-item
+            p.heading Season
+            p.control.title
+              span#season-selector.select.is-small
+                select(v-model="currentSeason")
+                  option(v-for="season in seasons") {{ season }}
 
 
-// Main plotting div
-#choropleth
-  #relative-button-title
-    span Weighted ILI (%)
-  #relative-button(v-on:click="toggleRelative")
-    span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
-    span.icon
-      i(
-        v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
-                      'fa fa-toggle-on']`
-       )
-    span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
+  // Main plotting div
+  #choropleth
+    #relative-button-title
+      span Weighted ILI (%)
+    #relative-button(v-on:click="toggleRelative")
+      span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
+      span.icon
+        i(
+          v-bind:class=`[choroplethRelative ? '' : 'fa-rotate-180',
+                        'fa fa-toggle-on']`
+         )
+      span(v-bind:class="[choroplethRelative ? '' : 'disabled']") Relative
 </template>
 
 <script>
 import Choropleth from '../../modules/choropleth'
-import {
-  initChoropleth,
-  updateSelectedRegion,
-  updateSelectedSeason,
-  plotChoropleth,
-  updateChoropleth,
-  toggleRelative
-} from '../../vuex/actions'
-import {
-  selectedWeekName,
-  selectedSeason,
-  selectedRegion,
-  choroplethRelative,
-  seasons,
-  regions
-} from '../../vuex/getters'
+import { mapGetters, mapActions } from 'vuex'
+import * as d3 from 'd3'
 
 export default {
-  vuex: {
-    actions: {
-      initChoropleth,
-      updateSelectedRegion,
-      updateSelectedSeason,
-      plotChoropleth,
-      updateChoropleth,
-      toggleRelative
-    },
-    getters: {
-      selectedWeekName,
-      selectedSeason,
-      selectedRegion,
-      choroplethRelative,
-      seasons,
-      regions
-    }
-  },
   computed: {
+    ...mapGetters([
+      'seasons',
+      'regions'
+    ]),
+    ...mapGetters('switches', [
+      'selectedSeason',
+      'selectedRegion',
+      'choroplethRelative'
+    ]),
+    ...mapGetters('weeks', [
+      'selectedWeekName'
+    ]),
     currentSeason: {
-      get() {
+      get () {
         return this.seasons[this.selectedSeason]
       },
-      set(val) {
+      set (val) {
         this.updateSelectedSeason(this.seasons.indexOf(val))
       }
     }
   },
-  ready() {
+  methods: {
+    ...mapActions([
+      'initChoropleth',
+      'plotChoropleth',
+      'updateChoropleth'
+    ]),
+    ...mapActions('switches', [
+      'updateSelectedRegion',
+      'updateSelectedSeason',
+      'toggleRelative'
+    ])
+  },
+  ready () {
     // Setup map
-    this.initChoropleth(new Choropleth(this.$d3, 'choropleth', (regionId) => {
+    this.initChoropleth(new Choropleth(d3, 'choropleth', regionId => {
       this.updateSelectedRegion(regionId)
     }))
 
@@ -156,7 +149,6 @@ export default {
     this.updateChoropleth()
     this.updateSelectedSeason(this.seasons.length - 1)
 
-    let d3 = this.$d3
     let infoTooltip = d3.select('#info-tooltip')
 
     // Info tooltip

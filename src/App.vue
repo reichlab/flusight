@@ -71,17 +71,18 @@ body {
 </style>
 
 <template lang="pug">
-// Fixed position components
-#info-tooltip
-#loader
-intro
+div
+  // Fixed position components
+  #info-tooltip
+  #loader
+  intro
 
-// Main layout components
-navbar
-.section#panel-section
-  #app.container
-    panels
-foot
+  // Main layout components
+  navbar
+  .section#panel-section
+    #app.container
+      panels
+  foot
 </template>
 
 <script>
@@ -89,9 +90,8 @@ import Navbar from './components/Navbar'
 import Intro from './components/Intro'
 import Panels from './components/Panels'
 import Foot from './components/Foot'
-import store from './vuex/store'
-import { forward, backward, appendIntroItems } from './vuex/actions'
-import { metadata } from './vuex/getters'
+
+import { mapGetters, mapActions } from 'vuex'
 
 var $ = window.jQuery = require('jquery')
 require('./assets/fakeLoader.min.js')
@@ -103,17 +103,16 @@ export default {
     Panels,
     Foot
   },
-  vuex: {
-    actions: {
-      backward,
-      forward,
-      appendIntroItems
-    },
-    getters: {
-      metadata
-    }
+  computed: {
+    ...mapGetters(['metadata'])
   },
-  store,
+  methods: {
+    ...mapActions([
+      'backward',
+      'forward'
+    ]),
+    ...mapActions('intro', ['appendIntroItems'])
+  },
   ready() {
 
     $('#loader').fakeLoader({
@@ -123,7 +122,7 @@ export default {
 
     $('#info-tooltip').css('display', 'none')
 
-    window.addEventListener('keyup', (evt) => {
+    window.addEventListener('keyup', evt => {
       if (evt.code === 'ArrowRight') {
         this.forward()
       } else if (evt.code === 'ArrowLeft') {
