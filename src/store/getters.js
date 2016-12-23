@@ -20,14 +20,31 @@ export const nextWeek = (state, getters) => getters.timeChart.getNextWeekData()
 export const previousWeek = (state, getters) => getters.timeChart.getPreviousWeekData()
 
 /**
- * Return data subset for chart as specified in region/season selected
+ * Return observed data for currently selected state
  */
-export const timeChartData = (state, getters) => {
+export const observed = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  return regionSubset.seasons[getters['switches/selectedSeason']].actual
+}
+
+/**
+ * Return actual data for currently selected state
+ */
+export const actual = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
+
+  return utils.getMaxLagData(seasonSubset.actual)
+}
+
+/**
+ * Return historical data for selected state
+ * All data older than currently selected season
+ */
+export const history = (state, getters) => {
   let regionSubset = state.data[getters['switches/selectedRegion']]
   let currentSeasonId = getters['switches/selectedSeason']
-  let seasonSubset = regionSubset.seasons[currentSeasonId]
-
-  let selectedWeeksCount = seasonSubset.actual.length
+  let weeksCount = regionSubset.seasons[currentSeasonId].actual.length
 
   let historicalData = []
 
@@ -35,7 +52,7 @@ export const timeChartData = (state, getters) => {
   for (let season of Object.keys(regionSubset.history)) {
     historicalData.push({
       id: season,
-      actual: utils.trimHistory(regionSubset.history[season], selectedWeeksCount)
+      actual: utils.trimHistory(regionSubset.history[season], weeksCount)
     })
   }
 
@@ -43,17 +60,42 @@ export const timeChartData = (state, getters) => {
     historicalData.push({
       id: regionSubset.seasons[i].id,
       actual: utils.trimHistory(utils.getMaxLagData(regionSubset.seasons[i].actual),
-                                selectedWeeksCount)
+                                weeksCount)
     })
   }
 
+  return historicalData
+}
+
+/**
+ * Baseline for selected state
+ */
+export const baseline = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  return regionSubset.seasons[getters['switches/selectedSeason']].baseline
+}
+
+/**
+ * All the model predictions for current state
+ */
+export const modelPreds = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  return regionSubset.seasons[getters['switches/selectedSeason']].models
+}
+
+/**
+ * Return data subset for chart as specified in region/season selected
+ */
+export const timeChartData = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+
   return {
-    region: regionSubset.subId, // Submission ids are concise
-    observed: seasonSubset.actual,
-    actual: utils.getMaxLagData(seasonSubset.actual), // Using this to avoid confusion
-    baseline: seasonSubset.baseline,
-    models: seasonSubset.models, // All model predictions
-    history: historicalData
+    region: regionSubset.subId, // Submission ids for displaying text
+    observed: getters.observed,
+    actual: getters.actual,
+    baseline: getters.baseline,
+    models: getters.modelPreds,
+    history: getters.history
   }
 }
 
@@ -92,11 +134,8 @@ export const choroplethData = (state, getters) => {
  * Return stats related to models
  */
 export const modelStats = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
-
-  let actual = utils.getMaxLagData(seasonSubset.actual)
-  let modelPreds = seasonSubset.models
+  let actual = getters.actual
+  let modelPreds = getters.modelPreds
 
   return {
     name: 'Mean Absolute Error',
