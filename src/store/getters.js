@@ -16,9 +16,6 @@ export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weight
 export const timeChart = state => state.timeChart
 export const choropleth = state => state.choropleth
 
-export const nextWeek = (state, getters) => getters.timeChart.getNextWeekData()
-export const previousWeek = (state, getters) => getters.timeChart.getPreviousWeekData()
-
 /**
  * Return observed data for currently selected state
  */

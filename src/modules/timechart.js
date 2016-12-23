@@ -363,10 +363,7 @@ export default class TimeChart {
       this.nowGroup
         .style('display', 'none')
     }
-    this.weekHook({
-      idx: this.weekIdx,
-      name: this.weeks[this.weekIdx]
-    })
+    weekHook(this.weekIdx)
 
     // Update markers with data
     this.timerect.plot(this, data.actual)
@@ -475,11 +472,7 @@ export default class TimeChart {
           .html(util.tooltipText(that, index, mouse[1]))
       })
       .on('click', function () {
-        let idx = that.capToActual(Math.round(xScale.invert(d3.mouse(this)[0])))
-        weekHook({
-          idx: idx,
-          name: weeks[idx]
-        })
+        weekHook(Math.round(xScale.invert(d3.mouse(this)[0])))
       })
   }
 
@@ -523,31 +516,5 @@ export default class TimeChart {
       Math.min(this.actualIndices[this.actualIndices.length - 1], idx),
       this.actualIndices[0]
     )
-  }
-
-  // External interaction functions
-  // ------------------------------
-
-  /**
-   * Return next week idx and name for vuex store
-   */
-  getNextWeekData () {
-    let nextIdx = this.capToActual(Math.min(this.weeks.length - 1,
-                                            this.weekIdx + 1))
-    return {
-      idx: nextIdx,
-      name: this.weeks[nextIdx]
-    }
-  }
-
-  /**
-   * Return preview week idx and name for vuex store
-   */
-  getPreviousWeekData () {
-    let previousIdx = this.capToActual(Math.max(0, this.weekIdx - 1))
-    return {
-      idx: previousIdx,
-      name: this.weeks[previousIdx]
-    }
   }
 }
