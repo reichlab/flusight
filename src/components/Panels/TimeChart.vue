@@ -283,7 +283,14 @@ $accent: #3273dc;
   }
   .stat-heading {
     text-align: center;
+    font-weight: bold;
     margin: 10px 10px !important;
+    a {
+      color: gray;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   .center {
     text-align: center;
@@ -338,8 +345,9 @@ div
 
   // Stats
   #stats.nav-drawer(v-show="statsShow")
-    .stat-heading.title.is-6
-      span(v-if="modelStats") <a href="v-bind:modelStats.url"> {{ modelStats.name }} </a>
+    .stat-heading
+      span(v-if="modelStats")
+        a(v-bind:href="modelStats.url", target="_blank") {{ modelStats.name }}
       span(v-else) No data found
     table.table.is-striped.is-bordered(v-if="modelStats")
       thead
