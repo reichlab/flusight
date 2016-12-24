@@ -24,6 +24,9 @@ const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyFile = './scripts/assets/history.json'
 const outputFile = './src/assets/data.json'
 
+// Caches CSV files
+let cachedCSVs = {}
+
 // Preprocess data directory and then generate data.json
 preprocess.processWide(dataDirectory, () => {
   // Look for seasons in the data directory
@@ -53,9 +56,6 @@ preprocess.processWide(dataDirectory, () => {
 
   // Get actual data for seasons
   actual.getActual(seasons, actualData => {
-    // Caches CSV files
-    let cachedCSVs = []
-
     // Add seasons to output
     output.forEach(val => {
       console.log('Parsing region: ' + val.region)
@@ -77,7 +77,7 @@ preprocess.processWide(dataDirectory, () => {
               let data = null
               let filtered = null
               // Take from cache to avoid file reads
-              if (cachedCSVs.indexOf(fileName) > -1) {
+              if (cachedCSVs[fileName]) {
                 data = cachedCSVs[fileName]
               } else {
                 data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
