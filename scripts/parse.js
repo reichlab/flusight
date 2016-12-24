@@ -9,6 +9,7 @@ const transform = require('./modules/transform')
 const preprocess = require('./modules/preprocess')
 const baseline = require('./modules/baseline')
 const history = require('./modules/history')
+const stats = require('./modules/stats')
 const utils = require('./utils')
 
 const fs = require('fs')
@@ -69,28 +70,37 @@ preprocess.processWide(dataDirectory, () => {
         let models = modelsDir.map(model => {
           // Get prediction weeks for each model
           let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
+          let modelMeta = utils.getModelMeta(path.join(dataDirectory, season, model))
+
+          let modelPredictions = weeks.map(week => {
+            let fileName = path.join(dataDirectory, season, model, week + '.csv')
+            let data = null
+            // Take from cache to avoid file reads
+            if (cachedCSVs[fileName]) {
+              data = cachedCSVs[fileName]
+            } else {
+              data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
+              cachedCSVs[fileName] = data
+            }
+            // Take only for the current region
+            let filtered = utils.regionFilter(data, val.subId)
+            if (filtered === -1) return -1
+            else {
+              filtered.week = week
+              return filtered
+            }
+          }).filter(skipData => skipData !== -1)
+
+          let modelStats = stats.getModelStats(
+            modelPredictions,
+            utils.getMaxLagData(actualData[val.id][season])
+          )
+
           return {
             id: model,
-            meta: utils.getModelMeta(path.join(dataDirectory, season, model)),
-            predictions: weeks.map(week => {
-              let fileName = path.join(dataDirectory, season, model, week + '.csv')
-              let data = null
-              let filtered = null
-              // Take from cache to avoid file reads
-              if (cachedCSVs[fileName]) {
-                data = cachedCSVs[fileName]
-              } else {
-                data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
-                cachedCSVs[fileName] = data
-              }
-              // Take only for the current region
-              filtered = utils.regionFilter(data, val.subId)
-              if (filtered === -1) return -1
-              else {
-                filtered.week = week
-                return filtered
-              }
-            }).filter(skipData => skipData !== -1)
+            meta: modelMeta,
+            stats: modelStats,
+            predictions: modelPredictions
           }
         })
         return {

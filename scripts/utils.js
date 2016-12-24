@@ -11,7 +11,7 @@ const yaml = require('js-yaml')
  * @param {string} directory root directory
  * @returns {Array} list of subdirectory
  */
-const getSubDirectories = (directory) => {
+const getSubDirectories = directory => {
   return fs.readdirSync(directory).filter(file => {
     return fs.statSync(path.join(directory, file)).isDirectory()
   })
@@ -22,7 +22,7 @@ const getSubDirectories = (directory) => {
  * @param {string} directory root directory
  * @returns {Array} list of .csv files
  */
-const getWeekFiles = (directory) => {
+const getWeekFiles = directory => {
   let newFiles = fs.readdirSync(directory)
       .filter(f => f.endsWith('.csv'))
   return newFiles.map(file => parseInt(file.split()[0]))
@@ -55,7 +55,7 @@ const regionFilter = (data, region) => {
  * @param {string} submissionDir path to the submission directory
  * @returns {Object} metadata object
  */
-const getModelMeta = (submissionDir) => {
+const getModelMeta = submissionDir => {
   let meta = {
     name: 'No metadata found',
     description: '',
@@ -66,8 +66,8 @@ const getModelMeta = (submissionDir) => {
 
   for (let i = 0; i < metaFiles.length; i++) {
     try {
-      meta = yaml.safeLoad(fs.readFileSync(path.join(submissionDir,
-                                                     metaFiles[i]), 'utf8'))
+      let filePath = path.join(submissionDir, metaFiles[i])
+      meta = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
     } catch (e) {
       continue
     }
@@ -76,7 +76,26 @@ const getModelMeta = (submissionDir) => {
   return meta
 }
 
+/**
+ * Get data with maximum lag
+ * First element of the lag array
+ */
+const getMaxLagData = actual => {
+  return actual.map(d => {
+    let dataToReturn = -1
+    // Handle zero length values
+    if (d.data.length !== 0) {
+      dataToReturn = d.data[0].value
+    }
+    return {
+      week: d.week,
+      data: dataToReturn
+    }
+  })
+}
+
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
+exports.getMaxLagData = getMaxLagData
