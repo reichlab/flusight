@@ -292,6 +292,10 @@ $accent: #3273dc;
       }
     }
   }
+  .stat-disclaimer {
+    margin: 10px;
+    font-style: italic;
+  }
   .center {
     text-align: center;
   }
@@ -367,6 +371,9 @@ div
           td {{ item.twoWk.toFixed(2) }}
           td {{ item.threeWk.toFixed(2) }}
           td {{ item.fourWk.toFixed(2) }}
+    .stat-disclaimer
+      | Calculated using the most recently updated data.<br>
+      | Final values may differ.
 
   // Controls
   #nav-controls

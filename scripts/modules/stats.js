@@ -30,11 +30,20 @@ const statsMae = (preds, actual) => {
   return diffs
 }
 
+const statsLog = (preds, actual) => {
+  return {
+    oneWk: NaN,
+    twoWk: NaN,
+    threeWk: NaN,
+    fourWk: NaN
+  }
+}
+
 const getModelStats = (modelPreds, actual) => {
   if (modelPreds.length > 0) {
     return {
-      upto: modelPreds[modelPreds.length - 1].week,
-      mae: statsMae(modelPreds, actual)
+      mae: statsMae(modelPreds, actual),
+      log: statsLog(modelPreds, actual)
     }
   } else {
     return null

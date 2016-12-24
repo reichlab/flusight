@@ -1,7 +1,17 @@
 import * as d3 from 'd3'
 
 const state = {
-  colors: d3.schemeCategory10
+  colors: d3.schemeCategory10,
+  selectedStat: 0,
+  stats: [{
+    id: 'mae',
+    name: 'Mean Absolute Error',
+    url: 'https://en.wikipedia.org/wiki/Mean_absolute_error'
+  }, {
+    id: 'log',
+    name: 'Log Score',
+    url: '#'
+  }]
 }
 
 // getters
@@ -20,17 +30,20 @@ const getters = {
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
 
+  selectedStat: state => state.selectedStat,
+
   modelStats: (state, getters) => {
     let stats = getters.models.map(m => m.stats)
+
+    let statsMeta = state.stats[getters.selectedStat]
 
     let output = {}
     // Assume if one model has no stats, no one has
     if (stats[0]) {
       // Formatted stuff
-      output.name = 'Mean Absolute Error'
-      output.url = 'https://en.wikipedia.org/wiki/Mean_absolute_error'
-      output.upto = stats[0].upto
-      output.data = stats.map(s => s.mae)
+      output.name = statsMeta.name
+      output.url = statsMeta.url
+      output.data = stats.map(s => s[statsMeta.id])
       return output
     } else {
       return null
