@@ -1,39 +1,38 @@
-// Generate json data for visualization
+/**
+ * Module for handling `yarn run parse`
+ * Uses ./modules and generate data.json
+ */
 
 const actual = require('./modules/actual')
 const metadata = require('./modules/metadata')
 const transform = require('./modules/transform')
 const preprocess = require('./modules/preprocess')
 const baseline = require('./modules/baseline')
-const config = require('./modules/config')
 const history = require('./modules/history')
-const utils = require('./modules/utils')
+const utils = require('./utils')
 
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
 
-/**
- * Generate json data using submissions files in the given dir
- * @param {string} dataDirectory directory with data files
- * @param {string} configFile config.yaml file
- * @param {string} baselineFile wILI_Baseline.csv file
- * @param {string} historyFile history.json file
- * @param {string} outputFile final data.json file
- */
-const generate = (dataDirectory,
-                  configFile,
-                  baselineFile,
-                  historyFile,
-                  outputFile) => {
+const config = require('./config').read('./config.yaml')
 
-  // Look for seasons
+// Setup variables
+const branding = config.branding
+const dataDirectory = './data'
+const baselineFile = './scripts/assets/wILI_Baseline.csv'
+const historyFile = './scripts/assets/history.json'
+const outputFile = './src/assets/data.json'
+
+// Preprocess data directory and then generate data.json
+preprocess.processWide(dataDirectory, () => {
+  // Look for seasons in the data directory
   let seasons = utils.getSubDirectories(dataDirectory)
 
   // Stop if no folder found
-  if (seasons.length == 0) {
+  if (seasons.length === 0) {
     console.log('No seasons found in data directory!')
-    return
+    process.exit(1)
   }
 
   // Print seasons
@@ -53,9 +52,9 @@ const generate = (dataDirectory,
   console.log('Gathering actual data for the seasons...')
 
   // Get actual data for seasons
-  actual.getActual(seasons, (actualData) => {
-    // Caches CSVs
-    let cachedCSVDumps = []
+  actual.getActual(seasons, actualData => {
+    // Caches CSV files
+    let cachedCSVs = []
 
     // Add seasons to output
     output.forEach(val => {
@@ -74,20 +73,19 @@ const generate = (dataDirectory,
             id: model,
             meta: utils.getModelMeta(path.join(dataDirectory, season, model)),
             predictions: weeks.map(week => {
-              let fileName = path.join(dataDirectory, season, model, week + '.csv'),
-                  data = null,
-                  filtered = null
+              let fileName = path.join(dataDirectory, season, model, week + '.csv')
+              let data = null
+              let filtered = null
               // Take from cache to avoid file reads
-              // TODO: change this quirkiness someday
-              if (cachedCSVDumps.indexOf(fileName) > -1) {
-                data = cachedCSVDumps[fileName]
+              if (cachedCSVs.indexOf(fileName) > -1) {
+                data = cachedCSVs[fileName]
               } else {
                 data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
-                cachedCSVDumps[fileName] = data
+                cachedCSVs[fileName] = data
               }
               // Take only for the current region
               filtered = utils.regionFilter(data, val.subId)
-              if (filtered == -1) return -1
+              if (filtered === -1) return -1
               else {
                 filtered.week = week
                 return filtered
@@ -104,32 +102,16 @@ const generate = (dataDirectory,
       })
     })
 
-    let yamlData = config.read(configFile)
     // Add current time
-    yamlData.updateTime = moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
+    branding.updateTime = moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
     let outputWithYamlData = {
       data: output,
-      metadata: yamlData
+      metadata: branding
     }
 
-    fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), (err) => {
-      if (err) {
-        return console.log(err)
-      }
-
-      console.log('\nAll done! JSON saved at ' + outputFile)
+    fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), err => {
+      if (err) return console.log(err)
+      else return console.log('\nAll done! JSON saved at ' + outputFile)
     })
   })
-}
-
-/**
- * Combine all preprocessing steps
- * @param {string} dataDirectory root data directory
- * @param {function} callback function to chain
- */
-const process = (dataDirectory, callback) => {
-  preprocess.processWide(dataDirectory, callback)
-}
-
-exports.process = process
-exports.generate = generate
+})

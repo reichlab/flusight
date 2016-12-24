@@ -1,4 +1,8 @@
-// Module for format transformation
+/**
+ * Module for format transformation from
+ * - wide csv to long csv
+ * - long csv to json
+ */
 
 const Papa = require('papaparse')
 const d3 = require('d3')
@@ -8,7 +12,7 @@ const d3 = require('d3')
  * @param {string} wideFormat wide format csv content
  * @returns {string} long format csv content
  */
-const wideToLong = (wideFormat) => {
+const wideToLong = wideFormat => {
   let data = Papa.parse(wideFormat, {
     dynamicTyping: true
   })
@@ -35,7 +39,7 @@ const wideToLong = (wideFormat) => {
   ]
 
   // All locations
-  let locations = data[0].filter(item => item != '')
+  let locations = data[0].filter(item => item !== '')
 
   // Setup bins
   let onsetBinsStart = [...Array(13).keys()]
@@ -140,7 +144,6 @@ const wideToLong = (wideFormat) => {
   output.push(headers)
 
   for (let i = 0; i < locations.length; i++) {
-
     for (let j = 0; j < metrics.length; j++) {
       // Add point prediction
       output.push([
@@ -176,10 +179,8 @@ const wideToLong = (wideFormat) => {
  * @param {Array} series an array of (unit type, bin start, bin end, value)
  * @returns {Object} object with keys 'low', 'high' and 'point'
  */
-const parseSeries = (series) => {
-
-  if (series.length === 1)
-    return null
+const parseSeries = series => {
+  if (series.length === 1) return null
 
   // Partition series into point and bin predictions
   let pointRows = series.filter(row => row[0] === 'Point')
@@ -201,8 +202,8 @@ const parseSeries = (series) => {
     low: [null, null],
     high: [null, null]
   }
-  let maxIdx = 0,
-      maxValue = binRows[maxIdx][3]
+  let maxIdx = 0
+  let maxValue = binRows[maxIdx][3]
 
   // Checking if everything is same
   let matches = 0
@@ -215,25 +216,27 @@ const parseSeries = (series) => {
     }
 
     // Skip last value which can be (slightly, weirdly) different
-    if ((i < (len - 1)) && (binRows[0][3] == binRows[i][3])) {
+    if ((i < (len - 1)) && (binRows[0][3] === binRows[i][3])) {
       matches += 1
     }
 
     // Update accumulators
-    // if (!range.low[1])
-      accumulator.low += binRows[i][3]
-    // if (!range.high[1])
-      accumulator.high += binRows[len - i - 1][3]
+    accumulator.low += binRows[i][3]
+    accumulator.high += binRows[len - i - 1][3]
 
-    if ((accumulator.low > confidenceTrims[0]) && (!range.low[0]))
+    if ((accumulator.low > confidenceTrims[0]) && (!range.low[0])) {
       range.low[0] = binRows[i][1]
-    if ((accumulator.high > confidenceTrims[0]) && (!range.high[0]))
+    }
+    if ((accumulator.high > confidenceTrims[0]) && (!range.high[0])) {
       range.high[0] = binRows[len - i - 1][2]
+    }
 
-    if ((accumulator.low > confidenceTrims[1]) && (!range.low[1]))
+    if ((accumulator.low > confidenceTrims[1]) && (!range.low[1])) {
       range.low[1] = binRows[i][1]
-    if ((accumulator.high > confidenceTrims[1]) && (!range.high[1]))
+    }
+    if ((accumulator.high > confidenceTrims[1]) && (!range.high[1])) {
       range.high[1] = binRows[len - i - 1][2]
+    }
   }
 
   if (matches === (len - 1)) {
@@ -243,8 +246,7 @@ const parseSeries = (series) => {
       high: [-1, -1],
       point: -1
     }
-  }
-  else {
+  } else {
     // Overwrite point prediction if it was explicitly specified
     let point = pointRows.length !== 0 ? pointRows[0][3] : binRows[maxIdx][1]
 
@@ -261,14 +263,14 @@ const parseSeries = (series) => {
  * @param {string} longFormat long format csv content
  * @returns {Object} json pbject
  */
-const longToJson = (longFormat) => {
+const longToJson = longFormat => {
   let data = Papa.parse(longFormat, {
     dynamicTyping: true
   })
 
   data = data.data.slice(1)
 
-  grouped = d3.nest()
+  let grouped = d3.nest()
     .key(d => d[0])
     .key(d => d[1])
     .rollup(leaves => parseSeries(leaves.map(l => [l[2], l[4], l[5], l[6]])))
@@ -278,12 +280,23 @@ const longToJson = (longFormat) => {
   // Unroll two key levels
   let output = []
 
+  // Map keys from csv to json
+  let keyMap = {
+    'Season onset': 'onsetWeek',
+    'Season peak week': 'peakWeek',
+    'Season peak percentage': 'peakPercent',
+    '1 wk ahead': 'oneWk',
+    '2 wk ahead': 'twoWk',
+    '3 wk ahead': 'threeWk',
+    '4 wk ahead': 'fourWk'
+  }
+
   grouped.forEach(regionGroup => {
     regionGroup.values.forEach(targetGroup => {
       if (targetGroup.value) {
         output.push({
           region: regionGroup.key,
-          target: targetGroup.key,
+          target: keyMap[targetGroup.key],
           point: targetGroup.value.point,
           low: targetGroup.value.low,
           high: targetGroup.value.high

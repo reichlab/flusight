@@ -1,5 +1,11 @@
-title: 'flusight'
-parent: 'reichlab'
-sourceUrl: 'https://github.com/reichlab/flusight'
-parentUrl: 'https://reichlab.github.io'
-licenseUrl: 'https://opensource.org/licenses/GPL-3.0'
+# Items used for branding and similar
+branding:
+  title: 'flusight'
+  parent: 'reichlab'
+  sourceUrl: 'https://github.com/reichlab/flusight'
+  parentUrl: 'https://reichlab.github.io'
+  licenseUrl: 'https://opensource.org/licenses/GPL-3.0'
+
+# Items required by backend script for generating data.json
+scripts:
+  baselineUrl: 'https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv'

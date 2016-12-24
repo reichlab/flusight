@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "gather": "node build/gather.js",
-    "parse": "node build/parse.js",
+    "get-baseline": "node scripts/get-baseline.js",
+    "get-history": "node scripts/get-history.js",
+    "parse": "node scripts/parse.js",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
   },

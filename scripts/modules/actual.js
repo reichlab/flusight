@@ -1,7 +1,9 @@
-// Wrapper around delphi-epidata API (https://github.com/undefx/delphi-epidata)
-// for getting actual flu data
+/**
+ * Provide actual flu data with lags
+ * Use delphi-epidata API (https://github.com/undefx/delphi-epidata)
+ */
 
-const delphiAPI = require('./assets/delphi_epidata')
+const delphiAPI = require('../assets/delphi_epidata')
 const metadata = require('./metadata')
 const mmwr = require('mmwr-week')
 
@@ -12,9 +14,9 @@ const regionIdentifiers = metadata.regions.map(x => x.id)
  * @param {string} season representing season
  * @returns {array} container with week, data pairs
  */
-const seasonWeeksData = (season) => {
-  let first = parseInt(season.split('-')[0]),
-      second = parseInt(season.split('-')[1])
+const seasonWeeksData = season => {
+  let first = parseInt(season.split('-')[0])
+  let second = parseInt(season.split('-')[1])
 
   // Check the number of weeks in first year
   let firstMaxWeek = mmwr.MMWRWeeksInYear(first)
@@ -48,9 +50,9 @@ const seasonWeeksData = (season) => {
  * @param {number} week week number identifier
  * @returns {string} string season like 2014-2015
  */
-const weekToSeason = (week) => {
-  let weekNum = week % 100,
-      year = parseInt(week / 100)
+const weekToSeason = week => {
+  let weekNum = week % 100
+  let year = parseInt(week / 100)
   if (weekNum > 29) {
     return [year, year + 1].join('-')
   } else {
@@ -64,14 +66,13 @@ const weekToSeason = (week) => {
  * @param {function} callback callback function
  */
 const getActual = (seasons, callback) => {
-
   // Get min max epiweek range in seasons
-  let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0]))),
-      lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
+  let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0])))
+  let lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
 
   // Request range
-  let start = parseInt(firstYear + '' + 30),
-      end = parseInt(lastYear + '' + 29)
+  let start = parseInt(firstYear + '' + 30)
+  let end = parseInt(lastYear + '' + 29)
 
   // Setup container
   let output = {}
@@ -83,8 +84,7 @@ const getActual = (seasons, callback) => {
   })
 
   // Fetch data from delphi api for given lag
-  const laggedRequest = (lag) => {
-
+  const laggedRequest = lag => {
     // Request API
     delphiAPI.Epidata.fluview((res, message, data) => {
       data.forEach(d => {
@@ -104,18 +104,12 @@ const getActual = (seasons, callback) => {
 
       console.log('Collecting data with lag: ' + lag)
 
-      if (lag === 0)
-        callback(output)
-      else
-        laggedRequest(lag - 1)
-    },
-                              regionIdentifiers,
-                              [delphiAPI.Epidata.range(start, end)],
-                              null,
-                              lag)
+      if (lag === 0) callback(output)
+      else laggedRequest(lag - 1)
+    }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
   }
 
-  // Go upto 51 weeks back
+  // Look upto 51 weeks back
   laggedRequest(51)
 }
 

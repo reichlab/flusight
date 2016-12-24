@@ -1,4 +1,6 @@
-// Module for getting season baselines
+/**
+ * Reader for baseline csv file
+ */
 
 const Papa = require('papaparse')
 const fs = require('fs')
@@ -6,19 +8,20 @@ const metadata = require('./metadata')
 
 /**
  * Return an object with region, season keyed baselines
- * @param {string} baselineFile baseline csv file
- * @returns {Object} baseline object
  */
-const getBaselines = (baselineFile) => {
+const getBaselines = baselineFile => {
+  if (!fs.existsSync(baselineFile)) {
+    console.log('Baseline file not found. Run `yarn run get-baseline` to fetch it')
+    process.exit(1)
+  }
+
   let data = Papa.parse(fs.readFileSync(baselineFile, 'utf8'), {
     dynamicTyping: true
-  })
-
-  data = data.data
+  }).data
 
   let regionSubIds = metadata.regions.map(d => d.subId)
   let seasons = data[0]
-      .filter(d => d.length != 0)
+      .filter(d => d.length !== 0)
       .map(d => d.replace('/', '-'))
 
   let output = {}

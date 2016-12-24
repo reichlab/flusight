@@ -1,9 +1,10 @@
-// Utility functions
+/**
+ * Common utility functions
+ */
 
 const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
-
 
 /**
  * Return all subdirectoies in given directory
@@ -36,18 +37,8 @@ const getWeekFiles = (directory) => {
 const regionFilter = (data, region) => {
   let filtered = {}
 
-  let keyMap = {
-    'Season onset': 'onsetWeek',
-    'Season peak week': 'peakWeek',
-    'Season peak percentage': 'peakPercent',
-    '1 wk ahead': 'oneWk',
-    '2 wk ahead': 'twoWk',
-    '3 wk ahead': 'threeWk',
-    '4 wk ahead': 'fourWk'
-  }
-
   data.filter(d => d.region === region).forEach((d, idx) => {
-    filtered[keyMap[d.target]] = {
+    filtered[d.target] = {
       point: d.point,
       low: d.low,
       high: d.high
@@ -55,10 +46,9 @@ const regionFilter = (data, region) => {
   })
 
   // Assuming all the predictions are not present when one isn't
-  if (filtered.oneWk.point == -1) return -1
+  if (filtered.oneWk.point === -1) return -1
   else return filtered
 }
-
 
 /**
  * Get model metadata
@@ -66,7 +56,6 @@ const regionFilter = (data, region) => {
  * @returns {Object} metadata object
  */
 const getModelMeta = (submissionDir) => {
-
   let meta = {
     name: 'No metadata found',
     description: '',
