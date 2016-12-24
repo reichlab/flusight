@@ -286,13 +286,24 @@ $accent: #3273dc;
   }
   .stat-heading {
     text-align: center;
-    font-weight: bold;
     margin: 10px 10px !important;
     a {
       color: gray;
+      font-weight: bold;
+      font-size: 12px;
+      margin-top: -2px;
       &:hover {
         text-decoration: underline;
       }
+    }
+    #previous-stat-btn {
+      float: left;
+    }
+    #next-stat-btn {
+      float: right;
+    }
+    .stat-btn {
+      margin-bottom: 10px;
     }
   }
   .stat-disclaimer {
@@ -354,7 +365,19 @@ div
   #stats.nav-drawer(v-show="statsShow")
     .stat-heading
       span(v-if="modelStats")
+        a#previous-stat-btn.stat-btn.button.is-small(
+          v-bind:class="{'is-disabled' : statAtFirst }"
+          v-on:click="statPrevious"
+        )
+          span.icon.is-small
+            i.fa.fa-arrow-left
         a(v-bind:href="modelStats.url", target="_blank") {{ modelStats.name }}
+        a#next-stat-btn.stat-btn.button.is-small(
+          v-bind:class="{'is-disabled' : statAtLast }"
+          v-on:click="statNext"
+        )
+          span.icon.is-small
+            i.fa.fa-arrow-right
       span(v-else) No data found
     table.table.is-striped.is-bordered(v-if="modelStats")
       thead
@@ -374,7 +397,7 @@ div
           td(v-bind:class="{ bold: item.twoWk.best }") {{ item.twoWk.value }}
           td(v-bind:class="{ bold: item.threeWk.best }") {{ item.threeWk.value }}
           td(v-bind:class="{ bold: item.fourWk.best }") {{ item.fourWk.value }}
-    .stat-disclaimer
+    .stat-disclaimer(v-if="modelStats")
       | Calculated using the most recently updated data.<br>
       | Final values may differ.
 
@@ -415,7 +438,9 @@ export default {
     ...mapGetters('models', [
       'modelStats',
       'modelColors',
-      'modelIds'
+      'modelIds',
+      'statAtFirst',
+      'statAtLast'
     ]),
     ...mapGetters('switches', [
       'legendShow',
@@ -427,6 +452,10 @@ export default {
       'initTimeChart',
       'plotTimeChart',
       'updateTimeChart'
+    ]),
+    ...mapActions('models', [
+      'statPrevious',
+      'statNext'
     ]),
     ...mapActions('switches', [
       'toggleLegend',

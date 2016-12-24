@@ -20,3 +20,6 @@ export const RESET_INTRO_POINTER = 'RESET_INTRO_POINTER'
 export const HIDE_INTRO = 'HIDE_INTRO'
 export const SHOW_INTRO = 'SHOW_INTRO'
 export const APPEND_INTRO_ITEM = 'APPEND_INTRO_ITEM'
+
+// models module
+export const UPDATE_SELECTED_STAT = 'UPDATE_SELECTED_STAT'

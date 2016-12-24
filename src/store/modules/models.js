@@ -1,3 +1,4 @@
+import * as types from '../mutation-types'
 import * as d3 from 'd3'
 
 const state = {
@@ -32,6 +33,10 @@ const getters = {
 
   selectedStat: state => state.selectedStat,
 
+  statAtLast: (state, getters) => getters.selectedStat === state.stats.length - 1,
+
+  statAtFirst: (state, getters) => getters.selectedStat === 0,
+
   modelStats: (state, getters) => {
     let stats = getters.models.map(m => m.stats)
 
@@ -50,7 +55,7 @@ const getters = {
         let ob = {}
         keys.forEach(key => {
           ob[key] = {
-            value: d[key].toFixed(2),
+            value: d[key] ? d[key].toFixed(2) : 'NA',
             best: false
           }
         })
@@ -58,14 +63,15 @@ const getters = {
       })
 
       // Apply properties to lowest error item
+      // Don't go for it when value if null
+      if (data[0]['oneWk']) {
+        keys.forEach(key => {
+          let perKey = data.map(d => d[key])
+          let minIdx = perKey.indexOf(Math.min(...perKey))
 
-      keys.forEach(key => {
-        let perKey = data.map(d => d[key])
-        let minIdx = perKey.indexOf(Math.min(...perKey))
-
-        console.log(minIdx)
-        output.data[minIdx][key].best = true
-      })
+          output.data[minIdx][key].best = true
+        })
+      }
 
       return output
     } else {
@@ -75,10 +81,24 @@ const getters = {
 }
 // actions
 const actions = {
+  statPrevious ({ commit, getters }) {
+    if (!getters.statAtFirst) {
+      commit(types.UPDATE_SELECTED_STAT, getters.selectedStat - 1)
+    }
+  },
+
+  statNext ({ commit, getters }) {
+    if (!getters.statAtLast) {
+      commit(types.UPDATE_SELECTED_STAT, getters.selectedStat + 1)
+    }
+  }
 }
 
 // mutations
 const mutations = {
+  [types.UPDATE_SELECTED_STAT] (state, val) {
+    state.selectedStat = val
+  }
 }
 
 export default {
