@@ -69,3 +69,7 @@ yarn run dev
 # build for production with minification
 yarn run build
 ```
+
+Go to the
+development [wiki](https://github.com/reichlab/flusight/wiki/Development) for
+more details.
