@@ -106,7 +106,7 @@ preprocess.processWide(dataDirectory, () => {
     branding.updateTime = moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
     let outputWithYamlData = {
       data: output,
-      metadata: branding
+      branding: branding
     }
 
     fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), err => {

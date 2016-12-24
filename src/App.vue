@@ -104,7 +104,7 @@ export default {
     Foot
   },
   computed: {
-    ...mapGetters(['metadata'])
+    ...mapGetters(['branding'])
   },
   methods: {
     ...mapActions([
@@ -179,7 +179,7 @@ export default {
         title: 'Finished',
         content: `Check out the source for this app and provide feedback on
                   the project's github page <a href="` +
-                  this.metadata.sourceUrl + `" target="_blank">here</a>.`,
+                  this.branding.sourceUrl + `" target="_blank">here</a>.`,
         direction: 'left',
         element: ''
       }

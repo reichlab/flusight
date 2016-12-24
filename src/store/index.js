@@ -20,8 +20,7 @@ const state = {
   // All the data!
   data: jsonData.data,
 
-  // All the metadata!
-  metadata: jsonData.metadata
+  branding: jsonData.branding
 }
 
 // mutations

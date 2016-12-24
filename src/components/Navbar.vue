@@ -37,13 +37,13 @@ nav.nav {
           span.brand.title
             a.brand-link(href="#")
               i.fa.fa-bar-chart
-              |  {{ metadata.title }}
+              |  {{ branding.title }}
             |  |
             a.thick.brand-link(
-              v-bind:href="metadata.parentUrl"
+              v-bind:href="branding.parentUrl"
               target="_blank"
             )
-              |  {{ metadata.parent }}
+              |  {{ branding.parent }}
 
       // Right side buttons
       #nav-menu.nav-right.nav-menu
@@ -53,13 +53,13 @@ nav.nav {
               i.fa.fa-question
             span Help
 
-          a.button.is-info.is-small(v-bind:href="tweetBody", target="_blank")
+          a.button.is-info.is-small(v-bind:href="branding.tweetUrl", target="_blank")
             span.icon.is-small
               i.fa.fa-twitter
             span Tweet
 
           a.button.is-dark.is-small(
-            v-bind:href="metadata.sourceUrl"
+            v-bind:href="branding.sourceUrl"
             target="_blank"
           )
             span.icon.is-small
@@ -72,18 +72,10 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['metadata'])
+    ...mapGetters(['branding'])
   },
   methods: {
     ...mapActions('intro', ['moveIntroStart'])
-  },
-  data() {
-    let tweetBody = 'https://twitter.com/intent/tweet?text=Flusight.%20'
-    + 'Real-time%20Influenza%20Forecasts.%20https%3A%2F%2Freichlab'
-    + '.github.io%2Fflusight%2F%20%40reichlab&source=webclient'
-    return {
-      tweetBody
-    }
   }
 }
 </script>
