@@ -1,7 +1,10 @@
 #+TITLE: Project Board
 
 * Issues
-** TODO Fix stats panel for no data
+** DONE Fix legend toggle in intro
+CLOSED: [2016-12-24 Sat 03:37]
+** DONE Fix stats panel for no data
+CLOSED: [2016-12-24 Sat 03:32]
 ** DONE Fix position of choropleth elements
 CLOSED: [2016-11-23 Wed 03:53]
 ** DONE Show legend while demoing
