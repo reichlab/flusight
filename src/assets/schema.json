@@ -1,229 +1,459 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Visualization Data",
-  "description": "Complete set of information for visualization",
-  "type": "array",
-  "items": {
-    "description": "Data for each region",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Identifier like 'nat', 'hhs1' etc."
-      },
-      "subId": {
-        "type": "string",
-        "description": "Name used in submission files"
-      },
-      "region": {
-        "type": "string",
-        "description": "Name of the region to be shown in ui"
-      },
-      "states": {
-        "description": "List of states covered in the region",
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 4,
-        "uniqueItems": true
-      },
-      "seasons": {
-        "type": "array",
-        "description": "The flu season",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifying string, e.g. '2015-2016'"
-            },
-            "actual": {
-              "type": "array",
-              "description": "Array of {date, value} pairs for actual flu data",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "week": {
-                    "type": "number",
-                    "decription": "Week number in the season"
-                  },
-                  "value": {
-                    "type": "number"
-                  }
-                },
-                "required": ["week", "value"]
-              },
-              "minItems": 10
-            },
-            "models": {
-              "type": "array",
-              "description": "A list of all model predictions",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "Name of the model"
-                  },
-                  "predictions": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "week": {
-                          "type": "number",
-                          "description": "Starting week number for prediction"
-                        },
-                        "onsetWeek": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for onset week"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "peakWeek": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for peak week"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "peakPercent": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for peak percent"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "oneWk": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for 1 wk ahead"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "twoWk": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for 2 wks ahead"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "threeWk": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for 3 wks ahead"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        },
-                        "fourWk": {
-                          "type": "object",
-                          "properties": {
-                            "point": {
-                              "type": "number",
-                              "description": "Point prediction for 4 wks ahead"
-                            },
-                            "low": {
-                              "type": "number",
-                              "description": "Lower confidence level (90%)"
-                            },
-                            "high": {
-                              "type": "number",
-                              "description": "Higher confidence level (90%)"
-                            }
-                          },
-                          "required": ["point", "low", "high"]
-                        }
-                      },
-                      "required": ["week", "onsetWeek", "peakWeek",
-                                   "peakPercent", "oneWk", "twoWK",
-                                   "threeWk", "fourWk"]
-                    },
-                    "minItems": 5,
-                    "uniqueItems": true
-                  }
-                },
-                "required": ["id", "predictions"]
-              },
-              "minItems": 2,
-              "uniqueItems": true
+  "description": "",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "required": [
+          "id",
+          "subId",
+          "region"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region": {
+            "type": "string",
+            "minLength": 1
+          },
+          "states": {
+            "type": "array",
+            "items": {
+              "required": [],
+              "properties": {}
             }
           },
-          "required": ["id", "actual", "models"]
-        },
-        "minItems": 2,
-        "uniqueItems": true
+          "history": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "required": [
+                "season"
+              ],
+              "properties": {
+                "season": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "week",
+                      "data"
+                    ],
+                    "properties": {
+                      "week": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "seasons": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "required": [
+                "id",
+                "baseline"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "actual": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "week"
+                    ],
+                    "properties": {
+                      "week": {
+                        "type": "number"
+                      },
+                      "data": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 1,
+                        "items": {
+                          "required": [
+                            "lag",
+                            "value"
+                          ],
+                          "properties": {
+                            "lag": {
+                              "type": "number"
+                            },
+                            "value": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "models": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "meta": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "url": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "description",
+                          "url"
+                        ]
+                      },
+                      "stats": {
+                        "type": "object",
+                        "properties": {
+                          "mae": {
+                            "type": "object",
+                            "properties": {
+                              "oneWk": {
+                                "type": "number"
+                              },
+                              "twoWk": {
+                                "type": "number"
+                              },
+                              "threeWk": {
+                                "type": "number"
+                              },
+                              "fourWk": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "oneWk",
+                              "twoWk",
+                              "threeWk",
+                              "fourWk"
+                            ]
+                          },
+                          "log": {
+                            "type": "object",
+                            "properties": {
+                              "oneWk": {},
+                              "twoWk": {},
+                              "threeWk": {},
+                              "fourWk": {}
+                            },
+                            "required": []
+                          }
+                        },
+                        "required": [
+                          "mae",
+                          "log"
+                        ]
+                      },
+                      "predictions": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 1,
+                        "items": {
+                          "required": [
+                            "week"
+                          ],
+                          "properties": {
+                            "onsetWeek": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "peakWeek": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "peakPercent": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "oneWk": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "twoWk": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "threeWk": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "fourWk": {
+                              "type": "object",
+                              "properties": {
+                                "point": {
+                                  "type": "number"
+                                },
+                                "low": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                },
+                                "high": {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [],
+                                    "properties": {}
+                                  }
+                                }
+                              },
+                              "required": [
+                                "point",
+                                "low",
+                                "high"
+                              ]
+                            },
+                            "week": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "baseline": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "required": ["id", "subId", "region", "states", "seasons"]
+    "branding": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parentUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "licenseUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tweetUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "updateTime": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "title",
+        "parent",
+        "sourceUrl",
+        "parentUrl",
+        "licenseUrl",
+        "tweetUrl",
+        "updateTime"
+      ]
+    }
   },
-  "minItems": 3,
-  "uniqueItems": true
+  "required": [
+    "data",
+    "branding"
+  ]
 }
