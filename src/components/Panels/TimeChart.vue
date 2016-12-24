@@ -280,6 +280,9 @@ $accent: #3273dc;
   }
   table {
     margin: 0px;
+    td.bold {
+      font-weight: bold;
+    }
   }
   .stat-heading {
     text-align: center;
@@ -367,10 +370,10 @@ div
       tbody
         tr(v-for="(index, item) in modelStats.data")
           td(v-bind:style="{ color: modelColors[index] }") {{ modelIds[index] }}
-          td {{ item.oneWk.toFixed(2) }}
-          td {{ item.twoWk.toFixed(2) }}
-          td {{ item.threeWk.toFixed(2) }}
-          td {{ item.fourWk.toFixed(2) }}
+          td(v-bind:class="{ bold: item.oneWk.best }") {{ item.oneWk.value }}
+          td(v-bind:class="{ bold: item.twoWk.best }") {{ item.twoWk.value }}
+          td(v-bind:class="{ bold: item.threeWk.best }") {{ item.threeWk.value }}
+          td(v-bind:class="{ bold: item.fourWk.best }") {{ item.fourWk.value }}
     .stat-disclaimer
       | Calculated using the most recently updated data.<br>
       | Final values may differ.

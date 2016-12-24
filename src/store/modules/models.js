@@ -41,9 +41,32 @@ const getters = {
     // Assume if one model has no stats, no one has
     if (stats[0]) {
       // Formatted stuff
+      let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+
       output.name = statsMeta.name
       output.url = statsMeta.url
-      output.data = stats.map(s => s[statsMeta.id])
+      let data = stats.map(s => s[statsMeta.id])
+      output.data = data.map(d => {
+        let ob = {}
+        keys.forEach(key => {
+          ob[key] = {
+            value: d[key].toFixed(2),
+            best: false
+          }
+        })
+        return ob
+      })
+
+      // Apply properties to lowest error item
+
+      keys.forEach(key => {
+        let perKey = data.map(d => d[key])
+        let minIdx = perKey.indexOf(Math.min(...perKey))
+
+        console.log(minIdx)
+        output.data[minIdx][key].best = true
+      })
+
       return output
     } else {
       return null
