@@ -396,11 +396,11 @@ div
         i.fa.fa-percent
 
     br
-    a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backward")
+    a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backwardSelectedWeek")
       span.icon.is-small
         i.fa.fa-arrow-left
     br
-    a#forward-btn.button.is-small.is-outlined.is-info(v-on:click="forward")
+    a#forward-btn.button.is-small.is-outlined.is-info(v-on:click="forwardSelectedWeek")
       span.icon.is-small
         i.fa.fa-arrow-right
 </template>
@@ -426,16 +426,16 @@ export default {
     ...mapActions([
       'initTimeChart',
       'plotTimeChart',
-      'updateTimeChart',
-      'backward',
-      'forward'
+      'updateTimeChart'
     ]),
     ...mapActions('switches', [
       'toggleLegend',
       'toggleStats'
     ]),
     ...mapActions('weeks', [
-      'updateSelectedWeek'
+      'updateSelectedWeek',
+      'forwardSelectedWeek',
+      'backwardSelectedWeek'
     ])
   },
   ready() {

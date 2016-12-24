@@ -107,9 +107,9 @@ export default {
     ...mapGetters(['branding'])
   },
   methods: {
-    ...mapActions([
-      'backward',
-      'forward'
+    ...mapActions('weeks', [
+      'backwardSelectedWeek',
+      'forwardSelectedWeek'
     ]),
     ...mapActions('intro', ['appendIntroItems'])
   },
@@ -124,9 +124,9 @@ export default {
 
     window.addEventListener('keyup', evt => {
       if (evt.code === 'ArrowRight') {
-        this.forward()
+        this.forwardSelectedWeek()
       } else if (evt.code === 'ArrowLeft') {
-        this.backward()
+        this.backwardSelectedWeek()
       }
     })
 

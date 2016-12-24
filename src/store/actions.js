@@ -46,19 +46,3 @@ export const updateChoropleth = ({ getters }) => {
 
   getters.choropleth.update(payload)
 }
-
-/**
- * Update week pointer in main store
- * and let watchers take care of everything else
- */
-export const forward = ({ dispatch }) => {
-  dispatch('weeks/forwardSelectedWeek')
-}
-
-/**
- * Update week pointer in main store
- * and let watchers take care of everything else
- */
-export const backward = ({ dispatch }) => {
-  dispatch('weeks/backwardSelectedWeek')
-}
