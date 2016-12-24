@@ -75,29 +75,3 @@ export const choroplethDataRange = (state, getters) => {
 
   return [Math.min(...minVals), Math.max(...maxVals)]
 }
-
-/**
- * Return mean absolute error between preds and actual data
- * Assumes `preds` weeks are in actual
- */
-export const maeStats = (preds, actual) => {
-  let diffs = [
-    [], // oneWk
-    [], // twoWk
-    [], // threeWk
-    []  // fourWk
-  ]
-
-  let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-
-  preds.forEach(p => {
-    let actualIndex = actual.map(d => d.week).indexOf(p.week)
-
-    keys.forEach((key, idx) => {
-      let actualData = actual[actualIndex + 1 + idx].data
-      if (actualData !== -1) diffs[idx].push(Math.abs(actualData - p[key].point))
-    })
-  })
-
-  return diffs.map(d => d.reduce((a, b) => a + b) / d.length)
-}

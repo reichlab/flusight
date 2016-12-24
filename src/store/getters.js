@@ -6,11 +6,6 @@ export const seasons = (state, getters) => {
   return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
 }
 export const regions = state => state.data.map(d => d.subId)
-export const models = (state, getters) => {
-  return state.data[getters['switches/selectedRegion']]
-    .seasons[getters['switches/selectedSeason']]
-    .models.map(m => m.id)
-}
 export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weighted ILI (%)']
 
 export const timeChart = state => state.timeChart
@@ -73,14 +68,6 @@ export const baseline = (state, getters) => {
 }
 
 /**
- * All the model predictions for current state
- */
-export const modelPreds = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  return regionSubset.seasons[getters['switches/selectedSeason']].models
-}
-
-/**
  * Return data subset for chart as specified in region/season selected
  */
 export const timeChartData = (state, getters) => {
@@ -91,7 +78,7 @@ export const timeChartData = (state, getters) => {
     observed: getters.observed,
     actual: getters.actual,
     baseline: getters.baseline,
-    models: getters.modelPreds,
+    models: getters['models/models'],
     history: getters.history
   }
 }
@@ -125,22 +112,4 @@ export const choroplethData = (state, getters) => {
 
   output.range = utils.choroplethDataRange(state, getters)
   return output
-}
-
-/**
- * Return stats related to models
- */
-export const modelStats = (state, getters) => {
-  let actual = getters.actual
-  let modelPreds = getters.modelPreds
-
-  return {
-    name: 'Mean Absolute Error',
-    data: modelPreds.map(m => {
-      return {
-        id: m.id,
-        value: utils.maeStats(m.predictions, actual)
-      }
-    })
-  }
 }

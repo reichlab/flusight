@@ -337,26 +337,26 @@ div
     #legend-prediction-container
 
   // Stats
-  #stats.nav-drawer(v-show="statsShow")
-    .stat-heading.title.is-6 {{ modelStats.name }}
-    table.table.is-striped.is-bordered
-      thead
-        tr
-          th.center Model
-          th(colspan="4").center Weekly predictions
-        tr
-          th
-          th 1 wk
-          th 2 wk
-          th 3 wk
-          th 4 wk
-      tbody
-        tr(v-for="(index, model) in modelStats.data")
-          td(v-bind:style="{ color: colors[index] }") {{ model.id }}
-          td {{ model.value[0].toFixed(2) }}
-          td {{ model.value[1].toFixed(2) }}
-          td {{ model.value[2].toFixed(2) }}
-          td {{ model.value[3].toFixed(2) }}
+  <!-- #stats.nav-drawer(v-show="statsShow") -->
+  <!--   .stat-heading.title.is-6 {{ modelStats.name }} -->
+  <!--   table.table.is-striped.is-bordered -->
+  <!--     thead -->
+  <!--       tr -->
+  <!--         th.center Model -->
+  <!--         th(colspan="4").center Weekly predictions -->
+  <!--       tr -->
+  <!--         th -->
+  <!--         th 1 wk -->
+  <!--         th 2 wk -->
+  <!--         th 3 wk -->
+  <!--         th 4 wk -->
+  <!--     tbody -->
+  <!--       tr(v-for="(index, model) in modelStats.data") -->
+  <!--         td(v-bind:style="{ color: colors[index] }") {{ model.id }} -->
+  <!--         td {{ model.value[0].toFixed(2) }} -->
+  <!--         td {{ model.value[1].toFixed(2) }} -->
+  <!--         td {{ model.value[2].toFixed(2) }} -->
+  <!--         td {{ model.value[3].toFixed(2) }} -->
 
   // Controls
   #nav-controls
@@ -393,7 +393,7 @@ import * as d3 from 'd3'
 export default {
   computed: {
     ...mapGetters([
-      'modelStats'
+      //'modelStats'
     ]),
     ...mapGetters('switches', [
       'legendShow',

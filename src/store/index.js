@@ -7,6 +7,7 @@ import * as getters from './getters'
 import intro from './modules/intro'
 import weeks from './modules/weeks'
 import switches from './modules/switches'
+import models from './modules/models'
 import jsonData from '!json!../assets/data.json'
 import * as types from './mutation-types'
 
@@ -43,6 +44,7 @@ export default new Vuex.Store({
   modules: {
     intro,
     weeks,
-    switches
+    switches,
+    models
   }
 })
