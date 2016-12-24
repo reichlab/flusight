@@ -48,7 +48,9 @@ const requestAPI = (range, container, callback) => {
         week: d['epiweek'],
         data: d['wili']
       }
-      container[d['region']][weekToSeason(d['epiweek'])].push(formatted)
+      let season = weekToSeason(d['epiweek'])
+      let seasonIndex = container[d['region']].map(d => d.season).indexOf(season)
+      container[d['region']][seasonIndex].data.push(formatted)
     })
 
     callback()
@@ -66,9 +68,12 @@ let seasons = getSeasons(start, end)
 // Setup container
 let historyData = {}
 regionIdentifiers.forEach(id => {
-  historyData[id] = {}
+  historyData[id] = []
   seasons.map(season => {
-    historyData[id][season] = []
+    historyData[id].push({
+      season: season,
+      data: []
+    })
   })
 })
 

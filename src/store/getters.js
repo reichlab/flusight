@@ -46,12 +46,12 @@ export const history = (state, getters) => {
   let historicalData = []
 
   // Add data from history store
-  for (let season of Object.keys(regionSubset.history)) {
+  regionSubset.history.forEach(h => {
     historicalData.push({
-      id: season,
-      actual: utils.trimHistory(regionSubset.history[season], weeksCount)
+      id: h.season,
+      actual: utils.trimHistory(h.data, weeksCount)
     })
-  }
+  })
 
   for (let i = 0; i < currentSeasonId; i++) {
     historicalData.push({
