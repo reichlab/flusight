@@ -469,7 +469,7 @@ export default {
   },
   ready() {
     // Initialize time chart
-    this.initTimeChart(new TimeChart(d3, 'timechart', weekIdx => {
+    this.initTimeChart(new TimeChart('timechart', weekIdx => {
       this.updateSelectedWeek(weekIdx)
     }))
 

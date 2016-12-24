@@ -138,7 +138,7 @@ export default {
   },
   ready () {
     // Setup map
-    this.initChoropleth(new Choropleth(d3, 'choropleth', regionId => {
+    this.initChoropleth(new Choropleth('choropleth', regionId => {
       this.updateSelectedRegion(regionId)
     }))
 

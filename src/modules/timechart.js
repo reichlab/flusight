@@ -4,9 +4,10 @@ import * as util from './utils/timechart'
 import * as marker from './markers/timechart'
 import textures from 'textures'
 import * as mmwr from 'mmwr-week'
+import * as d3 from 'd3'
 
 export default class TimeChart {
-  constructor (d3, elementId, weekHook) {
+  constructor (elementId, weekHook) {
     // Get div dimensions
     let footBB = d3.select('.footer').node().getBoundingClientRect()
     let chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
@@ -52,7 +53,6 @@ export default class TimeChart {
       .style('display', 'none')
 
     // Save variables
-    this.d3 = d3
     this.svg = svg
     this.xScale = xScale
     this.yScale = yScale
@@ -102,7 +102,6 @@ export default class TimeChart {
    */
   setupAxes () {
     let svg = this.svg
-    let d3 = this.d3
     let width = this.width
     let height = this.height
 
@@ -249,7 +248,6 @@ export default class TimeChart {
 
   // plot data
   plot (data) {
-    let d3 = this.d3
     let svg = this.svg
     let xScale = this.xScale
     let yScale = this.yScale
@@ -488,7 +486,7 @@ export default class TimeChart {
       p.update(idx)
     })
 
-    let noPredText = this.d3.select('#no-pred')
+    let noPredText = d3.select('#no-pred')
     // Set no
     if (this.predictions.filter(p => p.hidden).length !== 0) {
       noPredText

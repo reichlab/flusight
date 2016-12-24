@@ -1,6 +1,7 @@
 // Markers for time chart
 
 import * as util from '../utils/timechart'
+import * as d3 from 'd3'
 
 /**
  * Prediction markers
@@ -106,7 +107,6 @@ export class Prediction {
     this.color = color
     this.id = id
     this.meta = meta
-    this.d3 = parent.d3
     this.cid = parent.cid
   }
 
@@ -121,7 +121,6 @@ export class Prediction {
   }
 
   update (idx) {
-    let d3 = this.d3
     let color = this.color
     let id = this.id
     let week = this.weeks[idx]
@@ -334,13 +333,13 @@ export class Prediction {
         .attr('class', 'point-prediction')
         .transition()
         .duration(200)
-        .ease(this.d3.easeQuadOut)
+        .ease(d3.easeQuadOut)
         .attr('cx', d => this.xScale(d.week))
         .attr('cy', d => this.yScale(d.data))
         .attr('r', 3)
         .style('stroke', this.color)
 
-      let line = this.d3.line()
+      let line = d3.line()
           .x(d => this.xScale(d.week % 100))
           .y(d => this.yScale(d.data))
 
@@ -350,7 +349,7 @@ export class Prediction {
         .duration(200)
         .attr('d', line)
 
-      let area = this.d3.area()
+      let area = d3.area()
           .x(d => this.xScale(d.week % 100))
           .y1(d => this.yScale(d.low))
           .y0(d => this.yScale(d.high))
@@ -445,7 +444,6 @@ export class HistoricalLines {
     else this.hide()
 
     let tooltip = this.tooltip
-    let d3 = parent.d3
 
     let line = d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
@@ -508,9 +506,9 @@ export class HistoricalLines {
  */
 export class Legend {
   constructor (parent, legendHook) {
-    let actualContainer = parent.d3.select('#legend-actual-container')
-    let predictionContainer = parent.d3.select('#legend-prediction-container')
-    let ciButtons = parent.d3.select('#legend-ci-buttons')
+    let actualContainer = d3.select('#legend-actual-container')
+    let predictionContainer = d3.select('#legend-prediction-container')
+    let ciButtons = d3.select('#legend-ci-buttons')
 
     // Clear entries
     actualContainer.selectAll('*').remove()
@@ -576,8 +574,6 @@ export class Legend {
           }))
       })
 
-    let d3 = parent.d3
-
     // Meta data info tooltip
     let tooltip = parent.legendTooltip
 
@@ -635,7 +631,7 @@ export class Legend {
         .on('click', function () {
           ciButtons.selectAll('.ci-button')
             .classed('selected', false)
-          parent.d3.select(this).classed('selected', true)
+          d3.select(this).classed('selected', true)
 
           legendHook('legend:ci', idx)
         })
@@ -687,8 +683,6 @@ export class Legend {
           .attr('class', 'fa fa-external-link model-url')
           .style('color', p.color)
 
-      let d3 = parent.d3
-
       urlItem
         .on('mousemove', function () {
           tooltip.style('display', 'none')
@@ -724,7 +718,6 @@ export class Legend {
 
     this.tooltip = tooltip
     this.predictionContainer = predictionContainer
-    this.d3 = parent.d3
   }
 
   update (predictions) {
@@ -819,7 +812,7 @@ export class Actual {
   }
 
   plot (parent, data) {
-    let line = parent.d3.line()
+    let line = d3.line()
         .x(d => parent.xScaleWeek(d.week % 100))
         .y(d => parent.yScale(d.data))
 
@@ -842,7 +835,7 @@ export class Actual {
       .merge(circles)
       .attr('class', 'point-actual')
       .transition(200)
-      .ease(parent.d3.easeQuadOut)
+      .ease(d3.easeQuadOut)
       .attr('cx', d => parent.xScaleWeek(d.week % 100))
       .attr('cy', d => parent.yScale(d.data))
       .attr('r', 2)
@@ -865,7 +858,6 @@ export class Observed {
       .attr('class', 'line-observed')
 
     this.group = group
-    this.d3 = parent.d3
   }
 
   plot (parent, data) {
@@ -904,12 +896,12 @@ export class Observed {
       .attr('class', 'point-observed')
       .transition()
       .duration(200)
-      .ease(this.d3.easeQuadOut)
+      .ease(d3.easeQuadOut)
       .attr('cx', d => this.xScale(d.week % 100))
       .attr('cy', d => this.yScale(d.data))
       .attr('r', 2)
 
-    let line = this.d3.line()
+    let line = d3.line()
         .x(d => this.xScale(d.week % 100))
         .y(d => this.yScale(d.data))
 

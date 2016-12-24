@@ -5,13 +5,14 @@ import colormap from 'colormap'
 import * as marker from './markers/choropleth'
 import textures from 'textures'
 import tinycolor from 'tinycolor2'
+import * as d3 from 'd3'
 
 // Map interaction functions
 
 // Draw map on given element
 // Takes d3 instance
 export default class Choropleth {
-  constructor (d3, elementId, regionHook) {
+  constructor (elementId, regionHook) {
     let footBB = d3.select('.footer').node().getBoundingClientRect()
     let chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
 
@@ -69,7 +70,6 @@ export default class Choropleth {
     this.width = svg.node().getBoundingClientRect().width
     this.height = svg.node().getBoundingClientRect().height
     this.svg = svg
-    this.d3 = d3
     this.regionHook = regionHook
   }
 
@@ -80,7 +80,6 @@ export default class Choropleth {
    *   - Season selector change
    */
   plot (data) {
-    let d3 = this.d3
     let svg = this.svg
     let regionHook = this.regionHook
     let tooltip = this.tooltip
@@ -119,7 +118,7 @@ export default class Choropleth {
       .range([0, this.cmap.length - 0.01])
 
     // Setup color bar
-    this.colorBar = new marker.ColorBar(d3, svg, this.cmap)
+    this.colorBar = new marker.ColorBar(svg, this.cmap)
     this.colorBar.update(barLimits)
 
     // Set on hover items
@@ -160,7 +159,6 @@ export default class Choropleth {
    *   - Region selector change
    */
   update (ids) {
-    let d3 = this.d3
     let data = this.data
     let colorScale = this.colorScale
     let selectedTexture = this.selectedTexture
