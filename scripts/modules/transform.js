@@ -244,7 +244,8 @@ const parseSeries = series => {
     return {
       low: [-1, -1],
       high: [-1, -1],
-      point: -1
+      point: -1,
+      bins: null
     }
   } else {
     // Overwrite point prediction if it was explicitly specified
@@ -253,7 +254,8 @@ const parseSeries = series => {
     return {
       low: range.low,
       high: range.high,
-      point: point
+      point: point,
+      bins: binRows.map(row => [row[1], row[2], row[3]])
     }
   }
 }
@@ -271,10 +273,10 @@ const longToJson = longFormat => {
   data = data.data.slice(1)
 
   let grouped = d3.nest()
-    .key(d => d[0])
-    .key(d => d[1])
-    .rollup(leaves => parseSeries(leaves.map(l => [l[2], l[4], l[5], l[6]])))
-    .entries(data)
+      .key(d => d[0]) // Group by location
+      .key(d => d[1]) // target
+      .rollup(rows => parseSeries(rows.map(l => [l[2], l[4], l[5], l[6]])))
+      .entries(data)
 
   // Format data according to pipeline requirements
   // Unroll two key levels
@@ -299,7 +301,8 @@ const longToJson = longFormat => {
           target: keyMap[targetGroup.key],
           point: targetGroup.value.point,
           low: targetGroup.value.low,
-          high: targetGroup.value.high
+          high: targetGroup.value.high,
+          bins: targetGroup.value.bins
         })
       }
     })
