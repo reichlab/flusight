@@ -43,12 +43,12 @@ const statFuncMAE = (pred, actual) => Math.abs(actual - pred.point)
  */
 const statFuncLog = (pred, actual) => {
   let score = null
-  pred.bins.forEach(b => {
-    // When actual is in a given bin
-    if (actual > b[0]) {
-      score = Math.log(b[2])
+  for (let i = 0; i < pred.bins.length; i++) {
+    if (pred.bins[i][1] > actual) {
+      score = Math.log(pred.bins[i][2])
+      break
     }
-  })
+  }
   return score
 }
 
