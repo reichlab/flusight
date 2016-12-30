@@ -2,17 +2,6 @@
  * Get model statistics
  */
 
-const mmwr = require('mmwr-week')
-
-/**
- * Wrapper around week delta for working with weekStamps
- */
-const weekDeltaWrapper = (weekStamp, delta) => {
-  let out = mmwr.MMWRWeekWithDelta(Math.floor(weekStamp / 100),
-                                   weekStamp % 100, delta)
-  return parseInt(out.year + '' + out.week)
-}
-
 /**
  * Filter cache by region to create a series of predictions
  */
@@ -45,22 +34,34 @@ const filterCache = (cachedPredictions, regionId) => {
 }
 
 /**
- * Return logscore from given bin distribution and actual value
+ * Return MAE from given prediction and actual value
  */
-const getLogScore = (bins, actual) => {
-  //
+const statFuncMAE = (pred, actual) => Math.abs(actual - pred.point)
+
+/**
+ * Return log score from given prediction and actual value
+ */
+const statFuncLog = (pred, actual) => {
+  let score = null
+  pred.bins.forEach(b => {
+    // When actual is in a given bin
+    if (actual > b[0]) {
+      score = Math.log(b[2])
+    }
+  })
+  return score
 }
 
 /**
- * Return mean absolute error between point preds and actual data
- * Assumes `cachedPredictions` weeks are in actual
+ * Calculate stuff using given function
  */
-const statsMae = (filteredPreds, actual) => {
+const statsCore = (filteredPreds, actual, statFunc) => {
+  // Keys to work on
   let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-  let diffs = {}
+  let scores = {}
 
   keys.forEach(key => {
-    diffs[key] = []
+    scores[key] = []
   })
 
   filteredPreds.forEach(p => {
@@ -68,25 +69,16 @@ const statsMae = (filteredPreds, actual) => {
 
     keys.forEach((key, idx) => {
       let actualData = actual[actualIndex + 1 + idx].data
-      if (actualData !== -1) diffs[key].push(Math.abs(actualData - p[key].point))
+      if (actualData !== -1) scores[key].push(statFunc(p[key], actualData))
     })
   })
 
   // Take mean
   keys.forEach(key => {
-    diffs[key] = diffs[key].reduce((a, b) => a + b) / diffs[key].length
+    scores[key] = scores[key].reduce((a, b) => a + b) / scores[key].length
   })
 
-  return diffs
-}
-
-const statsLog = (filteredPreds, actual) => {
-  return {
-    oneWk: NaN,
-    twoWk: NaN,
-    threeWk: NaN,
-    fourWk: NaN
-  }
+  return scores
 }
 
 const getModelStats = (cachedPredictions, actual, regionId) => {
@@ -94,8 +86,8 @@ const getModelStats = (cachedPredictions, actual, regionId) => {
 
   if (filteredPreds.length > 0) {
     return {
-      mae: statsMae(filteredPreds, actual),
-      log: statsLog(filteredPreds, actual)
+      mae: statsCore(filteredPreds, actual, statFuncMAE),
+      log: statsCore(filteredPreds, actual, statFuncLog)
     }
   } else {
     return null
