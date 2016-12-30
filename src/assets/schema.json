@@ -151,48 +151,6 @@
                           "url"
                         ]
                       },
-                      "stats": {
-                        "type": "object",
-                        "properties": {
-                          "mae": {
-                            "type": "object",
-                            "properties": {
-                              "oneWk": {
-                                "type": "number"
-                              },
-                              "twoWk": {
-                                "type": "number"
-                              },
-                              "threeWk": {
-                                "type": "number"
-                              },
-                              "fourWk": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "oneWk",
-                              "twoWk",
-                              "threeWk",
-                              "fourWk"
-                            ]
-                          },
-                          "log": {
-                            "type": "object",
-                            "properties": {
-                              "oneWk": {},
-                              "twoWk": {},
-                              "threeWk": {},
-                              "fourWk": {}
-                            },
-                            "required": []
-                          }
-                        },
-                        "required": [
-                          "mae",
-                          "log"
-                        ]
-                      },
                       "predictions": {
                         "type": "array",
                         "uniqueItems": true,
@@ -396,6 +354,61 @@
                             }
                           }
                         }
+                      },
+                      "stats": {
+                        "type": "object",
+                        "properties": {
+                          "mae": {
+                            "type": "object",
+                            "properties": {
+                              "oneWk": {
+                                "type": "number"
+                              },
+                              "twoWk": {
+                                "type": "number"
+                              },
+                              "threeWk": {
+                                "type": "number"
+                              },
+                              "fourWk": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "oneWk",
+                              "twoWk",
+                              "threeWk",
+                              "fourWk"
+                            ]
+                          },
+                          "log": {
+                            "type": "object",
+                            "properties": {
+                              "oneWk": {
+                                "type": "number"
+                              },
+                              "twoWk": {
+                                "type": "number"
+                              },
+                              "threeWk": {
+                                "type": "number"
+                              },
+                              "fourWk": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "oneWk",
+                              "twoWk",
+                              "threeWk",
+                              "fourWk"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "mae",
+                          "log"
+                        ]
                       }
                     }
                   }
