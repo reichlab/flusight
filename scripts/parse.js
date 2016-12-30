@@ -25,9 +25,6 @@ const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyFile = './scripts/assets/history.json'
 const outputFile = './src/assets/data.json'
 
-// Caches CSV files
-let cachedCSVs = {}
-
 // Preprocess data directory and then generate data.json
 preprocess.processWide(dataDirectory, () => {
   // Look for seasons in the data directory
@@ -46,6 +43,13 @@ preprocess.processWide(dataDirectory, () => {
 
   // Bootstrap output
   let output = metadata.regions
+
+  // Crete cache for file data
+  let cachedCSVs = {}
+  // season -> model -> week
+  seasons.forEach(season => {
+    cachedCSVs[season] = {}
+  })
 
   // Get baseline data
   let baselineData = baseline.getBaselines(baselineFile)
@@ -68,6 +72,11 @@ preprocess.processWide(dataDirectory, () => {
         // Get models for each season
         let modelsDir = utils.getSubDirectories(path.join(dataDirectory, season))
         let models = modelsDir.map(model => {
+          // Bootstrap cache
+          if (!(model in cachedCSVs[season])) {
+            cachedCSVs[season][model] = {}
+          }
+
           // Get prediction weeks for each model
           let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
           let modelMeta = utils.getModelMeta(path.join(dataDirectory, season, model))
@@ -76,11 +85,11 @@ preprocess.processWide(dataDirectory, () => {
             let fileName = path.join(dataDirectory, season, model, week + '.csv')
             let data = null
             // Take from cache to avoid file reads
-            if (cachedCSVs[fileName]) {
-              data = cachedCSVs[fileName]
+            if (week in cachedCSVs[season][model]) {
+              data = cachedCSVs[season][model][week]
             } else {
               data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
-              cachedCSVs[fileName] = data
+              cachedCSVs[season][model][week] = data
             }
             // Take only for the current region
             let filtered = utils.regionFilter(data, val.subId)
