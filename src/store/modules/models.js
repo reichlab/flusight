@@ -11,7 +11,7 @@ const state = {
     bestFunc: Math.min
   }, {
     id: 'log',
-    name: 'Log Score',
+    name: 'Mean Log Score',
     url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
     bestFunc: Math.max
   }]
