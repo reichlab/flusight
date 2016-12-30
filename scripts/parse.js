@@ -100,15 +100,9 @@ preprocess.processWide(dataDirectory, () => {
             }
           }).filter(skipData => skipData !== -1)
 
-          let modelStats = stats.getModelStats(
-            modelPredictions,
-            utils.getMaxLagData(actualData[val.id][season])
-          )
-
           return {
             id: model,
             meta: modelMeta,
-            stats: modelStats,
             predictions: modelPredictions
           }
         })
@@ -118,6 +112,20 @@ preprocess.processWide(dataDirectory, () => {
           models: models,
           baseline: baselineData[val.subId][season]
         }
+      })
+    })
+
+    // Add model metadata
+    console.log('Calculating model stats')
+    output.forEach(val => {
+      val.seasons.forEach(season => {
+        season.models.forEach(model => {
+          model.stats = stats.getModelStats(
+            cachedCSVs[season.id][model.id],
+            utils.getMaxLagData(actualData[val.id][season.id]),
+            val.subId
+          )
+        })
       })
     })
 
