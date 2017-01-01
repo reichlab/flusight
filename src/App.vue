@@ -20,36 +20,6 @@ body {
   background-color: white;
 }
 
-#info-tooltip {
-  z-index: 100;
-  position: fixed;
-  box-shadow: 0px 0px 2px;
-  border-radius: 1px;
-  padding: 5px 10px;
-  color: #333;
-  font-size: 11px;
-  background-color: white;
-  width: 150px;
-
-  .bold {
-    font-weight: bold;
-  }
-  ul {
-    list-style: disc inside none;
-    display: table;
-
-    li {
-      display: table-row;
-      &::before {
-        content: '•';
-        display: table-cell;
-        text-align: right;
-        padding-right: 10px;
-      }
-    }
-  }
-}
-
 #loader {
   position: fixed;
   width: 100%;
@@ -73,7 +43,6 @@ body {
 <template lang="pug">
 div
   // Fixed position components
-  #info-tooltip
   #loader
   intro
 
@@ -119,8 +88,6 @@ export default {
       spinner: 'spinner1',
       bgColor: '#268bd2'
     })
-
-    $('#info-tooltip').css('display', 'none')
 
     window.addEventListener('keyup', evt => {
       if (evt.code === 'ArrowRight') {

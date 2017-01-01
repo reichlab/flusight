@@ -11,9 +11,6 @@
     padding-top: 10px;
     text-align: left;
     font-size: 12px;
-    span {
-      cursor: pointer
-    }
   }
 
   #relative-button {
@@ -34,27 +31,6 @@
   }
 }
 
-#selectors {
-  .level {
-    margin-bottom: 0px;
-  }
-}
-
-#choropleth-tooltip {
-  z-index: 1001;
-  position: fixed;
-  padding: 10px;
-  box-shadow: 0px 0px 2px;
-  border-radius: 1px;
-  background-color: white;
-  font-size: 11px;
-
-  .value {
-    font-size: 12px;
-    font-weight: bold;
-  }
-}
-
 .colorbar-group .axis {
   line, path {
     fill: none;
@@ -62,10 +38,67 @@
   }
 }
 
+#selectors {
+  .level {
+    margin-bottom: 0px;
+  }
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 100;
+  border-radius: 1px;
+  box-shadow: 0px 0px 2px;
+  background-color: white;
+  font-size: 11px;
+
+  .bold {
+    font-weight: bold;
+  }
+}
+
+#switch-tooltip {
+  padding: 5px 10px;
+  ul {
+    list-style: disc inside none;
+    display: table;
+
+    li {
+      display: table-row;
+      &::before {
+        content: '•';
+        display: table-cell;
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+#choropleth-tooltip {
+  padding: 5px 10px;
+  .value {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
 </style>
 
 <template lang="pug">
 div
+  // Tooltip over relative toggle switch
+  #switch-tooltip.tooltip(
+    v-show="tooltips.switch.show"
+    v-bind:style="tooltips.switch.pos"
+  )
+    | {{{ tooltips.switch.text }}}
+
+  // Tooltip for map hover
+  #choropleth-tooltip.tooltip
+    .value
+    .region
+
   #selectors
     .level.is-mobile
       .level-left
@@ -75,18 +108,23 @@ div
 
       .level-right
         .level-item
-            p.heading Season
-            p.control.title
-              span#season-selector.select.is-small
-                select(v-model="currentSeason")
-                  option(v-for="season in seasons") {{ season }}
+          p.heading Season
+          p.control.title
+            span#season-selector.select.is-small
+              select(v-model="currentSeason")
+                option(v-for="season in seasons") {{ season }}
 
 
   // Main plotting div
   #choropleth
     #relative-button-title
       span Weighted ILI (%)
-    #relative-button(v-on:click="toggleRelative")
+    #relative-button(
+      v-on:click="toggleRelative"
+      v-on:mouseover="showSwitchTooltip"
+      v-on:mouseout="hideSwitchTooltip"
+      v-on:mousemove="moveSwitchTooltip"
+    )
       span(v-bind:class="[choroplethRelative ? 'disabled' : '']") Absolute
       span.icon
         i(
@@ -134,7 +172,38 @@ export default {
       'updateSelectedRegion',
       'updateSelectedSeason',
       'toggleRelative'
-    ])
+    ]),
+    showSwitchTooltip () {
+      this.tooltips.switch.show = true
+    },
+    hideSwitchTooltip () {
+      this.tooltips.switch.show = false
+    },
+    moveSwitchTooltip (event) {
+      let obj = this.tooltips.switch
+
+      obj.pos.top = (event.clientY + 15) + 'px'
+      obj.pos.left = (event.clientX + 15) + 'px'
+    }
+  },
+  data () {
+    return {
+      tooltips: {
+        switch: {
+          show: false,
+          text: `Choose between
+                 <ul>
+                 <li><b>Absolute</b> weighted ILI % values or</li>
+                 <li><b>Relative</b> values as the percent above/below the<br>
+                 regional CDC baseline
+                 </ul>`,
+          pos: {
+            top: '0px',
+            left: '0px'
+          }
+        }
+      }
+    }
   },
   ready () {
     // Setup map
@@ -148,51 +217,6 @@ export default {
     // Hot start
     this.updateChoropleth()
     this.updateSelectedSeason(this.seasons.length - 1)
-
-    let infoTooltip = d3.select('#info-tooltip')
-
-    // Info tooltip
-    d3.select('#relative-button')
-      .on('mouseover', function() {
-        infoTooltip
-          .style('display', null)
-      })
-      .on('mouseout', function() {
-        infoTooltip
-          .style('display', 'none')
-      })
-      .on('mousemove', function() {
-        infoTooltip
-          .style('top', (d3.event.pageY + 15) + 'px')
-          .style('left', (d3.event.pageX + 15) + 'px')
-          .html(`Choose between
-                 <ul>
-                 <li><b>Absolute</b> weighted ILI % values or</li>
-                 <li><b>Relative</b> values as the percent above/below the
-                 regional CDC baseline
-                 </ul>`)
-      })
-
-    d3.select('#relative-button-title span')
-      .on('mouseover', function() {
-        infoTooltip
-          .style('display', null)
-      })
-      .on('mouseout', function() {
-        infoTooltip
-          .style('display', 'none')
-      })
-      .on('mousemove', function() {
-        infoTooltip
-          .style('top', (d3.event.pageY + 15) + 'px')
-          .style('left', (d3.event.pageX + 15) + 'px')
-          .html(`Percentage of outpatient doctor visits for influenza-like
-                 illness, weighted by state population.<br><br><em>Click to know
-                 more</em>`)
-      })
-      .on('click', function() {
-        window.open('http://www.cdc.gov/flu/weekly/overview.htm', '_blank')
-      })
   }
 }
 </script>

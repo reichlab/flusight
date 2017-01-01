@@ -106,6 +106,7 @@ export default class TimeChart {
     let height = this.height
 
     let infoTooltip = d3.select('#info-tooltip')
+        .style('display', 'none')
 
     svg.append('g')
       .attr('class', 'axis axis-x')

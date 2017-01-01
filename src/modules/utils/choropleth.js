@@ -28,17 +28,3 @@ export const getCousins = (element, data) => {
 
   return states
 }
-
-/**
- * Return formatted html for tooltip
- */
-export const tooltipText = (element, data, valueDecorator) => {
-  let stateName = element.getAttribute('class').split(' ')[1]
-  let region = data.filter(d => (d.states.indexOf(stateName) > -1))[0].region
-  let value = element.getAttribute('data-value')
-
-  let text = '<div class="value">' + valueDecorator(parseFloat(value).toFixed(2))
-  text += '</div>' + '<div>' + region + ' : ' + stateName + '</div>'
-
-  return text
-}

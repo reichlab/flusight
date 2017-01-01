@@ -49,9 +49,7 @@ export default class Choropleth {
       }
     })
 
-    // Add hover info div
-    this.tooltip = d3.select('body').append('div')
-      .attr('id', 'choropleth-tooltip')
+    this.tooltip = d3.select('#choropleth-tooltip')
       .style('display', 'none')
 
     let svg = d3.select('#' + elementId + ' svg')
@@ -141,7 +139,14 @@ export default class Choropleth {
         tooltip
           .style('top', (d3.event.pageY + 15) + 'px')
           .style('left', (d3.event.pageX + 15) + 'px')
-          .html(util.tooltipText(this, data.data, data.decorator))
+
+        let stateName = this.getAttribute('class').split(' ')[1]
+        let region = data.data
+            .filter(d => (d.states.indexOf(stateName) > -1))[0].region
+        let value = data.decorator(parseFloat(this.getAttribute('data-value'))
+                                   .toFixed(2))
+        tooltip.select('.value').text(value)
+        tooltip.select('.region').text(region + ' : ' + stateName)
       })
       .on('click', function () {
         // Change the region selector

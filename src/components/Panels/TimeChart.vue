@@ -315,6 +315,11 @@ $accent: #3273dc;
   font-size: 11px;
 }
 
+#info-tooltip {
+  padding: 5px 10px;
+  width: 150px;
+}
+
 #chart-tooltip {
   .bold {
     font-weight: bold;
@@ -374,6 +379,9 @@ div
   // Tooltips
   #legend-tooltip.tooltip
   #chart-tooltip.tooltip
+
+  // Axes label tooltip
+  #info-tooltip.tooltip
 
   // Description tooltip for legend entries
   #description-tooltip.tooltip(
@@ -556,35 +564,35 @@ export default {
       'forwardSelectedWeek',
       'backwardSelectedWeek'
     ]),
-    showDescriptionTooltip(info) {
+    showDescriptionTooltip (info) {
       let obj = this.tooltips.description
       obj.name = info.name
       obj.description = info.description
       obj.show = true
     },
-    hideDescriptionTooltip() {
+    hideDescriptionTooltip () {
       this.tooltips.description.show = false
     },
-    moveDescriptionTooltip(event) {
+    moveDescriptionTooltip (event) {
       let obj = this.tooltips.description
       obj.pos.top = (event.clientY + 15) + 'px'
       obj.pos.left = (event.clientX - 150 - 15) + 'px'
     },
-    showBtnTooltip(text) {
+    showBtnTooltip (text) {
       let obj = this.tooltips.btn
       obj.text = text
       obj.show = true
     },
-    hideBtnTooltip() {
+    hideBtnTooltip () {
       this.tooltips.btn.show = false
     },
-    moveBtnTooltip(event) {
+    moveBtnTooltip (event) {
       let obj = this.tooltips.btn
       obj.pos.top = (event.clientY + 15) + 'px'
       obj.pos.left = (event.clientX - 100 - 15) + 'px'
     }
   },
-  data() {
+  data () {
     return {
       tooltips: {
         description: {
