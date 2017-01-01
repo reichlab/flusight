@@ -3,6 +3,7 @@
 // Palette
 $observed: rgb(24, 129, 127);
 $actual: #66d600;
+$history: #ccc;
 $accent: #3273dc;
 
 // Mouse overlay
@@ -127,6 +128,19 @@ $accent: #3273dc;
   stroke-width: 1px;
 }
 
+.history-group {
+  .line-history {
+    fill: none;
+    stroke-width: 2px;
+    stroke: #eee;
+    &.highlight {
+      stroke: #ddd;
+      stroke-width: 3px;
+      pointer-events: none;
+    }
+  }
+}
+
 #nav-controls {
   position: absolute;
   background-color: white;
@@ -146,19 +160,7 @@ $accent: #3273dc;
   }
 }
 
-.history-group {
-  .line-history {
-    fill: none;
-    stroke-width: 2px;
-    stroke: #eee;
-    &.highlight {
-      stroke: #ddd;
-      stroke-width: 3px;
-      pointer-events: none;
-    }
-  }
-}
-
+// Side drawer
 .nav-drawer {
   user-select: none;
   position: absolute;
@@ -200,10 +202,22 @@ $accent: #3273dc;
       }
       color: #aaa !important;
     }
+    &#legend-actual i {
+      color: $actual;
+    }
+    &#legend-observed i {
+      color: $observed;
+    }
+    &#legend-history {
+      cursor: pointer;
+      i {
+        color: $history;
+      }
+    }
   }
   .item-selected {
-      background-color: $accent;
-      color: white;
+    background-color: $accent;
+    color: white;
   }
   #legend-ci-container {
     text-align: center;
@@ -268,6 +282,7 @@ $accent: #3273dc;
   }
 }
 
+// No prediction text
 #no-pred {
   position: absolute;
   top: 60px;
@@ -276,6 +291,7 @@ $accent: #3273dc;
   font-size: 10px;
 }
 
+// Today line
 .now-group {
   .now-line {
     stroke: black;
@@ -290,7 +306,6 @@ $accent: #3273dc;
 }
 
 // Tooltip and friends
-
 .tooltip {
   position: fixed;
   z-index: 100;
@@ -366,7 +381,7 @@ div
     v-bind:style="tooltips.description.pos"
   )
     .name {{ tooltips.description.name }}
-    .desc {{ tooltips.description.desc }}
+    .desc {{ tooltips.description.description }}
 
   // Chart button tooltip
   #btn-tooltip.tooltip(
@@ -382,7 +397,30 @@ div
 
   // Legend
   #legend.nav-drawer(v-show="legendShow")
-    #legend-actual-container
+    #legend-actual.item(
+      v-on:mouseover="showDescriptionTooltip(descriptions.actual)"
+      v-on:mouseout="hideDescriptionTooltip"
+      v-on:mousemove="moveDescriptionTooltip"
+    )
+      i.fa.fa-circle
+      span.item-title Actual
+
+    #legend-observed.item(
+      v-on:mouseover="showDescriptionTooltip(descriptions.observed)"
+      v-on:mouseout="hideDescriptionTooltip"
+      v-on:mousemove="moveDescriptionTooltip"
+    )
+      i.fa.fa-circle
+      span.item-title Observed
+
+    #legend-history.item(
+      v-on:mouseover="showDescriptionTooltip(descriptions.history)"
+      v-on:mouseout="hideDescriptionTooltip"
+      v-on:mousemove="moveDescriptionTooltip"
+    )
+      i.fa.fa-circle
+      span.item-title History
+
     hr
     #legend-ci-container
       .item
@@ -521,7 +559,7 @@ export default {
     showDescriptionTooltip(info) {
       let obj = this.tooltips.description
       obj.name = info.name
-      obj.desc = info.description
+      obj.description = info.description
       obj.show = true
     },
     hideDescriptionTooltip() {
@@ -551,7 +589,7 @@ export default {
       tooltips: {
         description: {
           name: '',
-          desc: '',
+          description: '',
           show: false,
           pos: {
             top: '0px',
@@ -565,6 +603,20 @@ export default {
             top: '0px',
             left: '0px'
           }
+        }
+      },
+      descriptions: {
+        actual: {
+          name: 'Actual Data',
+          description: 'Latest data available for the week'
+        },
+        observed: {
+          name: 'Observed Data',
+          description: 'Data available for weeks when the predictions were made'
+        },
+        history: {
+          name: 'Historical Data',
+          description: 'Toggle historical data lines'
         }
       }
     }
