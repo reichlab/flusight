@@ -362,11 +362,11 @@ div
 
   // Description tooltip for legend entries
   #description-tooltip.tooltip(
-    v-show="tooltips.legend.show"
-    v-bind:style="tooltips.legend.pos"
+    v-show="tooltips.description.show"
+    v-bind:style="tooltips.description.pos"
   )
-    .name {{ tooltips.legend.name }}
-    .desc {{ tooltips.legend.desc }}
+    .name {{ tooltips.description.name }}
+    .desc {{ tooltips.description.desc }}
 
   // Chart button tooltip
   #btn-tooltip.tooltip(
@@ -424,9 +424,9 @@ div
         tr(v-for="(index, item) in modelStats.data")
           td(
             v-bind:style="{ color: modelColors[index] }"
-            v-on:mouseover="showLegendTooltip(modelMeta[index])"
-            v-on:mouseout="hideLegendTooltip"
-            v-on:mousemove="moveLegendTooltip"
+            v-on:mouseover="showDescriptionTooltip(modelMeta[index])"
+            v-on:mouseout="hideDescriptionTooltip"
+            v-on:mousemove="moveDescriptionTooltip"
           ) {{ modelIds[index] }}
           td(v-bind:class="{ bold: item.oneWk.best }") {{ item.oneWk.value }}
           td(v-bind:class="{ bold: item.twoWk.best }") {{ item.twoWk.value }}
@@ -518,17 +518,17 @@ export default {
       'forwardSelectedWeek',
       'backwardSelectedWeek'
     ]),
-    showLegendTooltip(info) {
-      let obj = this.tooltips.legend
+    showDescriptionTooltip(info) {
+      let obj = this.tooltips.description
       obj.name = info.name
       obj.desc = info.description
       obj.show = true
     },
-    hideLegendTooltip() {
-      this.tooltips.legend.show = false
+    hideDescriptionTooltip() {
+      this.tooltips.description.show = false
     },
-    moveLegendTooltip(event) {
-      let obj = this.tooltips.legend
+    moveDescriptionTooltip(event) {
+      let obj = this.tooltips.description
       obj.pos.top = (event.clientY + 15) + 'px'
       obj.pos.left = (event.clientX - 150 - 15) + 'px'
     },
@@ -549,7 +549,7 @@ export default {
   data() {
     return {
       tooltips: {
-        legend: {
+        description: {
           name: '',
           desc: '',
           show: false,
