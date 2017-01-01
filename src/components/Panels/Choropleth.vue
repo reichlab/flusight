@@ -44,19 +44,6 @@
   }
 }
 
-.tooltip {
-  position: fixed;
-  z-index: 100;
-  border-radius: 1px;
-  box-shadow: 0px 0px 2px;
-  background-color: white;
-  font-size: 11px;
-
-  .bold {
-    font-weight: bold;
-  }
-}
-
 #switch-tooltip {
   padding: 5px 10px;
   ul {

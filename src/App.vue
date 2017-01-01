@@ -30,6 +30,18 @@ body {
   z-index: 999;
 }
 
+.tooltip {
+  position: fixed;
+  z-index: 100;
+  box-shadow: 0px 0px 2px;
+  border-radius: 1px;
+  background-color: white;
+  font-size: 11px;
+  .bold {
+    font-weight: bold;
+  }
+}
+
 .section {
   padding: 30px 20px !important;
 

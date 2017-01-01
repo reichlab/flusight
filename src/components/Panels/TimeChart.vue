@@ -306,14 +306,6 @@ $accent: #3273dc;
 }
 
 // Tooltip and friends
-.tooltip {
-  position: fixed;
-  z-index: 100;
-  box-shadow: 0px 0px 2px;
-  border-radius: 1px;
-  background-color: white;
-  font-size: 11px;
-}
 
 #info-tooltip {
   padding: 5px 10px;
