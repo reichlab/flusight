@@ -127,53 +127,6 @@ $accent: #3273dc;
   stroke-width: 1px;
 }
 
-#chart-tooltip {
-  z-index: 100;
-  position: fixed;
-  box-shadow: 0px 0px 2px;
-  border-radius: 1px;
-  background-color: white;
-  font-size: 11px;
-  .bold {
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-  }
-  .actual {
-    padding: 5px 10px;
-    color: #333;
-  }
-  .prediction {
-    padding: 5px 10px;
-    color: white;
-  }
-  .point {
-    padding: 5px 10px;
-    color: #333;
-    &.head {
-      color: white;
-    }
-  }
-}
-
-#legend-tooltip {
-  z-index: 100;
-  position: fixed;
-  box-shadow: 0px 0px 2px;
-  border-radius: 1px;
-  background-color: white;
-  font-size: 11px;
-  width: 150px;
-  .name {
-    padding: 5px 10px;
-    font-size: 13px;
-  }
-  .desc {
-    margin-top: 0px;
-    padding: 5px 10px;
-  }
-}
-
 #nav-controls {
   position: absolute;
   background-color: white;
@@ -336,13 +289,90 @@ $accent: #3273dc;
   }
 }
 
+// Tooltip and friends
+
+.tooltip {
+  position: fixed;
+  z-index: 100;
+  box-shadow: 0px 0px 2px;
+  border-radius: 1px;
+  background-color: white;
+  font-size: 11px;
+}
+
+#chart-tooltip {
+  .bold {
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  .actual {
+    padding: 5px 10px;
+    color: #333;
+  }
+  .prediction {
+    padding: 5px 10px;
+    color: white;
+  }
+  .point {
+    padding: 5px 10px;
+    color: #333;
+    &.head {
+      color: white;
+    }
+  }
+}
+
+#legend-tooltip {
+  width: 150px;
+  .name {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  .desc {
+    margin-top: 0px;
+    padding: 5px 10px;
+  }
+}
+
+#description-tooltip {
+  width: 150px;
+  .name {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  .desc {
+    margin-top: 0px;
+    padding: 5px 10px;
+  }
+}
+
+#btn-tooltip {
+  width: 100px;
+  padding: 5px 10px;
+}
+
 </style>
 
 <template lang="pug">
 div
   // Tooltips
-  #legend-tooltip
-  #chart-tooltip
+  #legend-tooltip.tooltip
+  #chart-tooltip.tooltip
+
+  // Description tooltip for legend entries
+  #description-tooltip.tooltip(
+    v-show="tooltips.legend.show"
+    v-bind:style="tooltips.legend.pos"
+  )
+    .name {{ tooltips.legend.name }}
+    .desc {{ tooltips.legend.desc }}
+
+  // Chart button tooltip
+  #btn-tooltip.tooltip(
+    v-show="tooltips.btn.show",
+    v-bind:style="tooltips.btn.pos"
+  ) {{ tooltips.btn.text }}
 
   // No predictions text
   #no-pred.heading Predictions not available <br> for selected week
@@ -392,7 +422,12 @@ div
           th 4 wk
       tbody
         tr(v-for="(index, item) in modelStats.data")
-          td(v-bind:style="{ color: modelColors[index] }") {{ modelIds[index] }}
+          td(
+            v-bind:style="{ color: modelColors[index] }"
+            v-on:mouseover="showLegendTooltip(modelMeta[index])"
+            v-on:mouseout="hideLegendTooltip"
+            v-on:mousemove="moveLegendTooltip"
+          ) {{ modelIds[index] }}
           td(v-bind:class="{ bold: item.oneWk.best }") {{ item.oneWk.value }}
           td(v-bind:class="{ bold: item.twoWk.best }") {{ item.twoWk.value }}
           td(v-bind:class="{ bold: item.threeWk.best }") {{ item.threeWk.value }}
@@ -403,27 +438,43 @@ div
 
   // Controls
   #nav-controls
-    a#legend-btn.button.is-small.is-info(
+    a.button.is-small.is-info(
       v-on:click="toggleLegend"
       v-bind:class="[legendShow ? '' : 'is-outlined']"
+      v-on:mouseover="showBtnTooltip('Toggle Legend')"
+      v-on:mouseout="hideBtnTooltip"
+      v-on:mousemove="moveBtnTooltip"
     )
       span.icon.is-small
         i.fa.fa-map-o
 
     br
-    a#stats-btn.button.is-small.is-info(
+    a.button.is-small.is-info(
       v-on:click="toggleStats"
       v-bind:class="[statsShow ? '' : 'is-outlined']"
+      v-on:mouseover="showBtnTooltip('Toggle Stats')"
+      v-on:mouseout="hideBtnTooltip"
+      v-on:mousemove="moveBtnTooltip"
     )
       span.icon.is-small
         i.fa.fa-percent
 
     br
-    a#backward-btn.button.is-small.is-outlined.is-info(v-on:click="backwardSelectedWeek")
+    a.button.is-small.is-outlined.is-info(
+      v-on:click="backwardSelectedWeek"
+      v-on:mouseover="showBtnTooltip('Move backward')"
+      v-on:mouseout="hideBtnTooltip"
+      v-on:mousemove="moveBtnTooltip"
+    )
       span.icon.is-small
         i.fa.fa-arrow-left
     br
-    a#forward-btn.button.is-small.is-outlined.is-info(v-on:click="forwardSelectedWeek")
+    a.button.is-small.is-outlined.is-info(
+      v-on:click="forwardSelectedWeek"
+      v-on:mouseover="showBtnTooltip('Move forward')"
+      v-on:mouseout="hideBtnTooltip"
+      v-on:mousemove="moveBtnTooltip"
+    )
       span.icon.is-small
         i.fa.fa-arrow-right
 </template>
@@ -439,6 +490,7 @@ export default {
       'modelStats',
       'modelColors',
       'modelIds',
+      'modelMeta',
       'statAtFirst',
       'statAtLast'
     ]),
@@ -465,7 +517,57 @@ export default {
       'updateSelectedWeek',
       'forwardSelectedWeek',
       'backwardSelectedWeek'
-    ])
+    ]),
+    showLegendTooltip(info) {
+      let obj = this.tooltips.legend
+      obj.name = info.name
+      obj.desc = info.description
+      obj.show = true
+    },
+    hideLegendTooltip() {
+      this.tooltips.legend.show = false
+    },
+    moveLegendTooltip(event) {
+      let obj = this.tooltips.legend
+      obj.pos.top = (event.clientY + 15) + 'px'
+      obj.pos.left = (event.clientX - 150 - 15) + 'px'
+    },
+    showBtnTooltip(text) {
+      let obj = this.tooltips.btn
+      obj.text = text
+      obj.show = true
+    },
+    hideBtnTooltip() {
+      this.tooltips.btn.show = false
+    },
+    moveBtnTooltip(event) {
+      let obj = this.tooltips.btn
+      obj.pos.top = (event.clientY + 15) + 'px'
+      obj.pos.left = (event.clientX - 100 - 15) + 'px'
+    }
+  },
+  data() {
+    return {
+      tooltips: {
+        legend: {
+          name: '',
+          desc: '',
+          show: false,
+          pos: {
+            top: '0px',
+            left: '0px'
+          }
+        },
+        btn: {
+          text: '',
+          show: false,
+          pos: {
+            top: '0px',
+            left: '0px'
+          }
+        }
+      }
+    }
   },
   ready() {
     // Initialize time chart
@@ -478,26 +580,6 @@ export default {
 
     // Hot start
     this.updateTimeChart()
-
-    // Add tooltips to nav icons
-    let tooltip = d3.select('#info-tooltip')
-
-    let elems = [
-      ['#legend-btn', 'Toggle legend'],
-      ['#stats-btn', 'Toggle Stats'],
-      ['#forward-btn', 'Move forward'],
-      ['#backward-btn', 'Move backward']
-    ]
-
-    elems.map(e => d3.select(e[0])
-              .on('mouseover', () => tooltip.style('display', null).style('width', '100px'))
-              .on('mouseout', () => tooltip.style('display', 'none').style('width', null))
-              .on('mousemove', () => {
-                tooltip
-                  .style('top', d3.event.pageY + 'px')
-                  .style('left', (d3.event.pageX - 100 - 15) + 'px')
-                  .html(e[1])
-              }))
   }
 }
 </script>
