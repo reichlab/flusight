@@ -24,7 +24,7 @@
     "font-awesome": "^4.6.3",
     "jquery": "^1.11.1",
     "js-yaml": "^3.6.1",
-    "mmwr-week": "github:reichlab/mmwr-week",
+    "mmwr-week": "^1.0.1",
     "moment": "^2.15.2",
     "papaparse": "^4.1.2",
     "textures": "^1.0.4",
