@@ -8,7 +8,9 @@ import 'font-awesome/css/font-awesome.css'
 import './assets/fakeLoader.css'
 import './assets/favicon.ico'
 
-new Vue({
+Vue.create = options => new Vue(options)
+
+Vue.create({
   el: 'body',
   store,
   components: { App }

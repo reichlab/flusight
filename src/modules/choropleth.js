@@ -27,7 +27,7 @@ export default class Choropleth {
     divWidth = Math.min(divWidth, 400)
 
     // Initialized datamap
-    new Datamap({
+    this.datamap = new Datamap({
       element: document.getElementById(elementId),
       scope: 'usa',
       height: divHeight,
