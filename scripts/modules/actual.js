@@ -1,9 +1,9 @@
 /**
  * Provide actual flu data with lags
- * Use delphi-epidata API (https://github.com/undefx/delphi-epidata)
+ * Use delphi-epidata API (https://github.com/cmu-delphi/delphi-epidata)
  */
 
-const delphiAPI = require('../assets/delphi_epidata')
+const delphiAPI = require('../assets/delphi_epidata.min')
 const metadata = require('./metadata')
 const mmwr = require('mmwr-week')
 
