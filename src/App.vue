@@ -94,8 +94,7 @@ export default {
     ]),
     ...mapActions('intro', ['appendIntroItems'])
   },
-  ready() {
-
+  ready () {
     $('#loader').fakeLoader({
       spinner: 'spinner1',
       bgColor: '#268bd2'

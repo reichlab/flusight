@@ -81,6 +81,7 @@ div
 <script>
 import * as d3 from 'd3'
 import { mapActions, mapGetters } from 'vuex'
+import * as cookie from 'js-cookie'
 
 export default {
   computed: {
@@ -99,7 +100,7 @@ export default {
       'moveIntroFinish',
       'moveIntroStart'
     ]),
-    demoStep(data) {
+    demoStep (data) {
       let tooltip = d3.select('#intro-tooltip')
       let tooltipBB = tooltip.node().getBoundingClientRect()
 
@@ -133,24 +134,22 @@ export default {
         }
       }
     },
-    setLastElement(el) {
+    setLastElement (el) {
       this.lastElement = el
     }
   },
-  ready() {
+  ready () {
     this.demoStep(this.currentIntro)
     this.moveIntroFinish()
 
     // Check for first run
     // Trigger intro
-    if
-      (document.cookie.replace(/(?:(?:^|.*;\s*)firstRun\s*\=\s*([^;]*).*$)|^.*$/,
-                               "$1") !== "true") {
-        document.cookie = "firstRun=true; expires=Fri, 31 Dec 9999 23:59:59 GMT"
-        this.moveIntroStart()
-      }
+    if (cookie.get('firstRun') !== 'true') {
+      cookie.set('firstRun', 'true', { expires: 365 })
+      this.moveIntroStart()
+    }
   },
-  data() {
+  data () {
     return {
       lastElement: ''
     }

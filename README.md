@@ -4,6 +4,8 @@ Flusight is an influenza forecasts visualizer for the CDC FluSight Challenge.
 
 Live at [https://reichlab.github.io/flusight/](https://reichlab.github.io/flusight/)
 
+[![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 [![DOI](https://zenodo.org/badge/69420249.svg)](https://zenodo.org/badge/latestdoi/69420249)
 [![Build Status](https://travis-ci.org/reichlab/flusight.svg?branch=master)](https://travis-ci.org/reichlab/flusight)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/reichlab/flusight.svg)](https://github.com/reichlab/flusight/pulls)

@@ -520,7 +520,6 @@ div
 <script>
 import TimeChart from '../../modules/timechart'
 import { mapGetters, mapActions } from 'vuex'
-import * as d3 from 'd3'
 
 export default {
   computed: {
@@ -621,7 +620,7 @@ export default {
       }
     }
   },
-  ready() {
+  ready () {
     // Initialize time chart
     this.initTimeChart(new TimeChart('timechart', weekIdx => {
       this.updateSelectedWeek(weekIdx)
