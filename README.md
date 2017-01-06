@@ -41,6 +41,10 @@ and [yarn](https://yarnpkg.com/en/docs/install).
 
   `yarn run parse`
   
++ Test
+
+  `yarn run test`
+  
 + Bundle production build
 
   `yarn run build`

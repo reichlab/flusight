@@ -5,6 +5,7 @@ set -e # Exit with nonzero exit code if anything fails
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]; then
     echo "Skipping deploy; just doing a build."
     yarn run parse
+    yarn run test
     yarn run build
     exit 0
 fi
@@ -19,6 +20,7 @@ git checkout gh-pages || git checkout --orphan gh-pages
 rm -rf ./dist/* || exit 0
 
 yarn run parse
+yarn run test
 yarn run build
 cp -r ./dist/* ./
 
