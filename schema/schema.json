@@ -97,7 +97,6 @@
                       "data": {
                         "type": "array",
                         "uniqueItems": true,
-                        "minItems": 1,
                         "items": {
                           "required": [
                             "lag",
@@ -154,7 +153,6 @@
                       "predictions": {
                         "type": "array",
                         "uniqueItems": true,
-                        "minItems": 1,
                         "items": {
                           "required": [
                             "week"
@@ -356,7 +354,7 @@
                         }
                       },
                       "stats": {
-                        "type": "object",
+                        "type": ["object", "null"],
                         "properties": {
                           "mae": {
                             "type": "object",
