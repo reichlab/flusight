@@ -73,3 +73,9 @@ yarn run build
 Go to the
 development [wiki](https://github.com/reichlab/flusight/wiki/Development) for
 more details.
+
+## Contributing
+Contributions are welcome. Use
+the github [issue tracker](https://github.com/reichlab/flusight/issues) to
+submit issues. Submit pull
+requests [here](https://github.com/reichlab/flusight/pulls).
