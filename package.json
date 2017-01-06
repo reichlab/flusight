@@ -9,7 +9,7 @@
     "dev": "node build/dev-server.js",
     "get-baseline": "node scripts/get-baseline.js",
     "get-history": "node scripts/get-history.js",
-    "generate-schema": "json-schema-generator ./src/assets/data.json -o ./src/assets/schema.json -f",
+    "generate-schema": "json-schema-generator ./src/assets/data.json -o ./schema/schema.json -f",
     "parse": "node scripts/parse.js",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
