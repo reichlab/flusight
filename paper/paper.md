@@ -1,4 +1,3 @@
-
 ---
 title: 'flusight: A static influenza forecast visualizer'
 tags:
