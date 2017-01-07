@@ -1,4 +1,6 @@
-// Metadata
+/** Metadata
+ * This connects the state ids used in visualization and submission csvs
+ */
 
 // List of US states
 const states = ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
@@ -13,6 +15,9 @@ const states = ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
   'VA', 'VT', 'WA', 'WI', 'WV', 'WY'] // 45-50
 
 // HHS region objects
+// id: Short id used by delphi-API
+// subId : Used as region identifier in csvs and displayed in visualization
+// region : Descriptive text. Not used anywhere as of now.
 const regions = [
   {
     id: 'nat',
