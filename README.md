@@ -21,6 +21,8 @@ by [Reich Lab](https://reichlab.github.io/) at UMass Amherst.
 [![Build Status](https://travis-ci.org/reichlab/flusight.svg?branch=master)](https://travis-ci.org/reichlab/flusight)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/reichlab/flusight.svg)](https://github.com/reichlab/flusight/pulls)
 
+![screenshot](screenframe.png)
+
 ## Quickstart
 
 For submitting weekly predictions on
