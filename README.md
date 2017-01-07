@@ -4,8 +4,10 @@ Flusight is a static influenza forecasts visualizer. It takes weekly prediction
 files in the
 [format]((https://github.com/cdcepi/FluSight-forecasts/blob/master/2016-2017_submission_template.csv))
 used by [CDC FluSight Challenge](https://predict.phiresearchlab.org/), extracts
-entities needed for visualization and generates a minified webpage ready for any
-static hosting service.
+entities needed for visualization and generates a minified webpage ready for
+static hosting. The visualizer uses an intermediate file, summarizing the
+predictions, which can be generated either by the set of scripts in the
+repository (which uses CDC's prediction format) or by the user.
 
 The live version associated with this github
 repository
