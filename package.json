@@ -19,6 +19,9 @@
     "parser": "babel-eslint",
     "plugins": [
       "vue"
+    ],
+    "ignore": [
+      "./src/assets/analytics.js"
     ]
   },
   "dependencies": {
@@ -39,6 +42,7 @@
     "tinycolor2": "^1.4.1",
     "topojson": "^1.6.27",
     "vue": "^1.0.21",
+    "vue-head": "^2.0.10",
     "vuex": "^2.1.1",
     "walk": "^2.3.9"
   },
