@@ -21,11 +21,12 @@ export default class TimeChart {
     // Limits
     divHeight = Math.min(Math.max(350, divHeight), 550)
 
-    let onsetOffset = 30
+    // Height of onset panel above x axis
+    let onsetHeight = 30
 
     // Create blank chart
     let margin = {
-      top: 1 + onsetOffset + 5, right: 50, bottom: 70, left: 40
+      top: 5, right: 50, bottom: 70 + onsetHeight, left: 40
     }
     let width = divWidth - margin.left - margin.right
     let height = divHeight - margin.top - margin.bottom
@@ -59,7 +60,7 @@ export default class TimeChart {
     this.xScaleDate = xScaleDate
     this.height = height
     this.width = width
-    this.onsetOffset = onsetOffset
+    this.onsetHeight = onsetHeight
     this.weekHook = weekHook
 
     // Add axes
@@ -68,8 +69,21 @@ export default class TimeChart {
     // Add marker primitives
     this.timerect = new marker.TimeRect(this)
 
+    this.onsetTexture = textures.lines()
+      .lighter()
+      .strokeWidth(0.5)
+      .size(8)
+      .stroke('#ccc')
+    svg.call(this.onsetTexture)
+
+    // Paint the onset panel
+    this.paintOnsetOffset()
+
     // Add overlays and other mouse interaction items
     this.setupOverlay()
+
+    // Axis at top of onset panel
+    this.setupReverseAxis()
 
     this.history = new marker.HistoricalLines(this)
     this.baseline = new marker.Baseline(this)
@@ -77,24 +91,14 @@ export default class TimeChart {
     this.observed = new marker.Observed(this)
     this.predictions = []
 
-    // Hard coding as of now
+    // Hard coding confidence values as of now
+    // This and currently selected id should ideally go in the vuex store
     this.confidenceIntervals = ['90%', '50%']
     this.cid = 1 // Use 50% as default
 
     // Legend toggle state
     this.historyShow = true
     this.predictionsShow = {}
-
-    this.onsetTexture = textures.lines()
-      .lighter()
-      .strokeWidth(0.5)
-      .size(8)
-      .stroke('#ccc')
-      .background('white')
-    svg.call(this.onsetTexture)
-
-    // Paint the top region
-    this.paintOnsetOffset()
   }
 
   /**
@@ -104,17 +108,22 @@ export default class TimeChart {
     let svg = this.svg
     let width = this.width
     let height = this.height
+    let onsetHeight = this.onsetHeight
+
+    // Keep onset panel between xaxis and plot
+    let xAxisPos = height + onsetHeight
 
     let infoTooltip = d3.select('#info-tooltip')
         .style('display', 'none')
 
+    // Main axis with ticks below the onset panel
     svg.append('g')
       .attr('class', 'axis axis-x')
-      .attr('transform', 'translate(0,' + height + ')')
+      .attr('transform', 'translate(0,' + xAxisPos + ')')
 
     let axisXDate = svg.append('g')
         .attr('class', 'axis axis-x-date')
-        .attr('transform', 'translate(0,' + (height + 25) + ')')
+        .attr('transform', 'translate(0,' + (xAxisPos + 25) + ')')
 
     let xText = axisXDate
         .append('text')
@@ -182,13 +191,26 @@ export default class TimeChart {
   }
 
   /**
+   * Add x axis with only ticks above the onset panel
+   */
+  setupReverseAxis () {
+    // Clone of axis above onset panel, without text
+    this.svg.append('g')
+      .attr('class', 'axis axis-x-ticks')
+      .attr('transform', 'translate(0,' + this.height + ')')
+  }
+
+  /**
    * Setup overlay for mouse events
    */
   setupOverlay () {
     let svg = this.svg
     let height = this.height
+    let onsetHeight = this.onsetHeight
     let width = this.width
     let tooltip = this.chartTooltip
+
+    let chartHeight = height + onsetHeight
 
     // Add vertical line
     let line = svg.append('line')
@@ -196,7 +218,7 @@ export default class TimeChart {
         .attr('x1', 0)
         .attr('y1', 0)
         .attr('x2', 0)
-        .attr('y2', height)
+        .attr('y2', chartHeight)
         .style('display', 'none')
 
     // Add now line
@@ -208,7 +230,7 @@ export default class TimeChart {
       .attr('x1', 0)
       .attr('y1', 0)
       .attr('x2', 0)
-      .attr('y2', height)
+      .attr('y2', chartHeight)
     nowGroup.append('text')
       .attr('class', 'now-text')
       .attr('transform', 'translate(15, 10) rotate(-90)')
@@ -218,7 +240,7 @@ export default class TimeChart {
     this.nowGroup = nowGroup
     svg.append('rect')
       .attr('class', 'overlay')
-      .attr('height', height)
+      .attr('height', chartHeight)
       .attr('width', width)
       .on('mouseover', () => {
         line.style('display', null)
@@ -232,18 +254,11 @@ export default class TimeChart {
 
   paintOnsetOffset () {
     this.svg.append('rect')
-      .attr('class', 'onset-paint')
-      .attr('height', this.onsetOffset + 5)
-      .attr('width', this.width)
-      .attr('x', 0)
-      .attr('y', -this.onsetOffset - 5)
-
-    this.svg.append('rect')
       .attr('class', 'onset-texture')
-      .attr('height', this.onsetOffset)
+      .attr('height', this.onsetHeight)
       .attr('width', this.width)
       .attr('x', 0)
-      .attr('y', -this.onsetOffset - 5)
+      .attr('y', this.height)
       .style('fill', this.onsetTexture.url())
   }
 
@@ -292,6 +307,9 @@ export default class TimeChart {
     let xAxis = d3.axisBottom(xScalePoint)
         .tickValues(xScalePoint.domain().filter((d, i) => !(i % 2)))
 
+    let xAxisReverseTick = d3.axisTop(xScalePoint)
+        .tickValues(xScalePoint.domain().filter((d, i) => !(i % 2)))
+
     let xAxisDate = d3.axisBottom(xScaleDate)
         .ticks(d3.timeMonth)
         .tickFormat(d3.timeFormat('%b %y'))
@@ -306,6 +324,12 @@ export default class TimeChart {
 
     svg.select('.axis-x')
       .transition().duration(200).call(xAxis)
+
+    // Copy over ticks above the onsetpanel
+    let tickOnlyAxis = svg.select('.axis-x-ticks')
+        .transition().duration(200).call(xAxisReverseTick)
+
+    tickOnlyAxis.selectAll('text').remove()
 
     svg.select('.axis-x-date')
       .transition().duration(200).call(xAxisDate)
@@ -377,7 +401,7 @@ export default class TimeChart {
     let colors = d3.schemeCategory10
 
     let totalModels = data.models.length
-    let onsetDiff = (this.onsetOffset - 2) / (totalModels + 1)
+    let onsetDiff = (this.onsetHeight - 2) / (totalModels + 1)
 
     // Filter markers not needed
     let currentPredictionIds = data.models.map(m => m.id)
@@ -408,7 +432,7 @@ export default class TimeChart {
       let predMarker
       let markerIndex = this.predictions.map(p => p.id).indexOf(m.id)
       if (markerIndex === -1) {
-        let onsetYPos = -(idx + 1) * onsetDiff - 6
+        let onsetYPos = (idx + 1) * onsetDiff + this.height + 1
         predMarker = new marker.Prediction(this,
                                            m.id,
                                            m.meta,

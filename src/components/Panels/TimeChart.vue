@@ -40,10 +40,6 @@ $accent: #3273dc;
   }
 }
 
-.onset-paint {
-  fill: white;
-}
-
 // Peak markers
 .peak-group {
   .peak-mark {
