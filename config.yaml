@@ -7,8 +7,6 @@ branding:
   appUrl: "https://reichlab.github.io/flusight"
   sourceUrl: "https://github.com/reichlab/flusight"
   parentUrl: "https://reichlab.github.io"
-  licenseName: "MIT"
-  licenseUrl: "https://opensource.org/licenses/MIT"
   tweetUrl: "https://twitter.com/intent/tweet?text=Flusight.%20\
              Real-time%20Influenza%20Forecasts.%20https%3A%2F%2Freichlab\
              .github.io%2Fflusight%2F%20%40reichlab&source=webclient"

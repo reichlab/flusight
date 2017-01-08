@@ -451,14 +451,6 @@
           "type": "string",
           "minLength": 1
         },
-        "licenseName": {
-          "type": "string",
-          "minLength": 1
-        },
-        "licenseUrl": {
-          "type": "string",
-          "minLength": 1
-        },
         "tweetUrl": {
           "type": "string",
           "minLength": 1
@@ -475,8 +467,6 @@
         "appUrl",
         "sourceUrl",
         "parentUrl",
-        "licenseName",
-        "licenseUrl",
         "tweetUrl",
         "updateTime"
       ]
