@@ -467,7 +467,6 @@
         "appUrl",
         "sourceUrl",
         "parentUrl",
-        "tweetUrl",
         "updateTime"
       ]
     }
