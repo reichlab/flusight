@@ -124,7 +124,6 @@ div
 <script>
 import Choropleth from '../../modules/choropleth'
 import { mapGetters, mapActions } from 'vuex'
-import * as d3 from 'd3'
 
 export default {
   computed: {

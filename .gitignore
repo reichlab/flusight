@@ -8,3 +8,5 @@ deploy_private
 
 *.Rproj
 .Rhistory
+
+src/assets/data.json

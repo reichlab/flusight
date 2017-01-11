@@ -1,18 +1,23 @@
-// Metadata
+/** Metadata
+ * This connects the state ids used in visualization and submission csvs
+ */
 
 // List of US states
 const states = ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
-                'CO', 'CT', 'DC', 'DE', 'FL', // 5-9
-                'GA', 'HI', 'IA', 'ID', 'IL', // 10-14
-                'IN', 'KS', 'KY', 'LA', 'MA', // 15-19
-                'MD', 'ME', 'MI', 'MN', 'MO', // 20-24
-                'MS', 'MT', 'NC', 'ND', 'NE', // 25-29
-                'NH', 'NJ', 'NM', 'NV', 'NY', // 30-34
-                'OH', 'OK', 'OR', 'PA', 'RI', // 35-39
-                'SC', 'SD', 'TN', 'TX', 'UT', // 40-44
-                'VA', 'VT', 'WA', 'WI', 'WV', 'WY'] // 45-50
+  'CO', 'CT', 'DC', 'DE', 'FL', // 5-9
+  'GA', 'HI', 'IA', 'ID', 'IL', // 10-14
+  'IN', 'KS', 'KY', 'LA', 'MA', // 15-19
+  'MD', 'ME', 'MI', 'MN', 'MO', // 20-24
+  'MS', 'MT', 'NC', 'ND', 'NE', // 25-29
+  'NH', 'NJ', 'NM', 'NV', 'NY', // 30-34
+  'OH', 'OK', 'OR', 'PA', 'RI', // 35-39
+  'SC', 'SD', 'TN', 'TX', 'UT', // 40-44
+  'VA', 'VT', 'WA', 'WI', 'WV', 'WY'] // 45-50
 
 // HHS region objects
+// id: Short id used by delphi-API
+// subId : Used as region identifier in csvs and displayed in visualization
+// region : Descriptive text. Not used anywhere as of now.
 const regions = [
   {
     id: 'nat',

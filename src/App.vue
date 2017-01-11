@@ -94,8 +94,35 @@ export default {
     ]),
     ...mapActions('intro', ['appendIntroItems'])
   },
-  ready() {
-
+  head: {
+    title: function () {
+      return {
+        inner: this.branding.title,
+        complement: this.branding.parent
+      }
+    },
+    meta: function () {
+      return [
+        { name: 'application-name', content: this.branding.title },
+        { name: 'description', content: this.branding.description },
+        // Twitter
+        { name: 'twitter:title', content: this.branding.title },
+        { name: 'twitter:description', content: this.branding.description },
+        { name: 'twitter:image', content: this.branding.imageUrl },
+        { name: 'twitter:url', content: this.branding.appUrl },
+        // Google+ / Schema.org
+        { itemprop: 'name', content: this.branding.title },
+        { itemprop: 'description', content: this.branding.description },
+        { itemprop: 'image', content: this.branding.imageUrl },
+        // Open Graph
+        { property: 'og:title', content: this.branding.title },
+        { property: 'og:description', content: this.branding.description },
+        { property: 'og:image', content: this.branding.imageUrl },
+        { property: 'og:url', content: this.branding.appUrl }
+      ]
+    }
+  },
+  ready () {
     $('#loader').fakeLoader({
       spinner: 'spinner1',
       bgColor: '#268bd2'

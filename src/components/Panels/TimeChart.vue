@@ -40,10 +40,6 @@ $accent: #3273dc;
   }
 }
 
-.onset-paint {
-  fill: white;
-}
-
 // Peak markers
 .peak-group {
   .peak-mark {
@@ -520,7 +516,6 @@ div
 <script>
 import TimeChart from '../../modules/timechart'
 import { mapGetters, mapActions } from 'vuex'
-import * as d3 from 'd3'
 
 export default {
   computed: {
@@ -621,7 +616,7 @@ export default {
       }
     }
   },
-  ready() {
+  ready () {
     // Initialize time chart
     this.initTimeChart(new TimeChart('timechart', weekIdx => {
       this.updateSelectedWeek(weekIdx)
