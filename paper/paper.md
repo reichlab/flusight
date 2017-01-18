@@ -6,14 +6,17 @@ tags:
   - Influenza
 authors:
  - name: Abhinav Tushar
-   orcid: 0000-0000-0000-0000
+   orcid: 0000-0001-7137-0728
    affiliation: 1
  - name: Nicholas G Reich
    orcid: 0000-0003-3503-9899
+   affiliation: 2
 affiliations:
  - name: University of Massachusetts-Amherst
    index: 1
-date: 10 January 2017
+ - name: University of Massachusetts-Amherst
+   index: 2
+date: 11 January 2017
 bibliography: paper.bib
 ---
 
