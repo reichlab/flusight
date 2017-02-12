@@ -74,7 +74,8 @@ import Foot from './components/Foot'
 
 import { mapGetters, mapActions } from 'vuex'
 
-var $ = window.jQuery = require('jquery')
+import $ from 'jquery'
+window.jQuery = $
 require('./assets/fakeLoader.min.js')
 
 export default {
