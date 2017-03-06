@@ -21,10 +21,6 @@ module.exports = {
       'components': path.resolve(__dirname, '../src/components')
     }
   },
-  externals: {
-    jquery: 'jQuery',
-    d3: 'd3'
-  },
   resolveLoader: {
     fallback: [path.join(__dirname, '../node_modules')]
   },
