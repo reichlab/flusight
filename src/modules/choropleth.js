@@ -1,13 +1,93 @@
 import 'topojson'
 import Datamap from 'datamaps/dist/datamaps.usa'
-import * as util from './utils/choropleth'
 import colormap from 'colormap'
-import * as marker from './markers/choropleth'
 import textures from 'textures'
 import tinycolor from 'tinycolor2'
 import * as d3 from 'd3'
 
-// Map interaction functions
+/**
+ * Return sibling data for given element
+ */
+export const getSiblings = (element, data) => {
+  let stateName = element.getAttribute('class').split(' ')[1]
+  return data.filter(d => d.states.indexOf(stateName) > -1)[0]
+}
+
+/**
+ * Return id mapping to region selector
+ */
+export const getRegionId = region => parseInt(region.split(' ').pop())
+
+/**
+ * Return non-sibling states
+ */
+export const getCousins = (element, data) => {
+  let stateName = element.getAttribute('class').split(' ')[1]
+  let states = []
+  data.forEach(d => {
+    if (d.states.indexOf(stateName) === -1) {
+      states = states.concat(d.states)
+    }
+  })
+
+  return states
+}
+
+export class ColorBar {
+  constructor (svg, cmap) {
+    let svgBB = svg.node().getBoundingClientRect()
+
+    // Clear
+    d3.select('.colorbar-group')
+      .remove()
+
+    let group = svg.append('g')
+        .attr('class', 'colorbar-group')
+
+    let bar = {
+      height: 15,
+      width: svgBB.width / 4,
+      x: (svgBB.width * 3 / 4) - 20,
+      y: svgBB.height - 20
+    }
+
+    let eachWidth = bar.width / cmap.length
+
+    // Add rectangles
+    for (let i = 0; i < cmap.length; i++) {
+      group.append('rect')
+        .attr('x', bar.x + i * eachWidth)
+        .attr('y', bar.y)
+        .attr('height', bar.height)
+        .attr('width', eachWidth)
+        .style('fill', cmap[cmap.length - 1 - i])
+    }
+
+    // Add axis
+    let scale = d3.scaleLinear()
+        .range([0, bar.width])
+
+    group.append('g')
+      .attr('class', 'axis axis-color')
+      .attr('transform', 'translate(' + bar.x + ',' + (bar.y - 2) + ')')
+
+    this.svg = svg
+    this.scale = scale
+  }
+
+  // Update scale of colorbar
+  update (range) {
+    this.scale.domain(range)
+
+    let axis = d3.axisTop(this.scale)
+        .ticks(5)
+
+    this.svg.select('.axis-color')
+      .transition()
+      .duration(200)
+      .call(axis)
+  }
+}
 
 // Draw map on given element
 // Takes d3 instance
@@ -116,21 +196,21 @@ export default class Choropleth {
       .range([0, this.cmap.length - 0.01])
 
     // Setup color bar
-    this.colorBar = new marker.ColorBar(svg, this.cmap)
+    this.colorBar = new ColorBar(svg, this.cmap)
     this.colorBar.update(barLimits)
 
     // Set on hover items
     d3.selectAll('.datamaps-subunit')
       .on('mouseover', function () {
         d3.selectAll('.datamaps-subunit')
-          .filter(d => util.getCousins(this, data.data)
+          .filter(d => getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '0.4')
         tooltip.style('display', null)
       })
       .on('mouseout', function () {
         d3.selectAll('.datamaps-subunit')
-          .filter(d => util.getCousins(this, data.data)
+          .filter(d => getCousins(this, data.data)
                   .indexOf(d.id) > -1)
           .style('opacity', '1.0')
         tooltip.style('display', 'none')
@@ -150,7 +230,7 @@ export default class Choropleth {
       })
       .on('click', function () {
         // Change the region selector
-        regionHook(util.getRegionId(util.getSiblings(this, data.data).region))
+        regionHook(getRegionId(getSiblings(this, data.data).region))
       })
 
     // Save data
