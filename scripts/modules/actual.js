@@ -7,6 +7,7 @@ const delphiAPI = require('../assets/delphi_epidata.min')
 const metadata = require('./metadata')
 const mmwr = require('mmwr-week')
 const ProgressBar = require('progress')
+const fs = require('fs')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
 
@@ -64,9 +65,10 @@ const weekToSeason = week => {
 /**
  * Get actual epidemic data for given seasons
  * @param {array} seasons array of string identifier strings
+ * @param {string} cacheFile file pointing to actual cache data
  * @param {function} callback callback function
  */
-const getActual = (seasons, callback) => {
+const getActual = (seasons, cacheFile, callback) => {
   // Get min max epiweek range in seasons
   let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0])))
   let lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
@@ -90,31 +92,65 @@ const getActual = (seasons, callback) => {
     total: 52
   })
 
+  // Use range and lag value to identify data
+  let cache = {}
+
+  // Setup cache
+  if (fs.existsSync(cacheFile)) {
+    cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
+  }
+
+  let rangeIdentifer = start + '-' + end
+  if (!(rangeIdentifer in cache)) {
+    cache[rangeIdentifer] = {}
+  }
+
   // Fetch data from delphi api for given lag
   const laggedRequest = lag => {
-    // Request API
-    delphiAPI.Epidata.fluview((res, message, data) => {
-      if (data !== undefined) {
-        data.forEach(d => {
-          let sub = output[d.region][weekToSeason(d.epiweek)]
-          let dataIndex
-          for (let i = 0; i < sub.length; i++) {
-            if (sub[i].week === d.epiweek) {
-              dataIndex = i
-              break
-            }
+    const populateOutput = data => {
+      data.forEach(d => {
+        let sub = output[d.region][weekToSeason(d.epiweek)]
+        let dataIndex
+        for (let i = 0; i < sub.length; i++) {
+          if (sub[i].week === d.epiweek) {
+            dataIndex = i
+            break
           }
-          output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
-            lag: lag,
-            value: d.wili
-          })
-        })
-      }
-      progressBar.tick()
+        }
 
-      if (lag === 0) callback(output)
-      else laggedRequest(lag - 1)
-    }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
+        output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
+          lag: lag,
+          value: d.wili
+        })
+      })
+    }
+
+    const nextLagCall = (currentLag) => {
+      progressBar.tick()
+      if (currentLag === 0) {
+        // Save cache
+        fs.writeFileSync(cacheFile, JSON.stringify(cache))
+        callback(output)
+      } else {
+        laggedRequest(currentLag - 1)
+      }
+    }
+
+    if (lag in cache[rangeIdentifer]) {
+      // Pulling in from cache
+      populateOutput(cache[rangeIdentifer][lag])
+      nextLagCall(lag)
+    } else {
+      // Request API
+      delphiAPI.Epidata.fluview((res, message, data) => {
+        if (data !== undefined) {
+          populateOutput(data)
+          cache[rangeIdentifer][lag] = data
+        }
+
+        nextLagCall(lag)
+      }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
+    }
   }
 
   // Look upto 51 weeks back

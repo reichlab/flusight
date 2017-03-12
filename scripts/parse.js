@@ -24,6 +24,7 @@ const branding = config.branding
 const dataDirectory = './data'
 const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyFile = './scripts/assets/history.json'
+const actualCacheFile = './scripts/assets/actual-cache.json'
 const outputFile = './src/assets/data.json'
 
 // Preprocess data directory and then generate data.json
@@ -64,7 +65,7 @@ preprocess.processWide(dataDirectory, () => {
   console.log(' Gathering actual data for the seasons...')
 
   // Get actual data for seasons
-  actual.getActual(seasons, actualData => {
+  actual.getActual(seasons, actualCacheFile, actualData => {
     // Add seasons to output
     console.log('\n Parsing regions...')
     let progressBar = new ProgressBar(' :bar :current of :total', {
