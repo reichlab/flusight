@@ -87,20 +87,22 @@ const getActual = (seasons, callback) => {
   const laggedRequest = lag => {
     // Request API
     delphiAPI.Epidata.fluview((res, message, data) => {
-      data.forEach(d => {
-        let sub = output[d.region][weekToSeason(d.epiweek)]
-        let dataIndex
-        for (let i = 0; i < sub.length; i++) {
-          if (sub[i].week === d.epiweek) {
-            dataIndex = i
-            break
+      if (data !== undefined) {
+        data.forEach(d => {
+          let sub = output[d.region][weekToSeason(d.epiweek)]
+          let dataIndex
+          for (let i = 0; i < sub.length; i++) {
+            if (sub[i].week === d.epiweek) {
+              dataIndex = i
+              break
+            }
           }
-        }
-        output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
-          lag: lag,
-          value: d.wili
+          output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
+            lag: lag,
+            value: d.wili
+          })
         })
-      })
+      }
 
       console.log('Collecting data with lag: ' + lag)
 
