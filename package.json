@@ -38,6 +38,7 @@
     "mmwr-week": "^1.0.1",
     "moment": "^2.15.2",
     "papaparse": "^4.1.2",
+    "progress": "^1.1.8",
     "textures": "^1.0.4",
     "tinycolor2": "^1.4.1",
     "topojson": "^1.6.27",

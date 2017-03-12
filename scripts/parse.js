@@ -15,6 +15,7 @@ const utils = require('./utils')
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment')
+const ProgressBar = require('progress')
 
 const config = require('./config').read('./config.yaml')
 
@@ -30,15 +31,18 @@ preprocess.processWide(dataDirectory, () => {
   // Look for seasons in the data directory
   let seasons = utils.getSubDirectories(dataDirectory)
 
+  console.log('\n ---------------------------------')
+  console.log(' Generating data.json for flusight')
+  console.log(' ---------------------------------\n')
   // Stop if no folder found
   if (seasons.length === 0) {
-    console.log('No seasons found in data directory!')
+    console.log(' No seasons found in data directory!')
     process.exit(1)
   }
 
   // Print seasons
-  console.log('Found ' + seasons.length + ' seasons:')
-  seasons.map(s => console.log(s))
+  console.log(` Found ${seasons.length} seasons:`)
+  seasons.map(s => console.log(' ' + s))
   console.log('')
 
   // Bootstrap output
@@ -57,13 +61,20 @@ preprocess.processWide(dataDirectory, () => {
   // Get historical data
   let historicalData = history.getHistory(historyFile)
 
-  console.log('Gathering actual data for the seasons...')
+  console.log(' Gathering actual data for the seasons...')
 
   // Get actual data for seasons
   actual.getActual(seasons, actualData => {
     // Add seasons to output
+    console.log('\n Parsing regions...')
+    let progressBar = new ProgressBar(' :bar :current of :total', {
+      complete: '▇',
+      incomplete: '-',
+      total: 11
+    })
+
     output.forEach(val => {
-      console.log('Parsing region: ' + val.region)
+      progressBar.tick()
 
       // Append historical data to region
       val.history = historicalData[val.id]
@@ -116,7 +127,7 @@ preprocess.processWide(dataDirectory, () => {
     })
 
     // Add model metadata
-    console.log('Calculating model stats')
+    console.log('\n Calculating model statistics')
     output.forEach(val => {
       val.seasons.forEach(season => {
         season.models.forEach(model => {
@@ -138,7 +149,7 @@ preprocess.processWide(dataDirectory, () => {
 
     fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), err => {
       if (err) return console.log(err)
-      else return console.log('\nAll done! JSON saved at ' + outputFile)
+      else return console.log('\n All done! JSON saved at ' + outputFile)
     })
   })
 })

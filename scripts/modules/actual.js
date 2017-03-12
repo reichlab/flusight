@@ -6,6 +6,7 @@
 const delphiAPI = require('../assets/delphi_epidata.min')
 const metadata = require('./metadata')
 const mmwr = require('mmwr-week')
+const ProgressBar = require('progress')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
 
@@ -83,6 +84,12 @@ const getActual = (seasons, callback) => {
     })
   })
 
+  let progressBar = new ProgressBar(' :bar :current of :total lag values', {
+    complete: '▇',
+    incomplete: '-',
+    total: 52
+  })
+
   // Fetch data from delphi api for given lag
   const laggedRequest = lag => {
     // Request API
@@ -103,8 +110,7 @@ const getActual = (seasons, callback) => {
           })
         })
       }
-
-      console.log('Collecting data with lag: ' + lag)
+      progressBar.tick()
 
       if (lag === 0) callback(output)
       else laggedRequest(lag - 1)
