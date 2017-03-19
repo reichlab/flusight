@@ -3801,9 +3801,9 @@ mkdirp@0.5.1, mkdirp@0.x.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
-mmwr-week@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/mmwr-week/-/mmwr-week-1.0.1.tgz#9e1681c5fe32c4b9de68d654c53b07928baf602d"
+mmwr-week@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/mmwr-week/-/mmwr-week-1.0.5.tgz#0d0fce47d3acb5e4bf200fbab4e07ee158b53668"
   dependencies:
     chai "^3.5.0"
     moment "^2.17.0"
