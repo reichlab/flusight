@@ -75,7 +75,10 @@ const getActual = (seasons, cacheFile, callback) => {
 
   // Request range
   let start = parseInt(firstYear + '' + 30)
-  let end = parseInt(lastYear + '' + 29)
+
+  // Current week
+  let current = mmwr.DateToMMWRWeek().year * 100 + mmwr.DateToMMWRWeek().week
+  let end = Math.min(current, parseInt(lastYear + '' + 29))
 
   // Setup container
   let output = {}
@@ -98,11 +101,18 @@ const getActual = (seasons, cacheFile, callback) => {
   // Setup cache
   if (fs.existsSync(cacheFile)) {
     cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
+  } else {
+    cache = {
+      data: {},
+      lastWeek: 0 // Used to identify cache staleness
+    }
   }
 
+  // let cacheStaleness = current - cache.lastWeek
+
   let rangeIdentifer = start + '-' + end
-  if (!(rangeIdentifer in cache)) {
-    cache[rangeIdentifer] = {}
+  if (!(rangeIdentifer in cache.data)) {
+    cache.data[rangeIdentifer] = {}
   }
 
   // Fetch data from delphi api for given lag
@@ -129,6 +139,7 @@ const getActual = (seasons, cacheFile, callback) => {
       progressBar.tick()
       if (currentLag === 0) {
         // Save cache
+        cache.lastWeek = current
         fs.writeFileSync(cacheFile, JSON.stringify(cache))
         callback(output)
       } else {
@@ -136,21 +147,21 @@ const getActual = (seasons, cacheFile, callback) => {
       }
     }
 
-    if (lag in cache[rangeIdentifer]) {
-      // Pulling in from cache
-      populateOutput(cache[rangeIdentifer][lag])
-      nextLagCall(lag)
-    } else {
-      // Request API
-      delphiAPI.Epidata.fluview((res, message, data) => {
-        if (data !== undefined) {
-          populateOutput(data)
-          cache[rangeIdentifer][lag] = data
-        }
+    // if (lag in cache.data[rangeIdentifer]) {
+    //   // Pulling in from cache
+    //   populateOutput(cache.data[rangeIdentifer][lag])
+    //   nextLagCall(lag)
+    // } else {
+    // Request API
+    delphiAPI.Epidata.fluview((res, message, data) => {
+      if (data !== undefined) {
+        populateOutput(data)
+        cache.data[rangeIdentifer][lag] = data
+      }
 
-        nextLagCall(lag)
-      }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
-    }
+      nextLagCall(lag)
+    }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
+    // }
   }
 
   // Look upto 51 weeks back
