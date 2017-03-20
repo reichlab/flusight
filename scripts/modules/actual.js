@@ -21,7 +21,8 @@ const seasonWeeksData = season => {
   let second = parseInt(season.split('-')[1])
 
   // Check the number of weeks in first year
-  let firstMaxWeek = mmwr.MMWRWeeksInYear(first)
+  let firstYear = new mmwr.MMWRDate(first)
+  let firstMaxWeek = firstYear.nWeeks
 
   let weeks = []
   // Weeks for first year
@@ -77,7 +78,9 @@ const getActual = (seasons, cacheFile, callback) => {
   let start = parseInt(firstYear + '' + 30)
 
   // Current week
-  let current = mmwr.DateToMMWRWeek().year * 100 + mmwr.DateToMMWRWeek().week
+  let currentDate = new mmwr.MMWRDate()
+  currentDate.fromMomentDate()
+  let current = currentDate.year * 100 + currentDate.week
   let end = Math.min(current, parseInt(lastYear + '' + 29))
 
   // Setup container
