@@ -7,7 +7,7 @@ const delphiAPI = require('../assets/delphi_epidata.min')
 const metadata = require('./metadata')
 const mmwr = require('mmwr-week')
 const ProgressBar = require('progress')
-const fs = require('fs')
+// const fs = require('fs')
 
 const regionIdentifiers = metadata.regions.map(x => x.id)
 
@@ -63,6 +63,12 @@ const weekToSeason = week => {
   }
 }
 
+// const stampToDate = stamp => {
+//   return new mmwr.MMWRDate(parseInt(stamp / 100), stamp % 100)
+// }
+
+const dateToStamp = date => date.year * 100 + date.week
+
 /**
  * Get actual epidemic data for given seasons
  * @param {array} seasons array of string identifier strings
@@ -74,14 +80,18 @@ const getActual = (seasons, cacheFile, callback) => {
   let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0])))
   let lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
 
-  // Request range
-  let start = parseInt(firstYear + '' + 30)
+  // Start week
+  let startStamp = firstYear * 100 + 30
+  // let startDate = stampToDate(startStamp)
 
   // Current week
   let currentDate = new mmwr.MMWRDate()
   currentDate.fromMomentDate()
-  let current = currentDate.year * 100 + currentDate.week
-  let end = Math.min(current, parseInt(lastYear + '' + 29))
+  let currentStamp = dateToStamp(currentDate)
+
+  // Last week
+  let endStamp = Math.min(currentStamp, lastYear * 100 + 29)
+  // let endDate = stampToDate(endStamp)
 
   // Setup container
   let output = {}
@@ -99,24 +109,33 @@ const getActual = (seasons, cacheFile, callback) => {
   })
 
   // Use range and lag value to identify data
-  let cache = {}
+  // let cache = {}
 
-  // Setup cache
-  if (fs.existsSync(cacheFile)) {
-    cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
-  } else {
-    cache = {
-      data: {},
-      lastWeek: 0 // Used to identify cache staleness
-    }
-  }
+  // // Setup cache
+  // if (fs.existsSync(cacheFile)) {
+  //   cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
+  // } else {
+  //   cache = {
+  //     data: {},
+  //     lastStamp: 0 // Used to identify cache staleness
+  //   }
+  // }
 
-  // let cacheStaleness = current - cache.lastWeek
+  // Number of weeks of staleness
+  // let cacheLastDate
+  // if (cache.lastStamp === 0) {
+  //   cacheLastDate = stampToDate(startStamp)
+  //   cacheLastDate.applyWeekDiff(-1)
+  // } else {
+  //   cacheLastDate = stampToDate(cache.lastStamp)
+  // }
 
-  let rangeIdentifer = start + '-' + end
-  if (!(rangeIdentifer in cache.data)) {
-    cache.data[rangeIdentifer] = {}
-  }
+  // let cacheStaleness = currentDate.diffWeek(cacheLastDate)
+
+  // let rangeIdentifer = startStamp + '-' + endStamp
+  // if (!(rangeIdentifer in cache.data)) {
+  //  cache.data[rangeIdentifer] = {}
+  // }
 
   // Fetch data from delphi api for given lag
   const laggedRequest = lag => {
@@ -142,8 +161,8 @@ const getActual = (seasons, cacheFile, callback) => {
       progressBar.tick()
       if (currentLag === 0) {
         // Save cache
-        cache.lastWeek = current
-        fs.writeFileSync(cacheFile, JSON.stringify(cache))
+        // cache.lastStamp = currentStamp
+        // fs.writeFileSync(cacheFile, JSON.stringify(cache))
         callback(output)
       } else {
         laggedRequest(currentLag - 1)
@@ -151,20 +170,27 @@ const getActual = (seasons, cacheFile, callback) => {
     }
 
     // if (lag in cache.data[rangeIdentifer]) {
-    //   // Pulling in from cache
-    //   populateOutput(cache.data[rangeIdentifer][lag])
-    //   nextLagCall(lag)
-    // } else {
+      // Pulling in from cache
+    //  populateOutput(cache.data[rangeIdentifer][lag])
+    // }
+
     // Request API
+    // let cacheStamp = Math.max(cache.lastStamp, startStamp)
+    // let requestStartDate = stampToDate(cacheStamp)
+    // requestStartDate.applyWeekDiff(-lag)
+    // if (requestStartDate.diffWeek(startDate) < 0) {
+    //   requestStartDate = startDate
+    // }
+    // let requestStartStamp = dateToStamp(requestStartDate)
+
     delphiAPI.Epidata.fluview((res, message, data) => {
       if (data !== undefined) {
         populateOutput(data)
-        cache.data[rangeIdentifer][lag] = data
+        // cache.data[rangeIdentifer][lag] = data
       }
 
       nextLagCall(lag)
-    }, regionIdentifiers, [delphiAPI.Epidata.range(start, end)], null, lag)
-    // }
+    }, regionIdentifiers, [delphiAPI.Epidata.range(startStamp, endStamp)], null, lag)
   }
 
   // Look upto 51 weeks back
