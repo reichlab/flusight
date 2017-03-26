@@ -29,7 +29,7 @@
     "bulma": "^0.2.1",
     "colormap": "^2.2.0",
     "d3": "^4.4.0",
-    "d3-foresight": "*",
+    "d3-foresight": "0.2.0",
     "datamaps": "^0.5.8",
     "download": "^5.0.2",
     "font-awesome": "^4.6.3",

@@ -26,8 +26,10 @@ export default {
     // Initialize time chart
     let timechart = new TimeChart('#timechart')
 
-    timechart.weekHooks.push(weekIdx => {
-      this.updateSelectedWeek(weekIdx)
+    timechart.eventHooks.push(eventData => {
+      if (eventData.type === 'weekUpdate') {
+        this.updateSelectedWeek(eventData.value)
+      }
     })
 
     this.initTimeChart(timechart)
