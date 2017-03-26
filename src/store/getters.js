@@ -71,8 +71,6 @@ export const baseline = (state, getters) => {
  * Return data subset for chart as specified in region/season selected
  */
 export const timeChartData = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-
   return {
     observed: getters.observed,
     actual: getters.actual,
