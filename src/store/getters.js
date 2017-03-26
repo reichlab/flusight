@@ -74,7 +74,6 @@ export const timeChartData = (state, getters) => {
   let regionSubset = state.data[getters['switches/selectedRegion']]
 
   return {
-    region: regionSubset.subId, // Submission ids for displaying text
     observed: getters.observed,
     actual: getters.actual,
     baseline: getters.baseline,
