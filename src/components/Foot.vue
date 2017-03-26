@@ -22,7 +22,7 @@ footer.footer
       | see the supported browsers
       | <a href="https://github.com/d3/d3/wiki#supported-environments">here</a>.
       | The <a v-bind:href="branding.sourceUrl">source</a> is licensed
-      | <a v-bind:href="https://opensource.org/licenses/MIT">MIT</a>.
+      | <a href="https://opensource.org/licenses/MIT">MIT</a>.
 </template>
 
 <script>
