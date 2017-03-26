@@ -91,10 +91,12 @@ export default {
       'introAtLast',
       'introShow',
       'introStep'
-    ])
+    ]),
+    ...mapGetters(['branding'])
   },
   methods: {
     ...mapActions('intro', [
+      'appendIntroItems',
       'moveIntroForward',
       'moveIntroBackward',
       'moveIntroFinish',
@@ -139,6 +141,61 @@ export default {
     }
   },
   ready () {
+    // Append intro items
+    this.appendIntroItems([
+      {
+        title: 'Season',
+        content: `Use this pull-down menu to select the flu season`,
+        direction: 'right',
+        element: '#season-selector'
+      },
+      {
+        title: 'Predictions',
+        content: `<p>You can use your keyboard's arrow keys or mouse to move
+                  between weeks for which we have data and predictions.</p>
+                  <br><p>The "current week" is the leading edge of the grey
+                  shaded region: the predictions shown were made when that
+                  week's data became available.</p><br><p>A forecast for the
+                  next four weeks is shown, as is the time and height of the
+                  peak week and the time of season onset.</p>`,
+        direction: 'left',
+        element: '#timechart-container'
+      },
+      {
+        title: 'Legend',
+        content: `You can interact with the legend to display different
+                  combinations of models, or to toggle the historical data
+                  lines and change confidence interval. Click on the links
+                  next to the models for more information about the models
+                  themselves.`,
+        direction: 'left',
+        element: '#legend'
+      },
+      {
+        title: 'Other controls',
+        content: `You can use these buttons to hide the legend, or move the
+                  graph forward or backward in time.`,
+        direction: 'left',
+        element: '#nav-controls'
+      },
+      {
+        title: 'US Map',
+        content: `<p>The map shows data for the currently selected week.</p>
+                  <p>You can also click on the map to see predictions for a
+                  particular region.</p>`,
+        direction: 'right',
+        element: '#map-intro'
+      },
+      {
+        title: 'Finished',
+        content: `Check out the source for this app and provide feedback on
+                  the project's github page <a href="` +
+                  this.branding.sourceUrl + `" target="_blank">here</a>.`,
+        direction: 'left',
+        element: ''
+      }
+    ])
+
     this.demoStep(this.currentIntro)
     this.moveIntroFinish()
 

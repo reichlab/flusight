@@ -29,26 +29,17 @@ const actions = {
     items.forEach(item => commit(types.APPEND_INTRO_ITEM, item))
   },
 
-  showLegend ({ dispatch, rootGetters }) {
-    if (!rootGetters['switches/legendShow']) {
-      dispatch('switches/toggleLegend', null, { root: true })
-    }
-  },
-
   moveIntroStart ({ commit, dispatch }) {
-    dispatch('showLegend')
     commit(types.RESET_INTRO_POINTER)
     commit(types.SHOW_INTRO)
   },
 
   moveIntroForward ({ commit, dispatch, getters }) {
-    dispatch('showLegend')
     if (getters.introAtLast) commit(types.HIDE_INTRO)
     else commit(types.INCREMENT_INTRO_POINTER)
   },
 
   moveIntroBackward ({ commit, dispatch }) {
-    dispatch('showLegend')
     commit(types.DECREMENT_INTRO_POINTER)
   },
 
