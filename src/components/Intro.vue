@@ -169,14 +169,14 @@ export default {
                   next to the models for more information about the models
                   themselves.`,
         direction: 'left',
-        element: '#legend'
+        element: '.legend'
       },
       {
         title: 'Other controls',
         content: `You can use these buttons to hide the legend, or move the
                   graph forward or backward in time.`,
         direction: 'left',
-        element: '#nav-controls'
+        element: '.nav-controls'
       },
       {
         title: 'US Map',
