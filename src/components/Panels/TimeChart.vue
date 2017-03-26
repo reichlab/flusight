@@ -27,7 +27,7 @@ export default {
     let timechart = new TimeChart('#timechart')
 
     timechart.eventHooks.push(eventData => {
-      if (eventData.type === 'weekUpdate') {
+      if (eventData.type === 'positionUpdate') {
         this.updateSelectedWeek(eventData.value)
       }
     })
