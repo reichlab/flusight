@@ -1,9 +1,7 @@
-import * as types from '../mutation-types'
 import * as d3 from 'd3'
 
 const state = {
   colors: d3.schemeCategory10,
-  selectedStat: 1,
   stats: [{
     id: 'mae',
     name: 'Mean Absolute Error',
@@ -32,12 +30,6 @@ const getters = {
   },
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
-
-  selectedStat: state => state.selectedStat,
-
-  statAtLast: (state, getters) => getters.selectedStat === state.stats.length - 1,
-
-  statAtFirst: (state, getters) => getters.selectedStat === 0,
 
   modelStats: (state, getters) => {
     let stats = getters.models.map(m => m.stats)
@@ -81,32 +73,9 @@ const getters = {
     }
   }
 }
-// actions
-const actions = {
-  statPrevious ({ commit, getters }) {
-    if (!getters.statAtFirst) {
-      commit(types.UPDATE_SELECTED_STAT, getters.selectedStat - 1)
-    }
-  },
-
-  statNext ({ commit, getters }) {
-    if (!getters.statAtLast) {
-      commit(types.UPDATE_SELECTED_STAT, getters.selectedStat + 1)
-    }
-  }
-}
-
-// mutations
-const mutations = {
-  [types.UPDATE_SELECTED_STAT] (state, val) {
-    state.selectedStat = val
-  }
-}
 
 export default {
   namespaced: true,
   state,
-  getters,
-  actions,
-  mutations
+  getters
 }

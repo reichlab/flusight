@@ -3,12 +3,6 @@ import * as types from '../mutation-types'
 const state = {
   region: 0,
   season: 0,
-
-  panels: {
-    legend: true,
-    stats: false
-  },
-
   choroplethRelative: false
 }
 
@@ -16,9 +10,7 @@ const state = {
 const getters = {
   selectedSeason: state => state.season,
   selectedRegion: state => state.region,
-  choroplethRelative: state => state.choroplethRelative,
-  legendShow: state => state.panels.legend,
-  statsShow: state => state.panels.stats
+  choroplethRelative: state => state.choroplethRelative
 }
 // actions
 const actions = {
@@ -30,14 +22,6 @@ const actions = {
     // Trigger deselection
     if (getters.selectedRegion === val) commit(types.UPDATE_SELECTED_REGION, 0)
     else commit(types.UPDATE_SELECTED_REGION, val)
-  },
-
-  toggleLegend ({ commit }) {
-    commit(types.TOGGLE_PANEL, 'legend')
-  },
-
-  toggleStats ({ commit }) {
-    commit(types.TOGGLE_PANEL, 'stats')
   },
 
   toggleRelative ({ commit }) {
@@ -53,14 +37,6 @@ const mutations = {
 
   [types.UPDATE_SELECTED_SEASON] (state, val) {
     state.season = val
-  },
-
-  [types.TOGGLE_PANEL] (state, val) {
-    // Hide everything else
-    for (let panel in state.panels) {
-      if (panel === val) state.panels[panel] = !state.panels[panel]
-      else state.panels[panel] = false
-    }
   },
 
   [types.TOGGLE_CHOROPLETH_RELATIVE] (state) {
