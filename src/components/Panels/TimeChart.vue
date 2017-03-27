@@ -23,7 +23,6 @@ export default {
     ])
   },
   ready () {
-
     let timeChartOptions = {
       baseline: {
         text: ['CDC', 'Baseline'],
