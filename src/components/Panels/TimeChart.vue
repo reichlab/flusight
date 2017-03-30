@@ -44,7 +44,8 @@ export default {
                         <br><br><em>Click to know more</em>`,
           url: 'http://www.cdc.gov/flu/weekly/overview.htm'
         }
-      }
+      },
+      pointType: 'mmwr-week'
     }
 
     // Initialize time chart
