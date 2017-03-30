@@ -18,7 +18,7 @@ export const baselineScale = (values, baseline) => {
  */
 export const getMaxLagData = actual => {
   return actual.map(d => {
-    let dataToReturn = -1
+    let dataToReturn = null
     // Handle zero length values
     if (d.data.length !== 0) {
       dataToReturn = d.data[0].value
