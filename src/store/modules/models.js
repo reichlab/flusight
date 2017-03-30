@@ -15,9 +15,40 @@ const state = {
 // getters
 const getters = {
   models: (state, getters, rootState, rootGetters) => {
-    return rootState.data[rootGetters['switches/selectedRegion']]
-      .seasons[rootGetters['switches/selectedSeason']]
-      .models
+    let modelsWithWeek = rootState.data[rootGetters['switches/selectedRegion']]
+        .seasons[rootGetters['switches/selectedSeason']]
+        .models
+    let timePointsWeek = rootGetters['timePoints'].map(tp => tp.week)
+
+    function weekToIndex (week) {
+      let wInt = Math.floor(week)
+      if (wInt === 0) wInt = Math.max(...timePointsWeek)
+      if (wInt === 53) wInt = 1
+      return timePointsWeek.indexOf(wInt)
+    }
+
+    modelsWithWeek.forEach(m => {
+      let oldPredictions = m.predictions.slice()
+      m.predictions = timePointsWeek.map(week => {
+        let indexOfWeek = oldPredictions.map(p => p.week % 100).indexOf(week)
+        if (indexOfWeek > -1) {
+          let { week, ...rest } = oldPredictions[indexOfWeek] // eslint-disable-line
+          // Transform weeks to indices
+          let weekTargets = ['peakWeek', 'onsetWeek']
+          weekTargets.forEach(target => {
+            rest[target].point = weekToIndex(rest[target].point)
+            rest[target].high = rest[target].high.map(val => weekToIndex(val))
+            rest[target].low = rest[target].low.map(val => weekToIndex(val))
+          })
+
+          return rest
+        } else {
+          return null
+        }
+      })
+    })
+
+    return modelsWithWeek
   },
 
   modelIds: (state, getters) => getters.models.map(m => m.id),
