@@ -15,15 +15,15 @@ const getters = {
     return text
   },
   weeks: (state, getters, rootState, rootGetters) => {
-    return rootGetters.actual.map(d => d.week % 100)
+    return rootGetters.timePoints.map(d => d.week)
   },
   years: (state, getters, rootState, rootGetters) => {
-    return rootGetters.actual.map(d => d.week / 100)
+    return rootGetters.timePoints.map(d => d.year)
   },
   actualIndices: (state, getters, rootState, rootGetters) => {
-    return rootGetters.actual
-        .filter(d => d.data !== -1)
-        .map(d => getters.weeks.indexOf(d.week % 100))
+    return rootGetters.actual.map((d, idx) => {
+      return (d ? idx : null)
+    }).filter(d => d !== null)
   },
   actualFirst: (state, getters) => getters.actualIndices[0],
   actualLast: (state, getters) => {

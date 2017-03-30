@@ -1,7 +1,4 @@
-import * as d3 from 'd3'
-
 const state = {
-  colors: d3.schemeCategory10,
   stats: [{
     id: 'mae',
     name: 'Mean Absolute Error',
@@ -24,10 +21,6 @@ const getters = {
   },
 
   modelIds: (state, getters) => getters.models.map(m => m.id),
-
-  modelColors: (state, getters) => {
-    return state.colors.filter((color, idx) => idx < getters.models.length)
-  },
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
 

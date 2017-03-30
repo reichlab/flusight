@@ -48,7 +48,7 @@ export const trimHistory = (historyActual, numWeeks) => {
     })
   }
 
-  return historyTrimmed
+  return historyTrimmed.map(d => d.data)
 }
 
 /**
@@ -60,7 +60,7 @@ export const choroplethDataRange = (state, getters) => {
 
   state.data.map(region => {
     region.seasons.map(season => {
-      let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d !== -1)
+      let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d)
 
       if (getters['switches/choroplethRelative']) {
         // Use baseline scaled data

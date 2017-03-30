@@ -16,7 +16,7 @@ export const choropleth = state => state.choropleth
  */
 export const observed = (state, getters) => {
   let regionSubset = state.data[getters['switches/selectedRegion']]
-  return regionSubset.seasons[getters['switches/selectedSeason']].actual
+  return regionSubset.seasons[getters['switches/selectedSeason']].actual.map(d => d.data)
 }
 
 /**
@@ -41,7 +41,8 @@ export const actual = (state, getters) => {
   let regionSubset = state.data[getters['switches/selectedRegion']]
   let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
 
-  return utils.getMaxLagData(seasonSubset.actual)
+  // Return just the values
+  return utils.getMaxLagData(seasonSubset.actual).map(d => d.data)
 }
 
 /**
