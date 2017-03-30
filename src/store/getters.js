@@ -20,6 +20,21 @@ export const observed = (state, getters) => {
 }
 
 /**
+ * Return a series of time points to be referenced by all series
+ */
+export const timePoints = (state, getters) => {
+  let regionSubset = state.data[getters['switches/selectedRegion']]
+  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
+
+  return seasonSubset.actual.map(d => {
+    return {
+      week: d.week % 100,
+      year: Math.floor(d.week / 100)
+    }
+  })
+}
+
+/**
  * Return actual data for currently selected state
  */
 export const actual = (state, getters) => {
@@ -72,6 +87,7 @@ export const baseline = (state, getters) => {
  */
 export const timeChartData = (state, getters) => {
   return {
+    timePoints: getters.timePoints,
     observed: getters.observed,
     actual: getters.actual,
     baseline: getters.baseline,
