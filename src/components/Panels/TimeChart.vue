@@ -16,9 +16,15 @@ div
 
 <script>
 import { TimeChart, DistributionChart } from 'd3-foresight'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters('models', [
+      'modelStatsMeta',
+      'modelCIs'
+    ])
+  },
   methods: {
     ...mapActions([
       'initTimeChart',
@@ -54,19 +60,21 @@ export default {
           url: 'http://www.cdc.gov/flu/weekly/overview.htm'
         }
       },
-      pointType: 'mmwr-week'
+      pointType: 'mmwr-week',
+      confidenceIntervals: this.modelCIs,
+      statsMeta: this.modelStatsMeta
     }
 
     // Initialize time chart
-    let timeChart = new TimeChart('#timechart', timeChartOptions)
+    // let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    timeChart.eventHooks.push(eventData => {
-      if (eventData.type === 'positionUpdate') {
-        this.updateSelectedWeek(eventData.value)
-      }
-    })
+    // timeChart.eventHooks.push(eventData => {
+    //   if (eventData.type === 'positionUpdate') {
+    //     this.updateSelectedWeek(eventData.value)
+    //   }
+    // })
 
-    this.initTimeChart(timeChart)
+    // this.initTimeChart(timeChart)
 
     // // Setup selected data
     // this.plotTimeChart()
@@ -75,7 +83,11 @@ export default {
     // this.updateTimeChart()
 
     // Override
-    let distributionChart = new DistributionChart('#timechart')
+    let distributionChartConfig = {
+      statsMeta: this.modelStatsMeta
+    }
+
+    let distributionChart = new DistributionChart('#timechart', distributionChartConfig)
 
     this.initDistributionChart(distributionChart)
     this.plotDistributionChart()

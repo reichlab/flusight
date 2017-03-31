@@ -1,15 +1,19 @@
 const state = {
-  stats: [{
+  statsMeta: [{
     id: 'mae',
     name: 'Mean Absolute Error',
+    header: ['1 wk', '2 wk', '3 wk', '4 wk'],
     url: 'https://en.wikipedia.org/wiki/Mean_absolute_error',
     bestFunc: Math.min
   }, {
     id: 'log',
     name: 'Mean Log Score',
+    header: ['1 wk', '2 wk', '3 wk', '4 wk'],
     url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
     bestFunc: Math.max
-  }]
+  }],
+
+  confidenceIntervals: ['90%', '50%']
 }
 
 // getters
@@ -27,6 +31,7 @@ const getters = {
       return timePointsWeek.indexOf(wInt)
     }
 
+    // TODO fix this mutation
     modelsWithWeek.forEach(m => {
       let oldPredictions = m.predictions.slice()
       m.predictions = timePointsWeek.map(week => {
@@ -46,6 +51,13 @@ const getters = {
           return null
         }
       })
+
+      // Convert stats to simple series
+      let statsKeys = ['log', 'mae']
+      let targetKeys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+      statsKeys.forEach(skey => {
+        m.stats[skey] = targetKeys.map(tkey => m.stats[skey][tkey])
+      })
     })
 
     return modelsWithWeek
@@ -55,11 +67,8 @@ const getters = {
    * Temporary getter to test distribution plots
    */
   modelRandomDistribution: (state, getters, rootState, rootGetters) => {
-    let modelsWithWeek = rootState.data[rootGetters['switches/selectedRegion']]
-        .seasons[rootGetters['switches/selectedSeason']]
-        .models
-
-    return modelsWithWeek.map(m => {
+    let models = getters.models
+    return models.map(m => {
       m.predictions = {
         x: [...Array(10).keys()],
         y: [...Array(10).keys()].map(d => Math.random())
@@ -72,47 +81,9 @@ const getters = {
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
 
-  modelStats: (state, getters) => {
-    let stats = getters.models.map(m => m.stats)
+  modelStatsMeta: (state, getters) => state.statsMeta,
 
-    let statsMeta = state.stats[getters.selectedStat]
-
-    let output = {}
-    // Assume if one model has no stats, no one has
-    if (stats[0]) {
-      // Formatted stuff
-      let keys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-
-      output.name = statsMeta.name
-      output.url = statsMeta.url
-      let data = stats.map(s => s[statsMeta.id])
-      output.data = data.map(d => {
-        let ob = {}
-        keys.forEach(key => {
-          ob[key] = {
-            value: d[key] ? d[key].toFixed(2) : 'NA',
-            best: false
-          }
-        })
-        return ob
-      })
-
-      // Apply properties to best item
-      // Don't go for it when value is null
-      if (data[0]['oneWk']) {
-        keys.forEach(key => {
-          let perKey = data.map(d => d[key])
-          let bestIdx = perKey.indexOf(statsMeta.bestFunc(...perKey))
-
-          output.data[bestIdx][key].best = true
-        })
-      }
-
-      return output
-    } else {
-      return null
-    }
-  }
+  modelCIs: (state, getters) => state.confidenceIntervals
 }
 
 export default {
