@@ -10,6 +10,10 @@ export const initChoropleth = ({ commit }, val) => {
   commit(types.SET_CHOROPLETH, val)
 }
 
+export const initDistributionChart = ({ commit }, val) => {
+  commit(types.SET_DISTRIBUTIONCHART, val)
+}
+
 // Plotting (data-changing) actions
 // --------------------------------
 
@@ -18,6 +22,13 @@ export const initChoropleth = ({ commit }, val) => {
  */
 export const plotTimeChart = ({ getters }) => {
   getters.timeChart.plot(getters.timeChartData)
+}
+
+/**
+ * Plot distribution chart
+ */
+export const plotDistributionChart = ({ getters }) => {
+  getters.distributionChart.plot(getters.distributionChartData)
 }
 
 /**

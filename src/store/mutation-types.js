@@ -3,6 +3,7 @@
 // Init mutations
 export const SET_TIMECHART = 'SET_TIMECHART'
 export const SET_CHOROPLETH = 'SET_CHOROPLETH'
+export const SET_DISTRIBUTIONCHART = 'SET_DISTRIBUTIONCHART'
 
 // weeks module
 export const UPDATE_SELECTED_WEEK = 'UPDATE_SELECTED_WEEK'

@@ -51,6 +51,23 @@ const getters = {
     return modelsWithWeek
   },
 
+  /**
+   * Temporary getter to test distribution plots
+   */
+  modelRandomDistribution: (state, getters, rootState, rootGetters) => {
+    let modelsWithWeek = rootState.data[rootGetters['switches/selectedRegion']]
+        .seasons[rootGetters['switches/selectedSeason']]
+        .models
+
+    return modelsWithWeek.map(m => {
+      m.predictions = {
+        x: [...Array(10).keys()],
+        y: [...Array(10).keys()].map(d => Math.random())
+      }
+      return m
+    })
+  },
+
   modelIds: (state, getters) => getters.models.map(m => m.id),
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),

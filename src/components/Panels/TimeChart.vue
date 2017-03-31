@@ -4,18 +4,27 @@
 <template lang="pug">
 div
   // Main plotting div
+  .tabs.is-small
+    ul
+      li
+        a Time Chart
+      li.is-active
+        a Distribution Chart
+
   #timechart
 </template>
 
 <script>
-import { TimeChart } from 'd3-foresight'
+import { TimeChart, DistributionChart } from 'd3-foresight'
 import { mapActions } from 'vuex'
 
 export default {
   methods: {
     ...mapActions([
       'initTimeChart',
+      'initDistributionChart',
       'plotTimeChart',
+      'plotDistributionChart',
       'updateTimeChart'
     ]),
     ...mapActions('weeks', [
@@ -48,22 +57,28 @@ export default {
       pointType: 'mmwr-week'
     }
 
+    // // Initialize time chart
+    // let timeChart = new TimeChart('#timechart', timeChartOptions)
+
+    // timeChart.eventHooks.push(eventData => {
+    //   if (eventData.type === 'positionUpdate') {
+    //     this.updateSelectedWeek(eventData.value)
+    //   }
+    // })
+
+    // this.initTimeChart(timeChart)
+
+    // // Setup selected data
+    // this.plotTimeChart()
+
+    // // Hot start
+    // this.updateTimeChart()
+
     // Initialize time chart
-    let timechart = new TimeChart('#timechart', timeChartOptions)
+    let distributionChart = new DistributionChart('#timechart')
 
-    timechart.eventHooks.push(eventData => {
-      if (eventData.type === 'positionUpdate') {
-        this.updateSelectedWeek(eventData.value)
-      }
-    })
-
-    this.initTimeChart(timechart)
-
-    // Setup selected data
-    this.plotTimeChart()
-
-    // Hot start
-    this.updateTimeChart()
+    this.initDistributionChart(distributionChart)
+    this.plotDistributionChart()
   }
 }
 </script>

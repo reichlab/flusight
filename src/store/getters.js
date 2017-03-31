@@ -10,6 +10,7 @@ export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weight
 
 export const timeChart = state => state.timeChart
 export const choropleth = state => state.choropleth
+export const distributionChart = state => state.distributionChart
 
 /**
  * Return observed data for currently selected state
@@ -94,6 +95,16 @@ export const timeChartData = (state, getters) => {
     baseline: getters.baseline,
     models: getters['models/models'],
     history: getters.history
+  }
+}
+
+/**
+ * Return data for distribution plot
+ */
+export const distributionChartData = (state, getters) => {
+  return {
+    actual: Math.random(),
+    models: getters['models/modelRandomDistribution']
   }
 }
 

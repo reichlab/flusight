@@ -53,7 +53,8 @@ export default {
       'updateTimeChart',
       'updateChoropleth',
       'plotChoropleth',
-      'plotTimeChart'
+      'plotTimeChart',
+      'plotDistributionChart'
     ])
   },
   watch: {
@@ -63,16 +64,18 @@ export default {
       // - map clicks
       // Time series gets new data
       // Choropleth gets highlight
-      this.plotTimeChart()
+      // this.plotTimeChart()
+      this.plotDistributionChart()
       this.updateChoropleth()
-      this.updateTimeChart()
+      // this.updateTimeChart()
     },
     selectedSeason: function () {
       // Triggered by selector
       // Choropleth gets new plot
       // Time series gets new data
-      this.plotTimeChart()
+      // this.plotTimeChart()
       this.plotChoropleth()
+      this.plotDistributionChart()
     },
     choroplethRelative: function () {
       // Triggered by relative selector
@@ -87,7 +90,8 @@ export default {
       // Choropleth gets transitions
       // Time series gets transitions
       this.updateChoropleth()
-      this.updateTimeChart()
+      // this.updateTimeChart()
+      this.plotDistributionChart()
     }
   }
 }

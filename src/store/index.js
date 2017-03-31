@@ -17,6 +17,7 @@ const state = {
   // D3 plot objects
   timeChart: null,
   choropleth: null,
+  distributionChart: null,
 
   // All the data!
   data: jsonData.data,
@@ -26,13 +27,16 @@ const state = {
 
 // mutations
 const mutations = {
-
   [types.SET_TIMECHART] (state, val) {
     state.timeChart = val
   },
 
   [types.SET_CHOROPLETH] (state, val) {
     state.choropleth = val
+  },
+
+  [types.SET_DISTRIBUTIONCHART] (state, val) {
+    state.distributionChart = val
   }
 }
 
