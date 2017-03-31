@@ -57,16 +57,16 @@ export default {
       pointType: 'mmwr-week'
     }
 
-    // // Initialize time chart
-    // let timeChart = new TimeChart('#timechart', timeChartOptions)
+    // Initialize time chart
+    let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    // timeChart.eventHooks.push(eventData => {
-    //   if (eventData.type === 'positionUpdate') {
-    //     this.updateSelectedWeek(eventData.value)
-    //   }
-    // })
+    timeChart.eventHooks.push(eventData => {
+      if (eventData.type === 'positionUpdate') {
+        this.updateSelectedWeek(eventData.value)
+      }
+    })
 
-    // this.initTimeChart(timeChart)
+    this.initTimeChart(timeChart)
 
     // // Setup selected data
     // this.plotTimeChart()
@@ -74,7 +74,7 @@ export default {
     // // Hot start
     // this.updateTimeChart()
 
-    // Initialize time chart
+    // Override
     let distributionChart = new DistributionChart('#timechart')
 
     this.initDistributionChart(distributionChart)
