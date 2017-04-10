@@ -13,7 +13,17 @@ const state = {
     bestFunc: Math.max
   }],
 
-  confidenceIntervals: ['90%', '50%']
+  confidenceIntervals: ['90%', '50%'],
+
+  targetNames: [
+    '1 week ahead',
+    '2 weeks ahead',
+    '3 weeks ahead',
+    '4 weeks ahead',
+    'Peak week',
+    'Peak percentage',
+    'Onset week'
+  ]
 }
 
 // getters
@@ -64,15 +74,18 @@ const getters = {
   },
 
   /**
-   * Temporary getter to test distribution plots
+   * TODO Temporary getter to test distribution plots
    */
-  modelRandomDistribution: (state, getters, rootState, rootGetters) => {
+  modelDistributions: (state, getters, rootState, rootGetters) => {
     let models = getters.models
     return models.map(m => {
-      m.predictions = {
-        x: [...Array(10).keys()],
-        y: [...Array(10).keys()].map(d => Math.random())
-      }
+      m.targets = state.targetNames.map(tn => {
+        return {
+          name: tn,
+          data: [...Array(10).keys()].map(x => [x, Math.random()]),
+          actual: Math.floor(Math.random() * (10 - 0)) + 0
+        }
+      })
       return m
     })
   },

@@ -103,8 +103,9 @@ export const timeChartData = (state, getters) => {
  */
 export const distributionChartData = (state, getters) => {
   return {
-    actual: Math.random(),
-    models: getters['models/modelRandomDistribution']
+    timePoints: getters.timePoints,
+    currentIdx: getters['weeks/selectedWeekIdx'],
+    models: getters['models/modelDistributions']
   }
 }
 
