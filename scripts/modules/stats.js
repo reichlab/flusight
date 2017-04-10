@@ -78,7 +78,7 @@ const statsCore = (filteredPreds, actual, statFunc) => {
     scores[key] = scores[key].reduce((a, b) => a + b) / scores[key].length
   })
 
-  // Return a plain list mapping to keys
+  // Return a plain list
   return keys.map(key => scores[key])
 }
 

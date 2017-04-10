@@ -48,7 +48,7 @@ const getters = {
     //
     // What we get after processing is
     // an array with null for each week without prediction and others like
-    // {fourWk, oneWk, etc}
+    // {fourWk, oneWk, onsetTime, peakTime etc}
     // Also we convert the week stamp (201630) to index for the timestamp series that
     // we are sending anyways
     //

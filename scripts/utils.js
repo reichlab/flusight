@@ -35,19 +35,38 @@ const getWeekFiles = directory => {
  * @returns {Object} an object with output for the region
  */
 const regionFilter = (data, region) => {
-  let filtered = {}
+  // Exploiting the fact that we know the structure of prediction at each week,
+  // we generate the optimal structure for foresight
+  let filtered = {
+    series: [null, null, null, null],
+    peakTime: null,
+    peakValue: null,
+    onsetTime: null
+  }
 
-  data.filter(d => d.region === region).forEach((d, idx) => {
-    filtered[d.target] = {
-      point: d.point,
-      low: d.low,
-      high: d.high
+  // Convert week ahead targets to simple series
+  let weekAheadTargets = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
+
+  data.filter(d => d.region === region).forEach(d => {
+    let wAIdx = weekAheadTargets.indexOf(d.target)
+    if (wAIdx > -1) {
+      filtered.series[wAIdx] = {
+        point: d.point,
+        low: d.low,
+        high: d.high
+      }
+    } else {
+      filtered[d.target] = {
+        point: d.point,
+        low: d.low,
+        high: d.high
+      }
     }
   })
 
-  // Assuming all the predictions are not present when one isn't
-  if (filtered.oneWk.point === -1) return -1
-  else return filtered
+  // Assuming all the predictions are not present when one wk isn't
+  if (filtered.series[0]) return filtered
+  else return -1
 }
 
 /**
