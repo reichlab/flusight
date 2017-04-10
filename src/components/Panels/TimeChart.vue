@@ -66,31 +66,28 @@ export default {
     }
 
     // Initialize time chart
-    // let timeChart = new TimeChart('#timechart', timeChartOptions)
+    let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    // timeChart.eventHooks.push(eventData => {
-    //   if (eventData.type === 'positionUpdate') {
-    //     this.updateSelectedWeek(eventData.value)
-    //   }
-    // })
+    timeChart.eventHooks.push(eventData => {
+      if (eventData.type === 'positionUpdate') {
+        this.updateSelectedWeek(eventData.value)
+      }
+    })
 
-    // this.initTimeChart(timeChart)
+    this.initTimeChart(timeChart)
 
-    // // Setup selected data
-    // this.plotTimeChart()
+    // Setup selected data
+    this.plotTimeChart()
 
-    // // Hot start
-    // this.updateTimeChart()
+    // // Override
+    // let distributionChartConfig = {
+    //   statsMeta: this.modelStatsMeta
+    // }
 
-    // Override
-    let distributionChartConfig = {
-      statsMeta: this.modelStatsMeta
-    }
+    // let distributionChart = new DistributionChart('#timechart', distributionChartConfig)
 
-    let distributionChart = new DistributionChart('#timechart', distributionChartConfig)
-
-    this.initDistributionChart(distributionChart)
-    this.plotDistributionChart()
+    // this.initDistributionChart(distributionChart)
+    // this.plotDistributionChart()
   }
 }
 </script>

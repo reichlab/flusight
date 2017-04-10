@@ -284,9 +284,9 @@ const longToJson = longFormat => {
 
   // Map keys from csv to json
   let keyMap = {
-    'Season onset': 'onsetWeek',
-    'Season peak week': 'peakWeek',
-    'Season peak percentage': 'peakPercent',
+    'Season onset': 'onsetTime',
+    'Season peak week': 'peakTime',
+    'Season peak percentage': 'peakValue',
     '1 wk ahead': 'oneWk',
     '2 wk ahead': 'twoWk',
     '3 wk ahead': 'threeWk',

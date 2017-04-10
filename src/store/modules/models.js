@@ -42,6 +42,19 @@ const getters = {
     }
 
     // TODO fix this mutation
+    // NOTE documenting this process for further work
+    // Without anything, m.predictions is a list of elements like
+    // {fourWk, oneWk..., week}
+    //
+    // What we get after processing is
+    // an array with null for each week without prediction and others like
+    // {fourWk, oneWk, etc}
+    // Also we convert the week stamp (201630) to index for the timestamp series that
+    // we are sending anyways
+    //
+    // What we finally would like is
+    // an array with null for each week without prediction and others like
+    // {series: [...oneWk, ...twoWk, ...], onsetTime, peakTime, peakValue}
     modelsWithWeek.forEach(m => {
       let oldPredictions = m.predictions.slice()
       m.predictions = timePointsWeek.map(week => {
@@ -49,8 +62,8 @@ const getters = {
         if (indexOfWeek > -1) {
           let { week, ...rest } = oldPredictions[indexOfWeek] // eslint-disable-line
           // Transform weeks to indices
-          let weekTargets = ['peakWeek', 'onsetWeek']
-          weekTargets.forEach(target => {
+          let timeTargets = ['peakTime', 'onsetTime']
+          timeTargets.forEach(target => {
             rest[target].point = weekToIndex(rest[target].point)
             rest[target].high = rest[target].high.map(val => weekToIndex(val))
             rest[target].low = rest[target].low.map(val => weekToIndex(val))
