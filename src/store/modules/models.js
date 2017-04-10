@@ -61,13 +61,6 @@ const getters = {
           return null
         }
       })
-
-      // Convert stats to simple series
-      let statsKeys = ['log', 'mae']
-      let targetKeys = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-      statsKeys.forEach(skey => {
-        m.stats[skey] = targetKeys.map(tkey => m.stats[skey][tkey])
-      })
     })
 
     return modelsWithWeek

@@ -78,7 +78,8 @@ const statsCore = (filteredPreds, actual, statFunc) => {
     scores[key] = scores[key].reduce((a, b) => a + b) / scores[key].length
   })
 
-  return scores
+  // Return a plain list mapping to keys
+  return keys.map(key => scores[key])
 }
 
 const getModelStats = (cachedPredictions, actual, regionId) => {
