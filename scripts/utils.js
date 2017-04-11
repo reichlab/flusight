@@ -8,6 +8,63 @@ const yaml = require('js-yaml')
 const mmwr = require('mmwr-week')
 
 /**
+ * Skip points which are not that important by calculating simple
+ * importance values
+ */
+const compressArray = (array, ratio) => {
+  let importances = Array(array.length).fill([0, 0])
+  // We will keep the first and the last value
+  importances[0] = [0, 100]
+  importances[array.length - 1] = [array.length - 1, 100]
+
+  for (let i = 1; i < array.length - 1; i++) {
+    importances[i] = [i, array[i] - (array[i - 1] + array[i + 1]) / 2]
+  }
+
+  importances.sort((a, b) => (a[1] - b[1]))
+
+  // Skip values
+  let skip = array.length - Math.floor(ratio * array.length)
+  return importances.slice(skip).map(imp => [imp[0], array[imp[0]]])
+}
+
+/**
+ * Regenerate array in the compressed representation
+ * Assume its a probability distribution and so it sums to one
+ */
+const deCompressArray = compArray => {
+  let array = Array(Math.max(...compArray.map(i => i[0]))).fill(0)
+
+  let clamped = []
+  // Fill in given values
+  compArray.forEach(item => {
+    array[item[0]] = item[1]
+    clamped.push(item[0])
+  })
+
+  let epsilon = 0.00000001 // Try to acheive 1e-8 error
+  let maxIter = 100
+  let sum, error
+
+  for (let i = 0; i < maxIter; i++) {
+    sum = array.reduce((a, b) => (a + b), 0)
+    error = 1 - sum
+    if (Math.abs(error) < epsilon) {
+      break
+    } else {
+      // Neighbour filling
+      for (let j = 1; j < array.length - 1; j++) {
+        if (clamped.indexOf(j) === -1) {
+          array[j] = (array[j - 1] + array[j + 1]) / 2
+        }
+      }
+    }
+  }
+
+  return array
+}
+
+/**
  * Return list of weekStamps in given mmwr season
  */
 const seasonToWeekStamps = season => {
@@ -80,7 +137,8 @@ const regionFilter = (data, region) => {
     series: [null, null, null, null],
     peakTime: null,
     peakValue: null,
-    onsetTime: null
+    onsetTime: null,
+    bins: null
   }
 
   // Convert week ahead targets to simple series
@@ -88,17 +146,24 @@ const regionFilter = (data, region) => {
 
   data.filter(d => d.region === region).forEach(d => {
     let wAIdx = weekAheadTargets.indexOf(d.target)
+
+    let compressedBins = null
+    if (d.bins) {
+      compressedBins = compressArray(d.bins.map(b => b[2]), 0.1)
+    }
     if (wAIdx > -1) {
       filtered.series[wAIdx] = {
         point: d.point,
         low: d.low,
-        high: d.high
+        high: d.high,
+        bins: compressedBins
       }
     } else {
       filtered[d.target] = {
         point: d.point,
         low: d.low,
-        high: d.high
+        high: d.high,
+        bins: compressedBins
       }
     }
   })
