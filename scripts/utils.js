@@ -43,19 +43,21 @@ const deCompressArray = compArray => {
   })
 
   let epsilon = 0.00000001 // Try to acheive 1e-8 error
+  let alpha = 1
   let maxIter = 100
   let sum, error
 
   for (let i = 0; i < maxIter; i++) {
     sum = array.reduce((a, b) => (a + b), 0)
     error = 1 - sum
+    console.log(error)
     if (Math.abs(error) < epsilon) {
       break
     } else {
       // Neighbour filling
       for (let j = 1; j < array.length - 1; j++) {
         if (clamped.indexOf(j) === -1) {
-          array[j] = (array[j - 1] + array[j + 1]) / 2
+          array[j] += alpha * error * (array[j - 1] + array[j + 1]) / 2
         }
       }
     }
@@ -224,3 +226,6 @@ exports.getModelMeta = getModelMeta
 exports.getMaxLagData = getMaxLagData
 exports.seasonToWeekStamps = seasonToWeekStamps
 exports.weekToIndex = weekToIndex
+
+exports.compressArray = compressArray
+exports.deCompressArray = deCompressArray
