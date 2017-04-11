@@ -44,17 +44,16 @@ const getters = {
     // TODO fix this mutation
     // NOTE documenting this process for further work
     // Without anything, m.predictions is a list of elements like
-    // {fourWk, oneWk..., week}
+    // {series: [], onsetTime, peakTime ..., week}
     //
     // What we get after processing is
     // an array with null for each week without prediction and others like
-    // {fourWk, oneWk, onsetTime, peakTime etc}
+    // {series: [], onsetTime, peakTime ...}
     // Also we convert the week stamp (201630) to index for the timestamp series that
     // we are sending anyways
     //
-    // What we finally would like is
-    // an array with null for each week without prediction and others like
-    // {series: [...oneWk, ...twoWk, ...], onsetTime, peakTime, peakValue}
+    // What we need is to apply a mutation initially on the main state which does this
+    // let it stay there or just cache this change somewhere.
     modelsWithWeek.forEach(m => {
       let oldPredictions = m.predictions.slice()
       m.predictions = timePointsWeek.map(week => {
