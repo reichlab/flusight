@@ -29,53 +29,9 @@ const state = {
 // getters
 const getters = {
   models: (state, getters, rootState, rootGetters) => {
-    let modelsWithWeek = rootState.data[rootGetters['switches/selectedRegion']]
-        .seasons[rootGetters['switches/selectedSeason']]
-        .models
-    let timePointsWeek = rootGetters['timePoints'].map(tp => tp.week)
-
-    function weekToIndex (week) {
-      let wInt = Math.floor(week)
-      if (wInt === 0) wInt = Math.max(...timePointsWeek)
-      if (wInt === 53) wInt = 1
-      return timePointsWeek.indexOf(wInt)
-    }
-
-    // TODO fix this mutation
-    // NOTE documenting this process for further work
-    // Without anything, m.predictions is a list of elements like
-    // {series: [], onsetTime, peakTime ..., week}
-    //
-    // What we get after processing is
-    // an array with null for each week without prediction and others like
-    // {series: [], onsetTime, peakTime ...}
-    // Also we convert the week stamp (201630) to index for the timestamp series that
-    // we are sending anyways
-    //
-    // What we need is to apply a mutation initially on the main state which does this
-    // let it stay there or just cache this change somewhere.
-    modelsWithWeek.forEach(m => {
-      let oldPredictions = m.predictions.slice()
-      m.predictions = timePointsWeek.map(week => {
-        let indexOfWeek = oldPredictions.map(p => p.week % 100).indexOf(week)
-        if (indexOfWeek > -1) {
-          let { week, ...rest } = oldPredictions[indexOfWeek] // eslint-disable-line
-          // Transform weeks to indices
-          let timeTargets = ['peakTime', 'onsetTime']
-          timeTargets.forEach(target => {
-            rest[target].point = weekToIndex(rest[target].point)
-            rest[target].high = rest[target].high.map(val => weekToIndex(val))
-            rest[target].low = rest[target].low.map(val => weekToIndex(val))
-          })
-
-          return rest
-        } else {
-          return null
-        }
-      })
-    })
-
-    return modelsWithWeek
+    return rootState.data[rootGetters['switches/selectedRegion']]
+      .seasons[rootGetters['switches/selectedSeason']]
+      .models
   },
 
   /**

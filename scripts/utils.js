@@ -5,6 +5,45 @@
 const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
+const mmwr = require('mmwr-week')
+
+/**
+ * Return list of weekStamps in given mmwr season
+ */
+const seasonToWeekStamps = season => {
+  let first = parseInt(season.split('-')[0])
+  let second = parseInt(season.split('-')[1])
+
+  // Check the number of weeks in first year
+  let firstYear = new mmwr.MMWRDate(first)
+  let firstMaxWeek = firstYear.nWeeks
+
+  let weeks = []
+  // Weeks for first year
+  for (let i = 30; i <= firstMaxWeek; i++) {
+    weeks.push(parseInt(first + '' + i))
+  }
+
+  // Weeks for second year
+  for (let i = 1; i < 30; i++) {
+    let week
+    if (i < 10) week = parseInt(second + '0' + i)
+    else week = parseInt(second + '' + i)
+    weeks.push(week)
+  }
+  return weeks
+}
+
+/**
+ * Convert given weekstamp to index depending on the season
+ */
+const weekToIndex = (week, seasonWeekStamps) => {
+  let seasonWeeks = seasonWeekStamps.map(st => st % 100)
+  let wInt = Math.floor(week)
+  if (wInt === 0) wInt = Math.max(...seasonWeeks)
+  if (wInt === 53) wInt = 1
+  return seasonWeeks.indexOf(wInt)
+}
 
 /**
  * Return all subdirectoies in given directory
@@ -118,3 +157,5 @@ exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
 exports.getMaxLagData = getMaxLagData
+exports.seasonToWeekStamps = seasonToWeekStamps
+exports.weekToIndex = weekToIndex

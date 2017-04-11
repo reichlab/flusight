@@ -90,27 +90,39 @@ preprocess.processWide(dataDirectory, () => {
           }
 
           // Get prediction weeks for each model
-          let weeks = utils.getWeekFiles(path.join(dataDirectory, season, model))
+          let weekStamps = utils.getWeekFiles(path.join(dataDirectory, season, model))
           let modelMeta = utils.getModelMeta(path.join(dataDirectory, season, model))
+          let seasonWeekStamps = utils.seasonToWeekStamps(season)
 
-          let modelPredictions = weeks.map(week => {
-            let fileName = path.join(dataDirectory, season, model, week + '.csv')
+          let modelPredictions = seasonWeekStamps.map((sweek, index) => {
+            if (weekStamps.indexOf(sweek) === -1) {
+              // Prediction not available for this week, return null
+              return null
+            }
+
+            let fileName = path.join(dataDirectory, season, model, sweek + '.csv')
             let data = null
             // Take from cache to avoid file reads
-            if (week in cachedCSVs[season][model]) {
-              data = cachedCSVs[season][model][week]
+            if (sweek in cachedCSVs[season][model]) {
+              data = cachedCSVs[season][model][sweek]
             } else {
               data = transform.longToJson(fs.readFileSync(fileName, 'utf8'))
-              cachedCSVs[season][model][week] = data
+              cachedCSVs[season][model][sweek] = data
             }
             // Take only for the current region
             let filtered = utils.regionFilter(data, val.subId)
-            if (filtered === -1) return -1
+            if (filtered === -1) return null
             else {
-              filtered.week = week
+              // Transform weeks predictions to season indices
+              let timeTargets = ['peakTime', 'onsetTime']
+              timeTargets.forEach(t => {
+                filtered[t].point = utils.weekToIndex(filtered[t].point, seasonWeekStamps)
+                filtered[t].high = filtered[t].high.map(val => utils.weekToIndex(val, seasonWeekStamps))
+                filtered[t].low = filtered[t].low.map(val => utils.weekToIndex(val, seasonWeekStamps))
+              })
               return filtered
             }
-          }).filter(skipData => skipData !== -1)
+          })
 
           return {
             id: model,
