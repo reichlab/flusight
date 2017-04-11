@@ -6,12 +6,14 @@ div
   // Main plotting div
   .tabs.is-small
     ul
-      li
+      li(v-bind:class="[showTimeChart ? 'is-active' : '']" v-on:click="displayTimeChart")
         a Time Chart
-      li.is-active
+      li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
         a Distribution Chart
 
-  #timechart
+  .container
+    #timechart
+    #distributionchart
 </template>
 
 <script>
@@ -23,6 +25,10 @@ export default {
     ...mapGetters('models', [
       'modelStatsMeta',
       'modelCIs'
+    ]),
+    ...mapGetters('switches', [
+      'showTimeChart',
+      'showDistributionChart'
     ])
   },
   methods: {
@@ -35,6 +41,10 @@ export default {
     ]),
     ...mapActions('weeks', [
       'updateSelectedWeek'
+    ]),
+    ...mapActions('switches', [
+      'displayTimeChart',
+      'displayDistributionChart'
     ])
   },
   ready () {
@@ -65,29 +75,33 @@ export default {
       statsMeta: this.modelStatsMeta
     }
 
-    // Initialize time chart
-    let timeChart = new TimeChart('#timechart', timeChartOptions)
+    // let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    timeChart.eventHooks.push(eventData => {
-      if (eventData.type === 'positionUpdate') {
-        this.updateSelectedWeek(eventData.value)
+    // timeChart.eventHooks.push(eventData => {
+    //   if (eventData.type === 'positionUpdate') {
+    //     this.updateSelectedWeek(eventData.value)
+    //   }
+    // })
+
+    // this.initTimeChart(timeChart)
+    // this.plotTimeChart()
+
+    let distributionChartConfig = {
+      statsMeta: this.modelStatsMeta,
+      axes: {
+        x: {
+          title: ['Epidemic', 'Week'],
+          description: `Week of the calendar year, as measured by the CDC.
+                        <br><br><em>Click to know more</em>`,
+          url: 'https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf'
+        }
       }
-    })
+    }
 
-    this.initTimeChart(timeChart)
+    let distributionChart = new DistributionChart('#distributionchart', distributionChartConfig)
 
-    // Setup selected data
-    this.plotTimeChart()
-
-    // // Override
-    // let distributionChartConfig = {
-    //   statsMeta: this.modelStatsMeta
-    // }
-
-    // let distributionChart = new DistributionChart('#timechart', distributionChartConfig)
-
-    // this.initDistributionChart(distributionChart)
-    // this.plotDistributionChart()
+    this.initDistributionChart(distributionChart)
+    this.plotDistributionChart()
   }
 }
 </script>

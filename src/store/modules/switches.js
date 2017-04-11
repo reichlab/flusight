@@ -3,14 +3,18 @@ import * as types from '../mutation-types'
 const state = {
   region: 0,
   season: 0,
-  choroplethRelative: false
+  choroplethRelative: false,
+  timeChart: true,
+  distributionChart: false
 }
 
 // getters
 const getters = {
   selectedSeason: state => state.season,
   selectedRegion: state => state.region,
-  choroplethRelative: state => state.choroplethRelative
+  choroplethRelative: state => state.choroplethRelative,
+  showTimeChart: state => state.timeChart,
+  showDistributionChart: state => state.distributionChart
 }
 // actions
 const actions = {
@@ -26,6 +30,14 @@ const actions = {
 
   toggleRelative ({ commit }) {
     commit(types.TOGGLE_CHOROPLETH_RELATIVE)
+  },
+
+  displayTimeChart ({ commit }) {
+    commit(types.DISPLAY_TIMECHART)
+  },
+
+  displayDistributionChart ({ commit }) {
+    commit(types.DISPLAY_DISTRIBUTIONCHART)
   }
 }
 
@@ -41,6 +53,16 @@ const mutations = {
 
   [types.TOGGLE_CHOROPLETH_RELATIVE] (state) {
     state.choroplethRelative = !state.choroplethRelative
+  },
+
+  [types.DISPLAY_TIMECHART] (state) {
+    state.distributionChart = false
+    state.timeChart = true
+  },
+
+  [types.DISPLAY_DISTRIBUTIONCHART] (state) {
+    state.timeChart = false
+    state.distributionChart = true
   }
 }
 
