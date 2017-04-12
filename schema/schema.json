@@ -97,6 +97,7 @@
                       "data": {
                         "type": "array",
                         "uniqueItems": true,
+                        "minItems": 1,
                         "items": {
                           "required": [
                             "lag",
@@ -152,255 +153,2800 @@
                       },
                       "predictions": {
                         "type": "array",
-                        "uniqueItems": true,
                         "items": {
-                          "required": [
-                            "week"
-                          ],
+                          "required": [],
                           "properties": {
-                            "onsetWeek": {
+                            "19": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "peakWeek": {
+                            "20": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "peakPercent": {
+                            "21": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "oneWk": {
+                            "22": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "twoWk": {
+                            "23": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "threeWk": {
+                            "24": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "fourWk": {
+                            "25": {
                               "type": "object",
                               "properties": {
-                                "point": {
-                                  "type": "number"
-                                },
-                                "low": {
+                                "series": {
                                   "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
                                   "items": {
-                                    "required": [],
-                                    "properties": {}
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
                                   }
                                 },
-                                "high": {
-                                  "type": "array",
-                                  "items": {
-                                    "required": [],
-                                    "properties": {}
-                                  }
-                                }
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
                               },
                               "required": [
-                                "point",
-                                "low",
-                                "high"
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
                               ]
                             },
-                            "week": {
-                              "type": "number"
+                            "26": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "27": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "28": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "29": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "30": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "31": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "32": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "33": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "34": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "35": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "36": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "37": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "38": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "39": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
+                            },
+                            "40": {
+                              "type": "object",
+                              "properties": {
+                                "series": {
+                                  "type": "array",
+                                  "uniqueItems": true,
+                                  "minItems": 1,
+                                  "items": {
+                                    "required": [
+                                      "point"
+                                    ],
+                                    "properties": {
+                                      "point": {
+                                        "type": "number"
+                                      },
+                                      "low": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "high": {
+                                        "type": "array",
+                                        "items": {
+                                          "required": [],
+                                          "properties": {}
+                                        }
+                                      },
+                                      "bins": {}
+                                    }
+                                  }
+                                },
+                                "peakTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "peakValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "onsetTime": {
+                                  "type": "object",
+                                  "properties": {
+                                    "point": {
+                                      "type": "number"
+                                    },
+                                    "low": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "high": {
+                                      "type": "array",
+                                      "items": {
+                                        "required": [],
+                                        "properties": {}
+                                      }
+                                    },
+                                    "bins": {}
+                                  },
+                                  "required": [
+                                    "point",
+                                    "low",
+                                    "high"
+                                  ]
+                                },
+                                "bins": {}
+                              },
+                              "required": [
+                                "series",
+                                "peakTime",
+                                "peakValue",
+                                "onsetTime"
+                              ]
                             }
                           }
                         }
                       },
                       "stats": {
-                        "type": ["object", "null"],
+                        "type": "object",
                         "properties": {
                           "mae": {
-                            "type": "object",
-                            "properties": {
-                              "oneWk": {
-                                "type": "number"
-                              },
-                              "twoWk": {
-                                "type": "number"
-                              },
-                              "threeWk": {
-                                "type": "number"
-                              },
-                              "fourWk": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "oneWk",
-                              "twoWk",
-                              "threeWk",
-                              "fourWk"
-                            ]
+                            "type": "array",
+                            "items": {
+                              "required": [],
+                              "properties": {}
+                            }
                           },
                           "log": {
-                            "type": "object",
-                            "properties": {
-                              "oneWk": {
-                                "type": "number"
-                              },
-                              "twoWk": {
-                                "type": "number"
-                              },
-                              "threeWk": {
-                                "type": "number"
-                              },
-                              "fourWk": {
-                                "type": "number"
-                              }
-                            },
-                            "required": [
-                              "oneWk",
-                              "twoWk",
-                              "threeWk",
-                              "fourWk"
-                            ]
+                            "type": "array",
+                            "items": {
+                              "required": [],
+                              "properties": {}
+                            }
                           }
                         },
                         "required": [
@@ -464,9 +3010,11 @@
         "title",
         "parent",
         "description",
+        "imageUrl",
         "appUrl",
         "sourceUrl",
         "parentUrl",
+        "tweetUrl",
         "updateTime"
       ]
     }

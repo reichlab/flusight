@@ -8,16 +8,16 @@ div
     ul
       li(v-bind:class="[showTimeChart ? 'is-active' : '']" v-on:click="displayTimeChart")
         a Time Chart
-      li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
-        a Distribution Chart
+      // li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
+        // a Distribution Chart
 
   .container
     #timechart
-    #distributionchart
+    // #distributionchart
 </template>
 
 <script>
-import { TimeChart, DistributionChart } from 'd3-foresight'
+import { TimeChart } from 'd3-foresight'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -75,33 +75,33 @@ export default {
       statsMeta: this.modelStatsMeta
     }
 
-    // let timeChart = new TimeChart('#timechart', timeChartOptions)
+    let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    // timeChart.eventHooks.push(eventData => {
-    //   if (eventData.type === 'positionUpdate') {
-    //     this.updateSelectedWeek(eventData.value)
-    //   }
-    // })
-
-    // this.initTimeChart(timeChart)
-    // this.plotTimeChart()
-
-    let distributionChartConfig = {
-      statsMeta: this.modelStatsMeta,
-      axes: {
-        x: {
-          title: ['Epidemic', 'Week'],
-          description: `Week of the calendar year, as measured by the CDC.
-                        <br><br><em>Click to know more</em>`,
-          url: 'https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf'
-        }
+    timeChart.eventHooks.push(eventData => {
+      if (eventData.type === 'positionUpdate') {
+        this.updateSelectedWeek(eventData.value)
       }
-    }
+    })
 
-    let distributionChart = new DistributionChart('#distributionchart', distributionChartConfig)
+    this.initTimeChart(timeChart)
+    this.plotTimeChart()
 
-    this.initDistributionChart(distributionChart)
-    this.plotDistributionChart()
+    // let distributionChartConfig = {
+    //   statsMeta: this.modelStatsMeta,
+    //   axes: {
+    //     x: {
+    //       title: ['Epidemic', 'Week'],
+    //       description: `Week of the calendar year, as measured by the CDC.
+    //                     <br><br><em>Click to know more</em>`,
+    //       url: 'https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf'
+    //     }
+    //   }
+    // }
+
+    // let distributionChart = new DistributionChart('#distributionchart', distributionChartConfig)
+
+    // this.initDistributionChart(distributionChart)
+    // this.plotDistributionChart()
   }
 }
 </script>

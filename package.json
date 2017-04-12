@@ -11,7 +11,7 @@
     "get-history": "node scripts/get-history.js",
     "generate-schema": "json-schema-generator ./src/assets/data.json -o ./schema/schema.json -f",
     "parse": "node scripts/parse.js",
-    "test": "standard \"./**/*.vue\" \"./**/*.js\" && mocha",
+    "test": "standard \"./**/*.vue\" \"./**/*.js\"",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
   },

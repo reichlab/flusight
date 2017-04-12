@@ -151,7 +151,7 @@ const regionFilter = (data, region) => {
 
     let compressedBins = null
     if (d.bins) {
-      compressedBins = compressArray(d.bins.map(b => b[2]), 0.1)
+      // compressedBins = compressArray(d.bins.map(b => b[2]), 0.1)
     }
     if (wAIdx > -1) {
       filtered.series[wAIdx] = {
