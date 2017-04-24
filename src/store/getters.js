@@ -1,7 +1,7 @@
 import * as utils from './utils'
 
-// Selected items
 export const branding = state => state.branding
+export const updateTime = state => state.updateTime
 export const seasons = (state, getters) => {
   return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
 }

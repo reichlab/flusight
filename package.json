@@ -64,7 +64,6 @@
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.9.0",
     "function-bind": "^1.0.2",
     "gh-pages-deploy": "^0.4.2",
     "html-webpack-plugin": "^2.8.1",
