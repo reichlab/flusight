@@ -2,6 +2,12 @@ import * as types from './mutation-types'
 
 // Initializations
 // ---------------
+export const initData = ({ commit, getters }, val) => {
+  if (!getters.data) {
+    commit(types.SET_DATA, val)
+  }
+}
+
 export const initTimeChart = ({ commit }, val) => {
   commit(types.SET_TIMECHART, val)
 }

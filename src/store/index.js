@@ -10,14 +10,9 @@ import switches from './modules/switches'
 import models from './modules/models'
 import * as types from './mutation-types'
 import branding from 'json!yaml!../../config.yaml'
-import * as jsonData from './data'
+// import * as jsonData from './data'
 
 Vue.use(Vuex)
-
-// require.ensure(['./data'], function () {
-//   const data = require('./data')
-//   console.log(data)
-// })
 
 const state = {
   // D3 plot objects
@@ -25,8 +20,8 @@ const state = {
   choropleth: null,
   distributionChart: null,
   // All the data!
-  data: jsonData.data,
-  updateTime: jsonData.updateTime,
+  data: null, // jsonData.data,
+  updateTime: null, // jsonData.updateTime,
   branding: branding.branding
 }
 
@@ -34,6 +29,7 @@ const state = {
 const mutations = {
   [types.SET_DATA] (state, val) {
     state.data = val.data
+    state.updateTime = val.updateTime
   },
 
   [types.SET_TIMECHART] (state, val) {

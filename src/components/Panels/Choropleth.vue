@@ -75,31 +75,31 @@
 <template lang="pug">
 div
   // Tooltip over relative toggle switch
-  #switch-tooltip.tooltip(
-    v-show="tooltips.switch.show"
-    v-bind:style="tooltips.switch.pos"
-  )
-    | {{{ tooltips.switch.text }}}
+  // #switch-tooltip.tooltip(
+  //   v-show="tooltips.switch.show"
+  //   v-bind:style="tooltips.switch.pos"
+  // )
+  //   | {{{ tooltips.switch.text }}}
 
   // Tooltip for map hover
   #choropleth-tooltip.tooltip
     .value
     .region
 
-  #selectors
-    .level.is-mobile
-      .level-left
-        .level-item
-          .heading Week <b>{{ selectedWeekName }}</b>
-          .subtitle {{ regions[selectedRegion] }}
+  // #selectors
+  //   .level.is-mobile
+  //     .level-left
+  //       .level-item
+  //         .heading Week <b>{{ selectedWeekName }}</b>
+  //         .subtitle {{ regions[selectedRegion] }}
 
-      .level-right
-        .level-item
-          p.heading Season
-          p.control.title
-            span#season-selector.select.is-small
-              select(v-model="currentSeason")
-                option(v-for="season in seasons") {{ season }}
+  //     .level-right
+  //       .level-item
+  //         p.heading Season
+  //         p.control.title
+  //           span#season-selector.select.is-small
+  //             select(v-model="currentSeason")
+  //               option(v-for="season in seasons") {{ season }}
 
 
   // Main plotting div
@@ -150,6 +150,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'initData',
       'initChoropleth',
       'plotChoropleth',
       'updateChoropleth'
@@ -192,17 +193,22 @@ export default {
     }
   },
   ready () {
-    // Setup map
-    this.initChoropleth(new Choropleth('choropleth', regionId => {
-      this.updateSelectedRegion(regionId)
-    }))
 
-    // Setup data
-    this.plotChoropleth()
+    require.ensure(['../../store/data'], () => {
+      this.initData(require('../../store/data'))
 
-    // Hot start
-    this.updateChoropleth()
-    this.updateSelectedSeason(this.seasons.length - 1)
+      // Setup map
+      this.initChoropleth(new Choropleth('choropleth', regionId => {
+        this.updateSelectedRegion(regionId)
+      }))
+
+      // Setup data
+      this.plotChoropleth()
+
+      // Hot start
+      this.updateChoropleth()
+      this.updateSelectedSeason(this.seasons.length - 1)
+    })
   }
 }
 </script>

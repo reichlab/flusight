@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'initData',
       'initTimeChart',
       'initDistributionChart',
       'plotTimeChart',
@@ -75,16 +76,19 @@ export default {
       statsMeta: this.modelStatsMeta
     }
 
-    let timeChart = new TimeChart('#timechart', timeChartOptions)
+    require.ensure(['../../store/data.js'], () => {
+      this.initData(require('../../store/data.js'))
+      let timeChart = new TimeChart('#timechart', timeChartOptions)
 
-    timeChart.eventHooks.push(eventData => {
-      if (eventData.type === 'positionUpdate') {
-        this.updateSelectedWeek(eventData.value)
-      }
+      timeChart.eventHooks.push(eventData => {
+        if (eventData.type === 'positionUpdate') {
+          this.updateSelectedWeek(eventData.value)
+        }
+      })
+
+      this.initTimeChart(timeChart)
+      this.plotTimeChart()
     })
-
-    this.initTimeChart(timeChart)
-    this.plotTimeChart()
 
     // let distributionChartConfig = {
     //   statsMeta: this.modelStatsMeta,
