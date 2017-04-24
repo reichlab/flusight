@@ -17,10 +17,7 @@ const path = require('path')
 const moment = require('moment')
 const ProgressBar = require('progress')
 
-const config = require('./config').read('./config.yaml')
-
 // Setup variables
-const branding = config.branding
 const dataDirectory = './data'
 const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyFile = './scripts/assets/history.json'
@@ -154,15 +151,12 @@ preprocess.processWide(dataDirectory, () => {
     })
 
     // Add current time
-    branding.updateTime = moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
     let outputWithYamlData = {
       data: output,
-      branding: branding
+      updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
     }
 
-    fs.writeFile(outputFile, JSON.stringify(outputWithYamlData, null, 2), err => {
-      if (err) return console.log(err)
-      else return console.log('\n All done! JSON saved at ' + outputFile)
-    })
+    fs.writeFileSync(outputFile, JSON.stringify(outputWithYamlData))
+    console.log('\n All done! data saved at ' + outputFile)
   })
 })
