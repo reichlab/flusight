@@ -6,7 +6,8 @@ import store from './store'
 
 import 'bulma/css/bulma.css'
 import 'font-awesome/css/font-awesome.css'
-import './assets/fakeLoader.css'
+import './assets/please-wait.css'
+import './assets/spinner.css'
 import './assets/favicon.ico'
 import './assets/analytics.js'
 

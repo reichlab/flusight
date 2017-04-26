@@ -20,16 +20,6 @@ body {
   background-color: white;
 }
 
-#loader {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  background-color: $accent;
-  z-index: 999;
-}
-
 .tooltip {
   position: fixed;
   z-index: 100;
@@ -50,12 +40,20 @@ body {
   }
 }
 
+// Hide logo div in please wait div
+.pg-loading-logo-header {
+  display: none;
+}
+
+.pg-loading-html {
+  margin-top: 0 !important;
+}
+
 </style>
 
 <template lang="pug">
 div
   // Fixed position components
-  #loader
   intro
 
   // Main layout components
@@ -74,8 +72,7 @@ import Foot from './components/Foot'
 
 import { mapGetters, mapActions } from 'vuex'
 
-var $ = window.jQuery = require('jquery')
-require('./assets/fakeLoader.min.js')
+window.pw = require('./assets/please-wait.min.js')
 
 export default {
   components: {
@@ -122,9 +119,13 @@ export default {
     }
   },
   ready () {
-    $('#loader').fakeLoader({
-      spinner: 'spinner1',
-      bgColor: '#268bd2'
+    window.loading_screen = window.pw.pleaseWait({
+      backgroundColor: '#268bd2',
+      loadingHtml: `<div class="spinner">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>`
     })
 
     window.addEventListener('keyup', evt => {
