@@ -147,8 +147,7 @@ const regionFilter = (data, region) => {
     series: [null, null, null, null],
     peakTime: null,
     peakValue: null,
-    onsetTime: null,
-    bins: null
+    onsetTime: null
   }
 
   // Convert week ahead targets to simple series
