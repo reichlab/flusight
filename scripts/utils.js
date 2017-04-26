@@ -11,7 +11,16 @@ const mmwr = require('mmwr-week')
  * Skip points which are not that important by calculating simple
  * importance values
  */
-const compressArray = (array, ratio) => {
+const compressArray = (array, cRatio) => {
+  let skip
+  if (cRatio < 1.0) {
+    // cRatio is actual compression ratio
+    skip = array.length - Math.floor(cRatio * array.length)
+  } else {
+    // cRatio is the number of points we expect in the compressed array
+    skip = array.length - cRatio
+  }
+
   let importances = Array(array.length).fill([0, 0])
   // We will keep the first and the last value
   importances[0] = [0, 100]
@@ -24,7 +33,6 @@ const compressArray = (array, ratio) => {
   importances.sort((a, b) => (a[1] - b[1]))
 
   // Skip values
-  let skip = array.length - Math.floor(ratio * array.length)
   return importances.slice(skip).map(imp => [imp[0], array[imp[0]]])
 }
 
