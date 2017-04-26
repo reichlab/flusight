@@ -28,7 +28,38 @@ const getters = {
   actualFirst: (state, getters) => getters.actualIndices[0],
   actualLast: (state, getters) => {
     return getters.actualIndices[getters.actualIndices.length - 1]
+  },
+  firstPlottingWeekIdx: (state, getters, rootState, rootGetters) => {
+    // Check if season is current
+    let isLiveSeason = getters.actualIndices.length < rootGetters.timePoints.length
+
+    if (isLiveSeason) {
+      // Start at the latest prediction
+      return Math.max(...rootGetters['models/models'].map(m => {
+        let index = m.predictions.length - 1
+        for (let i = index; i >= 0; i--) {
+          if (m.predictions[i] !== null) return i
+        }
+        return 0
+      }))
+    } else {
+      // Start at the first prediction
+      let modelPredictions = rootGetters['models/models'].map(m => {
+        for (let i = 0; i < m.predictions.length; i++) {
+          if (m.predictions[i] !== null) return i
+        }
+        return 0
+      })
+
+      if (modelPredictions.length === 0) {
+        // Start at the most recent actual data
+        return getters.actualIndices[getters.actualIndices.length - 1]
+      } else {
+        return Math.min(...modelPredictions)
+      }
+    }
   }
+
 }
 
 // actions
