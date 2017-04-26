@@ -29,9 +29,6 @@ export default {
     ...mapGetters('switches', [
       'showTimeChart',
       'showDistributionChart'
-    ]),
-    ...mapGetters('weeks', [
-      'firstPlottingWeekIdx'
     ])
   },
   methods: {
@@ -45,6 +42,7 @@ export default {
     ]),
     ...mapActions('weeks', [
       'updateSelectedWeek',
+      'resetToFirstIdx'
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
@@ -92,7 +90,6 @@ export default {
 
       this.initTimeChart(timeChart)
       this.plotTimeChart()
-      this.updateSelectedWeek(this.firstPlottingWeekIdx)
 
       // let distributionChartConfig = {
       //   statsMeta: this.modelStatsMeta,

@@ -59,11 +59,14 @@ const getters = {
       }
     }
   }
-
 }
 
 // actions
 const actions = {
+  resetToFirstIdx ({ commit, getters }) {
+    commit(types.UPDATE_SELECTED_WEEK, getters.firstPlottingWeekIdx)
+  },
+
   updateSelectedWeek ({ commit, getters }, val) {
     let capped = Math.max(Math.min(getters.actualLast, val), getters.actualFirst)
     commit(types.UPDATE_SELECTED_WEEK, capped)

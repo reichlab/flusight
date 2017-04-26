@@ -26,8 +26,10 @@ export const initDistributionChart = ({ commit }, val) => {
 /**
  * Plot (update) time chart with region / season data
  */
-export const plotTimeChart = ({ getters }) => {
+export const plotTimeChart = ({ dispatch, getters }) => {
   getters.timeChart.plot(getters.timeChartData)
+  dispatch('weeks/resetToFirstIdx')
+  dispatch('updateTimeChart')
 }
 
 /**
