@@ -10,7 +10,6 @@ import switches from './modules/switches'
 import models from './modules/models'
 import * as types from './mutation-types'
 import branding from 'json!yaml!../../config.yaml'
-// import * as jsonData from './data'
 
 Vue.use(Vuex)
 
@@ -20,8 +19,8 @@ const state = {
   choropleth: null,
   distributionChart: null,
   // All the data!
-  data: null, // jsonData.data,
-  updateTime: null, // jsonData.updateTime,
+  data: null,
+  updateTime: null,
   branding: branding.branding
 }
 

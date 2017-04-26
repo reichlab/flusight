@@ -1,11 +1,23 @@
 import * as utils from './utils'
 
 export const branding = state => state.branding
-export const updateTime = state => state.updateTime
-export const seasons = (state, getters) => {
-  return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
+export const updateTime = state => {
+  return state.updateTime ? state.updateTime : 'NA'
 }
-export const regions = state => state.data.map(d => d.subId)
+export const seasons = (state, getters) => {
+  if (state.data) {
+    return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
+  } else {
+    return ['']
+  }
+}
+export const regions = state => {
+  if (state.data) {
+    return state.data.map(d => d.subId)
+  } else {
+    return ['']
+  }
+}
 export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weighted ILI (%)']
 
 export const timeChart = state => state.timeChart
@@ -24,15 +36,22 @@ export const observed = (state, getters) => {
  * Return a series of time points to be referenced by all series
  */
 export const timePoints = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
+  if (state.data) {
+    let regionSubset = state.data[getters['switches/selectedRegion']]
+    let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
 
-  return seasonSubset.actual.map(d => {
-    return {
-      week: d.week % 100,
-      year: Math.floor(d.week / 100)
-    }
-  })
+    return seasonSubset.actual.map(d => {
+      return {
+        week: d.week % 100,
+        year: Math.floor(d.week / 100)
+      }
+    })
+  } else {
+    return [{
+      week: 0,
+      year: 0
+    }]
+  }
 }
 
 /**
