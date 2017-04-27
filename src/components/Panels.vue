@@ -59,38 +59,22 @@ export default {
   },
   watch: {
     selectedRegion: function () {
-      // Triggered by
-      // - selector
-      // - map clicks
-      // Time series gets new data
-      // Choropleth gets highlight
       this.plotTimeChart()
-      // this.plotDistributionChart()
+      this.plotDistributionChart()
       this.updateChoropleth()
     },
     selectedSeason: function () {
-      // Triggered by selector
-      // Choropleth gets new plot
-      // Time series gets new data
       this.plotTimeChart()
       this.plotChoropleth()
-      // this.plotDistributionChart()
+      this.plotDistributionChart()
     },
     choroplethRelative: function () {
-      // Triggered by relative selector
-      // Use specific choropleth getter and do a plot
       this.plotChoropleth()
     },
     selectedWeekIdx: function () {
-      // Triggered by
-      // - nav buttons
-      // - mouse jumps
-      // - keyboard
-      // Choropleth gets transitions
-      // Time series gets transitions
       this.updateChoropleth()
       this.updateTimeChart()
-      // this.plotDistributionChart()
+      this.plotDistributionChart()
     }
   }
 }

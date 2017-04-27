@@ -28,7 +28,9 @@ export default {
       'initTimeChart',
       'initDistributionChart',
       'plotTimeChart',
-      'plotDistributionChart'
+      'plotDistributionChart',
+      'clearTimeChart',
+      'clearDistributionChart'
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
@@ -39,14 +41,28 @@ export default {
     require.ensure(['../../store/data.js'], () => {
       this.initData(require('../../store/data.js'))
 
-      this.initTimeChart('#chart-right')
-      this.plotTimeChart()
-
-      // this.initDistributionChart('#chart-right')
-      // this.plotDistributionChart()
+      this.displayTimeChart()
 
       window.loading_screen.finish()
     })
-  } 
+  },
+  watch: {
+    showTimeChart: function () {
+      if (this.showTimeChart) {
+        this.initTimeChart('#chart-right')
+        this.plotTimeChart()
+      } else {
+        this.clearTimeChart()
+      }
+    },
+    showDistributionChart: function () {
+      if (this.showDistributionChart) {
+        this.initDistributionChart('#chart-right')
+        this.plotDistributionChart()
+      } else {
+        this.clearDistributionChart()
+      }
+    }
+  }
 }
 </script>

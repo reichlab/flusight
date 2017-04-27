@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import * as d3 from 'd3'
 import { TimeChart, DistributionChart } from 'd3-foresight'
 
 // Initializations
@@ -37,6 +38,8 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
     statsMeta: getters['models/modelStatsMeta']
   }
 
+  // Clear div
+  d3.select(divSelector).selectAll('*').remove()
   let timeChart = new TimeChart(divSelector, timeChartOptions)
 
   timeChart.eventHooks.push(eventData => {
@@ -53,7 +56,6 @@ export const initChoropleth = ({ commit }, val) => {
 }
 
 export const initDistributionChart = ({ commit, getters, dispatch }, divSelector) => {
-
   let distributionChartConfig = {
     statsMeta: getters['models/modelStatsMeta'],
     axes: {
@@ -66,6 +68,8 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
     }
   }
 
+  // Clear div
+  d3.select(divSelector).selectAll('*').remove()
   let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
   commit(types.SET_DISTRIBUTIONCHART, distributionChart)
 }
@@ -77,16 +81,20 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
  * Plot (update) time chart with region / season data
  */
 export const plotTimeChart = ({ dispatch, getters }) => {
-  getters.timeChart.plot(getters.timeChartData)
-  dispatch('weeks/resetToFirstIdx')
-  dispatch('updateTimeChart')
+  if (getters.timeChart) {
+    getters.timeChart.plot(getters.timeChartData)
+    dispatch('weeks/resetToFirstIdx')
+    dispatch('updateTimeChart')
+  }
 }
 
 /**
  * Plot distribution chart
  */
 export const plotDistributionChart = ({ getters }) => {
-  getters.distributionChart.plot(getters.distributionChartData)
+  if (getters.distributionChart) {
+    getters.distributionChart.plot(getters.distributionChartData)
+  }
 }
 
 /**
@@ -101,7 +109,9 @@ export const plotChoropleth = ({ commit, dispatch, getters }) => {
  * Tell time chart to move markers to weekIdx
  */
 export const updateTimeChart = ({ getters }) => {
-  getters.timeChart.update(getters['weeks/selectedWeekIdx'])
+  if (getters.timeChart) {
+    getters.timeChart.update(getters['weeks/selectedWeekIdx'])
+  }
 }
 
 /**
@@ -114,4 +124,18 @@ export const updateChoropleth = ({ getters }) => {
   }
 
   getters.choropleth.update(payload)
+}
+
+/**
+ * Clear timeChart
+ */
+export const clearTimeChart = ({ commit }) => {
+  commit(types.SET_TIMECHART, null)
+}
+
+/**
+ * Clear distributionChart
+ */
+export const clearDistributionChart = ({ commit }) => {
+  commit(types.SET_DISTRIBUTIONCHART, null)
 }

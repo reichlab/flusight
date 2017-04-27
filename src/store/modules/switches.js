@@ -4,7 +4,7 @@ const state = {
   region: 0,
   season: 0,
   choroplethRelative: false,
-  timeChart: true,
+  timeChart: false,
   distributionChart: false
 }
 
