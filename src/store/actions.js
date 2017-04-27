@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+import { TimeChart, DistributionChart } from 'd3-foresight'
 
 // Initializations
 // ---------------
@@ -8,16 +9,65 @@ export const initData = ({ commit, getters }, val) => {
   }
 }
 
-export const initTimeChart = ({ commit }, val) => {
-  commit(types.SET_TIMECHART, val)
+export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
+  let timeChartOptions = {
+    baseline: {
+      text: ['CDC', 'Baseline'],
+      description: `Baseline ILI value as defined by CDC.
+                    <br><br><em>Click to know more</em>`,
+      url: 'http://www.cdc.gov/flu/weekly/overview.htm'
+    },
+    axes: {
+      x: {
+        title: ['Epidemic', 'Week'],
+        description: `Week of the calendar year, as measured by the CDC.
+                      <br><br><em>Click to know more</em>`,
+        url: 'https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf'
+      },
+      y: {
+        title: 'Weighted ILI (%)',
+        description: `Percentage of outpatient doctor visits for
+                      influenza-like illness, weighted by state population.
+                      <br><br><em>Click to know more</em>`,
+        url: 'http://www.cdc.gov/flu/weekly/overview.htm'
+      }
+    },
+    pointType: 'mmwr-week',
+    confidenceIntervals: getters['models/modelCIs'],
+    statsMeta: getters['models/modelStatsMeta']
+  }
+
+  let timeChart = new TimeChart(divSelector, timeChartOptions)
+
+  timeChart.eventHooks.push(eventData => {
+    if (eventData.type === 'positionUpdate') {
+      dispatch('weeks/updateSelectedWeek', eventData.value)
+    }
+  })
+
+  commit(types.SET_TIMECHART, timeChart)
 }
 
 export const initChoropleth = ({ commit }, val) => {
   commit(types.SET_CHOROPLETH, val)
 }
 
-export const initDistributionChart = ({ commit }, val) => {
-  commit(types.SET_DISTRIBUTIONCHART, val)
+export const initDistributionChart = ({ commit, getters, dispatch }, divSelector) => {
+
+  let distributionChartConfig = {
+    statsMeta: getters['models/modelStatsMeta'],
+    axes: {
+      x: {
+        title: ['Epidemic', 'Week'],
+        description: `Week of the calendar year, as measured by the CDC.
+                      <br><br><em>Click to know more</em>`,
+        url: 'https://wwwn.cdc.gov/nndss/document/MMWR_Week_overview.pdf'
+      }
+    }
+  }
+
+  let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
+  commit(types.SET_DISTRIBUTIONCHART, distributionChart)
 }
 
 // Plotting (data-changing) actions
