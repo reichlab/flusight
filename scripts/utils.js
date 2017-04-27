@@ -58,7 +58,6 @@ const deCompressArray = compArray => {
   for (let i = 0; i < maxIter; i++) {
     sum = array.reduce((a, b) => (a + b), 0)
     error = 1 - sum
-    console.log(error)
     if (Math.abs(error) < epsilon) {
       break
     } else {

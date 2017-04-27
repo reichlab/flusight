@@ -26,6 +26,43 @@ const state = {
   ]
 }
 
+/**
+ * Regenerate array in the compressed representation
+ * Assume its a probability distribution and so it sums to one
+ */
+const deCompressArray = compArray => {
+  let array = Array(Math.max(...compArray.map(i => i[0]))).fill(0)
+
+  let clamped = []
+  // Fill in given values
+  compArray.forEach(item => {
+    array[item[0]] = item[1]
+    clamped.push(item[0])
+  })
+
+  let epsilon = 0.00000001 // Try to acheive 1e-8 error
+  let alpha = 1
+  let maxIter = 100
+  let sum, error
+
+  for (let i = 0; i < maxIter; i++) {
+    sum = array.reduce((a, b) => (a + b), 0)
+    error = 1 - sum
+    if (Math.abs(error) < epsilon) {
+      break
+    } else {
+      // Neighbour filling
+      for (let j = 1; j < array.length - 1; j++) {
+        if (clamped.indexOf(j) === -1) {
+          array[j] += alpha * error * (array[j - 1] + array[j + 1]) / 2
+        }
+      }
+    }
+  }
+
+  return array
+}
+
 // getters
 const getters = {
   models: (state, getters, rootState, rootGetters) => {
@@ -35,18 +72,34 @@ const getters = {
   },
 
   /**
-   * TODO Temporary getter to test distribution plots
+   * Getter for generating probability distributions
    */
   modelDistributions: (state, getters, rootState, rootGetters) => {
     let models = getters.models
+    let currentWeekIdx = rootGetters['weeks/selectedWeekIdx']
+
     return models.map(m => {
-      m.targets = state.targetNames.map(tn => {
-        return {
-          name: tn,
-          data: [...Array(10).keys()].map(x => [x, Math.random()]),
-          actual: Math.floor(Math.random() * (10 - 0)) + 0
-        }
-      })
+      let currentPreds = m.predictions[currentWeekIdx]
+      if (currentPreds) {
+        // Predictions are present
+        // Decompress the bins and latch on to targets
+        let binsTargets = [
+          ...currentPreds.series.map(s => s.bins),
+          currentPreds.peakTime.bins,
+          currentPreds.peakValue.bins,
+          currentPreds.onsetTime.bins
+        ]
+        m.targets = state.targetNames.map((tn, idx) => {
+          let unpacked = deCompressArray(binsTargets[idx])
+          return {
+            name: tn,
+            data: unpacked.map((v, i) => [i, v]),
+            actual: Math.floor(Math.random() * (10 - 0)) + 0
+          }
+        })
+      } else {
+        m.targets = []
+      }
       return m
     })
   },
