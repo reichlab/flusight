@@ -83,7 +83,7 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
 export const plotTimeChart = ({ dispatch, getters }) => {
   if (getters.timeChart) {
     getters.timeChart.plot(getters.timeChartData)
-    dispatch('weeks/resetToFirstIdx')
+    dispatch('weeks/readjustSelectedWeek')
     dispatch('updateTimeChart')
   }
 }

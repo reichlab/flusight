@@ -37,13 +37,15 @@ export default {
       'displayDistributionChart'
     ]),
     ...mapActions('weeks', [
-      'readjustSelectedWeek'
+      'readjustSelectedWeek',
+      'resetToFirstIdx'
     ])
   },
   ready () {
     require.ensure(['../../store/data.js'], () => {
       this.initData(require('../../store/data.js'))
 
+      this.resetToFirstIdx()
       this.displayTimeChart()
 
       window.loading_screen.finish()
