@@ -55,15 +55,22 @@ export default {
       'plotChoropleth',
       'plotTimeChart',
       'plotDistributionChart'
+    ]),
+    ...mapActions('weeks', [
+      'readjustSelectedWeek'
     ])
   },
   watch: {
     selectedRegion: function () {
+      // Jiggle weeks
+      this.readjustSelectedWeek()
       this.plotTimeChart()
       this.plotDistributionChart()
       this.updateChoropleth()
     },
     selectedSeason: function () {
+      // Jiggle weeks
+      this.readjustSelectedWeek()
       this.plotTimeChart()
       this.plotChoropleth()
       this.plotDistributionChart()

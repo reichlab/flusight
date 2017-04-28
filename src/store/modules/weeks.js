@@ -81,6 +81,18 @@ const actions = {
     commit(types.UPDATE_SELECTED_WEEK, capped)
   },
 
+  readjustSelectedWeek ({ commit, getters, rootGetters }) {
+    let idx = getters.selectedWeekIdx
+    let limits
+    if (rootGetters['switches/showTimeChart']) {
+      limits = getters.actualWeekIdxRange
+    } else {
+      limits = getters.predictionWeekIdxRange
+    }
+    let capped = Math.max(Math.min(limits[1], idx), limits[0])
+    commit(types.UPDATE_SELECTED_WEEK, capped)
+  },
+
   forwardSelectedWeek ({ commit, getters, rootGetters }) {
     let idx = Math.min(getters.weeks.length - 1, getters.selectedWeekIdx + 1)
     let limits

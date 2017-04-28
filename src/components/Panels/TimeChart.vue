@@ -35,6 +35,9 @@ export default {
     ...mapActions('switches', [
       'displayTimeChart',
       'displayDistributionChart'
+    ]),
+    ...mapActions('weeks', [
+      'readjustSelectedWeek'
     ])
   },
   ready () {
@@ -48,6 +51,7 @@ export default {
   },
   watch: {
     showTimeChart: function () {
+      this.readjustSelectedWeek()
       if (this.showTimeChart) {
         this.initTimeChart('#chart-right')
         this.plotTimeChart()
