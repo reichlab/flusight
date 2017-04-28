@@ -120,6 +120,7 @@ export default {
   },
   ready () {
     window.loading_screen = window.pw.pleaseWait({
+      logo: '',
       backgroundColor: '#268bd2',
       loadingHtml: `<div class="spinner">
                       <div class="bounce1"></div>
