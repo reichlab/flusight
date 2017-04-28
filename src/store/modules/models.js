@@ -15,7 +15,7 @@ const state = {
 
   confidenceIntervals: ['90%', '50%'],
 
-  targetNames: [
+  curveNames: [
     '1 week ahead',
     '2 weeks ahead',
     '3 weeks ahead',
@@ -77,28 +77,49 @@ const getters = {
   modelDistributions: (state, getters, rootState, rootGetters) => {
     let models = getters.models
     let currentWeekIdx = rootGetters['weeks/selectedWeekIdx']
+    let timePoints = rootGetters['weeks/weeks']
 
     return models.map(m => {
       let currentPreds = m.predictions[currentWeekIdx]
+      m.curves = state.curveNames.map(cn => {
+        return {
+          name: cn,
+          data: null,
+          actual: null
+        }
+      })
       if (currentPreds) {
         // Predictions are present
-        // Decompress the bins and latch on to targets
-        let binsTargets = [
+        // Decompress the bins and latch on to curves
+        let curves = [
           ...currentPreds.series.map(s => s.bins),
           currentPreds.peakTime.bins,
           currentPreds.peakValue.bins,
           currentPreds.onsetTime.bins
         ]
-        m.targets = state.targetNames.map((tn, idx) => {
-          let unpacked = deCompressArray(binsTargets[idx])
-          return {
-            name: tn,
-            data: unpacked.map((v, i) => [i, v]),
-            actual: Math.floor(Math.random() * (10 - 0)) + 0
+
+        for (let i = 0; i < m.curves.length; i++) {
+          let unpackedArray = deCompressArray(curves[i])
+          let totalBins = unpackedArray.length
+          let paddedArray
+          if (totalBins === 33) {
+            // Pad unpackedArray
+            let startAt = 9
+            paddedArray = timePoints.map((tp, idx) => {
+              if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
+                return [tp, unpackedArray[idx - startAt]]
+              } else {
+                return [tp, 0]
+              }
+            })
+          } else {
+            // These are value bins, divide by 100
+            paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
           }
-        })
-      } else {
-        m.targets = []
+
+          m.curves[i].data = paddedArray
+          m.curves[i].actual = 0
+        }
       }
       return m
     })
