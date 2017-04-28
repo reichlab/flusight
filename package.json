@@ -1,6 +1,6 @@
 {
   "name": "flusight",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Flu predictions visualizer",
   "author": "Abhinav Tushar <abhinav.tushar.vs@gmail.com>",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "bulma": "^0.2.1",
     "colormap": "^2.2.0",
     "d3": "^4.4.0",
-    "d3-foresight": "0.2.4",
+    "d3-foresight": "0.3.0",
     "datamaps": "^0.5.8",
     "download": "^5.0.2",
     "font-awesome": "^4.6.3",
