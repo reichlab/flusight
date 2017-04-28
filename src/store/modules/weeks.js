@@ -25,38 +25,47 @@ const getters = {
       return (d ? idx : null)
     }).filter(d => d !== null)
   },
-  actualFirst: (state, getters) => getters.actualIndices[0],
-  actualLast: (state, getters) => {
-    return getters.actualIndices[getters.actualIndices.length - 1]
+  predictionWeekIdxRange: (state, getters, rootState, rootGetters) => {
+    let minMaxes = rootGetters['models/models'].map(m => {
+      let min = 0
+      let max = m.predictions.length - 1
+
+      let inRange = false
+      for (let i = 0; i < m.predictions.length; i++) {
+        if (inRange) {
+          if (m.predictions[i] === null) {
+            max = i - 1
+            break
+          }
+        } else {
+          if (m.predictions[i] !== null) {
+            min = i
+            inRange = true
+          }
+        }
+      }
+      return [min, max]
+    })
+
+    let first = Math.min(...minMaxes.map(mm => mm[0]))
+    let last = Math.max(...minMaxes.map(mm => mm[1]))
+
+    return [first, last]
+  },
+  actualWeekIdxRange: (state, getters) => {
+    return [
+      getters.actualIndices[0],
+      getters.actualIndices[getters.actualIndices.length - 1]
+    ]
   },
   firstPlottingWeekIdx: (state, getters, rootState, rootGetters) => {
     // Check if season is current
     let isLiveSeason = getters.actualIndices.length < rootGetters.timePoints.length
 
     if (isLiveSeason) {
-      // Start at the latest prediction
-      return Math.max(...rootGetters['models/models'].map(m => {
-        let index = m.predictions.length - 1
-        for (let i = index; i >= 0; i--) {
-          if (m.predictions[i] !== null) return i
-        }
-        return 0
-      }))
+      return getters.predictionWeekIdxRange[1]
     } else {
-      // Start at the first prediction
-      let modelPredictions = rootGetters['models/models'].map(m => {
-        for (let i = 0; i < m.predictions.length; i++) {
-          if (m.predictions[i] !== null) return i
-        }
-        return 0
-      })
-
-      if (modelPredictions.length === 0) {
-        // Start at the most recent actual data
-        return getters.actualIndices[getters.actualIndices.length - 1]
-      } else {
-        return Math.min(...modelPredictions)
-      }
+      return getters.predictionWeekIdxRange[0]
     }
   }
 }
@@ -68,19 +77,31 @@ const actions = {
   },
 
   updateSelectedWeek ({ commit, getters }, val) {
-    let capped = Math.max(Math.min(getters.actualLast, val), getters.actualFirst)
+    let capped = Math.max(Math.min(getters.actualWeekIdxRange[1], val), getters.actualWeekIdxRange[0])
     commit(types.UPDATE_SELECTED_WEEK, capped)
   },
 
-  forwardSelectedWeek ({ commit, getters }) {
+  forwardSelectedWeek ({ commit, getters, rootGetters }) {
     let idx = Math.min(getters.weeks.length - 1, getters.selectedWeekIdx + 1)
-    let capped = Math.max(Math.min(getters.actualLast, idx), getters.actualFirst)
+    let limits
+    if (rootGetters['switches/showTimeChart']) {
+      limits = getters.actualWeekIdxRange
+    } else {
+      limits = getters.predictionWeekIdxRange
+    }
+    let capped = Math.max(Math.min(limits[1], idx), limits[0])
     commit(types.UPDATE_SELECTED_WEEK, capped)
   },
 
-  backwardSelectedWeek ({ commit, getters }) {
+  backwardSelectedWeek ({ commit, getters, rootGetters }) {
     let idx = Math.max(0, getters.selectedWeekIdx - 1)
-    let capped = Math.max(Math.min(getters.actualLast, idx), getters.actualFirst)
+    let limits
+    if (rootGetters['switches/showTimeChart']) {
+      limits = getters.actualWeekIdxRange
+    } else {
+      limits = getters.predictionWeekIdxRange
+    }
+    let capped = Math.max(Math.min(limits[1], idx), limits[0])
     commit(types.UPDATE_SELECTED_WEEK, capped)
   }
 }
