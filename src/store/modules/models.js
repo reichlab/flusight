@@ -23,7 +23,11 @@ const state = {
     'Peak week',
     'Peak percentage',
     'Onset week'
-  ]
+  ],
+
+  // Cache for unpacked curve data
+  // Identifies curves using `seasonIdx-regionIdx-weekIdx-modelIdx-curveIdx`
+  curveCache: {}
 }
 
 /**
@@ -40,7 +44,7 @@ const deCompressArray = compArray => {
     clamped.push(item[0])
   })
 
-  let epsilon = 0.00000001 // Try to acheive 1e-8 error
+  let epsilon = 1e-8 // Try to acheive 1e-8 error
   let alpha = 1
   let maxIter = 100
   let sum, error
@@ -79,7 +83,9 @@ const getters = {
     let currentWeekIdx = rootGetters['weeks/selectedWeekIdx']
     let timePoints = rootGetters['weeks/weeks']
 
-    return models.map(m => {
+    let curveIdentifierPrefix = rootGetters['switches/selectedSeason'] + '-' + rootGetters['switches/selectedRegion'] + '-' + currentWeekIdx
+
+    return models.map((m, idx) => {
       let currentPreds = m.predictions[currentWeekIdx]
       m.curves = state.curveNames.map(cn => {
         return {
@@ -99,22 +105,29 @@ const getters = {
         ]
 
         for (let i = 0; i < m.curves.length; i++) {
-          let unpackedArray = deCompressArray(curves[i])
-          let totalBins = unpackedArray.length
           let paddedArray
-          if (totalBins === 33) {
-            // Pad unpackedArray
-            let startAt = 9
-            paddedArray = timePoints.map((tp, idx) => {
-              if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
-                return [tp, unpackedArray[idx - startAt]]
-              } else {
-                return [tp, 0]
-              }
-            })
+
+          let curveIdentifier = curveIdentifierPrefix + '-' + idx + '-' + i
+          if (state.curveCache[curveIdentifier]) {
+            paddedArray = state.curveCache[curveIdentifier]
           } else {
-            // These are value bins, divide by 100
-            paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
+            let unpackedArray = deCompressArray(curves[i])
+            let totalBins = unpackedArray.length
+            if (totalBins === 33) {
+              // Pad unpackedArray
+              let startAt = 9
+              paddedArray = timePoints.map((tp, idx) => {
+                if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
+                  return [tp, unpackedArray[idx - startAt]]
+                } else {
+                  return [tp, 0]
+                }
+              })
+            } else {
+              // These are value bins, divide by 100
+              paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
+            }
+            state.curveCache[curveIdentifier] = paddedArray
           }
 
           m.curves[i].data = paddedArray
