@@ -120,8 +120,7 @@ const regionFilter = (data, region) => {
 
     let compressedBins = null
     if (d.bins) {
-      // Using 12 points gives cushion for 33 bins targets
-      compressedBins = compressArray(d.bins.map(b => b[2]), 12)
+      compressedBins = compressArray(d.bins.map(b => b[2]), 15)
     }
     if (wAIdx > -1) {
       filtered.series[wAIdx] = {
@@ -198,4 +197,3 @@ exports.seasonToWeekStamps = seasonToWeekStamps
 exports.weekToIndex = weekToIndex
 
 exports.compressArray = compressArray
-exports.deCompressArray = deCompressArray
