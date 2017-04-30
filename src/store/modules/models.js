@@ -111,23 +111,47 @@ const getters = {
           if (state.curveCache[curveIdentifier]) {
             paddedArray = state.curveCache[curveIdentifier]
           } else {
-            let unpackedArray = deCompressArray(curves[i])
-            let totalBins = unpackedArray.length
-            if (totalBins === 33) {
-              // Pad unpackedArray
+            // let unpackedArray = deCompressArray(curves[i])
+            // let totalBins = unpackedArray.length
+            // if (totalBins === 33) {
+            //   // Pad unpackedArray
+            //   let startAt = 9
+            //   paddedArray = timePoints.map((tp, idx) => {
+            //     if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
+            //       return [tp, unpackedArray[idx - startAt]]
+            //     } else {
+            //       return [tp, 0]
+            //     }
+            //   })
+            // } else {
+            //   // These are value bins, divide by 10
+            //   paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
+            // }
+            // state.curveCache[curveIdentifier] = paddedArray
+
+            if (curves[i].length === 33) {
+              // These are week values
               let startAt = 9
               paddedArray = timePoints.map((tp, idx) => {
-                if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
-                  return [tp, unpackedArray[idx - startAt]]
+                if ((idx > startAt) && (idx < (startAt + curves[i].length))) {
+                  return [tp, curves[i][idx - startAt]]
                 } else {
                   return [tp, 0]
                 }
               })
             } else {
-              // These are value bins, divide by 100
-              paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
+              // These are value bins
+              const parseSeries = (series, skip) => {
+                return series.map((val, key) => [(skip * key / 10), val])
+              }
+              if (curves[i].length === 26) {
+                // Old bins
+                paddedArray = parseSeries(curves[i], 2)
+              } else {
+                // New bins
+                paddedArray = parseSeries(curves[i], 5)
+              }
             }
-            state.curveCache[curveIdentifier] = paddedArray
           }
 
           m.curves[i].data = paddedArray

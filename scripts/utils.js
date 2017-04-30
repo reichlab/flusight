@@ -97,6 +97,31 @@ const getWeekFiles = directory => {
 }
 
 /**
+ * Group bins for display
+ */
+const groupTargetBins = values => {
+  const groupSum = (array, groupSize) => {
+    return array.reduce((acc, val, idx) => {
+      acc[Math.floor(idx / groupSize)] = val
+      return acc
+    }, Array(groupSize).fill(0))
+  }
+
+  if (values.length === 131) {
+    // newer format bin values
+    return groupSum(values.slice(0, values.length - 1), 5)
+  } else if (values.length === 27) {
+    // older format bin values
+    return groupSum(values.slice(0, values.length - 1), 2)
+  } else if (values.length === 33) {
+    // week values
+    return groupSum(values, 1)
+  } else {
+    throw new RangeError('Unknown length of bins : ' + values.length)
+  }
+}
+
+/**
  * Filter data returned from tranform.longToJson according to region
  * @param {Array} data data returned from longToJson
  * @param {string} region region identifier to filter on
@@ -118,23 +143,24 @@ const regionFilter = (data, region) => {
   data.filter(d => d.region === region).forEach(d => {
     let wAIdx = weekAheadTargets.indexOf(d.target)
 
-    let compressedBins = null
+    let parsedBins = null
     if (d.bins) {
-      compressedBins = compressArray(d.bins.map(b => b[2]), 15)
+      // parsedBins = compressArray(d.bins.map(b => b[2]), 7)
+      parsedBins = groupTargetBins(d.bins.map(b => b[2]))
     }
     if (wAIdx > -1) {
       filtered.series[wAIdx] = {
         point: d.point,
         low: d.low,
         high: d.high,
-        bins: compressedBins
+        bins: parsedBins
       }
     } else {
       filtered[d.target] = {
         point: d.point,
         low: d.low,
         high: d.high,
-        bins: compressedBins
+        bins: parsedBins
       }
     }
   })
