@@ -102,9 +102,9 @@ const getWeekFiles = directory => {
 const groupTargetBins = values => {
   const groupSum = (array, groupSize) => {
     return array.reduce((acc, val, idx) => {
-      acc[Math.floor(idx / groupSize)] = val
+      acc[Math.floor(idx / groupSize)] += val
       return acc
-    }, Array(groupSize).fill(0))
+    }, Array(array.length / groupSize).fill(0))
   }
 
   if (values.length === 131) {
