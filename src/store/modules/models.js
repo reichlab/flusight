@@ -141,17 +141,16 @@ const getters = {
               })
             } else {
               // These are value bins
-              const parseSeries = (series, skip) => {
-                return series.map((val, key) => [(skip * key / 10), val])
-              }
               if (curves[i].length === 26) {
-                // Old bins
-                paddedArray = parseSeries(curves[i], 2)
-              } else {
                 // New bins
-                paddedArray = parseSeries(curves[i], 5)
+                paddedArray = curves[i].map((val, idx) => [0.5 * idx, val])
+              } else {
+                // Old bins
+                paddedArray = curves[i].map((val, idx) => [idx, val])
               }
             }
+
+            state.curveCache[curveIdentifier] = paddedArray
           }
 
           m.curves[i].data = paddedArray
