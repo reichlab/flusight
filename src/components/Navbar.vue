@@ -53,6 +53,11 @@ nav.nav {
               i.fa.fa-question
             span Help
 
+          a.button.is-small(v-bind:href="branding.aboutUrl", target="_blank")
+            span.icon.is-small
+              i.fa.fa-info
+            span About
+
           a.button.is-info.is-small(v-bind:href="branding.tweetUrl", target="_blank")
             span.icon.is-small
               i.fa.fa-twitter
