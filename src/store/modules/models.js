@@ -16,13 +16,13 @@ const state = {
   confidenceIntervals: ['90%', '50%'],
 
   curveNames: [
-    '1 week ahead',
-    '2 weeks ahead',
-    '3 weeks ahead',
-    '4 weeks ahead',
-    'Peak week',
-    'Peak percentage',
-    'Onset week'
+    '1 week ahead (% wili)',
+    '2 weeks ahead (% wili)',
+    '3 weeks ahead (% wili)',
+    '4 weeks ahead (% wili)',
+    'Peak week (week #)',
+    'Peak percentage (% wili)',
+    'Onset week (week #)'
   ],
 
   // Cache for unpacked curve data
