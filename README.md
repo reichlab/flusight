@@ -11,9 +11,9 @@ repository (which uses CDC's prediction format) or by the user.
 
 The live version associated with this github
 repository
-at [https://reichlab.github.io/flusight/](https://reichlab.github.io/flusight/)
+at [https://reichlab.github.io/flusight/](http://reichlab.io/flusight/)
 displays predictions for CDC FluSight Challenge
-by [Reich Lab](https://reichlab.github.io/) at UMass Amherst.
+by [Reich Lab](http://reichlab.io/) at UMass Amherst. To know more about it, go to the [about](https://github.com/reichlab/flusight/wiki/About) page in the [wiki](https://github.com/reichlab/flusight/wiki).
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
