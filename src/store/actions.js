@@ -71,6 +71,14 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
   // Clear div
   d3.select(divSelector).selectAll('*').remove()
   let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
+
+  distributionChart.eventHooks.push(eventData => {
+    if (eventData.type === 'forward') {
+      dispatch('weeks/forwardSelectedWeek')
+    } else if (eventData.type === 'backward') {
+      dispatch('weeks/backwardSelectedWeek')
+    }
+  })
   commit(types.SET_DISTRIBUTIONCHART, distributionChart)
 }
 
