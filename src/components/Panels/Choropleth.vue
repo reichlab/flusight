@@ -91,7 +91,10 @@ div
       .level-left
         .level-item
           .heading Week <b>{{ selectedWeekName }}</b>
-          .subtitle {{ regions[selectedRegion] }}
+          // .subtitle {{ regions[selectedRegion] }}
+          span#region-selector.select
+              select(v-model="currentRegion")
+                option(v-for="region in regions") {{ region }}
 
       .level-right
         .level-item
@@ -145,6 +148,14 @@ export default {
       },
       set (val) {
         this.updateSelectedSeason(this.seasons.indexOf(val))
+      }
+    },
+    currentRegion: {
+      get () {
+        return this.regions[this.selectedRegion]
+      },
+      set (val) {
+        this.updateSelectedRegion(this.regions.indexOf(val))
       }
     }
   },
