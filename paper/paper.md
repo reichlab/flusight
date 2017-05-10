@@ -10,12 +10,10 @@ authors:
    affiliation: 1
  - name: Nicholas G Reich
    orcid: 0000-0003-3503-9899
-   affiliation: 2
+   affiliation: 1
 affiliations:
  - name: University of Massachusetts-Amherst
    index: 1
- - name: University of Massachusetts-Amherst
-   index: 2
 date: 11 January 2017
 bibliography: paper.bib
 ---
