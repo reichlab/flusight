@@ -102,6 +102,10 @@ export default {
       'moveIntroFinish',
       'moveIntroStart'
     ]),
+    ...mapActions('switches', [
+      'displayTimeChart',
+      'displayDistributionChart'
+    ]),
     demoStep (data) {
       let tooltip = d3.select('#intro-tooltip')
       let tooltipBB = tooltip.node().getBoundingClientRect()
@@ -119,6 +123,7 @@ export default {
         let targetBB = target.node().getBoundingClientRect()
 
         // Highlight current div
+        target.style('background-color', 'white')
         target.style('z-index', '850')
 
         let yPos = targetBB.top
@@ -135,6 +140,9 @@ export default {
             .style('left', (targetBB.left + targetBB.width + 20) + 'px')
         }
       }
+
+      // Execute intro hook
+      if (data.hook) data.hook()
     },
     setLastElement (el) {
       this.lastElement = el
@@ -150,6 +158,13 @@ export default {
         element: '#season-selector'
       },
       {
+        title: 'Region',
+        content: `Use this drop down to select the region to show predictions
+                  for.`,
+        direction: 'right',
+        element: '#region-selector'
+      },
+      {
         title: 'Predictions',
         content: `<p>You can use your keyboard's arrow keys or mouse to move
                   between weeks for which we have data and predictions.</p>
@@ -159,7 +174,26 @@ export default {
                   next four weeks is shown, as is the time and height of the
                   peak week and the time of season onset.</p>`,
         direction: 'left',
-        element: '#timechart-container'
+        element: '#timechart-container',
+        hook: this.displayTimeChart
+      },
+      {
+        title: 'Probabilities',
+        content: `The probability distributions underlying these predictions
+                  targets can be seen by switching to the <em>Distribution
+                  Chart</em> tab here`,
+        direction: 'left',
+        element: '#timechart-container',
+        hook: this.displayDistributionChart
+      },
+      {
+        title: 'US Map',
+        content: `<p>The map shows data for the currently selected week.</p>
+                  <p>You can also click on the map to see predictions for a
+                  particular region.</p>`,
+        direction: 'right',
+        element: '#map-intro',
+        hook: this.displayTimeChart
       },
       {
         title: 'Legend',
@@ -173,18 +207,10 @@ export default {
       },
       {
         title: 'Other controls',
-        content: `You can use these buttons to hide the legend, or move the
-                  graph forward or backward in time.`,
+        content: `You can use these buttons to hide the legend, see model
+                  statistics, or move the graph forward or backward in time.`,
         direction: 'left',
         element: '.nav-controls'
-      },
-      {
-        title: 'US Map',
-        content: `<p>The map shows data for the currently selected week.</p>
-                  <p>You can also click on the map to see predictions for a
-                  particular region.</p>`,
-        direction: 'right',
-        element: '#map-intro'
       },
       {
         title: 'Finished',
@@ -213,12 +239,12 @@ export default {
   },
   watch: {
     introStep: function () {
-      this.demoStep(this.currentIntro)
       // Un-highlight previous div
       if (this.lastElement !== '') {
         d3.select(this.lastElement)
           .style('z-index', null)
       }
+      this.demoStep(this.currentIntro)
 
       // Save current as last element
       this.setLastElement(this.currentIntro.element)
