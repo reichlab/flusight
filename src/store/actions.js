@@ -77,6 +77,9 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
       dispatch('weeks/forwardSelectedWeek')
     } else if (eventData.type === 'backward') {
       dispatch('weeks/backwardSelectedWeek')
+    } else if (eventData.type === 'positionUpdate') {
+      dispatch('weeks/updateSelectedWeek', eventData.value)
+      dispatch('weeks/readjustSelectedWeek')
     }
   })
   commit(types.SET_DISTRIBUTIONCHART, distributionChart)
