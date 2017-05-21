@@ -215,10 +215,13 @@ export default class Choropleth {
           .style('opacity', '1.0')
         tooltip.style('display', 'none')
       })
-      .on('mousemove', function () {
+      .on('mousemove', function (event) {
+        let [x, y] = d3.mouse(svg.node())
+        let bb = svg.node().getBoundingClientRect()
+
         tooltip
-          .style('top', (d3.event.pageY + 15) + 'px')
-          .style('left', (d3.event.pageX + 15) + 'px')
+          .style('top', (y + bb.top + 15) + 'px')
+          .style('left', (x + bb.left + 15) + 'px')
 
         let stateName = this.getAttribute('class').split(' ')[1]
         let region = data.data
