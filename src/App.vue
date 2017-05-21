@@ -122,7 +122,7 @@ export default {
         return metaItems.concat([
           { itemprop: 'image', content: this.branding.imageUrl },
           { property: 'og:image', content: this.branding.imageUrl },
-          { name: 'twitter:image', content: this.branding.imageUrl },
+          { name: 'twitter:image', content: this.branding.imageUrl }
         ])
       } else {
         return metaItems
