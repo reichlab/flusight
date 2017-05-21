@@ -10,6 +10,10 @@ export const initData = ({ commit, getters }, val) => {
   }
 }
 
+export const setBrandLogo = ({ commit, getters }, val) => {
+  commit(types.SET_BRAND_LOGO, val)
+}
+
 export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
   let timeChartOptions = {
     baseline: {

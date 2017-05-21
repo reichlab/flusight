@@ -41,6 +41,10 @@ const mutations = {
 
   [types.SET_DISTRIBUTIONCHART] (state, val) {
     state.distributionChart = val
+  },
+
+  [types.SET_BRAND_LOGO] (state, val) {
+    state.branding.logo = val
   }
 }
 

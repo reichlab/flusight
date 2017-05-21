@@ -1,28 +1,39 @@
 <style lang="scss" scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:800');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:700');
 
 .brand.title {
-  font-size: 20px;
-  color: #72caf9;
-  .brand-link{
-    color: #72caf9;
+  display: flex;
+  align-items: center;
+
+  .title-text{
+    font-family: 'Source Sans Pro';
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 10px;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 0px;
+    border-left-width: 1px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+
     &:hover {
       border: none;
     }
-  }
-  .thick {
-    font-family: "Open Sans";
-    color: #aaa;
-    font-weight: 800;
-    &:hover {
-      color: #888;
+
+    img {
+      max-height: 40px;
     }
   }
 }
 
 nav.nav {
-    box-shadow: 0px 5px 30px -20px;
+  box-shadow: 0px 5px 30px -20px;
 }
 
 </style>
@@ -35,15 +46,12 @@ nav.nav {
       .nav-left
         span.nav-item.is-brand
           span.brand.title
-            a.brand-link(href="#")
-              i.fa.fa-bar-chart
-              |  {{ branding.title }}
-            |  |
-            a.thick.brand-link(
+            a(
               v-bind:href="branding.parentUrl"
               target="_blank"
             )
-              |  {{ branding.parent }}
+              img(v-bind:src="branding.logo")
+            span.brand.title-text {{ branding.title }}
 
       // Right side buttons
       #nav-menu.nav-right.nav-menu

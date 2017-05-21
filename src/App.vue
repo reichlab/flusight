@@ -70,6 +70,8 @@ import Intro from './components/Intro'
 import Panels from './components/Panels'
 import Foot from './components/Foot'
 
+import brandLogo from '../brand-logo.png'
+
 import { mapGetters, mapActions } from 'vuex'
 
 window.pw = require('./assets/please-wait.min.js')
@@ -88,7 +90,8 @@ export default {
     ...mapActions('weeks', [
       'backwardSelectedWeek',
       'forwardSelectedWeek'
-    ])
+    ]),
+    ...mapActions(['setBrandLogo'])
   },
   head: {
     title: function () {
@@ -119,6 +122,7 @@ export default {
     }
   },
   ready () {
+    this.setBrandLogo(brandLogo)
     window.loading_screen = window.pw.pleaseWait({
       logo: '',
       backgroundColor: '#268bd2',
