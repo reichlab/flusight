@@ -66,7 +66,7 @@ nav.nav {
               i.fa.fa-info
             span About
 
-          a.button.is-info.is-small(v-bind:href="branding.tweetUrl", target="_blank")
+          a.button.is-info.is-small(v-show="branding.tweetUrl", v-bind:href="branding.tweetUrl", target="_blank")
             span.icon.is-small
               i.fa.fa-twitter
             span Tweet
