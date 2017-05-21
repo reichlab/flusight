@@ -11,7 +11,8 @@ used by [CDC FluSight Challenge](https://predict.phiresearchlab.org/), extracts
 entities needed for visualization and generates a minified webpage ready for
 static hosting. The visualizer uses an intermediate file, summarizing the
 predictions, which can be generated either by the set of scripts in the
-repository (which uses CDC's prediction format) or by the user.
+repository (which uses CDC's prediction format) or by the user. Visualizations
+are implemented using the [d3-foresight npm package](https://www.npmjs.com/package/d3-foresight).
 
 The live version associated with this github
 repository
