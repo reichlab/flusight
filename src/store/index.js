@@ -21,7 +21,7 @@ const state = {
   // All the data!
   data: null,
   updateTime: null,
-  branding: branding.branding
+  branding: Object.assign({logo: ''}, branding.branding)
 }
 
 // mutations
