@@ -46,10 +46,17 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
   d3.select(divSelector).selectAll('*').remove()
   let timeChart = new TimeChart(divSelector, timeChartOptions)
 
-  timeChart.eventHooks.push(eventData => {
-    if (eventData.type === 'positionUpdate') {
-      dispatch('weeks/updateSelectedWeek', eventData.value)
-    }
+  timeChart.addHook('forward-index', () => {
+    dispatch('weeks/forwardSelectedWeek')
+  })
+
+  timeChart.addHook('backward-index', () => {
+    dispatch('weeks/backwardSelectedWeek')
+  })
+
+  timeChart.addHook('jump-to-index', (index) => {
+    dispatch('weeks/updateSelectedWeek', index)
+    dispatch('weeks/readjustSelectedWeek')
   })
 
   commit(types.SET_TIMECHART, timeChart)
@@ -76,16 +83,19 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
   d3.select(divSelector).selectAll('*').remove()
   let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
 
-  distributionChart.eventHooks.push(eventData => {
-    if (eventData.type === 'forward') {
-      dispatch('weeks/forwardSelectedWeek')
-    } else if (eventData.type === 'backward') {
-      dispatch('weeks/backwardSelectedWeek')
-    } else if (eventData.type === 'positionUpdate') {
-      dispatch('weeks/updateSelectedWeek', eventData.value)
-      dispatch('weeks/readjustSelectedWeek')
-    }
+  distributionChart.addHook('forward-index', () => {
+    dispatch('weeks/forwardSelectedWeek')
   })
+
+  distributionChart.addHook('backward-index', () => {
+    dispatch('weeks/backwardSelectedWeek')
+  })
+
+  distributionChart.addHook('jump-to-index', (index) => {
+    dispatch('weeks/updateSelectedWeek', index)
+    dispatch('weeks/readjustSelectedWeek')
+  })
+
   commit(types.SET_DISTRIBUTIONCHART, distributionChart)
 }
 
