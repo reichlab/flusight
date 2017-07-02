@@ -231,6 +231,13 @@ export default {
       cookie.set('firstRun', 'true', { expires: 365 })
       this.moveIntroStart()
     }
+
+    // Exit on escape
+    window.addEventListener('keyup', evt => {
+      if (evt.which === 27 || evt.keyCode === 27) {
+        this.moveIntroFinish()
+      }
+    })
   },
   data () {
     return {
