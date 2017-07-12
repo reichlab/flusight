@@ -13,6 +13,7 @@ const regionIdentifiers = metadata.regions.map(x => x.id)
 
 /**
  * Function returning complete week array for a season
+ * Consider mmwr week 30 as the season week number 1
  * @param {string} season representing season
  * @returns {array} container with week, data pairs
  */
