@@ -32,15 +32,29 @@
   }
 }
 
-nav.nav {
+.nav-container {
   box-shadow: 0px 5px 30px -20px;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 980px) {
+  nav.nav {
+    margin: 0 auto;
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1180px) {
+  nav.nav {
+    max-width: 1200px;
+  }
 }
 
 </style>
 
 <template lang="pug">
 .hero-head
-  .container
+  .container.nav-container
     nav.nav
       // Logo
       .nav-left
