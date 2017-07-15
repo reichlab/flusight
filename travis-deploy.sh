@@ -42,3 +42,4 @@ ssh-add deploy_private
 
 # Push to gh-pages
 git push $SSH_REPO gh-pages --force
+ssh-agent -k
