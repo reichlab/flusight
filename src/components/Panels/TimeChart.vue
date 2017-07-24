@@ -42,8 +42,8 @@ export default {
     ])
   },
   ready () {
-    require.ensure(['../../store/data.js'], () => {
-      this.initData(require('../../store/data.js'))
+    require.ensure(['../../store/data'], () => {
+      this.initData(require('../../store/data'))
 
       this.resetToFirstIdx()
       this.displayTimeChart()
