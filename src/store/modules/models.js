@@ -30,43 +30,6 @@ const state = {
   curveCache: {}
 }
 
-/**
- * Regenerate array in the compressed representation
- * Assume its a probability distribution and so it sums to one
- */
-// const deCompressArray = compArray => {
-//   let array = Array(Math.max(...compArray.map(i => i[0]))).fill(0)
-
-//   let clamped = []
-//   // Fill in given values
-//   compArray.forEach(item => {
-//     array[item[0]] = item[1]
-//     clamped.push(item[0])
-//   })
-
-//   let epsilon = 1e-8 // Try to acheive 1e-8 error
-//   let alpha = 1
-//   let maxIter = 100
-//   let sum, error
-
-//   for (let i = 0; i < maxIter; i++) {
-//     sum = array.reduce((a, b) => (a + b), 0)
-//     error = 1 - sum
-//     if (Math.abs(error) < epsilon) {
-//       break
-//     } else {
-//       // Neighbour filling
-//       for (let j = 1; j < array.length - 1; j++) {
-//         if (clamped.indexOf(j) === -1) {
-//           array[j] += alpha * error * (array[j - 1] + array[j + 1]) / 2
-//         }
-//       }
-//     }
-//   }
-
-//   return array
-// }
-
 // getters
 const getters = {
   models: (state, getters, rootState, rootGetters) => {
@@ -111,24 +74,6 @@ const getters = {
           if (state.curveCache[curveIdentifier]) {
             paddedArray = state.curveCache[curveIdentifier]
           } else {
-            // let unpackedArray = deCompressArray(curves[i])
-            // let totalBins = unpackedArray.length
-            // if (totalBins === 33) {
-            //   // Pad unpackedArray
-            //   let startAt = 9
-            //   paddedArray = timePoints.map((tp, idx) => {
-            //     if ((idx > startAt) && (idx < (startAt + unpackedArray.length))) {
-            //       return [tp, unpackedArray[idx - startAt]]
-            //     } else {
-            //       return [tp, 0]
-            //     }
-            //   })
-            // } else {
-            //   // These are value bins, divide by 10
-            //   paddedArray = unpackedArray.map((val, key) => [(key / 10), val])
-            // }
-            // state.curveCache[curveIdentifier] = paddedArray
-
             if (curves[i].length === 33) {
               // These are week values
               let startAt = 9
