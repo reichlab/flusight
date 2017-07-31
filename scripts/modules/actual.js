@@ -73,10 +73,9 @@ const dateToStamp = date => date.year * 100 + date.week
 /**
  * Get actual epidemic data for given seasons
  * @param {array} seasons array of string identifier strings
- * @param {string} cacheFile file pointing to actual cache data
  * @param {function} callback callback function
  */
-const getActual = (seasons, cacheFile, callback) => {
+const getActual = (seasons, callback) => {
   // Get min max epiweek range in seasons
   let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0])))
   let lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
@@ -109,35 +108,6 @@ const getActual = (seasons, cacheFile, callback) => {
     total: 52
   })
 
-  // Use range and lag value to identify data
-  // let cache = {}
-
-  // // Setup cache
-  // if (fs.existsSync(cacheFile)) {
-  //   cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
-  // } else {
-  //   cache = {
-  //     data: {},
-  //     lastStamp: 0 // Used to identify cache staleness
-  //   }
-  // }
-
-  // Number of weeks of staleness
-  // let cacheLastDate
-  // if (cache.lastStamp === 0) {
-  //   cacheLastDate = stampToDate(startStamp)
-  //   cacheLastDate.applyWeekDiff(-1)
-  // } else {
-  //   cacheLastDate = stampToDate(cache.lastStamp)
-  // }
-
-  // let cacheStaleness = currentDate.diffWeek(cacheLastDate)
-
-  // let rangeIdentifer = startStamp + '-' + endStamp
-  // if (!(rangeIdentifer in cache.data)) {
-  //  cache.data[rangeIdentifer] = {}
-  // }
-
   // Fetch data from delphi api for given lag
   const laggedRequest = lag => {
     const populateOutput = data => {
@@ -161,33 +131,15 @@ const getActual = (seasons, cacheFile, callback) => {
     const nextLagCall = (currentLag) => {
       progressBar.tick()
       if (currentLag === 0) {
-        // Save cache
-        // cache.lastStamp = currentStamp
-        // fs.writeFileSync(cacheFile, JSON.stringify(cache))
         callback(output)
       } else {
         laggedRequest(currentLag - 1)
       }
     }
 
-    // if (lag in cache.data[rangeIdentifer]) {
-      // Pulling in from cache
-    //  populateOutput(cache.data[rangeIdentifer][lag])
-    // }
-
-    // Request API
-    // let cacheStamp = Math.max(cache.lastStamp, startStamp)
-    // let requestStartDate = stampToDate(cacheStamp)
-    // requestStartDate.applyWeekDiff(-lag)
-    // if (requestStartDate.diffWeek(startDate) < 0) {
-    //   requestStartDate = startDate
-    // }
-    // let requestStartStamp = dateToStamp(requestStartDate)
-
     delphiAPI.Epidata.fluview((res, message, data) => {
       if (data !== undefined) {
         populateOutput(data)
-        // cache.data[rangeIdentifer][lag] = data
       }
 
       nextLagCall(lag)
