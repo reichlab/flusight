@@ -176,10 +176,6 @@ actual.getActual(seasons, actualData => {
     })
   })
 
-  let outputWrapped = {
-    data: output
-  }
-
-  fs.writeFileSync(outputFile, JSON.stringify(outputWrapped))
+  fs.writeFileSync(outputFile, JSON.stringify(output))
   console.log('\n ✓ All done! data.json saved at ' + outputFile)
 })
