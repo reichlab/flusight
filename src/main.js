@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueHead from 'vue-head'
+import VueResource from 'vue-resource'
 
 import App from './App'
 import store from './store'
@@ -31,6 +32,7 @@ import './assets/favicons/mstile-310x310.png'
 import './assets/favicons/mstile-70x70.png'
 
 Vue.use(VueHead)
+Vue.use(VueResource)
 
 Vue.create = options => new Vue(options)
 
