@@ -9,14 +9,14 @@ export const updateTime = state => {
 
 export const seasons = (state, getters) => {
   if (state.metadata) {
-    return state.metadata.availableSeasons
+    return state.metadata.seasonIds
   } else {
     return ['']
   }
 }
 export const regions = (state, getters) => {
-  if (state.data) {
-    return state.data.map(d => getters.metadata.regionData[d.id].subId)
+  if (state.metadata) {
+    return state.metadata.regionData.map(r => r.subId)
   } else {
     return ['']
   }

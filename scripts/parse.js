@@ -54,18 +54,9 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
-let regionDataObject = region.regionData.reduce((result, item) => {
-  result[item.id] = {
-    subId: item.subId,
-    regionData: item.region,
-    states: item.states
-  }
-  return result
-}, {})
-
 fs.writeFileSync(metaOutFile, JSON.stringify({
-  regionData: regionDataObject,
-  availableSeasons: seasons,
+  regionData: region.regionData,
+  seasonIds: seasons,
   updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
 }))
 console.log(' ✓ Wrote metadata.json\n')
