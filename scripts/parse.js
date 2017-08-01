@@ -7,7 +7,7 @@
  */
 
 const actual = require('./modules/actual')
-const metadata = require('./modules/metadata')
+const region = require('./modules/region')
 const transform = require('./modules/transform')
 const baseline = require('./modules/baseline')
 const stats = require('./modules/stats')
@@ -36,7 +36,7 @@ if (!fs.existsSync(historyInFile)) {
   process.exit(1)
 } else {
   fs.copySync(historyInFile, historyOutFile)
-  console.log(' ✓ Wrote history.json')
+  console.log(' ✓ Wrote history.json\n')
 }
 
 // M E T A D A T A . J S O N
@@ -55,12 +55,28 @@ seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
 fs.writeFileSync(metaOutFile, JSON.stringify({
+  regionData: region.regionData.reduce((result, item) => {
+    result[item.id] = {
+      subId: item.subId,
+      region: item.region,
+      states: item.states
+    }
+    return result
+  }, {}),
+  availableSeasons: seasons,
   updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
 }))
+console.log(' ✓ Wrote metadata.json\n')
+
+process.exit(1)
 
 // D A T A . J S O N
-// Bootstrap output
-let output = metadata.regions
+// Bootstrap output as a list
+let output = region.regionData.map(d => {
+  return {
+    id: d.id
+  }
+})
 
 // Crete cache for file data
 let cachedCSVs = {}

@@ -4,7 +4,7 @@
 
 const Papa = require('papaparse')
 const fs = require('fs')
-const metadata = require('./metadata')
+const region = require('./region')
 
 /**
  * Return an object with region, season keyed baselines
@@ -19,7 +19,7 @@ const getBaselines = baselineFile => {
     dynamicTyping: true
   }).data
 
-  let regionSubIds = metadata.regions.map(d => d.subId)
+  let regionSubIds = region.regionData.map(d => d.subId)
   let seasons = data[0]
       .filter(d => d.length !== 0)
       .map(d => d.replace('/', '-'))

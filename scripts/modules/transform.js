@@ -97,7 +97,7 @@ const parseSeries = series => {
  * @returns {Object} json pbject
  */
 const csvToJson = csvData => {
-  let data = Papa.parse(longFormat, {
+  let data = Papa.parse(csvData, {
     dynamicTyping: true
   })
 

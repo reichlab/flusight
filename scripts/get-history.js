@@ -3,10 +3,10 @@
  */
 
 const delphiAPI = require('./assets/delphi_epidata.min')
-const metadata = require('./modules/metadata')
+const region = require('./modules/region')
 const fs = require('fs')
 
-const regionIdentifiers = metadata.regions.map(r => r.id)
+const regionIdentifiers = region.regionData.map(r => r.id)
 const historyFile = './scripts/assets/history.json'
 
 /**

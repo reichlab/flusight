@@ -4,12 +4,12 @@
  */
 
 const delphiAPI = require('../assets/delphi_epidata.min')
-const metadata = require('./metadata')
+const region = require('./region')
 const mmwr = require('mmwr-week')
 const ProgressBar = require('progress')
 // const fs = require('fs')
 
-const regionIdentifiers = metadata.regions.map(x => x.id)
+const regionIdentifiers = region.regionData.map(x => x.id)
 
 /**
  * Function returning complete week array for a season

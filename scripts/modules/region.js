@@ -18,7 +18,7 @@ const states = ['AK', 'AL', 'AR', 'AZ', 'CA', // 0-4
 // id: Short id used by delphi-API
 // subId : Used as region identifier in csvs and displayed in visualization
 // region : Descriptive text. Not used anywhere as of now.
-const regions = [
+const regionData = [
   {
     id: 'nat',
     subId: 'US National',
@@ -87,4 +87,4 @@ const regions = [
   }
 ]
 
-exports.regions = regions
+exports.regionData = regionData
