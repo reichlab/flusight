@@ -27,6 +27,7 @@ describe('Season data files', function () {
     let seasons = fs.readdirSync('./data').filter(file => {
       return fs.statSync(path.join('./data', file)).isDirectory()
     })
+    seasons[seasons.length - 1] = 'latest'
 
     seasons.forEach(season => {
       fs.existsSync(`./src/assets/data/season-${season}.json`).should.be.true
