@@ -4,7 +4,7 @@ export const branding = state => state.branding
 export const metadata = state => state.metadata
 export const history = state => state.history
 export const updateTime = state => {
-  return 'NA' || state.metadata.updateTime || 'NA'
+  return state.metadata ? state.metadata.updateTime : 'NA'
 }
 
 export const seasons = (state, getters) => {
