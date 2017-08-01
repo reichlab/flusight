@@ -162,6 +162,8 @@ export default {
   methods: {
     ...mapActions([
       'initData',
+      'initMetadata',
+      'initHistory',
       'initChoropleth',
       'plotChoropleth',
       'updateChoropleth'
@@ -205,7 +207,11 @@ export default {
   },
   ready () {
     require.ensure(['../../store/data'], () => {
-      this.initData(require('../../store/data'))
+      let dataChunk = require('../../store/data')
+
+      this.initData(dataChunk.data)
+      this.initMetadata(dataChunk.metadata)
+      this.initHistory(dataChunk.history)
 
       // Setup map
       this.initChoropleth(new Choropleth('choropleth', regionId => {

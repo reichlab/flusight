@@ -10,6 +10,18 @@ export const initData = ({ commit, getters }, val) => {
   }
 }
 
+export const initMetadata = ({ commit, getters }, val) => {
+  if (!getters.metadata) {
+    commit(types.SET_METADATA, val)
+  }
+}
+
+export const initHistory = ({ commit, getters }, val) => {
+  if (!getters.history) {
+    commit(types.SET_HISTORY, val)
+  }
+}
+
 export const setBrandLogo = ({ commit, getters }, val) => {
   commit(types.SET_BRAND_LOGO, val)
 }

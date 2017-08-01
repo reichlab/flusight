@@ -1,9 +1,12 @@
 import * as utils from './utils'
 
 export const branding = state => state.branding
+export const metadata = state => state.metadata
+export const history = state => state.history
 export const updateTime = state => {
-  return state.updateTime ? state.updateTime : 'NA'
+  return 'NA' || state.metadata.updateTime || 'NA'
 }
+
 export const seasons = (state, getters) => {
   if (state.data) {
     return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
@@ -69,30 +72,30 @@ export const actual = (state, getters) => {
  * Return historical data for selected state
  * All data older than currently selected season
  */
-export const history = (state, getters) => {
+export const historicalData = (state, getters) => {
   let regionSubset = state.data[getters['switches/selectedRegion']]
   let currentSeasonId = getters['switches/selectedSeason']
   let weeksCount = regionSubset.seasons[currentSeasonId].actual.length
 
-  let historicalData = []
+  let output = []
 
   // Add data from history store
-  regionSubset.history.forEach(h => {
-    historicalData.push({
+  getters.history[regionSubset.id].forEach(h => {
+    output.push({
       id: h.season,
       actual: utils.trimHistory(h.data, weeksCount)
     })
   })
 
   for (let i = 0; i < currentSeasonId; i++) {
-    historicalData.push({
+    output.push({
       id: regionSubset.seasons[i].id,
       actual: utils.trimHistory(utils.getMaxLagData(regionSubset.seasons[i].actual),
                                 weeksCount)
     })
   }
 
-  return historicalData
+  return output
 }
 
 /**
@@ -113,7 +116,7 @@ export const timeChartData = (state, getters) => {
     actual: getters.actual,
     baseline: getters.baseline,
     models: getters['models/models'],
-    history: getters.history
+    history: getters.historicalData
   }
 }
 

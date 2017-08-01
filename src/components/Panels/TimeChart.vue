@@ -25,6 +25,8 @@ export default {
   methods: {
     ...mapActions([
       'initData',
+      'initMetadata',
+      'initHistory',
       'initTimeChart',
       'initDistributionChart',
       'plotTimeChart',
@@ -43,7 +45,11 @@ export default {
   },
   ready () {
     require.ensure(['../../store/data'], () => {
-      this.initData(require('../../store/data'))
+      let dataChunk = require('../../store/data')
+
+      this.initData(dataChunk.data)
+      this.initMetadata(dataChunk.metadata)
+      this.initHistory(dataChunk.history)
 
       this.resetToFirstIdx()
       this.displayTimeChart()

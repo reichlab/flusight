@@ -2,6 +2,8 @@
 
 // Init mutations
 export const SET_DATA = 'SET_DATA'
+export const SET_HISTORY = 'SET_HISTORY'
+export const SET_METADATA = 'SET_METADATA'
 export const SET_TIMECHART = 'SET_TIMECHART'
 export const SET_CHOROPLETH = 'SET_CHOROPLETH'
 export const SET_DISTRIBUTIONCHART = 'SET_DISTRIBUTIONCHART'

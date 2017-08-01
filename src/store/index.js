@@ -20,15 +20,23 @@ const state = {
   distributionChart: null,
   // All the data!
   data: null,
-  updateTime: null,
+  history: null,
+  metadata: null,
   branding: Object.assign({logo: ''}, branding.branding)
 }
 
 // mutations
 const mutations = {
   [types.SET_DATA] (state, val) {
-    state.data = val.data
-    state.updateTime = val.updateTime
+    state.data = val
+  },
+
+  [types.SET_HISTORY] (state, val) {
+    state.history = val
+  },
+
+  [types.SET_METADATA] (state, val) {
+    state.metadata = val
   },
 
   [types.SET_TIMECHART] (state, val) {

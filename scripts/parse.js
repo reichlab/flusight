@@ -1,6 +1,9 @@
 /**
  * Module for handling `yarn run parse`
- * Uses ./modules and generate data.json
+ * Generate following data files in ./src/assets/data/
+ * - history.json :: historical data for regions
+ * - metadata.json :: metadata for regions with season prediction availability
+ * - season-XXXX.json :: main data for season XXXX
  */
 
 const actual = require('./modules/actual')
@@ -8,11 +11,9 @@ const metadata = require('./modules/metadata')
 const transform = require('./modules/transform')
 const preprocess = require('./modules/preprocess')
 const baseline = require('./modules/baseline')
-const history = require('./modules/history')
 const stats = require('./modules/stats')
 const utils = require('./utils')
-
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const moment = require('moment')
 const ProgressBar = require('progress')
@@ -20,10 +21,25 @@ const ProgressBar = require('progress')
 // Setup variables
 const dataDirectory = './data'
 const baselineFile = './scripts/assets/wILI_Baseline.csv'
-const historyFile = './scripts/assets/history.json'
-const outputFile = './src/assets/data.json'
+const historyInFile = './scripts/assets/history.json'
+const historyOutFile = './src/assets/data/history.json'
+const metaOutFile = './src/assets/data/metadata.json'
+const outputFile = './src/assets/data/data.json'
 
-// Preprocess data directory and then generate data.json
+// H I S T O R Y . J S O N
+if (!fs.existsSync(historyInFile)) {
+  console.log('History file not found. Run `yarn run get-history` to fetch it')
+  process.exit(1)
+} else {
+  fs.copySync(historyInFile, historyOutFile)
+}
+
+// M E T A D A T A . J S O N
+fs.writeFileSync(metaOutFile, JSON.stringify({
+  updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
+}))
+
+// D A T A . J S O N
 preprocess.processWide(dataDirectory, () => {
   // Look for seasons in the data directory
   let seasons = utils.getSubDirectories(dataDirectory)
@@ -55,9 +71,6 @@ preprocess.processWide(dataDirectory, () => {
   // Get baseline data
   let baselineData = baseline.getBaselines(baselineFile)
 
-  // Get historical data
-  let historicalData = history.getHistory(historyFile)
-
   console.log(' Gathering actual data for the seasons...')
 
   // Get actual data for seasons
@@ -72,9 +85,6 @@ preprocess.processWide(dataDirectory, () => {
 
     output.forEach(val => {
       progressBar.tick()
-
-      // Append historical data to region
-      val.history = historicalData[val.id]
 
       val.seasons = seasons.map(season => {
         // Get models for each season
@@ -149,13 +159,11 @@ preprocess.processWide(dataDirectory, () => {
       })
     })
 
-    // Add current time
-    let outputWithYamlData = {
-      data: output,
-      updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
+    let outputWrapped = {
+      data: output
     }
 
-    fs.writeFileSync(outputFile, JSON.stringify(outputWithYamlData))
+    fs.writeFileSync(outputFile, JSON.stringify(outputWrapped))
     console.log('\n All done! data saved at ' + outputFile)
   })
 })
