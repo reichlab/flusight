@@ -122,8 +122,8 @@ const groupTargetBins = values => {
 }
 
 /**
- * Filter data returned from tranform.longToJson according to region
- * @param {Array} data data returned from longToJson
+ * Filter data returned from tranform.csvToJson according to region
+ * @param {Array} data data returned from csvToJson
  * @param {string} region region identifier to filter on
  * @returns {Object} an object with output for the region
  */
