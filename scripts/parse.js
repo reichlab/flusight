@@ -54,15 +54,17 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
+let regionDataObject = region.regionData.reduce((result, item) => {
+  result[item.id] = {
+    subId: item.subId,
+    regionData: item.region,
+    states: item.states
+  }
+  return result
+}, {})
+
 fs.writeFileSync(metaOutFile, JSON.stringify({
-  regionData: region.regionData.reduce((result, item) => {
-    result[item.id] = {
-      subId: item.subId,
-      region: item.region,
-      states: item.states
-    }
-    return result
-  }, {}),
+  regionData: regionDataObject,
   availableSeasons: seasons,
   updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
 }))
@@ -131,7 +133,7 @@ actual.getActual(seasons, actualData => {
             cachedCSVs[season][model][sweek] = data
           }
           // Take only for the current region
-          let filtered = utils.regionFilter(data, val.subId)
+          let filtered = utils.regionFilter(data, regionDataObject[val.id].subId)
           if (filtered === -1) return null
           else {
             // Transform weeks predictions to season indices
@@ -155,7 +157,7 @@ actual.getActual(seasons, actualData => {
         id: season,
         actual: actualData[val.id][season],
         models: models,
-        baseline: baselineData[val.subId][season]
+        baseline: baselineData[regionDataObject[val.id].subId][season]
       }
     })
   })
@@ -168,7 +170,7 @@ actual.getActual(seasons, actualData => {
         model.stats = stats.getModelStats(
           cachedCSVs[season.id][model.id],
           utils.getMaxLagData(actualData[val.id][season.id]),
-          val.subId
+          regionDataObject[val.id].subId
         )
       })
     })
