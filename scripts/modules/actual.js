@@ -64,10 +64,6 @@ const weekToSeason = week => {
   }
 }
 
-// const stampToDate = stamp => {
-//   return new mmwr.MMWRDate(parseInt(stamp / 100), stamp % 100)
-// }
-
 const dateToStamp = date => date.year * 100 + date.week
 
 /**
