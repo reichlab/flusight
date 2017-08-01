@@ -25,7 +25,7 @@ const filterCache = (cachedPredictions, regionId) => {
         })
 
       // Assuming all the predictions are not present when one isn't
-      if (perWeekPreds.oneWk.point !== -1) {
+      if (perWeekPreds.oneWk && perWeekPreds.oneWk.point !== -1) {
         output.push(perWeekPreds)
       }
     }

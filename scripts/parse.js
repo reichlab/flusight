@@ -15,7 +15,6 @@ const utils = require('./utils')
 const fs = require('fs-extra')
 const path = require('path')
 const moment = require('moment')
-const ProgressBar = require('progress')
 
 // Setup variables
 const dataDirectory = './data'
@@ -23,11 +22,11 @@ const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyInFile = './scripts/assets/history.json'
 const historyOutFile = './src/assets/data/history.json'
 const metaOutFile = './src/assets/data/metadata.json'
-const outputFile = './src/assets/data/data.json'
 
 console.log('\n ----------------------------------')
 console.log(' Generating data files for flusight')
 console.log(' ----------------------------------\n')
+console.log(' Messages overlap due to concurrency. Don\'t read too much.\n')
 
 // H I S T O R Y . J S O N
 if (!fs.existsSync(historyInFile)) {
@@ -39,7 +38,7 @@ if (!fs.existsSync(historyInFile)) {
   console.log(' ✓ Wrote history.json\n')
 }
 
-// M E T A D A T A . J S O N
+// S E A S O N - X X X X - X X X X . J S O N
 // Look for seasons in the data directory
 let seasons = utils.getSubDirectories(dataDirectory)
 
@@ -54,59 +53,39 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
-fs.writeFileSync(metaOutFile, JSON.stringify({
-  regionData: region.regionData,
-  seasonIds: seasons,
-  updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
-}))
-console.log(' ✓ Wrote metadata.json\n')
-
-// D A T A . J S O N
-// Bootstrap output as a list
-let output = region.regionData.map(d => {
-  return {
-    id: d.id
-  }
-})
-
-// Crete cache for file data
-let cachedCSVs = {}
-// season -> model -> week
-seasons.forEach(season => {
-  cachedCSVs[season] = {}
-})
-
 // Get baseline data
 let baselineData = baseline.getBaselines(baselineFile)
 
-console.log(' Gathering actual data for the seasons...')
+// Create cache for file data
+let cachedCSVs = {}
+// season -> model -> week
+seasons.forEach(seasonId => {
+  cachedCSVs[seasonId] = {}
+})
 
-// Get actual data for seasons
-actual.getActual(seasons, actualData => {
-  // Add seasons to output
-  console.log('\n Parsing regions...')
-  let progressBar = new ProgressBar(' :bar :current of :total', {
-    complete: '▇',
-    incomplete: '-',
-    total: 11
-  })
+// Write separate files for each season
+seasons.forEach(seasonId => {
+  let seasonOutFile = `./src/assets/data/season-${seasonId}.json`
+  actual.getActual([seasonId], actualData => {
+    console.log(`\n Parsing data for season ${seasonId}...`)
+    let output = {
+      seasonId: seasonId,
+      regions: []
+    }
 
-  output.forEach(val => {
-    progressBar.tick()
-
-    val.seasons = seasons.map(season => {
+    output.regions = region.regionData.map(reg => {
       // Get models for each season
-      let modelsDir = utils.getSubDirectories(path.join(dataDirectory, season))
+      let modelsDir = utils.getSubDirectories(path.join(dataDirectory, seasonId))
       let models = modelsDir.map(model => {
         // Bootstrap cache
-        if (!(model in cachedCSVs[season])) {
-          cachedCSVs[season][model] = {}
+        if (!(model in cachedCSVs[seasonId])) {
+          cachedCSVs[seasonId][model] = {}
         }
 
         // Get prediction weeks for each model
-        let weekStamps = utils.getWeekFiles(path.join(dataDirectory, season, model))
-        let modelMeta = utils.getModelMeta(path.join(dataDirectory, season, model))
-        let seasonWeekStamps = utils.seasonToWeekStamps(season)
+        let weekStamps = utils.getWeekFiles(path.join(dataDirectory, seasonId, model))
+        let modelMeta = utils.getModelMeta(path.join(dataDirectory, seasonId, model))
+        let seasonWeekStamps = utils.seasonToWeekStamps(seasonId)
 
         let modelPredictions = seasonWeekStamps.map((sweek, index) => {
           if (weekStamps.indexOf(sweek) === -1) {
@@ -114,17 +93,17 @@ actual.getActual(seasons, actualData => {
             return null
           }
 
-          let fileName = path.join(dataDirectory, season, model, sweek + '.csv')
+          let fileName = path.join(dataDirectory, seasonId, model, sweek + '.csv')
           let data = null
           // Take from cache to avoid file reads
-          if (sweek in cachedCSVs[season][model]) {
-            data = cachedCSVs[season][model][sweek]
+          if (sweek in cachedCSVs[seasonId][model]) {
+            data = cachedCSVs[seasonId][model][sweek]
           } else {
             data = transform.csvToJson(fs.readFileSync(fileName, 'utf8'))
-            cachedCSVs[season][model][sweek] = data
+            cachedCSVs[seasonId][model][sweek] = data
           }
           // Take only for the current region
-          let filtered = utils.regionFilter(data, regionDataObject[val.id].subId)
+          let filtered = utils.regionFilter(data, reg.subId)
           if (filtered === -1) return null
           else {
             // Transform weeks predictions to season indices
@@ -145,28 +124,35 @@ actual.getActual(seasons, actualData => {
         }
       })
       return {
-        id: season,
-        actual: actualData[val.id][season],
+        id: reg.id,
+        actual: actualData[reg.id][seasonId],
         models: models,
-        baseline: baselineData[regionDataObject[val.id].subId][season]
+        baseline: baselineData[reg.subId][seasonId]
       }
     })
-  })
 
-  // Add model metadata
-  console.log('\n Calculating model statistics')
-  output.forEach(val => {
-    val.seasons.forEach(season => {
-      season.models.forEach(model => {
+    // Add model metadata
+    console.log('\n Calculating model statistics')
+
+    output.regions.forEach(reg => {
+      reg.models.forEach(model => {
         model.stats = stats.getModelStats(
-          cachedCSVs[season.id][model.id],
-          utils.getMaxLagData(actualData[val.id][season.id]),
-          regionDataObject[val.id].subId
+          cachedCSVs[seasonId][model.id],
+          utils.getMaxLagData(actualData[reg.id][seasonId]),
+          reg.subId
         )
       })
     })
-  })
 
-  fs.writeFileSync(outputFile, JSON.stringify(output))
-  console.log('\n ✓ All done! data.json saved at ' + outputFile)
+    fs.writeFileSync(seasonOutFile, JSON.stringify(output))
+    console.log('\n ✓ .json saved at ' + seasonOutFile)
+  })
 })
+
+// M E T A D A T A . J S O N
+fs.writeFileSync(metaOutFile, JSON.stringify({
+  regionData: region.regionData,
+  seasonIds: seasons,
+  updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
+}))
+console.log(' ✓ Wrote metadata.json')
