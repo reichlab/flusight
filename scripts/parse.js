@@ -64,8 +64,13 @@ seasons.forEach(seasonId => {
 })
 
 // Write separate files for each season
-seasons.forEach(seasonId => {
-  let seasonOutFile = `./src/assets/data/season-${seasonId}.json`
+seasons.forEach((seasonId, seasonIdx) => {
+  let seasonOutFile
+  if (seasonIdx === seasons.length - 1) {
+    seasonOutFile = './src/assets/data/season-latest.json'
+  } else {
+    seasonOutFile = `./src/assets/data/season-${seasonId}.json`
+  }
   actual.getActual([seasonId], actualData => {
     console.log(`\n Parsing data for season ${seasonId}...`)
     let output = {

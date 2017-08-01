@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'initData',
+      'addSeasonData',
       'initMetadata',
       'initHistory',
       'initTimeChart',
@@ -47,7 +47,7 @@ export default {
     require.ensure(['../../store/data'], () => {
       let dataChunk = require('../../store/data')
 
-      this.initData(dataChunk.data)
+      this.addSeasonData(dataChunk.latestSeasonData)
       this.initMetadata(dataChunk.metadata)
       this.initHistory(dataChunk.history)
 

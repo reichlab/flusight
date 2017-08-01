@@ -161,7 +161,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'initData',
+      'addSeasonData',
       'initMetadata',
       'initHistory',
       'initChoropleth',
@@ -209,9 +209,10 @@ export default {
     require.ensure(['../../store/data'], () => {
       let dataChunk = require('../../store/data')
 
-      this.initData(dataChunk.data)
+      this.addSeasonData(dataChunk.latestSeasonData)
       this.initMetadata(dataChunk.metadata)
       this.initHistory(dataChunk.history)
+      this.updateSelectedSeason(this.seasons.length - 1)
 
       // Setup map
       this.initChoropleth(new Choropleth('choropleth', regionId => {
@@ -223,7 +224,6 @@ export default {
 
       // Hot start
       this.updateChoropleth()
-      this.updateSelectedSeason(this.seasons.length - 1)
     })
   }
 }
