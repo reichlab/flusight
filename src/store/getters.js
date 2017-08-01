@@ -8,15 +8,15 @@ export const updateTime = state => {
 }
 
 export const seasons = (state, getters) => {
-  if (state.data) {
-    return state.data[getters['switches/selectedRegion']].seasons.map(s => s.id)
+  if (state.metadata) {
+    return state.metadata.availableSeasons
   } else {
     return ['']
   }
 }
 export const regions = state => {
-  if (state.data) {
-    return state.data.map(d => d.subId)
+  if (state.metadata) {
+    return state.metadata.regionData.map(d => d.subId)
   } else {
     return ['']
   }
@@ -150,8 +150,8 @@ export const choroplethData = (state, getters) => {
     if (relative) values = utils.baselineScale(values, r.seasons[seasonId].baseline)
 
     output.data.push({
-      region: r.subId,
-      states: r.states,
+      region: getters.metadata.regionData[r.id].subId,
+      states: getters.metadata.regionData[r.id].states,
       value: values
     })
   })

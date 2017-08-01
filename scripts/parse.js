@@ -68,8 +68,6 @@ fs.writeFileSync(metaOutFile, JSON.stringify({
 }))
 console.log(' ✓ Wrote metadata.json\n')
 
-process.exit(1)
-
 // D A T A . J S O N
 // Bootstrap output as a list
 let output = region.regionData.map(d => {
