@@ -9,9 +9,8 @@
     "dev": "node build/dev-server.js",
     "get-baseline": "node scripts/get-baseline.js",
     "get-history": "node scripts/get-history.js",
-    "generate-schema": "json-schema-generator ./src/assets/data.json -o ./schema/schema.json -f",
     "parse": "node scripts/parse.js",
-    "test": "standard \"./**/*.vue\" \"./**/*.js\"",
+    "test": "standard \"./**/*.vue\" \"./**/*.js\" & mocha",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
   },
