@@ -54,18 +54,18 @@ export const trimHistory = (historyActual, numWeeks) => {
 /**
  * Return range for choropleth color scale
  */
-export const choroplethDataRange = (state, getters) => {
+export const choroplethDataRange = (seasonsData, relativeToggle) => {
   let maxVals = []
   let minVals = []
 
-  state.data.map(region => {
-    region.seasons.map(season => {
-      let actual = getMaxLagData(season.actual).map(d => d.data).filter(d => d)
+  seasonsData.map(seasonData => {
+    seasonData.regions.map(regionData => {
+      let actual = getMaxLagData(regionData.actual).map(d => d.data).filter(d => d)
 
-      if (getters['switches/choroplethRelative']) {
+      if (relativeToggle) {
         // Use baseline scaled data
-        maxVals.push(Math.max(...actual.map(d => ((d / season.baseline) - 1) * 100)))
-        minVals.push(Math.min(...actual.map(d => ((d / season.baseline) - 1) * 100)))
+        maxVals.push(Math.max(...actual.map(d => ((d / regionData.baseline) - 1) * 100)))
+        minVals.push(Math.min(...actual.map(d => ((d / regionData.baseline) - 1) * 100)))
       } else {
         maxVals.push(Math.max(...actual))
         minVals.push(Math.min(...actual))

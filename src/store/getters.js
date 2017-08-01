@@ -38,6 +38,7 @@ export const seasons = (state, getters) => {
     return ['']
   }
 }
+
 export const regions = (state, getters) => {
   if (state.metadata) {
     return state.metadata.regionData.map(r => r.subId)
@@ -45,6 +46,7 @@ export const regions = (state, getters) => {
     return ['']
   }
 }
+
 export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weighted ILI (%)']
 
 export const timeChart = state => state.timeChart
@@ -182,6 +184,6 @@ export const choroplethData = (state, getters) => {
 
   output.data = output.data.slice(1) // Remove national data
 
-  output.range = utils.choroplethDataRange(state, getters)
+  output.range = utils.choroplethDataRange(state.data, relative)
   return output
 }
