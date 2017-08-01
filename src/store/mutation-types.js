@@ -1,7 +1,7 @@
 // All the possible mutations for the application
 
 // Init mutations
-export const SET_DATA = 'SET_DATA'
+export const ADD_SEASON_DATA = 'ADD_SEASON_DATA'
 export const SET_HISTORY = 'SET_HISTORY'
 export const SET_METADATA = 'SET_METADATA'
 export const SET_TIMECHART = 'SET_TIMECHART'

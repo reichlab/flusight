@@ -4,9 +4,9 @@ import { TimeChart, DistributionChart } from 'd3-foresight'
 
 // Initializations
 // ---------------
-export const initData = ({ commit, getters }, val) => {
-  if (!getters.data) {
-    commit(types.SET_DATA, val)
+export const addSeasonData = ({ commit, getters }, val) => {
+  if (getters.downloadedSeasons.indexOf(val.seasonId) === -1) {
+    commit(types.ADD_SEASON_DATA, val)
   }
 }
 

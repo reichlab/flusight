@@ -18,8 +18,7 @@ const state = {
   timeChart: null,
   choropleth: null,
   distributionChart: null,
-  // All the data!
-  data: null,
+  data: [], // Container for season data
   history: null,
   metadata: null,
   branding: Object.assign({logo: ''}, branding.branding)
@@ -27,8 +26,9 @@ const state = {
 
 // mutations
 const mutations = {
-  [types.SET_DATA] (state, val) {
-    state.data = val
+  [types.ADD_SEASON_DATA] (state, val) {
+    state.data.push(val)
+    // TODO: Remove data if short on memory
   },
 
   [types.SET_HISTORY] (state, val) {

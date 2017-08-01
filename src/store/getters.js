@@ -7,6 +7,30 @@ export const updateTime = state => {
   return state.metadata ? state.metadata.updateTime : 'NA'
 }
 
+/**
+ * Return seasons for which we have downloaded the data
+ */
+export const downloadedSeasons = state => {
+  return state.data.map(d => d.seasonId)
+}
+
+/**
+ * Return subset of data reflecting current selection
+ * Assume that we have already downloaded the data needed
+ */
+export const selectedData = (state, getters) => {
+  let selectedSeasonIdx = getters['switches/selectedSeason']
+  let selectedRegionIdx = getters['switches/selectedRegion']
+
+  let selectedSeasonId = getters.seasons[selectedSeasonIdx]
+  let seasonSubset = state.data[getters.downloadedSeasons.indexOf(selectedSeasonId)]
+
+  return seasonSubset.regions[selectedRegionIdx]
+}
+
+/**
+ * Return list of seasons available for us
+ */
 export const seasons = (state, getters) => {
   if (state.metadata) {
     return state.metadata.seasonIds
@@ -31,19 +55,15 @@ export const distributionChart = state => state.distributionChart
  * Return observed data for currently selected state
  */
 export const observed = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  return regionSubset.seasons[getters['switches/selectedSeason']].actual.map(d => d.data)
+  return getters.selectedData.actual.map(d => d.data)
 }
 
 /**
  * Return a series of time points to be referenced by all series
  */
 export const timePoints = (state, getters) => {
-  if (state.data) {
-    let regionSubset = state.data[getters['switches/selectedRegion']]
-    let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
-
-    return seasonSubset.actual.map(d => {
+  if (state.data.length > 0) {
+    return getters.selectedData.actual.map(d => {
       return {
         week: d.week % 100,
         year: Math.floor(d.week / 100)
@@ -61,11 +81,7 @@ export const timePoints = (state, getters) => {
  * Return actual data for currently selected state
  */
 export const actual = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  let seasonSubset = regionSubset.seasons[getters['switches/selectedSeason']]
-
-  // Return just the values
-  return utils.getMaxLagData(seasonSubset.actual).map(d => d.data)
+  return utils.getMaxLagData(getters.selectedData.actual).map(d => d.data)
 }
 
 /**
@@ -73,26 +89,33 @@ export const actual = (state, getters) => {
  * All data older than currently selected season
  */
 export const historicalData = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  let currentSeasonId = getters['switches/selectedSeason']
-  let weeksCount = regionSubset.seasons[currentSeasonId].actual.length
+  let selectedRegionIdx = getters['switches/selectedRegion']
+  let selectedRegionId = getters.metadata.regionData[selectedRegionIdx].id
+  let selectedSeasonIdx = getters['switches/selectedSeason']
+  let weeksCount = getters.selectedData.actual.length
 
   let output = []
 
   // Add data from history store
-  getters.history[regionSubset.id].forEach(h => {
+  getters.history[selectedRegionId].forEach(h => {
     output.push({
       id: h.season,
       actual: utils.trimHistory(h.data, weeksCount)
     })
   })
 
-  for (let i = 0; i < currentSeasonId; i++) {
-    output.push({
-      id: regionSubset.seasons[i].id,
-      actual: utils.trimHistory(utils.getMaxLagData(regionSubset.seasons[i].actual),
-                                weeksCount)
-    })
+  // NOTE: Skipping season not yet downloaded
+  for (let i = 0; i < selectedSeasonIdx; i++) {
+    let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[i])
+    if (downloadedSeasonIdx !== -1) {
+      output.push({
+        id: getters.seasons[i],
+        actual: utils.trimHistory(
+          utils.getMaxLagData(state.data[downloadedSeasonIdx].regions[selectedRegionId].actual),
+          weeksCount
+        )
+      })
+    }
   }
 
   return output
@@ -102,8 +125,7 @@ export const historicalData = (state, getters) => {
  * Baseline for selected state
  */
 export const baseline = (state, getters) => {
-  let regionSubset = state.data[getters['switches/selectedRegion']]
-  return regionSubset.seasons[getters['switches/selectedSeason']].baseline
+  return getters.selectedData.baseline
 }
 
 /**
@@ -135,7 +157,7 @@ export const distributionChartData = (state, getters) => {
  * Return actual data for all regions for current selections
  */
 export const choroplethData = (state, getters) => {
-  let seasonId = getters['switches/selectedSeason']
+  let selectedSeasonIdx = getters['switches/selectedSeason']
   let relative = getters['switches/choroplethRelative']
 
   let output = {
@@ -144,14 +166,16 @@ export const choroplethData = (state, getters) => {
     decorator: relative ? x => x + ' % (baseline)' : x => x + ' %'
   }
 
-  state.data.map(r => {
-    let values = utils.getMaxLagData(r.seasons[seasonId].actual)
+  let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[selectedSeasonIdx])
 
-    if (relative) values = utils.baselineScale(values, r.seasons[seasonId].baseline)
+  state.data[downloadedSeasonIdx].regions.map(reg => {
+    let values = utils.getMaxLagData(reg.actual)
+
+    if (relative) values = utils.baselineScale(values, reg.baseline)
 
     output.data.push({
-      region: getters.metadata.regionData[r.id].subId,
-      states: getters.metadata.regionData[r.id].states,
+      region: getters.metadata.regionData[reg.id].subId,
+      states: getters.metadata.regionData[reg.id].states,
       value: values
     })
   })

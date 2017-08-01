@@ -16,6 +16,7 @@ const getters = {
   showTimeChart: state => state.timeChart,
   showDistributionChart: state => state.distributionChart
 }
+
 // actions
 const actions = {
   updateSelectedSeason ({ commit }, val) {
