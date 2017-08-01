@@ -33,9 +33,7 @@ const state = {
 // getters
 const getters = {
   models: (state, getters, rootState, rootGetters) => {
-    return rootState.data[rootGetters['switches/selectedRegion']]
-      .seasons[rootGetters['switches/selectedSeason']]
-      .models
+    return rootGetters.selectedData.models
   },
 
   /**

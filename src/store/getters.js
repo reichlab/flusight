@@ -168,14 +168,14 @@ export const choroplethData = (state, getters) => {
 
   let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[selectedSeasonIdx])
 
-  state.data[downloadedSeasonIdx].regions.map(reg => {
+  state.data[downloadedSeasonIdx].regions.map((reg, regIdx) => {
     let values = utils.getMaxLagData(reg.actual)
 
     if (relative) values = utils.baselineScale(values, reg.baseline)
 
     output.data.push({
-      region: getters.metadata.regionData[reg.id].subId,
-      states: getters.metadata.regionData[reg.id].states,
+      region: getters.metadata.regionData[regIdx].subId,
+      states: getters.metadata.regionData[regIdx].states,
       value: values
     })
   })
