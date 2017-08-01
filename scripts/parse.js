@@ -134,8 +134,8 @@ seasons.forEach(seasonId => {
     // Add model metadata
     console.log('\n Calculating model statistics')
 
-    region.regionData.forEach((reg, idx) => {
-      output.regions[idx].models.forEach(model => {
+    region.regionData.forEach((reg, regionIdx) => {
+      output.regions[regionIdx].models.forEach(model => {
         model.stats = stats.getModelStats(
           cachedCSVs[seasonId][model.id],
           utils.getMaxLagData(actualData[reg.id][seasonId]),
