@@ -23,6 +23,10 @@ yarn run parse
 yarn run test
 yarn run build
 cp -r ./dist/* ./
+# Some cleanup
+rm -rf ./dist/*
+rm -rf ./data ./test ./src ./scripts ./schema ./paper ./build ./config
+rm yarn.lock screen.png screenframe.png
 
 git config user.name "CI auto deploy"
 git config user.email "abhinav.tushar.vs@gmail.com"
