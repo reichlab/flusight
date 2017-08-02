@@ -16,6 +16,12 @@ export const initMetadata = ({ commit, getters }, val) => {
   }
 }
 
+export const initSeasonDataUrls = ({ commit, getters }, val) => {
+  if (!getters.seasonDataUrls) {
+    commit(types.SET_SEASON_DATA_URLS, val)
+  }
+}
+
 export const initHistory = ({ commit, getters }, val) => {
   if (!getters.history) {
     commit(types.SET_HISTORY, val)

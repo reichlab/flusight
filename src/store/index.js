@@ -9,7 +9,7 @@ import weeks from './modules/weeks'
 import switches from './modules/switches'
 import models from './modules/models'
 import * as types from './mutation-types'
-import branding from 'json!yaml!../../config.yaml'
+import configYaml from 'json!yaml!../../config.yaml'
 
 Vue.use(Vuex)
 
@@ -21,7 +21,8 @@ const state = {
   data: [], // Container for season data
   history: null,
   metadata: null,
-  branding: Object.assign({logo: ''}, branding.branding)
+  seasonDataUrls: null,
+  branding: Object.assign({logo: ''}, configYaml.branding)
 }
 
 // mutations
@@ -29,6 +30,10 @@ const mutations = {
   [types.ADD_SEASON_DATA] (state, val) {
     state.data.push(val)
     // TODO: Remove data if short on memory
+  },
+
+  [types.SET_SEASON_DATA_URLS] (state, val) {
+    state.seasonDataUrls = val
   },
 
   [types.SET_HISTORY] (state, val) {

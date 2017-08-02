@@ -29,6 +29,7 @@ export default {
       'initHistory',
       'initTimeChart',
       'initDistributionChart',
+      'initSeasonDataUrls',
       'plotTimeChart',
       'plotDistributionChart',
       'clearTimeChart',
@@ -47,6 +48,7 @@ export default {
     require.ensure(['../../store/data'], () => {
       let dataChunk = require('../../store/data')
 
+      this.initSeasonDataUrls(dataChunk.seasonDataUrls)
       this.addSeasonData(dataChunk.latestSeasonData)
       this.initMetadata(dataChunk.metadata)
       this.initHistory(dataChunk.history)

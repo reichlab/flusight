@@ -132,7 +132,9 @@ export default {
   computed: {
     ...mapGetters([
       'seasons',
-      'regions'
+      'regions',
+      'downloadedSeasons',
+      'seasonDataUrls'
     ]),
     ...mapGetters('switches', [
       'selectedSeason',
@@ -147,7 +149,22 @@ export default {
         return this.seasons[this.selectedSeason]
       },
       set (val) {
-        this.updateSelectedSeason(this.seasons.indexOf(val))
+        // Check if we need to download the season
+        if (this.downloadedSeasons.indexOf(val) === -1) {
+          let dataUrl = this.seasonDataUrls[val]
+          // TODO: Show a spinner
+          this.$http.get(dataUrl).then(response => {
+            let data = JSON.parse(response.bodyText.slice(17, -1))
+            this.addSeasonData(data)
+            this.updateSelectedSeason(this.seasons.indexOf(val))
+          }, response => {
+            // TODO: Some way of notifying for error
+            console.log('Some error')
+            console.log(response)
+          })
+        } else {
+          this.updateSelectedSeason(this.seasons.indexOf(val))
+        }
       }
     },
     currentRegion: {
@@ -166,7 +183,8 @@ export default {
       'initHistory',
       'initChoropleth',
       'plotChoropleth',
-      'updateChoropleth'
+      'updateChoropleth',
+      'initSeasonDataUrls'
     ]),
     ...mapActions('switches', [
       'updateSelectedRegion',
@@ -209,6 +227,7 @@ export default {
     require.ensure(['../../store/data'], () => {
       let dataChunk = require('../../store/data')
 
+      this.initSeasonDataUrls(dataChunk.seasonDataUrls)
       this.addSeasonData(dataChunk.latestSeasonData)
       this.initMetadata(dataChunk.metadata)
       this.initHistory(dataChunk.history)

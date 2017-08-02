@@ -2,6 +2,7 @@
 
 // Init mutations
 export const ADD_SEASON_DATA = 'ADD_SEASON_DATA'
+export const SET_SEASON_DATA_URLS = 'SET_SEASON_DATA_URLS'
 export const SET_HISTORY = 'SET_HISTORY'
 export const SET_METADATA = 'SET_METADATA'
 export const SET_TIMECHART = 'SET_TIMECHART'

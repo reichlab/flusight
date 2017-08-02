@@ -3,6 +3,7 @@ import * as utils from './utils'
 export const branding = state => state.branding
 export const metadata = state => state.metadata
 export const history = state => state.history
+export const seasonDataUrls = state => state.seasonDataUrls
 export const updateTime = state => {
   return state.metadata ? state.metadata.updateTime : 'NA'
 }
@@ -113,7 +114,7 @@ export const historicalData = (state, getters) => {
       output.push({
         id: getters.seasons[i],
         actual: utils.trimHistory(
-          utils.getMaxLagData(state.data[downloadedSeasonIdx].regions[selectedRegionId].actual),
+          utils.getMaxLagData(state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual),
           weeksCount
         )
       })

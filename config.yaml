@@ -15,7 +15,3 @@ branding:
 # Items required by backend script for generating data.json
 scripts:
   baselineUrl: "https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv"
-
-# Items used by the app
-app:
-  baseUrl: "http://reichlab.io/flusight" # Use for requesting season data
