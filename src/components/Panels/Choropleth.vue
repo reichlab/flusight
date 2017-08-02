@@ -99,6 +99,7 @@ div
       .level-right
         .level-item
           p.heading Season
+            span#season-loading-spinner(v-show="seasonLoading") load
           p.control.title
             span#season-selector.select.is-small
               select(v-model="currentSeason")
@@ -139,7 +140,8 @@ export default {
     ...mapGetters('switches', [
       'selectedSeason',
       'selectedRegion',
-      'choroplethRelative'
+      'choroplethRelative',
+      'seasonLoading'
     ]),
     ...mapGetters('weeks', [
       'selectedWeekName'
@@ -152,15 +154,17 @@ export default {
         // Check if we need to download the season
         if (this.downloadedSeasons.indexOf(val) === -1) {
           let dataUrl = this.seasonDataUrls[val]
-          // TODO: Show a spinner
+          this.showSeasonLoading()
           this.$http.get(dataUrl).then(response => {
             let data = JSON.parse(response.bodyText.slice(17, -1))
             this.addSeasonData(data)
             this.updateSelectedSeason(this.seasons.indexOf(val))
+            this.hideSeasonLoading()
           }, response => {
             // TODO: Some way of notifying for error
             console.log('Some error')
             console.log(response)
+            this.hideSeasonLoading()
           })
         } else {
           this.updateSelectedSeason(this.seasons.indexOf(val))
@@ -189,7 +193,9 @@ export default {
     ...mapActions('switches', [
       'updateSelectedRegion',
       'updateSelectedSeason',
-      'toggleRelative'
+      'toggleRelative',
+      'hideSeasonLoading',
+      'showSeasonLoading'
     ]),
     showSwitchTooltip () {
       this.tooltips.switch.show = true

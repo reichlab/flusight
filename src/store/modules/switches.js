@@ -5,7 +5,8 @@ const state = {
   season: 0,
   choroplethRelative: false,
   timeChart: false,
-  distributionChart: false
+  distributionChart: false,
+  seasonLoading: false
 }
 
 // getters
@@ -14,7 +15,8 @@ const getters = {
   selectedRegion: state => state.region,
   choroplethRelative: state => state.choroplethRelative,
   showTimeChart: state => state.timeChart,
-  showDistributionChart: state => state.distributionChart
+  showDistributionChart: state => state.distributionChart,
+  seasonLoading: state => state.seasonLoading
 }
 
 // actions
@@ -39,6 +41,14 @@ const actions = {
 
   displayDistributionChart ({ commit }) {
     commit(types.DISPLAY_DISTRIBUTIONCHART)
+  },
+
+  hideSeasonLoading ({ commit }) {
+    commit(types.SET_SEASON_LOADING, false)
+  },
+
+  showSeasonLoading ({ commit }) {
+    commit(types.SET_SEASON_LOADING, true)
   }
 }
 
@@ -50,6 +60,10 @@ const mutations = {
 
   [types.UPDATE_SELECTED_SEASON] (state, val) {
     state.season = val
+  },
+
+  [types.SET_SEASON_LOADING] (state, val) {
+    state.seasonLoading = val
   },
 
   [types.TOGGLE_CHOROPLETH_RELATIVE] (state) {
