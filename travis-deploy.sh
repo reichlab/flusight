@@ -19,25 +19,16 @@ SHA=`git rev-parse --verify HEAD`
 git checkout gh-pages || git checkout --orphan gh-pages
 rm -rf ./dist/* || exit 0
 
-# Do two commits, one for creating the data files
 yarn run parse
 yarn run test
-rm ./src/assets/data/.gitignore # Adding the jsons back in the repo
+yarn run build
+cp -r ./dist/* ./
 
 git config user.name "CI auto deploy"
 git config user.email "abhinav.tushar.vs@gmail.com"
 
 git add .
-git commit -m "Generated data files"
-
-# TODO: Change rawgit url in config using the recent hash
-
-# Second commit to update the data root url so that flusight can fetch
-# from rawgit
-yarn run build
-cp -r ./dist/* ./
-git add .
-git commit -m "Site built"
+git commit -m "Auto deploy to GitHub Pages: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
