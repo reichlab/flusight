@@ -70,6 +70,15 @@
   }
 }
 
+#season-loading-spinner {
+  img {
+    width: 50px;
+  }
+
+  &.hidden {
+    visibility: hidden;
+  }
+}
 </style>
 
 <template lang="pug">
@@ -99,7 +108,8 @@ div
       .level-right
         .level-item
           p.heading Season
-            span#season-loading-spinner(v-show="seasonLoading") load
+            span#season-loading-spinner(v-bind:class="[seasonLoading ? '' : 'hidden']")
+              img(v-bind:src="loadingSpinner")
           p.control.title
             span#season-selector.select.is-small
               select(v-model="currentSeason")
@@ -128,6 +138,7 @@ div
 <script>
 import Choropleth from '../../modules/choropleth'
 import { mapGetters, mapActions } from 'vuex'
+import loadingSpinner from '../../assets/loading.gif'
 
 export default {
   computed: {
@@ -226,7 +237,8 @@ export default {
             left: '0px'
           }
         }
-      }
+      },
+      loadingSpinner: loadingSpinner
     }
   },
   ready () {
