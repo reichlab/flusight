@@ -167,7 +167,7 @@ export default {
           let dataUrl = this.seasonDataUrls[val]
           this.showSeasonLoading()
           this.$http.get(dataUrl).then(response => {
-            let data = JSON.parse(response.bodyText.slice(17, -1))
+            let data = JSON.parse(response.bodyText.slice(17))
             this.addSeasonData(data)
             this.updateSelectedSeason(this.seasons.indexOf(val))
             this.hideSeasonLoading()
