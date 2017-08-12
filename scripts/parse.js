@@ -153,7 +153,7 @@ seasons.forEach((seasonId, seasonIdx) => {
     console.log('\n ✓ .json saved at ' + seasonOutFile)
 
     // Clear season cache
-    cachedCSVs[seasonId] = {}
+    delete cachedCSVs[seasonId]
   })
 })
 
