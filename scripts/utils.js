@@ -41,6 +41,7 @@ const weekToIndex = (week, seasonWeekStamps) => {
   let seasonWeeks = seasonWeekStamps.map(st => st % 100)
   let wInt = Math.floor(week)
   if (wInt === 0) wInt = Math.max(...seasonWeeks)
+  // TODO: Is this going to be right for 2014-2015?
   if (wInt === 53) wInt = 1
   return seasonWeeks.indexOf(wInt)
 }
