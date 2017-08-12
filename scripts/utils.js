@@ -84,7 +84,7 @@ const groupTargetBins = values => {
   } else if (values.length === 27) {
     // older format bin values
     return groupSum(values.slice(0, values.length - 1), 2)
-  } else if (values.length === 33) {
+  } else if (values.length < 40) {
     // week values
     return groupSum(values, 1)
   } else {
