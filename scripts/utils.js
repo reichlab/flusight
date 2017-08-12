@@ -8,35 +8,6 @@ const yaml = require('js-yaml')
 const mmwr = require('mmwr-week')
 
 /**
- * Skip points which are not that important by calculating simple
- * importance values
- */
-const compressArray = (array, cRatio) => {
-  let skip
-  if (cRatio < 1.0) {
-    // cRatio is actual compression ratio
-    skip = array.length - Math.floor(cRatio * array.length)
-  } else {
-    // cRatio is the number of points we expect in the compressed array
-    skip = array.length - cRatio
-  }
-
-  let importances = Array(array.length).fill([0, 0])
-  // We will keep the first and the last value
-  importances[0] = [0, 100]
-  importances[array.length - 1] = [array.length - 1, 100]
-
-  for (let i = 1; i < array.length - 1; i++) {
-    importances[i] = [i, array[i] - (array[i - 1] + array[i + 1]) / 2]
-  }
-
-  importances.sort((a, b) => (a[1] - b[1]))
-
-  // Skip values
-  return importances.slice(skip).map(imp => [imp[0], array[imp[0]]])
-}
-
-/**
  * Return list of weekStamps in given mmwr season
  */
 const seasonToWeekStamps = season => {
@@ -145,7 +116,6 @@ const regionFilter = (data, region) => {
 
     let parsedBins = null
     if (d.bins) {
-      // parsedBins = compressArray(d.bins.map(b => b[2]), 7)
       parsedBins = groupTargetBins(d.bins.map(b => b[2]))
     }
     if (wAIdx > -1) {
@@ -221,5 +191,3 @@ exports.getModelMeta = getModelMeta
 exports.getMaxLagData = getMaxLagData
 exports.seasonToWeekStamps = seasonToWeekStamps
 exports.weekToIndex = weekToIndex
-
-exports.compressArray = compressArray
