@@ -151,6 +151,9 @@ seasons.forEach((seasonId, seasonIdx) => {
 
     fs.writeFileSync(seasonOutFile, JSON.stringify(output))
     console.log('\n ✓ .json saved at ' + seasonOutFile)
+
+    // Clear season cache
+    cachedCSVs[seasonId] = {}
   })
 })
 
