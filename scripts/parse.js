@@ -6,7 +6,6 @@
  * - season-XXXX.json :: main data for season XXXX
  */
 
-const actual = require('./modules/actual')
 const region = require('./modules/region')
 const transform = require('./modules/transform')
 const baseline = require('./modules/baseline')
@@ -17,11 +16,13 @@ const path = require('path')
 const moment = require('moment')
 
 // Setup variables
-const dataDirectory = './data'
+const dataDir = './data' // Place with the CSVs
 const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyInFile = './scripts/assets/history.json'
 const historyOutFile = './src/assets/data/history.json'
 const metaOutFile = './src/assets/data/metadata.json'
+const actualDataDir = './scripts/assets' // Place with downlaoded actual jsons
+const outDir = './src/assets/data' // Place where all files are written
 
 console.log('\n ----------------------------------')
 console.log(' Generating data files for flusight')
@@ -40,18 +41,7 @@ if (!fs.existsSync(historyInFile)) {
 
 // S E A S O N - X X X X - X X X X . J S O N
 // Look for seasons in the data directory
-let seasons = utils.getSubDirectories(dataDirectory)
-
-// Stop if no folder found
-if (seasons.length === 0) {
-  console.log(' ✕ No seasons found in data directory!')
-  process.exit(1)
-}
-
-// Print seasons
-console.log(` Found ${seasons.length} seasons:`)
-seasons.forEach(s => console.log(' ' + s))
-console.log('')
+let seasons = utils.getSubDirectories(dataDir)
 
 // Get baseline data
 let baselineData = baseline.getBaselines(baselineFile)
@@ -65,13 +55,18 @@ seasons.forEach(seasonId => {
 
 // Write separate files for each season
 seasons.forEach((seasonId, seasonIdx) => {
+  let seasonInFile = path.join(actualDataDir, `${seasonId}-actual.json`)
+
   let seasonOutFile
   if (seasonIdx === seasons.length - 1) {
-    seasonOutFile = './src/assets/data/season-latest.json'
+    seasonOutFile = path.join(outDir, 'season-latest.json')
   } else {
-    seasonOutFile = `./src/assets/data/season-${seasonId}.json`
+    seasonOutFile = path.join(outDir, `season-${seasonId}.json`)
   }
-  actual.getActual([seasonId], actualData => {
+
+  fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
+    if (err) throw err
+    let actualData = JSON.parse(fileData)
     console.log(`\n Parsing data for season ${seasonId}...`)
     let output = {
       seasonId: seasonId,
@@ -80,7 +75,7 @@ seasons.forEach((seasonId, seasonIdx) => {
 
     output.regions = region.regionData.map(reg => {
       // Get models for each season
-      let modelsDir = utils.getSubDirectories(path.join(dataDirectory, seasonId))
+      let modelsDir = utils.getSubDirectories(path.join(dataDir, seasonId))
       let models = modelsDir.map(model => {
         // Bootstrap cache
         if (!(model in cachedCSVs[seasonId])) {
@@ -88,8 +83,8 @@ seasons.forEach((seasonId, seasonIdx) => {
         }
 
         // Get prediction weeks for each model
-        let weekStamps = utils.getWeekFiles(path.join(dataDirectory, seasonId, model))
-        let modelMeta = utils.getModelMeta(path.join(dataDirectory, seasonId, model))
+        let weekStamps = utils.getWeekFiles(path.join(dataDir, seasonId, model))
+        let modelMeta = utils.getModelMeta(path.join(dataDir, seasonId, model))
         let seasonWeekStamps = utils.seasonToWeekStamps(seasonId)
 
         let modelPredictions = seasonWeekStamps.map((sweek, index) => {
@@ -98,7 +93,7 @@ seasons.forEach((seasonId, seasonIdx) => {
             return null
           }
 
-          let fileName = path.join(dataDirectory, seasonId, model, sweek + '.csv')
+          let fileName = path.join(dataDir, seasonId, model, sweek + '.csv')
           let data = null
           // Take from cache to avoid file reads
           if (sweek in cachedCSVs[seasonId][model]) {

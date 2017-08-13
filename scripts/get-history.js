@@ -77,7 +77,7 @@ regionIdentifiers.forEach(id => {
   })
 })
 
-console.log('Downloading historical data from ' + start + ' to ' + end)
+console.log(' Downloading historical data from ' + start + ' to ' + end)
 
 requestAPI([start, breakPoint], historyData, () => {
   requestAPI([breakPoint + 1, end], historyData, () => {
