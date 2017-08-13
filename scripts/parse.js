@@ -7,22 +7,16 @@
  */
 
 const region = require('./modules/region')
-const transform = require('./modules/transform')
-const baseline = require('./modules/baseline')
-const stats = require('./modules/stats')
 const utils = require('./utils')
 const fs = require('fs-extra')
-const path = require('path')
 const moment = require('moment')
+const { exec } = require('child_process')
 
 // Setup variables
 const dataDir = './data' // Place with the CSVs
-const baselineFile = './scripts/assets/wILI_Baseline.csv'
 const historyInFile = './scripts/assets/history.json'
 const historyOutFile = './src/assets/data/history.json'
 const metaOutFile = './src/assets/data/metadata.json'
-const actualDataDir = './scripts/assets' // Place with downlaoded actual jsons
-const outDir = './src/assets/data' // Place where all files are written
 
 console.log('\n ----------------------------------')
 console.log(' Generating data files for flusight')
@@ -39,119 +33,8 @@ if (!fs.existsSync(historyInFile)) {
   console.log(' ✓ Wrote history.json\n')
 }
 
-// S E A S O N - X X X X - X X X X . J S O N
 // Look for seasons in the data directory
 let seasons = utils.getSubDirectories(dataDir)
-
-// Get baseline data
-let baselineData = baseline.getBaselines(baselineFile)
-
-// Create cache for file data
-let cachedCSVs = {}
-// season -> model -> week
-seasons.forEach(seasonId => {
-  cachedCSVs[seasonId] = {}
-})
-
-// Write separate files for each season
-seasons.forEach((seasonId, seasonIdx) => {
-  let seasonInFile = path.join(actualDataDir, `${seasonId}-actual.json`)
-
-  let seasonOutFile
-  if (seasonIdx === seasons.length - 1) {
-    seasonOutFile = path.join(outDir, 'season-latest.json')
-  } else {
-    seasonOutFile = path.join(outDir, `season-${seasonId}.json`)
-  }
-
-  fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
-    if (err) throw err
-    let actualData = JSON.parse(fileData)
-    console.log(`\n Parsing data for season ${seasonId}...`)
-    let output = {
-      seasonId: seasonId,
-      regions: []
-    }
-
-    output.regions = region.regionData.map(reg => {
-      // Get models for each season
-      let modelsDir = utils.getSubDirectories(path.join(dataDir, seasonId))
-      let models = modelsDir.map(model => {
-        // Bootstrap cache
-        if (!(model in cachedCSVs[seasonId])) {
-          cachedCSVs[seasonId][model] = {}
-        }
-
-        // Get prediction weeks for each model
-        let weekStamps = utils.getWeekFiles(path.join(dataDir, seasonId, model))
-        let modelMeta = utils.getModelMeta(path.join(dataDir, seasonId, model))
-        let seasonWeekStamps = utils.seasonToWeekStamps(seasonId)
-
-        let modelPredictions = seasonWeekStamps.map((sweek, index) => {
-          if (weekStamps.indexOf(sweek) === -1) {
-            // Prediction not available for this week, return null
-            return null
-          }
-
-          let fileName = path.join(dataDir, seasonId, model, sweek + '.csv')
-          let data = null
-          // Take from cache to avoid file reads
-          if (sweek in cachedCSVs[seasonId][model]) {
-            data = cachedCSVs[seasonId][model][sweek]
-          } else {
-            data = transform.csvToJson(fs.readFileSync(fileName, 'utf8'))
-            cachedCSVs[seasonId][model][sweek] = data
-          }
-          // Take only for the current region
-          let filtered = utils.regionFilter(data, reg.subId)
-          if (filtered === -1) return null
-          else {
-            // Transform weeks predictions to season indices
-            let timeTargets = ['peakTime', 'onsetTime']
-            timeTargets.forEach(t => {
-              filtered[t].point = utils.weekToIndex(filtered[t].point, seasonWeekStamps)
-              filtered[t].high = filtered[t].high.map(val => utils.weekToIndex(val, seasonWeekStamps))
-              filtered[t].low = filtered[t].low.map(val => utils.weekToIndex(val, seasonWeekStamps))
-            })
-            return filtered
-          }
-        })
-
-        return {
-          id: model,
-          meta: modelMeta,
-          predictions: modelPredictions
-        }
-      })
-      return {
-        id: reg.id,
-        actual: actualData[reg.id][seasonId],
-        models: models,
-        baseline: baselineData[reg.subId][seasonId]
-      }
-    })
-
-    // Add model metadata
-    console.log('\n Calculating model statistics')
-
-    region.regionData.forEach((reg, regionIdx) => {
-      output.regions[regionIdx].models.forEach(model => {
-        model.stats = stats.getModelStats(
-          cachedCSVs[seasonId][model.id],
-          utils.getMaxLagData(actualData[reg.id][seasonId]),
-          reg.subId
-        )
-      })
-    })
-
-    fs.writeFile(seasonOutFile, JSON.stringify(output), (err) => {
-      if (err) throw err
-      console.log('\n ✓ .json saved at ' + seasonOutFile)
-      // Clear season cache
-      delete cachedCSVs[seasonId]
-    })
-  })
-})
 
 // M E T A D A T A . J S O N
 fs.writeFileSync(metaOutFile, JSON.stringify({
@@ -160,3 +43,28 @@ fs.writeFileSync(metaOutFile, JSON.stringify({
   updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
 }))
 console.log(' ✓ Wrote metadata.json')
+
+// S E A S O N - X X X X - X X X X . J S O N
+
+/**
+ * Run a node subprocess to parse season
+ */
+function parseSeason (seasonId, callback) {
+  exec(`node scripts/parse-season.js ${seasonId}`, (err) => {
+    if (err) throw err
+    callback()
+  })
+}
+
+function parseSeasons (seasonIds) {
+  if (seasonIds.length === 0) {
+    console.log('All done')
+  } else {
+    console.log(` Running parse-season for ${seasonIds[0]}`)
+    parseSeason(seasonIds[0], () => {
+      parseSeasons(seasonIds.slice(1))
+    })
+  }
+}
+
+parseSeasons(seasons)

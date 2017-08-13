@@ -9,7 +9,7 @@ const path = require('path')
 const fs = require('fs')
 
 // Variables and paths
-const dataDirectory = './data'
+const dataDir = './data'
 const outputDir = './scripts/assets'
 
 console.log(' Downloading actual data from delphi epidata API')
@@ -17,7 +17,7 @@ console.log(' -----------------------------------------------')
 console.log(' Messages overlap due to concurrency. Don\'t read too much.\n')
 
 // Look for seasons in the data directory
-let seasons = utils.getSubDirectories(dataDirectory)
+let seasons = utils.getSubDirectories(dataDir)
 
 // Stop if no folder found
 if (seasons.length === 0) {
