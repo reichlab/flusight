@@ -42,14 +42,12 @@ const statFuncMAE = (pred, actual) => Math.abs(actual - pred.point)
  * Return log score from given prediction and actual value
  */
 const statFuncLog = (pred, actual) => {
-  let score = null
   for (let i = 0; i < pred.bins.length; i++) {
     if (pred.bins[i][1] > actual) {
-      score = Math.log(pred.bins[i][2])
-      break
+      return Math.log(pred.bins[i][2])
     }
   }
-  return score
+  return null
 }
 
 /**
