@@ -4,13 +4,13 @@ const state = {
     name: 'Mean Absolute Error',
     header: ['1 wk', '2 wk', '3 wk', '4 wk'],
     url: 'https://en.wikipedia.org/wiki/Mean_absolute_error',
-    bestFunc: Math.min
+    bestFunc: items => Math.min(...items.filter(d => d !== 'NA'))
   }, {
     id: 'log',
     name: 'Mean Log Score',
     header: ['1 wk', '2 wk', '3 wk', '4 wk'],
     url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
-    bestFunc: Math.max
+    bestFunc: items => Math.max(...items.filter(d => d !== 'NA'))
   }],
 
   confidenceIntervals: ['90%', '50%'],
