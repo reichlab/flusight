@@ -10,6 +10,7 @@
     "get-baseline": "node scripts/get-baseline.js",
     "get-history": "node scripts/get-history.js",
     "get-actual": "node scripts/get-actual.js",
+    "get-scores": "node scripts/get-scores.js",
     "parse": "node scripts/parse.js",
     "test": "standard \"./**/*.vue\" \"./**/*.js\" & mocha",
     "build": "node build/build.js",
