@@ -13,7 +13,6 @@ const baseline = require('./modules/baseline')
 
 // Variables and paths
 const dataDir = './data'
-const actualDataDir = './scripts/assets'
 const outDir = './src/assets/data'
 const baselineFile = './scripts/assets/wILI_Baseline.csv'
 
@@ -22,14 +21,15 @@ let baselineData = baseline.getBaselines(baselineFile)
 
 // Look for seasons in the data directory
 let seasons = utils.getSubDirectories(dataDir)
-// Take season id from command line
-let seasonId = process.argv[2]
+
+// Take input file from command line argument
+let seasonInFile = process.argv[2]
+// Season actual files are named <season-id>-actual.json
+let seasonId = path.basename(seasonInFile).slice(0, -12)
 let seasonIdx = seasons.indexOf(seasonId)
 
 // Create cache for file data
 let cachedCSVs = {}
-
-let seasonInFile = path.join(actualDataDir, `${seasonId}-actual.json`)
 
 let seasonOutFile
 if (seasonIdx === seasons.length - 1) {

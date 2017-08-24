@@ -9,11 +9,13 @@
 const region = require('./modules/region')
 const utils = require('./utils')
 const fs = require('fs-extra')
+const path = require('path')
 const moment = require('moment')
 const { exec } = require('child_process')
 
 // Setup variables
 const dataDir = './data' // Place with the CSVs
+const actualDataDir = './scripts/assets'
 const historyInFile = './scripts/assets/history.json'
 const historyOutFile = './src/assets/data/history.json'
 const metaOutFile = './src/assets/data/metadata.json'
@@ -50,7 +52,8 @@ console.log(' ✓ Wrote metadata.json')
  * Run a node subprocess to parse season
  */
 function parseSeason (seasonId, callback) {
-  exec(`node scripts/parse-season.js ${seasonId}`, (err) => {
+  let seasonActualFile = path.join(actualDataDir, `${seasonId}-actual.json`)
+  exec(`node scripts/parse-season.js ${seasonActualFile}`, (err) => {
     if (err) throw err
     callback()
   })
