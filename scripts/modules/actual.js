@@ -7,7 +7,6 @@ const delphiAPI = require('../assets/delphi_epidata.min')
 const region = require('./region')
 const mmwr = require('mmwr-week')
 const ProgressBar = require('progress')
-// const fs = require('fs')
 
 const regionIdentifiers = region.regionData.map(x => x.id)
 
