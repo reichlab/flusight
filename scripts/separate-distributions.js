@@ -35,32 +35,28 @@ const filterPrediction = prediction => {
   }
 }
 
-// Extract bin data
+// Extract bin data for all regions in given season data
 const extractDistributions = seasonData => {
-  return {
-    seasonId: seasonData.seasonId,
-    regions: seasonData.regions.map(reg => {
-      return {
-        id: reg.id,
-        models: reg.models.map(mod => {
-          return {
-            id: mod.id,
-            predictions: mod.predictions.map(filterPrediction)
-          }
-        })
-      }
-    })
-  }
+  return seasonData.regions.map(reg => {
+    return {
+      seasonId: seasonData.seasonId,
+      regionId: reg.id,
+      models: reg.models.map(mod => {
+        return {
+          id: mod.id,
+          predictions: mod.predictions.map(filterPrediction)
+        }
+      })
+    }
+  })
 }
 
 let seasonData = JSON.parse(fs.readFileSync(seasonInFile), 'utf8')
-let seasonId = seasonData.seasonId
-let distributionData = extractDistributions(seasonData)
-
-let outputFile = path.join(outDir, `season-${seasonId}.json`)
-
-fs.writeFile(outputFile, JSON.stringify(distributionData), err => {
-  if (err)
-    throw err
-  console.log(` Distributions file written at ${outputFile}`)
+extractDistributions(seasonData).forEach(regionData => {
+  let outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
+  fs.writeFile(outputFile, JSON.stringify(regionData), err => {
+    if (err)
+      throw err
+    console.log(` Distributions file written at ${outputFile}`)
+  })
 })
