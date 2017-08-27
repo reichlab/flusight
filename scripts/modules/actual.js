@@ -77,7 +77,6 @@ const getActual = (seasons, callback) => {
 
   // Start week
   let startStamp = firstYear * 100 + 30
-  // let startDate = stampToDate(startStamp)
 
   // Current week
   let currentDate = new mmwr.MMWRDate()
@@ -86,7 +85,6 @@ const getActual = (seasons, callback) => {
 
   // Last week
   let endStamp = Math.min(currentStamp, lastYear * 100 + 29)
-  // let endDate = stampToDate(endStamp)
 
   // Setup container
   let output = {}
