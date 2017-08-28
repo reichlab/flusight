@@ -185,7 +185,7 @@ export const choroplethData = (state, getters) => {
     output.data.push({
       region: getters.metadata.regionData[regIdx].subId,
       states: getters.metadata.regionData[regIdx].states,
-      value: values
+      values: values
     })
   })
 

@@ -259,7 +259,7 @@ export default class Choropleth {
 
     // Update colors for given week
     data.map(d => {
-      let value = d.value[ids.weekIdx].data
+      let value = d.values[ids.weekIdx]
       let color = '#ccc'
       if (value !== -1) color = cmap[Math.floor(colorScale(value))]
 

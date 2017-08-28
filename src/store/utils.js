@@ -5,10 +5,7 @@
  */
 export const baselineScale = (values, baseline) => {
   return values.map(d => {
-    return {
-      week: d.week,
-      data: baseline ? ((d.data / baseline) - 1) * 100 : -1
-    }
+    return baseline ? ((d / baseline) - 1) * 100 : -1
   })
 }
 
