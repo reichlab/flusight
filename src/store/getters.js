@@ -84,7 +84,7 @@ export const timePoints = (state, getters) => {
  * Return actual data for currently selected state
  */
 export const actual = (state, getters) => {
-  return utils.getMaxLagData(getters.selectedData.actual).map(d => d.data)
+  return getters.selectedData.actual.map(d => d.actual)
 }
 
 /**
@@ -114,7 +114,7 @@ export const historicalData = (state, getters) => {
       output.push({
         id: getters.seasons[i],
         actual: utils.trimHistory(
-          utils.getMaxLagData(state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual),
+          state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual.map(d => d.actual),
           weeksCount
         )
       })
@@ -172,7 +172,7 @@ export const choroplethData = (state, getters) => {
   let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[selectedSeasonIdx])
 
   state.data[downloadedSeasonIdx].regions.map((reg, regIdx) => {
-    let values = utils.getMaxLagData(reg.actual)
+    let values = reg.actual.map(d => d.actual)
 
     if (relative) values = utils.baselineScale(values, reg.baseline)
 

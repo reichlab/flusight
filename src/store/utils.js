@@ -13,24 +13,6 @@ export const baselineScale = (values, baseline) => {
 }
 
 /**
- * Get data with maximum lag
- * First element of the lag array
- */
-export const getMaxLagData = actual => {
-  return actual.map(d => {
-    let dataToReturn = null
-    // Handle zero length values
-    if (d.data.length !== 0) {
-      dataToReturn = d.data[0].value
-    }
-    return {
-      week: d.week,
-      data: dataToReturn
-    }
-  })
-}
-
-/**
  * Trim history data to fit in length 'numWeeks'
  */
 export const trimHistory = (historyActual, numWeeks) => {
@@ -60,7 +42,7 @@ export const choroplethDataRange = (seasonsData, relativeToggle) => {
 
   seasonsData.map(seasonData => {
     seasonData.regions.map(regionData => {
-      let actual = getMaxLagData(regionData.actual).map(d => d.data).filter(d => d)
+      let actual = regionData.actual.map(d => d.actual).filter(d => d)
 
       if (relativeToggle) {
         // Use baseline scaled data
