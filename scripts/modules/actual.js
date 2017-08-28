@@ -95,7 +95,7 @@ const getActual = (season, callback) => {
   let output = {}
   regionIdentifiers.forEach(id => {
     output[id] = {
-      season: seasonWeeksData(season)
+      [season]: seasonWeeksData(season)
     }
   })
 
