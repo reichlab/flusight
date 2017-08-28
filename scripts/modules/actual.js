@@ -29,7 +29,8 @@ const seasonWeeksData = season => {
   for (let i = 30; i <= firstMaxWeek; i++) {
     weeks.push({
       week: parseInt(first + '' + i),
-      data: []
+      actual: -1,
+      lagData: []
     })
   }
 
@@ -42,7 +43,8 @@ const seasonWeeksData = season => {
 
     weeks.push({
       week: week,
-      data: []
+      actual: -1,
+      lagData: []
     })
   }
   return weeks
@@ -73,6 +75,7 @@ const dateToStamp = date => date.year * 100 + date.week
 const getActual = (season, callback) => {
   // Get min max epiweek range in seasons
   let [firstYear, lastYear] = season.split('-').map(d => parseInt(d))
+
   // Go upto this lag value back
   let maxLag = 51
 
@@ -88,6 +91,7 @@ const getActual = (season, callback) => {
   let endStamp = Math.min(currentStamp, lastYear * 100 + 29)
 
   // Setup container
+  // Request fill in this
   let output = {}
   regionIdentifiers.forEach(id => {
     output[id] = {
@@ -101,38 +105,47 @@ const getActual = (season, callback) => {
     total: maxLag + 1
   })
 
-  // Fetch data from delphi api for given lag
-  const laggedRequest = lag => {
-    const populateOutput = data => {
-      data.forEach(d => {
-        let sub = output[d.region][weekToSeason(d.epiweek)]
-        let dataIndex
-        for (let i = 0; i < sub.length; i++) {
-          if (sub[i].week === d.epiweek) {
-            dataIndex = i
-            break
-          }
-        }
+  // Find the index for filling in output
+  const getDataIndex = apiDataPoint => {
+    let seasonId = weekToSeason(apiDataPoint.epiweek)
+    let sub = output[apiDataPoint.region][seasonId]
+    return sub.map(s => s.week).indexOf(apiDataPoint.epiweek)
+  }
 
-        output[d.region][weekToSeason(d.epiweek)][dataIndex].data.push({
-          lag: lag,
-          value: d.wili
+  // Fetch actual data provided at whatever lag value (might be larger than 51)
+  const actualRequest = (cbActual) => {
+    delphiAPI.Epidata.fluview((res, message, data) => {
+      if (data !== undefined) {
+        data.forEach(d => {
+          let dataIndex = getDataIndex(d)
+          output[d.region][weekToSeason(d.epiweek)][dataIndex].actual = d.wili
         })
-      })
-    }
+      }
+    }, regionIdentifiers, [delphiAPI.Epidata.range(startStamp, endStamp)])
+    cbActual()
+  }
 
+  // Fetch data from delphi api for given lag
+  const laggedRequest = (lag, cbLag) => {
     const nextLagCall = (currentLag) => {
       progressBar.tick()
       if (currentLag === 0) {
-        callback(output)
+        // Lag requests done
+        cbLag()
       } else {
-        laggedRequest(currentLag - 1)
+        laggedRequest(currentLag - 1, cbLag)
       }
     }
 
     delphiAPI.Epidata.fluview((res, message, data) => {
       if (data !== undefined) {
-        populateOutput(data)
+        data.forEach(d => {
+          let dataIndex = getDataIndex(d)
+          output[d.region][weekToSeason(d.epiweek)][dataIndex].lagData.push({
+            lag: lag,
+            value: d.wili
+          })
+        })
       }
 
       nextLagCall(lag)
@@ -140,7 +153,13 @@ const getActual = (season, callback) => {
   }
 
   // Look upto maxLag weeks back
-  laggedRequest(maxLag)
+  laggedRequest(maxLag, () => {
+    // Fill in actual values now
+    actualRequest(() => {
+      // Return the populated container
+      callback(output)
+    })
+  })
 }
 
 exports.getActual = getActual
