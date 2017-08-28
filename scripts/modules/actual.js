@@ -103,8 +103,8 @@ const getActual = (season, callback) => {
           output[d.region][dataIndex].actual = d.wili
         })
       }
+      cbActual()
     }, regionIdentifiers, [delphiAPI.Epidata.range(startStamp, endStamp)])
-    cbActual()
   }
 
   // Fetch data from delphi api for given lag
