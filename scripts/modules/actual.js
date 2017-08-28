@@ -30,7 +30,7 @@ const seasonWeeksData = season => {
     weeks.push({
       week: parseInt(first + '' + i),
       actual: null,
-      lag: []
+      lagData: []
     })
   }
 
@@ -44,7 +44,7 @@ const seasonWeeksData = season => {
     weeks.push({
       week: week,
       actual: null,
-      lag: []
+      lagData: []
     })
   }
   return weeks
@@ -123,7 +123,7 @@ const getActual = (season, callback) => {
       if (data !== undefined) {
         data.forEach(d => {
           let dataIndex = getDataIndex(d)
-          output[d.region][dataIndex].lag.push({
+          output[d.region][dataIndex].lagData.push({
             lag: lag,
             value: d.wili
           })

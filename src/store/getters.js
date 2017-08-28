@@ -58,7 +58,7 @@ export const distributionChart = state => state.distributionChart
  * Return observed data for currently selected state
  */
 export const observed = (state, getters) => {
-  return getters.selectedData.actual.map(d => d.data)
+  return getters.selectedData.actual.map(d => d.lagData)
 }
 
 /**
