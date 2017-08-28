@@ -167,28 +167,9 @@ const getModelMeta = submissionDir => {
   return meta
 }
 
-/**
- * Get data with maximum lag
- * First element of the lag array
- */
-const getMaxLagData = actual => {
-  return actual.map(d => {
-    let dataToReturn = -1
-    // Handle zero length values
-    if (d.data.length !== 0) {
-      dataToReturn = d.data[0].value
-    }
-    return {
-      week: d.week,
-      data: dataToReturn
-    }
-  })
-}
-
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
-exports.getMaxLagData = getMaxLagData
 exports.seasonToWeekStamps = seasonToWeekStamps
 exports.weekToIndex = weekToIndex

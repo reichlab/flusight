@@ -99,7 +99,7 @@ fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
     })
     return {
       id: reg.id,
-      actual: actualData[reg.id][seasonId],
+      actual: actualData[reg.id],
       models: models,
       baseline: baselineData[reg.subId][seasonId]
     }
@@ -112,7 +112,12 @@ fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
     output.regions[regionIdx].models.forEach(model => {
       model.stats = stats.getModelStats(
         cachedCSVs[model.id],
-        utils.getMaxLagData(actualData[reg.id][seasonId]),
+        actualData[reg.id].map(weekData => {
+          return {
+            week: weekData.week,
+            data: weekData.actual
+          }
+        }),
         reg.subId
       )
     })

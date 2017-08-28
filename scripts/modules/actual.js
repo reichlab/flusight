@@ -50,21 +50,6 @@ const seasonWeeksData = season => {
   return weeks
 }
 
-/**
- * Function mapping week number (201523) to season string
- * @param {number} week week number identifier
- * @returns {string} string season like 2014-2015
- */
-const weekToSeason = week => {
-  let weekNum = week % 100
-  let year = parseInt(week / 100)
-  if (weekNum > 29) {
-    return [year, year + 1].join('-')
-  } else {
-    return [year - 1, year].join('-')
-  }
-}
-
 const dateToStamp = date => date.year * 100 + date.week
 
 /**
@@ -94,9 +79,7 @@ const getActual = (season, callback) => {
   // Request fill in this
   let output = {}
   regionIdentifiers.forEach(id => {
-    output[id] = {
-      [season]: seasonWeeksData(season)
-    }
+    output[id] = seasonWeeksData(season)
   })
 
   let progressBar = new ProgressBar(' :bar :current of :total lag values', {
@@ -107,8 +90,7 @@ const getActual = (season, callback) => {
 
   // Find the index for filling in output
   const getDataIndex = apiDataPoint => {
-    let seasonId = weekToSeason(apiDataPoint.epiweek)
-    let sub = output[apiDataPoint.region][seasonId]
+    let sub = output[apiDataPoint.region]
     return sub.map(s => s.week).indexOf(apiDataPoint.epiweek)
   }
 
@@ -118,7 +100,7 @@ const getActual = (season, callback) => {
       if (data !== undefined) {
         data.forEach(d => {
           let dataIndex = getDataIndex(d)
-          output[d.region][weekToSeason(d.epiweek)][dataIndex].actual = d.wili
+          output[d.region][dataIndex].actual = d.wili
         })
       }
     }, regionIdentifiers, [delphiAPI.Epidata.range(startStamp, endStamp)])
@@ -141,7 +123,7 @@ const getActual = (season, callback) => {
       if (data !== undefined) {
         data.forEach(d => {
           let dataIndex = getDataIndex(d)
-          output[d.region][weekToSeason(d.epiweek)][dataIndex].lagData.push({
+          output[d.region][dataIndex].lagData.push({
             lag: lag,
             value: d.wili
           })
