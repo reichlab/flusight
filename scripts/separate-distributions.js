@@ -10,7 +10,6 @@ const fs = require('fs')
 const path = require('path')
 
 // Variables and paths
-const seasonDataDir = './src/assets/data'
 const outDir = './src/assets/data/distributions'
 
 // Take season id from command line
@@ -55,8 +54,9 @@ let seasonData = JSON.parse(fs.readFileSync(seasonInFile), 'utf8')
 extractDistributions(seasonData).forEach(regionData => {
   let outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
   fs.writeFile(outputFile, JSON.stringify(regionData), err => {
-    if (err)
+    if (err) {
       throw err
+    }
     console.log(` Distributions file written at ${outputFile}`)
   })
 })
