@@ -34,7 +34,7 @@ seasons.forEach((seasonId, seasonIdx) => {
   let seasonOutFile = path.join(outputDir, `${seasonId}-actual.json`)
 
   console.log(` Downloading data for ${seasonId}`)
-  actual.getActual([seasonId], actualData => {
+  actual.getActual(seasonId, actualData => {
     fs.writeFile(seasonOutFile, JSON.stringify(actualData), (err) => {
       if (err) throw err
       console.log(` ✓ File written at ${seasonOutFile}`)

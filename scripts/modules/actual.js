@@ -67,13 +67,12 @@ const dateToStamp = date => date.year * 100 + date.week
 
 /**
  * Get actual epidemic data for given seasons
- * @param {array} seasons array of string identifier strings
+ * @param {array} season season identifier string
  * @param {function} callback callback function
  */
-const getActual = (seasons, callback) => {
+const getActual = (season, callback) => {
   // Get min max epiweek range in seasons
-  let firstYear = Math.min(...seasons.map(d => parseInt(d.split('-')[0])))
-  let lastYear = Math.max(...seasons.map(d => parseInt(d.split('-')[1])))
+  let [firstYear, lastYear] = season.split('-').map(d => parseInt(d))
 
   // Start week
   let startStamp = firstYear * 100 + 30
@@ -89,10 +88,9 @@ const getActual = (seasons, callback) => {
   // Setup container
   let output = {}
   regionIdentifiers.forEach(id => {
-    output[id] = {}
-    seasons.map(season => {
-      output[id][season] = seasonWeeksData(season)
-    })
+    output[id] = {
+      season: seasonWeeksData(season)
+    }
   })
 
   let progressBar = new ProgressBar(' :bar :current of :total lag values', {
