@@ -73,6 +73,8 @@ const dateToStamp = date => date.year * 100 + date.week
 const getActual = (season, callback) => {
   // Get min max epiweek range in seasons
   let [firstYear, lastYear] = season.split('-').map(d => parseInt(d))
+  // Go upto this lag value back
+  let maxLag = 51
 
   // Start week
   let startStamp = firstYear * 100 + 30
@@ -96,7 +98,7 @@ const getActual = (season, callback) => {
   let progressBar = new ProgressBar(' :bar :current of :total lag values', {
     complete: '▇',
     incomplete: '-',
-    total: 52
+    total: maxLag + 1
   })
 
   // Fetch data from delphi api for given lag
@@ -137,8 +139,8 @@ const getActual = (season, callback) => {
     }, regionIdentifiers, [delphiAPI.Epidata.range(startStamp, endStamp)], null, lag)
   }
 
-  // Look upto 51 weeks back
-  laggedRequest(51)
+  // Look upto maxLag weeks back
+  laggedRequest(maxLag)
 }
 
 exports.getActual = getActual
