@@ -111,10 +111,16 @@ export const historicalData = (state, getters) => {
   for (let i = 0; i < selectedSeasonIdx; i++) {
     let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[i])
     if (downloadedSeasonIdx !== -1) {
+      let seasonActual = state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual
       output.push({
         id: getters.seasons[i],
         actual: utils.trimHistory(
-          state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual.map(d => d.actual),
+          seasonActual.map(d => {
+            return {
+              week: d.week,
+              data: d.actual
+            }
+          }),
           weeksCount
         )
       })
