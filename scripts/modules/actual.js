@@ -29,7 +29,7 @@ const seasonWeeksData = season => {
   for (let i = 30; i <= firstMaxWeek; i++) {
     weeks.push({
       week: parseInt(first + '' + i),
-      actual: -1,
+      actual: null,
       lagData: []
     })
   }
@@ -43,7 +43,7 @@ const seasonWeeksData = season => {
 
     weeks.push({
       week: week,
-      actual: -1,
+      actual: null,
       lagData: []
     })
   }
