@@ -18,7 +18,7 @@ const distDataCtx = require.context(
 const seasonDataUrls = seasonDataCtx.keys().reduce((acc, key) => {
   if (key.startsWith('./season-')) {
     // Identifier is like '2013-2014'
-    acc[key.slice(9, -5)] = req(key)
+    acc[key.slice(9, -5)] = seasonDataCtx(key)
   }
   return acc
 }, {})
@@ -26,7 +26,7 @@ const seasonDataUrls = seasonDataCtx.keys().reduce((acc, key) => {
 const distDataUrls = distDataCtx.keys().reduce((acc, key) => {
   if (key.startsWith('./season-')) {
     // Identifier is like '2013-2014-hhs10'
-    acc[key.slice(9, -5)] = req(key)
+    acc[key.slice(9, -5)] = distDataCtx(key)
   }
   return acc
 }, {})
