@@ -12,7 +12,7 @@
     "get-actual": "node scripts/get-actual.js",
     "get-scores": "node scripts/get-scores.js",
     "parse": "node scripts/parse.js",
-    "test": "standard \"./**/*.vue\" \"./**/*.js\" & mocha",
+    "test": "standard \"./**/*.vue\" \"./**/*.js\" && mocha",
     "build": "node build/build.js",
     "deploy": "gh-pages-deploy"
   },
