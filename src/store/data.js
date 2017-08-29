@@ -31,5 +31,4 @@ const distDataUrls = distDataCtx.keys().reduce((acc, key) => {
   return acc
 }, {})
 
-
 export { seasonDataUrls, distDataUrls, latestSeasonData, history, metadata }
