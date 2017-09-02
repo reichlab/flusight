@@ -57,12 +57,17 @@ use [npm](https://www.npmjs.com/) too).
 + Put prediction submission files in `./data` as described in
   the [wiki](https://github.com/reichlab/flusight/wiki/Workflow)
 
-+ Parse prediction files to generate `./src/assets/data.json` (summary file,
-  used by the visualizer)
++ Collect actual data from
+  [delphi-epidata](https://github.com/cmu-delphi/delphi-epidata) API for
+  involved seasons.
+
+  `yarn run get-actual`
+
++ Parse prediction files to generate data files in `./src/assets/data/`
 
   `yarn run parse`
   
-+ Test
++ Test if the collected data files are fine
 
   `yarn run test`
   
@@ -80,10 +85,10 @@ use [npm](https://www.npmjs.com/) too).
   deployment to take place*
   
   
-In case you want to generate the `./src/assets/data.json` file yourself, you can
-replace the parsing step (`yarn run parse`) with your own but make sure to check
-for schema compliance (`yarn run test`). Head over to
-the [wiki](https://github.com/reichlab/flusight/wiki) to know more.
+In case you want to generate the data files yourself, you can replace the
+parsing and data collection step with your own but make sure to check for data
+compliance (`yarn run test`). Head over to the
+[wiki](https://github.com/reichlab/flusight/wiki) to know more.
 
 ## Development
 
