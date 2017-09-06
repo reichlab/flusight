@@ -3,7 +3,7 @@
  * Use delphi-epidata API (https://github.com/cmu-delphi/delphi-epidata)
  */
 
-const delphiAPI = require('../assets/delphi_epidata.min')
+const delphiAPI = require('../assets/delphi_epidata')
 const region = require('./region')
 const mmwr = require('mmwr-week')
 const ProgressBar = require('progress')
