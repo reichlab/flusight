@@ -14,7 +14,7 @@ Notes:
   var Epidata, http, querystring;
 
   if ((typeof $ !== "undefined" && $ !== null ? $.getJSON : void 0) == null) {
-    http = require('http');
+    https = require('https');
     querystring = require('querystring');
   }
 
@@ -75,7 +75,7 @@ Notes:
             return handler(JSON.parse(text));
           });
         };
-        return http.get(BASE_URL + "?" + (querystring.stringify(params)), reader);
+        return https.get(BASE_URL + "?" + (querystring.stringify(params)), reader);
       }
     };
 
