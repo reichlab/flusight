@@ -22,7 +22,8 @@
       "vue"
     ],
     "ignore": [
-      "./src/assets/analytics.js"
+      "./src/assets/analytics.js",
+      "./scripts/assets/delphi_epidata.js"
     ]
   },
   "dependencies": {
