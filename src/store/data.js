@@ -2,6 +2,7 @@ import history from '!json!../assets/data/history.json'
 import metadata from '!json!../assets/data/metadata.json'
 // Loading latest season in the main bundle itself
 import latestSeasonData from '!json!../assets/data/season-latest.json'
+import latestDistData from '!json!../assets/data/distributions/season-latest-nat.json'
 
 const seasonDataCtx = require.context(
   'file-loader!../assets/data/',
@@ -31,4 +32,4 @@ const distDataUrls = distDataCtx.keys().reduce((acc, key) => {
   return acc
 }, {})
 
-export { seasonDataUrls, distDataUrls, latestSeasonData, history, metadata }
+export { seasonDataUrls, distDataUrls, latestSeasonData, latestDistData, history, metadata }
