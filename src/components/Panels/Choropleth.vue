@@ -189,7 +189,8 @@ export default {
       'initChoropleth',
       'plotChoropleth',
       'updateChoropleth',
-      'initSeasonDataUrls'
+      'initSeasonDataUrls',
+      'initDistDataUrls'
     ]),
     ...mapActions('switches', [
       'updateSelectedRegion',
@@ -233,7 +234,9 @@ export default {
       let dataChunk = require('../../store/data')
 
       this.initSeasonDataUrls(dataChunk.seasonDataUrls)
+      this.initDistDataUrls(dataChunk.distDataUrls)
       this.addSeasonData(dataChunk.latestSeasonData)
+      this.addDistData(dataChunk.latestDistData)
       this.initMetadata(dataChunk.metadata)
       this.initHistory(dataChunk.history)
       this.updateSelectedSeason(this.seasons.length - 1)
