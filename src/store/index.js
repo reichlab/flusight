@@ -18,7 +18,7 @@ const state = {
   timeChart: null,
   choropleth: null,
   distributionChart: null,
-  data: [], // Container for season data
+  seasonData: [], // Container for season data
   history: null,
   metadata: null,
   seasonDataUrls: null,
@@ -28,7 +28,7 @@ const state = {
 // mutations
 const mutations = {
   [types.ADD_SEASON_DATA] (state, val) {
-    state.data.push(val)
+    state.seasonData.push(val)
     // TODO: Remove data if short on memory
   },
 

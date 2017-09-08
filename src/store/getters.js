@@ -12,7 +12,9 @@ export const updateTime = state => {
  * Return seasons for which we have downloaded the data
  */
 export const downloadedSeasons = state => {
-  return state.data.map(d => d.seasonId)
+  return state.seasonData.map(d => d.seasonId)
+}
+
 }
 
 /**
@@ -24,7 +26,7 @@ export const selectedData = (state, getters) => {
   let selectedRegionIdx = getters['switches/selectedRegion']
 
   let selectedSeasonId = getters.seasons[selectedSeasonIdx]
-  let seasonSubset = state.data[getters.downloadedSeasons.indexOf(selectedSeasonId)]
+  let seasonSubset = state.seasonData[getters.downloadedSeasons.indexOf(selectedSeasonId)]
 
   return seasonSubset.regions[selectedRegionIdx]
 }
@@ -65,7 +67,7 @@ export const observed = (state, getters) => {
  * Return a series of time points to be referenced by all series
  */
 export const timePoints = (state, getters) => {
-  if (state.data.length > 0) {
+  if (state.seasonData.length > 0) {
     return getters.selectedData.actual.map(d => {
       return {
         week: d.week % 100,
@@ -111,7 +113,7 @@ export const historicalData = (state, getters) => {
   for (let i = 0; i < selectedSeasonIdx; i++) {
     let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[i])
     if (downloadedSeasonIdx !== -1) {
-      let seasonActual = state.data[downloadedSeasonIdx].regions[selectedRegionIdx].actual
+      let seasonActual = state.seasonData[downloadedSeasonIdx].regions[selectedRegionIdx].actual
       output.push({
         id: getters.seasons[i],
         actual: utils.trimHistory(
@@ -177,7 +179,7 @@ export const choroplethData = (state, getters) => {
 
   let downloadedSeasonIdx = getters.downloadedSeasons.indexOf(getters.seasons[selectedSeasonIdx])
 
-  state.data[downloadedSeasonIdx].regions.map((reg, regIdx) => {
+  state.seasonData[downloadedSeasonIdx].regions.map((reg, regIdx) => {
     let values = reg.actual.map(d => d.actual)
 
     if (relative) values = utils.baselineScale(values, reg.baseline)
@@ -191,6 +193,6 @@ export const choroplethData = (state, getters) => {
 
   output.data = output.data.slice(1) // Remove national data
 
-  output.range = utils.choroplethDataRange(state.data, relative)
+  output.range = utils.choroplethDataRange(state.seasonData, relative)
   return output
 }
