@@ -8,9 +8,14 @@
 
 const fs = require('fs')
 const path = require('path')
+const utils = require('./utils')
 
 // Variables and paths
+const dataDir = './data'
 const outDir = './src/assets/data/distributions'
+
+// Check for all seasons in the data directory
+let seasons = utils.getSubDirectories(dataDir)
 
 // Take season id from command line
 let seasonInFile = process.argv[2]
@@ -52,7 +57,14 @@ const extractDistributions = seasonData => {
 
 let seasonData = JSON.parse(fs.readFileSync(seasonInFile), 'utf8')
 extractDistributions(seasonData).forEach(regionData => {
-  let outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
+  // If the season is latest and region is nat, save as `latest-nat`.
+  // This chunk will get loaded directly with the main app.
+  let outputFile
+  if ((seasons.indexOf(regionData.seasonId) === seasons.length - 1) && (regionData.regionId === 'nat')) {
+    outputFile = path.join(outDir, 'season-latest-nat.json')
+  } else {
+    outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
+  }
   fs.writeFile(outputFile, JSON.stringify(regionData), err => {
     if (err) {
       throw err
