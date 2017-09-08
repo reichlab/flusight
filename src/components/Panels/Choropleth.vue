@@ -69,16 +69,6 @@
     font-weight: bold;
   }
 }
-
-#season-loading-spinner {
-  img {
-    width: 50px;
-  }
-
-  &.hidden {
-    visibility: hidden;
-  }
-}
 </style>
 
 <template lang="pug">
@@ -107,8 +97,6 @@ div
       .level-right
         .level-item
           p.heading Season
-            span#season-loading-spinner(v-bind:class="[seasonLoading ? '' : 'hidden']")
-              img(v-bind:src="loadingSpinner")
           p.control.title
             span#season-selector.select.is-small
               select(v-model="currentSeason")
@@ -137,7 +125,7 @@ div
 <script>
 import Choropleth from '../../modules/choropleth'
 import { mapGetters, mapActions } from 'vuex'
-import loadingSpinner from '../../assets/loading.gif'
+import nprogress from 'nprogress'
 
 export default {
   computed: {
@@ -150,8 +138,7 @@ export default {
     ...mapGetters('switches', [
       'selectedSeason',
       'selectedRegion',
-      'choroplethRelative',
-      'seasonLoading'
+      'choroplethRelative'
     ]),
     ...mapGetters('weeks', [
       'selectedWeekName'
@@ -164,7 +151,7 @@ export default {
         // Check if we need to download the season
         if (this.downloadedSeasons.indexOf(val) === -1) {
           let dataUrl = this.seasonDataUrls[val]
-          this.showSeasonLoading()
+          nprogress.start()
           this.$http.get(dataUrl).then(response => {
             let jsonText = response.bodyText.slice(17)
             if (jsonText.endsWith(';')) {
@@ -173,12 +160,12 @@ export default {
             let data = JSON.parse(jsonText)
             this.addSeasonData(data)
             this.updateSelectedSeason(this.seasons.indexOf(val))
-            this.hideSeasonLoading()
+            nprogress.done()
           }, response => {
             // TODO: Some way of notifying for error
             console.log('Some error')
             console.log(response)
-            this.hideSeasonLoading()
+            nprogress.done()
           })
         } else {
           this.updateSelectedSeason(this.seasons.indexOf(val))
@@ -207,9 +194,7 @@ export default {
     ...mapActions('switches', [
       'updateSelectedRegion',
       'updateSelectedSeason',
-      'toggleRelative',
-      'hideSeasonLoading',
-      'showSeasonLoading'
+      'toggleRelative'
     ]),
     showSwitchTooltip () {
       this.tooltips.switch.show = true
@@ -240,8 +225,7 @@ export default {
             left: '0px'
           }
         }
-      },
-      loadingSpinner: loadingSpinner
+      }
     }
   },
   ready () {
