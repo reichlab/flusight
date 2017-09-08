@@ -10,6 +10,12 @@ export const addSeasonData = ({ commit, getters }, val) => {
   }
 }
 
+export const addDistData = ({ commit, getters }, val) => {
+  if (getters.downloadedDists.indexOf(`${val.seasonId}-${val.regionId}`) === -1) {
+    commit(types.ADD_DIST_DATA, val)
+  }
+}
+
 export const initMetadata = ({ commit, getters }, val) => {
   if (!getters.metadata) {
     commit(types.SET_METADATA, val)
@@ -19,6 +25,12 @@ export const initMetadata = ({ commit, getters }, val) => {
 export const initSeasonDataUrls = ({ commit, getters }, val) => {
   if (!getters.seasonDataUrls) {
     commit(types.SET_SEASON_DATA_URLS, val)
+  }
+}
+
+export const initDistDataUrls = ({ commit, getters }, val) => {
+  if (!getters.distDataUrls) {
+    commit(types.SET_DIST_DATA_URLS, val)
   }
 }
 

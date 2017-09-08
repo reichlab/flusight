@@ -4,6 +4,7 @@ export const branding = state => state.branding
 export const metadata = state => state.metadata
 export const history = state => state.history
 export const seasonDataUrls = state => state.seasonDataUrls
+export const distDataUrls = state => state.distDataUrls
 export const updateTime = state => {
   return state.metadata ? state.metadata.updateTime : 'NA'
 }
@@ -15,6 +16,11 @@ export const downloadedSeasons = state => {
   return state.seasonData.map(d => d.seasonId)
 }
 
+/**
+ * Return selection ids for which we have downloaded distributions
+ */
+export const downloadedDists = state => {
+  return state.distData.map(d => `${d.seasonId}-${d.regionId}`)
 }
 
 /**
