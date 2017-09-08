@@ -100,7 +100,6 @@ div
       .level-left
         .level-item
           .heading Week <b>{{ selectedWeekName }}</b>
-          // .subtitle {{ regions[selectedRegion] }}
           span#region-selector.select
               select(v-model="currentRegion")
                 option(v-for="region in regions") {{ region }}
