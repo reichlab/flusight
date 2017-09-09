@@ -24,6 +24,27 @@ export const downloadedDists = state => {
 }
 
 /**
+ * Return distribution reference ids for current selection
+ */
+export const selectedDistId = (state, getters) => {
+  let selectedSeasonIdx = getters['switches/selectedSeason']
+  let selectedRegionIdx = getters['switches/selectedRegion']
+
+  let selectedSeasonId = getters.seasons[selectedSeasonIdx]
+  let selectedRegionId = getters.metadata.regionData[selectedRegionIdx].id
+
+  return `${selectedSeasonId}-${selectedRegionId}`
+}
+
+/**
+ * Return distributions data for the current selection
+ */
+export const selectedDistData = (state, getters) => {
+  let distDataIdx = getters.downloadedDists.indexOf(getters.selectedDistId)
+  return state.distData[distDataIdx]
+}
+
+/**
  * Return subset of data reflecting current selection
  * Assume that we have already downloaded the data needed
  */

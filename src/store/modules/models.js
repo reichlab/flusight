@@ -46,8 +46,10 @@ const getters = {
 
     let curveIdentifierPrefix = rootGetters['switches/selectedSeason'] + '-' + rootGetters['switches/selectedRegion'] + '-' + currentWeekIdx
 
+    let modelDistData = rootGetters.selectedDistData.models
+
     return models.map((m, idx) => {
-      let currentPreds = m.predictions[currentWeekIdx]
+      let currentPreds = modelDistData[idx].predictions[currentWeekIdx]
       m.curves = state.curveNames.map(cn => {
         return {
           name: cn,
