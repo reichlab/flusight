@@ -25,6 +25,7 @@ export default {
   methods: {
     ...mapActions([
       'addSeasonData',
+      'addDistData',
       'initMetadata',
       'initHistory',
       'initTimeChart',
