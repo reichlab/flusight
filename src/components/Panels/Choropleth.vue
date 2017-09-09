@@ -123,7 +123,7 @@ div
 </template>
 
 <script>
-import Choropleth from '../../modules/choropleth'
+import Choropleth from '../../choropleth'
 import { mapGetters, mapActions } from 'vuex'
 import nprogress from 'nprogress'
 
