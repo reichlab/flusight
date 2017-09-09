@@ -4,6 +4,19 @@ import { TimeChart, DistributionChart } from 'd3-foresight'
 
 // Initializations
 // ---------------
+
+/**
+ * Import data from the latest chunk
+ */
+export const importLatestChunk = (context, dataChunk) => {
+  initSeasonDataUrls(context, dataChunk.seasonDataUrls)
+  initDistDataUrls(context, dataChunk.distDataUrls)
+  addSeasonData(context, dataChunk.latestSeasonData)
+  addDistData(context, dataChunk.latestDistData)
+  initMetadata(context, dataChunk.metadata)
+  initHistory(context, dataChunk.history)
+}
+
 export const addSeasonData = ({ commit, getters }, val) => {
   if (getters.downloadedSeasons.indexOf(val.seasonId) === -1) {
     commit(types.ADD_SEASON_DATA, val)

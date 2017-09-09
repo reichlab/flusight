@@ -183,15 +183,11 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addSeasonData',
-      'addDistData',
-      'initMetadata',
-      'initHistory',
+      'importLatestChunk',
       'initChoropleth',
       'plotChoropleth',
       'updateChoropleth',
-      'initSeasonDataUrls',
-      'initDistDataUrls'
+      'addSeasonData'
     ]),
     ...mapActions('switches', [
       'updateSelectedRegion',
@@ -232,14 +228,8 @@ export default {
   },
   ready () {
     require.ensure(['../../store/data'], () => {
-      let dataChunk = require('../../store/data')
+      this.importLatestChunk(require('../../store/data'))
 
-      this.initSeasonDataUrls(dataChunk.seasonDataUrls)
-      this.initDistDataUrls(dataChunk.distDataUrls)
-      this.addSeasonData(dataChunk.latestSeasonData)
-      this.addDistData(dataChunk.latestDistData)
-      this.initMetadata(dataChunk.metadata)
-      this.initHistory(dataChunk.history)
       this.updateSelectedSeason(this.seasons.length - 1)
 
       // Setup map
