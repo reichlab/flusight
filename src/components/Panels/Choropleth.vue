@@ -124,6 +124,7 @@ div
 
 <script>
 import Choropleth from '../../choropleth'
+import * as util from '../../util'
 import { mapGetters, mapActions } from 'vuex'
 import nprogress from 'nprogress'
 
@@ -153,17 +154,12 @@ export default {
           let dataUrl = this.seasonDataUrls[val]
           nprogress.start()
           this.$http.get(dataUrl).then(response => {
-            let jsonText = response.bodyText.slice(17)
-            if (jsonText.endsWith(';')) {
-              jsonText = jsonText.slice(0, -1)
-            }
-            let data = JSON.parse(jsonText)
+            let data = util.parseDataResponse(response)
             this.addSeasonData(data)
             this.updateSelectedSeason(this.seasons.indexOf(val))
             nprogress.done()
           }, response => {
-            // TODO: Some way of notifying for error
-            console.log('Some error')
+            console.log(`Error in requesting data for ${val}`)
             console.log(response)
             nprogress.done()
           })
