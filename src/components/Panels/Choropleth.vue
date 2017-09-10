@@ -151,32 +151,32 @@ export default {
         return this.seasons[this.selectedSeason]
       },
       set (val) {
-        if (this.showTimeChart) {
-          // Check if we need to download the season
-          nprogress.start()
-          this.downloadSeasonData({
-            http: this.$http,
-            id: val,
-            success: () => {
+        // Check if we need to download the season
+        nprogress.start()
+        this.downloadSeasonData({
+          http: this.$http,
+          id: val,
+          success: () => {
+            if (this.showDistributionChart) {
+              // Check if we need to download dist data
+              let distId = `${val}-${this.selectedRegionId}`
+              nprogress.start()
+              this.downloadDistData({
+                http: this.$http,
+                id: distId,
+                success: () => {
+                  this.updateSelectedSeason(this.seasons.indexOf(val))
+                  nprogress.done()
+                },
+                fail: err => console.log(err)
+              })
+            } else {
               this.updateSelectedSeason(this.seasons.indexOf(val))
               nprogress.done()
-            },
-            fail: err => console.log(err)
-          })
-        } else if (this.showDistributionChart) {
-          // Check if we need to download dist data
-          let distId = `${val}-${this.selectedRegionId}`
-          nprogress.start()
-          this.downloadDistData({
-            http: this.$http,
-            id: distId,
-            success: () => {
-              this.updateSelectedSeason(this.seasons.indexOf(val))
-              nprogress.done()
-            },
-            fail: err => console.log(err)
-          })
-        }
+            }
+          },
+          fail: err => console.log(err)
+        })
       }
     },
     currentRegion: {

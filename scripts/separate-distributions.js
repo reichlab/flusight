@@ -55,6 +55,23 @@ const extractDistributions = seasonData => {
   })
 }
 
+// Delete bins from seasonData
+const deleteDistributions = seasonData => {
+  seasonData.regions.forEach(reg => {
+    reg.models.forEach(mod => {
+      mod.predictions.forEach(pred => {
+        if (pred) {
+          delete pred.peakTime.bins
+          delete pred.onsetTime.bins
+          delete pred.peakValue.bins
+          pred.series.forEach(s => delete s.bins)
+        }
+      })
+    })
+  })
+  return seasonData
+}
+
 let seasonData = JSON.parse(fs.readFileSync(seasonInFile), 'utf8')
 extractDistributions(seasonData).forEach(regionData => {
   // If the season is latest and region is nat, save as `latest-nat`.
@@ -71,4 +88,12 @@ extractDistributions(seasonData).forEach(regionData => {
     }
     console.log(` Distributions file written at ${outputFile}`)
   })
+})
+
+// Write clipped seasonData file
+fs.writeFile(seasonInFile, JSON.stringify(deleteDistributions(seasonData)), err => {
+  if (err) {
+    throw err   
+  }
+  console.log(' Cropped data file written')
 })
