@@ -167,9 +167,63 @@ const getModelMeta = submissionDir => {
   return meta
 }
 
+// Get rid of point values from a prediction object
+const filterPrediction = prediction => {
+  const takeOnlyBins = p => {
+    return {
+      bins: p.bins
+    }
+  }
+  if (prediction) {
+    return {
+      series: prediction.series.map(takeOnlyBins),
+      peakTime: takeOnlyBins(prediction.peakTime),
+      onsetTime: takeOnlyBins(prediction.onsetTime),
+      peakValue: takeOnlyBins(prediction.peakValue)
+    }
+  } else {
+    return null
+  }
+}
+
+// Extract bin data for all regions in given season data
+const extractDistributions = seasonData => {
+  return seasonData.regions.map(reg => {
+    return {
+      seasonId: seasonData.seasonId,
+      regionId: reg.id,
+      models: reg.models.map(mod => {
+        return {
+          id: mod.id,
+          predictions: mod.predictions.map(filterPrediction)
+        }
+      })
+    }
+  })
+}
+
+// Delete bins from seasonData
+const deleteDistributions = seasonData => {
+  seasonData.regions.forEach(reg => {
+    reg.models.forEach(mod => {
+      mod.predictions.forEach(pred => {
+        if (pred) {
+          delete pred.peakTime.bins
+          delete pred.onsetTime.bins
+          delete pred.peakValue.bins
+          pred.series.forEach(s => delete s.bins)
+        }
+      })
+    })
+  })
+  return seasonData
+}
+
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
 exports.seasonToWeekStamps = seasonToWeekStamps
 exports.weekToIndex = weekToIndex
+exports.extractDistributions = extractDistributions
+exports.deleteDistributions = deleteDistributions

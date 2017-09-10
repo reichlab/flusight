@@ -123,7 +123,27 @@ fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
     })
   })
 
-  fs.writeFile(seasonOutFile, JSON.stringify(output), (err) => {
+  // Separate distributions data from the models.
+  // NOTE: This should happen somewhere above, but meh!
+  utils.extractDistributions(output).forEach(regionData => {
+    // If the season is latest and region is nat, save as `latest-nat`.
+    // This chunk will get loaded directly with the main app.
+    let outDir = './src/assets/data/distributions'
+    let outputFile
+    if ((seasons.indexOf(regionData.seasonId) === seasons.length - 1) && (regionData.regionId === 'nat')) {
+      outputFile = path.join(outDir, 'season-latest-nat.json')
+    } else {
+      outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
+    }
+    fs.writeFile(outputFile, JSON.stringify(regionData), err => {
+      if (err) {
+        throw err
+      }
+      console.log(` Distributions file written at ${outputFile}`)
+    })
+  })
+
+  fs.writeFile(seasonOutFile, JSON.stringify(utils.deleteDistributions(output)), (err) => {
     if (err) throw err
     console.log('\n ✓ .json saved at ' + seasonOutFile)
   })
