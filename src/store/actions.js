@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import * as d3 from 'd3'
+import * as util from '../util'
 import { TimeChart, DistributionChart } from 'd3-foresight'
 
 // Initializations
@@ -15,6 +16,48 @@ export const importLatestChunk = (context, dataChunk) => {
   addDistData(context, dataChunk.latestDistData)
   initMetadata(context, dataChunk.metadata)
   initHistory(context, dataChunk.history)
+}
+
+/**
+ * Check for season data corresponding to asked id and fetch if necessary
+ */
+export const downloadSeasonData = (context, reqData) => {
+  let getters = context.getters
+  let seasonId = reqData.id
+
+  if (getters.downloadedSeasons.indexOf(seasonId) === -1) {
+    let dataUrl = getters.seasonDataUrls[seasonId]
+    reqData.http.get(dataUrl).then(response => {
+      let data = util.parseDataResponse(response)
+      addSeasonData(context, data)
+      reqData.success()
+    }, response => {
+      reqData.fail(response)
+    })
+  } else {
+    reqData.success()
+  }
+}
+
+/**
+ * Check for dist data corresponding to asked id and fetch if necessary
+ */
+export const downloadDistData = (context, reqData) => {
+  let getters = context.getters
+  let distId = reqData.id
+
+  if (getters.downloadedDists.indexOf(distId) === -1) {
+    let dataUrl = getters.distDataUrls[distId]
+    reqData.http.get(dataUrl).then(response => {
+      let data = util.parseDataResponse(response)
+      addDistData(context, data)
+      reqData.success()
+    }, response => {
+      reqData.fail(response)
+    })
+  } else {
+    reqData.success()
+  }
 }
 
 export const addSeasonData = ({ commit, getters }, val) => {

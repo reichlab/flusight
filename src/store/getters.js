@@ -23,24 +23,20 @@ export const downloadedDists = state => {
   return state.distData.map(d => `${d.seasonId}-${d.regionId}`)
 }
 
-/**
- * Return distribution reference ids for current selection
- */
-export const selectedDistId = (state, getters) => {
-  let selectedSeasonIdx = getters['switches/selectedSeason']
-  let selectedRegionIdx = getters['switches/selectedRegion']
+export const selectedSeasonId = (state, getters) => {
+  return getters.seasons[getters['switches/selectedSeason']]
+}
 
-  let selectedSeasonId = getters.seasons[selectedSeasonIdx]
-  let selectedRegionId = getters.metadata.regionData[selectedRegionIdx].id
-
-  return `${selectedSeasonId}-${selectedRegionId}`
+export const selectedRegionId = (state, getters) => {
+  return getters.metadata.regionData[getters['switches/selectedRegion']].id
 }
 
 /**
  * Return distributions data for the current selection
  */
 export const selectedDistData = (state, getters) => {
-  let distDataIdx = getters.downloadedDists.indexOf(getters.selectedDistId)
+  let selectedDistId = `${getters.selectedSeasonId}-${getters.selectedRegionId}`
+  let distDataIdx = getters.downloadedDists.indexOf(selectedDistId)
   return state.distData[distDataIdx]
 }
 
@@ -49,11 +45,8 @@ export const selectedDistData = (state, getters) => {
  * Assume that we have already downloaded the data needed
  */
 export const selectedData = (state, getters) => {
-  let selectedSeasonIdx = getters['switches/selectedSeason']
   let selectedRegionIdx = getters['switches/selectedRegion']
-
-  let selectedSeasonId = getters.seasons[selectedSeasonIdx]
-  let seasonSubset = state.seasonData[getters.downloadedSeasons.indexOf(selectedSeasonId)]
+  let seasonSubset = state.seasonData[getters.downloadedSeasons.indexOf(getters.selectedSeasonId)]
 
   return seasonSubset.regions[selectedRegionIdx]
 }
@@ -122,7 +115,7 @@ export const actual = (state, getters) => {
  */
 export const historicalData = (state, getters) => {
   let selectedRegionIdx = getters['switches/selectedRegion']
-  let selectedRegionId = getters.metadata.regionData[selectedRegionIdx].id
+  let selectedRegionId = getters.selectedRegionId
   let selectedSeasonIdx = getters['switches/selectedSeason']
   let weeksCount = getters.selectedData.actual.length
 

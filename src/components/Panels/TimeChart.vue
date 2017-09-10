@@ -14,9 +14,14 @@ div
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import nprogress from 'nprogress'
 
 export default {
   computed: {
+    ...mapGetters([
+      'selectedRegionId',
+      'selectedSeasonId'
+    ]),
     ...mapGetters('switches', [
       'showTimeChart',
       'showDistributionChart'
@@ -30,7 +35,9 @@ export default {
       'plotTimeChart',
       'plotDistributionChart',
       'clearTimeChart',
-      'clearDistributionChart'
+      'clearDistributionChart',
+      'downloadSeasonData',
+      'downloadDistData'
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
@@ -55,16 +62,36 @@ export default {
     showTimeChart: function () {
       this.readjustSelectedWeek()
       if (this.showTimeChart) {
-        this.initTimeChart('#chart-right')
-        this.plotTimeChart()
+        // Check if we need to download chunks
+        nprogress.start()
+        this.downloadSeasonData({
+          http: this.$http,
+          id: this.selectedSeasonId,
+          success: () => {
+            this.initTimeChart('#chart-right')
+            this.plotTimeChart()
+            nprogress.done()
+          },
+          fail: err => console.log(err)
+        })
       } else {
         this.clearTimeChart()
       }
     },
     showDistributionChart: function () {
       if (this.showDistributionChart) {
-        this.initDistributionChart('#chart-right')
-        this.plotDistributionChart()
+        // Check if we need to download chunks
+        nprogress.start()
+        this.downloadDistData({
+          http: this.$http,
+          id: `${this.selectedSeasonId}-${this.selectedRegionId}`,
+          success: () => {
+            this.initDistributionChart('#chart-right')
+            this.plotDistributionChart()
+            nprogress.done()
+          },
+          fail: err => console.log(err)
+        })
       } else {
         this.clearDistributionChart()
       }

@@ -124,7 +124,6 @@ div
 
 <script>
 import Choropleth from '../../choropleth'
-import * as util from '../../util'
 import { mapGetters, mapActions } from 'vuex'
 import nprogress from 'nprogress'
 
@@ -133,13 +132,16 @@ export default {
     ...mapGetters([
       'seasons',
       'regions',
-      'downloadedSeasons',
-      'seasonDataUrls'
+      'selectedRegionId',
+      'selectedSeasonId',
+      'metadata'
     ]),
     ...mapGetters('switches', [
       'selectedSeason',
       'selectedRegion',
-      'choroplethRelative'
+      'choroplethRelative',
+      'showTimeChart',
+      'showDistributionChart'
     ]),
     ...mapGetters('weeks', [
       'selectedWeekName'
@@ -149,22 +151,31 @@ export default {
         return this.seasons[this.selectedSeason]
       },
       set (val) {
-        // Check if we need to download the season
-        if (this.downloadedSeasons.indexOf(val) === -1) {
-          let dataUrl = this.seasonDataUrls[val]
+        if (this.showTimeChart) {
+          // Check if we need to download the season
           nprogress.start()
-          this.$http.get(dataUrl).then(response => {
-            let data = util.parseDataResponse(response)
-            this.addSeasonData(data)
-            this.updateSelectedSeason(this.seasons.indexOf(val))
-            nprogress.done()
-          }, response => {
-            console.log(`Error in requesting data for ${val}`)
-            console.log(response)
-            nprogress.done()
+          this.downloadSeasonData({
+            http: this.$http,
+            id: val,
+            success: () => {
+              this.updateSelectedSeason(this.seasons.indexOf(val))
+              nprogress.done()
+            },
+            fail: err => console.log(err)
           })
-        } else {
-          this.updateSelectedSeason(this.seasons.indexOf(val))
+        } else if (this.showDistributionChart) {
+          // Check if we need to download dist data
+          let distId = `${val}-${this.selectedRegionId}`
+          nprogress.start()
+          this.downloadDistData({
+            http: this.$http,
+            id: distId,
+            success: () => {
+              this.updateSelectedSeason(this.seasons.indexOf(val))
+              nprogress.done()
+            },
+            fail: err => console.log(err)
+          })
         }
       }
     },
@@ -173,7 +184,24 @@ export default {
         return this.regions[this.selectedRegion]
       },
       set (val) {
-        this.updateSelectedRegion(this.regions.indexOf(val))
+        let regionIdx = this.regions.indexOf(val)
+        let regionId = this.metadata.regionData[regionIdx].id
+        let distId = `${this.selectedSeasonId}-${regionId}`
+        if (this.showDistributionChart) {
+          // If on distribution chart, check and request for dist data
+          nprogress.start()
+          this.downloadDistData({
+            http: this.$http,
+            id: distId,
+            success: () => {
+              this.updateSelectedRegion(regionIdx)
+              nprogress.done()
+            },
+            fail: err => console.log(err)
+          })
+        } else {
+          this.updateSelectedRegion(regionIdx)
+        }
       }
     }
   },
@@ -183,7 +211,8 @@ export default {
       'initChoropleth',
       'plotChoropleth',
       'updateChoropleth',
-      'addSeasonData'
+      'downloadSeasonData',
+      'downloadDistData'
     ]),
     ...mapActions('switches', [
       'updateSelectedRegion',
@@ -229,8 +258,24 @@ export default {
       this.updateSelectedSeason(this.seasons.length - 1)
 
       // Setup map
-      this.initChoropleth(new Choropleth('choropleth', regionId => {
-        this.updateSelectedRegion(regionId)
+      this.initChoropleth(new Choropleth('choropleth', regionIdx => {
+        if (this.showDistributionChart) {
+          // If on distribution chart, check and request for dist data
+          let regionId = this.metadata.regionData[regionIdx].id
+          let distId = `${this.selectedSeasonId}-${regionId}`
+          nprogress.start()
+          this.downloadDistData({
+            http: this.$http,
+            id: distId,
+            success: () => {
+              this.updateSelectedRegion(regionIdx)
+              nprogress.done()
+            },
+            fail: err => console.log(err)
+          })
+        } else {
+          this.updateSelectedRegion(regionIdx)
+        }
       }))
 
       // Setup data
