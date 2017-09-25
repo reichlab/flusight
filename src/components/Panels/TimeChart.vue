@@ -50,15 +50,15 @@ div
     #scores(v-show="showScoresPanel")
       .score-header
         span
-          a.score-btn.button.is-small.prev-score-btn.is-disabled
+          a.score-btn.button.is-small.prev-score-btn(v-bind:class="[prevScoreActive ? '' : 'is-disabled']" v-on:click="selectPrevScore")
             span.icon.is-small
               i.fa.fa-arrow-left
         span
-          a.score-btn.button.is-small.next-score-btn
+          a.score-btn.button.is-small.next-score-btn(v-bind:class="[nextScoreActive ? '' : 'is-disabled']" v-on:click="selectNextScore")
             span.icon.is-small
               i.fa.fa-arrow-right
         span.score-title
-          a(v-bind:href="modelSelectedScoreMeta.url", target="_blank") {{ modelSelectedScoreMeta.name }}
+          a(v-bind:href="modelSelectedScoreMeta.url" target="_blank") {{ modelSelectedScoreMeta.name }}
       .score-body
         table.table.is-striped.is-bordered
           thead
@@ -68,7 +68,7 @@ div
           tbody
             tr(v-for="(i, id) in modelIds")
               td
-                a(v-bind:href="modelMeta[i].url", target="_blank") {{ id }}
+                a(v-bind:href="modelMeta[i].url" target="_blank") {{ id }}
               td(v-for="scr in modelScores[i]") {{ parseInt(scr * 1000) / 1000 }}
       .score-footer
         | Calculated using the most recently updated data. Final values may differ.
@@ -87,7 +87,9 @@ export default {
     ...mapGetters('switches', [
       'showTimeChart',
       'showDistributionChart',
-      'showScoresPanel'
+      'showScoresPanel',
+      'nextScoreActive',
+      'prevScoreActive'
     ]),
     ...mapGetters('models', [
       'modelSelectedScoreMeta',
@@ -112,7 +114,8 @@ export default {
       'displayTimeChart',
       'displayDistributionChart',
       'displayScoresPanel',
-      'updateSelectedScore'
+      'selectNextScore',
+      'selectPrevScore'
     ]),
     ...mapActions('weeks', [
       'readjustSelectedWeek',

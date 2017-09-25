@@ -114,7 +114,10 @@ const getters = {
     return state.scoreMeta[rootGetters['switches/selectedScore']]
   },
 
+  modelNumScores: (state) => state.scoreMeta.length,
+
   modelScores: (state, getters) => {
+    // TODO: Find best here and attach that info to the data
     return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
   },
 

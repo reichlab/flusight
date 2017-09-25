@@ -18,7 +18,11 @@ const getters = {
   choroplethRelative: state => state.choroplethRelative,
   showTimeChart: state => state.timeChart,
   showDistributionChart: state => state.distributionChart,
-  showScoresPanel: state => state.scoresPanel
+  showScoresPanel: state => state.scoresPanel,
+  nextScoreActive: (state, getters, rootState, rootGetters) => {
+    return state.score < (rootGetters['models/modelNumScores'] - 1)
+  },
+  prevScoreActive: state => state.score > 0
 }
 
 // actions
@@ -33,8 +37,12 @@ const actions = {
     else commit(types.UPDATE_SELECTED_REGION, val)
   },
 
-  updateSelectedScore ({ commit }, val) {
-    commit(types.UPDATE_SELECTED_SCORE, val)
+  selectNextScore ({ commit, getters }) {
+    commit(types.UPDATE_SELECTED_SCORE, getters.selectedScore + 1)
+  },
+
+  selectPrevScore ({ commit, getters }) {
+    commit(types.UPDATE_SELECTED_SCORE, getters.selectedScore - 1)
   },
 
   toggleRelative ({ commit }) {
