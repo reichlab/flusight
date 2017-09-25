@@ -7,6 +7,8 @@ div
         a Time Chart
       li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
         a Distribution Chart
+      li(v-bind:class="[showScores ? 'is-active' : '']" v-on:click="displayScores")
+        a Scores
 
   .container
     #chart-right
@@ -24,7 +26,8 @@ export default {
     ]),
     ...mapGetters('switches', [
       'showTimeChart',
-      'showDistributionChart'
+      'showDistributionChart',
+      'showScores'
     ])
   },
   methods: {
@@ -41,7 +44,8 @@ export default {
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
-      'displayDistributionChart'
+      'displayDistributionChart',
+      'displayScores'
     ]),
     ...mapActions('weeks', [
       'readjustSelectedWeek',

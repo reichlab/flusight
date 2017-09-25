@@ -5,7 +5,8 @@ const state = {
   season: 0,
   choroplethRelative: false,
   timeChart: false,
-  distributionChart: false
+  distributionChart: false,
+  scores: false
 }
 
 // getters
@@ -14,7 +15,8 @@ const getters = {
   selectedRegion: state => state.region,
   choroplethRelative: state => state.choroplethRelative,
   showTimeChart: state => state.timeChart,
-  showDistributionChart: state => state.distributionChart
+  showDistributionChart: state => state.distributionChart,
+  showScores: state => state.scores
 }
 
 // actions
@@ -39,6 +41,10 @@ const actions = {
 
   displayDistributionChart ({ commit }) {
     commit(types.DISPLAY_DISTRIBUTIONCHART)
+  },
+
+  displayScores ({ commit }) {
+    commit(types.DISPLAY_SCORES)
   }
 }
 
@@ -58,12 +64,20 @@ const mutations = {
 
   [types.DISPLAY_TIMECHART] (state) {
     state.distributionChart = false
+    state.scores = false
     state.timeChart = true
   },
 
   [types.DISPLAY_DISTRIBUTIONCHART] (state) {
     state.timeChart = false
+    state.scores = false
     state.distributionChart = true
+  },
+
+  [types.DISPLAY_SCORES] (state) {
+    state.timeChart = false
+    state.distributionChart = false
+    state.scores = true
   }
 }
 
