@@ -1,3 +1,36 @@
+<style lang="scss">
+#scores {
+  padding: 5px 10px;
+
+  .score-body {
+    margin: 10px 0;
+  }
+
+  .score-footer {
+    font-style: italic;
+  }
+
+  .score-header {
+    .score-btn {
+      margin: 0 2px;
+    }
+
+    .score-title {
+      font-size: 18px;
+      font-weight: 300;
+      margin-left: 10px;
+
+      a {
+        color: #333;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+</style>
+
 <template lang="pug">
 div
   // Main plotting div
@@ -11,7 +44,50 @@ div
         a Scores
 
   .container
-    #chart-right
+    #chart-right(v-show="!showScores")
+
+    #scores(v-show="showScores")
+      .score-header
+        span
+          a.score-btn.button.is-small.prev-score-btn.is-disabled
+            span.icon.is-small
+              i.fa.fa-arrow-left
+        span
+          a.score-btn.button.is-small.next-score-btn
+            span.icon.is-small
+              i.fa.fa-arrow-right
+        span.score-title
+          a(href="https://en.wikipedia.org", target="_blank") Mean Log Score
+      .score-body
+        table.table.is-striped.is-bordered
+          thead
+            tr
+              th Model
+              th 1 wk
+              th 2 wk
+              th 3 wk
+              th 4 wk
+          tbody
+            tr
+              td KCDE
+              td 0.29
+              td 0.45
+              td 0.61
+              td 0.68
+            tr
+              td KCDE
+              td 0.29
+              td 0.45
+              td 0.61
+              td 0.68
+            tr
+              td KCDE
+              td 0.29
+              td 0.45
+              td 0.61
+              td 0.68
+      .score-footer
+        | Calculated using the most recently updated data. Final values may differ.
 </template>
 
 <script>
@@ -28,6 +104,9 @@ export default {
       'showTimeChart',
       'showDistributionChart',
       'showScores'
+    ]),
+    ...mapGetters('models', [
+      'modelStatsMeta'
     ])
   },
   methods: {
