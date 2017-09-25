@@ -2,12 +2,20 @@
 #scores {
   padding: 5px 10px;
 
+  a {
+    color: #333;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .score-body {
     margin: 10px 0;
   }
 
   .score-footer {
-    font-style: italic;
+    color: gray;
+    font-size: 14px;
   }
 
   .score-header {
@@ -19,13 +27,6 @@
       font-size: 18px;
       font-weight: 300;
       margin-left: 10px;
-
-      a {
-        color: #333;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
     }
   }
 }
@@ -40,13 +41,13 @@ div
         a Time Chart
       li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
         a Distribution Chart
-      li(v-bind:class="[showScores ? 'is-active' : '']" v-on:click="displayScores")
+      li(v-bind:class="[showScoresPanel ? 'is-active' : '']" v-on:click="displayScoresPanel")
         a Scores
 
   .container
-    #chart-right(v-show="!showScores")
+    #chart-right(v-show="!showScoresPanel")
 
-    #scores(v-show="showScores")
+    #scores(v-show="showScoresPanel")
       .score-header
         span
           a.score-btn.button.is-small.prev-score-btn.is-disabled
@@ -57,35 +58,18 @@ div
             span.icon.is-small
               i.fa.fa-arrow-right
         span.score-title
-          a(href="https://en.wikipedia.org", target="_blank") Mean Log Score
+          a(v-bind:href="modelSelectedScoreMeta.url", target="_blank") {{ modelSelectedScoreMeta.name }}
       .score-body
         table.table.is-striped.is-bordered
           thead
             tr
               th Model
-              th 1 wk
-              th 2 wk
-              th 3 wk
-              th 4 wk
+              th(v-for="hd in modelSelectedScoreMeta.header") {{ hd }}
           tbody
-            tr
-              td KCDE
-              td 0.29
-              td 0.45
-              td 0.61
-              td 0.68
-            tr
-              td KCDE
-              td 0.29
-              td 0.45
-              td 0.61
-              td 0.68
-            tr
-              td KCDE
-              td 0.29
-              td 0.45
-              td 0.61
-              td 0.68
+            tr(v-for="(i, id) in modelIds")
+              td
+                a(v-bind:href="modelMeta[i].url", target="_blank") {{ id }}
+              td(v-for="scr in modelScores[i]") {{ parseInt(scr * 1000) / 1000 }}
       .score-footer
         | Calculated using the most recently updated data. Final values may differ.
 </template>
@@ -103,10 +87,13 @@ export default {
     ...mapGetters('switches', [
       'showTimeChart',
       'showDistributionChart',
-      'showScores'
+      'showScoresPanel'
     ]),
     ...mapGetters('models', [
-      'modelStatsMeta'
+      'modelSelectedScoreMeta',
+      'modelIds',
+      'modelMeta',
+      'modelScores'
     ])
   },
   methods: {
@@ -124,7 +111,8 @@ export default {
     ...mapActions('switches', [
       'displayTimeChart',
       'displayDistributionChart',
-      'displayScores'
+      'displayScoresPanel',
+      'updateSelectedScore'
     ]),
     ...mapActions('weeks', [
       'readjustSelectedWeek',

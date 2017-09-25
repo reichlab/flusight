@@ -6,17 +6,19 @@ const state = {
   choroplethRelative: false,
   timeChart: false,
   distributionChart: false,
-  scores: false
+  score: 0,
+  scoresPanel: false
 }
 
 // getters
 const getters = {
   selectedSeason: state => state.season,
   selectedRegion: state => state.region,
+  selectedScore: state => state.score,
   choroplethRelative: state => state.choroplethRelative,
   showTimeChart: state => state.timeChart,
   showDistributionChart: state => state.distributionChart,
-  showScores: state => state.scores
+  showScoresPanel: state => state.scoresPanel
 }
 
 // actions
@@ -31,6 +33,10 @@ const actions = {
     else commit(types.UPDATE_SELECTED_REGION, val)
   },
 
+  updateSelectedScore ({ commit }, val) {
+    commit(types.UPDATE_SELECTED_SCORE, val)
+  },
+
   toggleRelative ({ commit }) {
     commit(types.TOGGLE_CHOROPLETH_RELATIVE)
   },
@@ -43,8 +49,8 @@ const actions = {
     commit(types.DISPLAY_DISTRIBUTIONCHART)
   },
 
-  displayScores ({ commit }) {
-    commit(types.DISPLAY_SCORES)
+  displayScoresPanel ({ commit }) {
+    commit(types.DISPLAY_SCORESPANEL)
   }
 }
 
@@ -58,26 +64,30 @@ const mutations = {
     state.season = val
   },
 
+  [types.UPDATE_SELECTED_SCORE] (state, val) {
+    state.score = val
+  },
+
   [types.TOGGLE_CHOROPLETH_RELATIVE] (state) {
     state.choroplethRelative = !state.choroplethRelative
   },
 
   [types.DISPLAY_TIMECHART] (state) {
     state.distributionChart = false
-    state.scores = false
+    state.scoresPanel = false
     state.timeChart = true
   },
 
   [types.DISPLAY_DISTRIBUTIONCHART] (state) {
     state.timeChart = false
-    state.scores = false
+    state.scoresPanel = false
     state.distributionChart = true
   },
 
-  [types.DISPLAY_SCORES] (state) {
+  [types.DISPLAY_SCORESPANEL] (state) {
     state.timeChart = false
     state.distributionChart = false
-    state.scores = true
+    state.scoresPanel = true
   }
 }
 

@@ -124,8 +124,7 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
       }
     },
     pointType: 'mmwr-week',
-    confidenceIntervals: getters['models/modelCIs'],
-    statsMeta: getters['models/modelStatsMeta']
+    confidenceIntervals: getters['models/modelCIs']
   }
 
   // Clear div
@@ -154,7 +153,6 @@ export const initChoropleth = ({ commit }, val) => {
 
 export const initDistributionChart = ({ commit, getters, dispatch }, divSelector) => {
   let distributionChartConfig = {
-    statsMeta: getters['models/modelStatsMeta'],
     axes: {
       x: {
         title: ['Epidemic', 'Week'],

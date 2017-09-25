@@ -1,5 +1,5 @@
 const state = {
-  statsMeta: [{
+  scoreMeta: [{
     id: 'mae',
     name: 'Mean Absolute Error',
     header: ['1 wk', '2 wk', '3 wk', '4 wk'],
@@ -110,7 +110,13 @@ const getters = {
 
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
 
-  modelStatsMeta: (state, getters) => state.statsMeta,
+  modelSelectedScoreMeta: (state, getters, rootState, rootGetters) => {
+    return state.scoreMeta[rootGetters['switches/selectedScore']]
+  },
+
+  modelScores: (state, getters) => {
+    return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
+  },
 
   modelCIs: (state, getters) => state.confidenceIntervals
 }
