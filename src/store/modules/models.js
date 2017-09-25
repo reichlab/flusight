@@ -116,8 +116,20 @@ const getters = {
 
   modelNumScores: (state) => state.scoreMeta.length,
 
+  modelBestIndices: (state, getters) => {
+    // Find best model in each columns
+    let bestIndices = Array(getters.modelSelectedScoreMeta.header.length).fill(0)
+    let bestFunc = getters.modelSelectedScoreMeta.bestFunc
+    let scoreId = getters.modelSelectedScoreMeta.id
+
+    for (let i = 0; i < bestIndices.length; i++) {
+      let col = getters.models.map(m => m.stats[scoreId][i])
+      bestIndices[i] = col.indexOf(bestFunc(col))
+    }
+    return bestIndices
+  },
+
   modelScores: (state, getters) => {
-    // TODO: Find best here and attach that info to the data
     return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
   },
 
