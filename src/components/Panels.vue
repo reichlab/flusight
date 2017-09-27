@@ -1,4 +1,7 @@
 <style lang="scss" scoped>
+h1 a {
+  color: black;
+}
 
 .columns {
   .column {
