@@ -11,6 +11,8 @@
 
   .score-body {
     margin: 10px 0;
+    max-height: 450px;
+    overflow-y: scroll;
 
     .bold {
       font-weight: bold;
