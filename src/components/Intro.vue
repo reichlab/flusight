@@ -104,7 +104,8 @@ export default {
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
-      'displayDistributionChart'
+      'displayDistributionChart',
+      'displayScoresPanel'
     ]),
     demoStep (data) {
       let tooltip = d3.select('#intro-tooltip')
@@ -187,6 +188,14 @@ export default {
         hook: this.displayDistributionChart
       },
       {
+        title: 'Scores',
+        content: `Performance of the models on currently selected season and
+                  region can be seen in the tab <em>Scores</em> tab`,
+        direction: 'left',
+        element: '#timechart-container',
+        hook: this.displayScoresPanel
+      },
+      {
         title: 'US Map',
         content: `<p>The map shows data for the currently selected week.</p>
                   <p>You can also click on the map to see predictions for a
@@ -207,8 +216,8 @@ export default {
       },
       {
         title: 'Other controls',
-        content: `You can use these buttons to hide the legend, see model
-                  statistics, or move the graph forward or backward in time.`,
+        content: `You can use these buttons to hide the legend
+                  or move the graph forward or backward in time.`,
         direction: 'left',
         element: '.nav-controls'
       },
