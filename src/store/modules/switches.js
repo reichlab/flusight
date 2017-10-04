@@ -6,7 +6,7 @@ const state = {
   choroplethRelative: false,
   timeChart: false,
   distributionChart: false,
-  score: 0,
+  score: 1,
   scoresPanel: false
 }
 
