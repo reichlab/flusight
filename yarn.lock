@@ -1532,9 +1532,9 @@ d3-force@1.0.6:
     d3-quadtree "1"
     d3-timer "1"
 
-d3-foresight@0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/d3-foresight/-/d3-foresight-0.4.1.tgz#0828462b216aceefac2c1cb5ec20f2a2ebf2df14"
+d3-foresight@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/d3-foresight/-/d3-foresight-0.4.2.tgz#ea660e844379a25cf7276b6a72b03db1f2d1e1ff"
   dependencies:
     colormap "^2.2.0"
     d3 "^4.5.0"
