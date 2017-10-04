@@ -130,7 +130,10 @@ const getters = {
   },
 
   modelScores: (state, getters) => {
-    return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
+    return getters.models.map(m => {
+      // We want nulls (-Infinity) to be shown as NA
+      return m.stats[getters.modelSelectedScoreMeta.id].map(d => d === null ? 'NA' : parseInt(d * 1000) / 1000)
+    })
   },
 
   modelCIs: (state, getters) => state.confidenceIntervals
