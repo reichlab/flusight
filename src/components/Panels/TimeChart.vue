@@ -74,7 +74,7 @@ div
               td
                 a(v-bind:href="modelMeta[i].url" target="_blank") {{ id }}
               td(v-for="(j, scr) in modelScores[i]" v-bind:class="[modelBestIndices[j] == i ? 'bold' : '']" track-by="$index")
-                | {{ scr }}
+                | {{  scr === null ? 'NA' : parseInt(scr * 1000) / 1000 }}
       .score-footer
         | Calculated using the most recently updated data. Final values may differ.
 </template>

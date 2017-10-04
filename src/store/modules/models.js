@@ -124,16 +124,13 @@ const getters = {
 
     for (let i = 0; i < bestIndices.length; i++) {
       let col = getters.models.map(m => m.stats[scoreId][i])
-      bestIndices[i] = col.indexOf(bestFunc(col))
+      bestIndices[i] = col.indexOf(bestFunc(col.filter(d => d !== null)))
     }
     return bestIndices
   },
 
   modelScores: (state, getters) => {
-    return getters.models.map(m => {
-      // We want nulls (-Infinity) to be shown as NA
-      return m.stats[getters.modelSelectedScoreMeta.id].map(d => d === null ? 'NA' : parseInt(d * 1000) / 1000)
-    })
+    return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
   },
 
   modelCIs: (state, getters) => state.confidenceIntervals
