@@ -11,6 +11,7 @@ import './assets/please-wait.css'
 import './assets/spinner.css'
 import './assets/analytics.js'
 import 'nprogress/nprogress.css'
+import 'tablesort/tablesort.css'
 
 import './assets/favicons/apple-touch-icon-114x114.png'
 import './assets/favicons/apple-touch-icon-120x120.png'

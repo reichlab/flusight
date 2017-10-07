@@ -66,7 +66,7 @@ div
         span.score-title
           a(v-bind:href="modelSelectedScoreMeta.url" target="_blank") {{ modelSelectedScoreMeta.name }}
       .score-body
-        table.table.is-striped.is-bordered
+        table.table.is-striped.is-bordered#score-table
           thead
             tr
               th Model
@@ -84,6 +84,7 @@ div
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import nprogress from 'nprogress'
+import tablesort from 'tablesort'
 
 export default {
   computed: {
@@ -136,6 +137,7 @@ export default {
 
       this.resetToFirstIdx()
       this.displayTimeChart()
+      tablesort(document.getElementById('score-table'))
 
       window.loading_screen.finish()
     })
