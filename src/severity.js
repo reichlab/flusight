@@ -5,8 +5,11 @@ export default class SeverityChart {
    * The constructor takes in id of the element to draw on
    */
   constructor (elementId) {
-    let elem = d3.select(elementId)
-    let chartBB = elem.node().getBoundingClientRect()
+    this.elem = d3.select(elementId)
+    // Clear div
+    this.elem.selectAll('*').remove()
+
+    let chartBB = this.elem.node().getBoundingClientRect()
     let divWidth = chartBB.width
     let divHeight = 480
 
@@ -21,7 +24,7 @@ export default class SeverityChart {
     this.width = divWidth - margin.left - margin.right
     this.height = divHeight - margin.top - margin.bottom
 
-    this.svg = elem.append('svg')
+    this.svg = this.elem.append('svg')
       .attr('width', divWidth)
       .attr('height', divHeight)
       .append('g')
@@ -51,6 +54,11 @@ export default class SeverityChart {
    */
   plot (data) {
     this.data = data
+
+    // Tests
+    // You should be able to see these text below the blank svg in severity tab
+    this.elem.selectAll('div').remove()
+    this.elem.append('div').text(`I got ${data.thresholds} as thresholds. Also data from ${data.models.length} models working for ${data.timePoints.length} weeks.`)
   }
 
   /**
@@ -58,5 +66,7 @@ export default class SeverityChart {
    * (something from 0,...51/52, depending on the number of mmwr weeks in year)
    */
   update (idx) {
+    this.elem.selectAll('h1').remove()
+    this.elem.append('h1').text(`On week index ${idx}`)
   }
 }
