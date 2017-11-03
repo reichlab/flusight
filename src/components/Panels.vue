@@ -55,9 +55,11 @@ export default {
     ...mapActions([
       'updateTimeChart',
       'updateChoropleth',
+      'updateSeverityChart',
       'plotChoropleth',
       'plotTimeChart',
-      'plotDistributionChart'
+      'plotDistributionChart',
+      'plotSeverityChart'
     ]),
     ...mapActions('weeks', [
       'readjustSelectedWeek'
@@ -69,6 +71,7 @@ export default {
       this.readjustSelectedWeek()
       this.plotTimeChart()
       this.plotDistributionChart()
+      this.plotSeverityChart()
       this.updateChoropleth()
     },
     selectedSeason: function () {
@@ -77,6 +80,7 @@ export default {
       this.plotTimeChart()
       this.plotChoropleth()
       this.plotDistributionChart()
+      this.plotSeverityChart()
     },
     choroplethRelative: function () {
       this.plotChoropleth()
@@ -84,6 +88,7 @@ export default {
     selectedWeekIdx: function () {
       this.updateChoropleth()
       this.updateTimeChart()
+      this.updateSeverityChart()
       this.plotDistributionChart()
     }
   }

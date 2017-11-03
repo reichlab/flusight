@@ -75,6 +75,7 @@ export const choropleths = state => ['Actual Weighted ILI (%)', 'Relative Weight
 export const timeChart = state => state.timeChart
 export const choropleth = state => state.choropleth
 export const distributionChart = state => state.distributionChart
+export const severityChart = state => state.severityChart
 
 /**
  * Return observed data for currently selected state
@@ -181,6 +182,17 @@ export const distributionChartData = (state, getters) => {
     timePoints: getters.timePoints,
     currentIdx: getters['weeks/selectedWeekIdx'],
     models: getters['models/modelDistributions']
+  }
+}
+
+/**
+ * Return data for severity plot
+ */
+export const severityChartData = (state, getters) => {
+  return {
+    timePoints: getters.timePoints,
+    models: getters['models/modelDistributions'],
+    thresholds: [4.3, 6.8, 8.6] // Dummy thresholds approximating the lines from CDC pdf
   }
 }
 

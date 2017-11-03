@@ -6,8 +6,9 @@ const state = {
   choroplethRelative: false,
   timeChart: false,
   distributionChart: false,
-  score: 1,
-  scoresPanel: false
+  severityChart: false,
+  scoresPanel: false,
+  score: 1
 }
 
 // getters
@@ -18,6 +19,7 @@ const getters = {
   choroplethRelative: state => state.choroplethRelative,
   showTimeChart: state => state.timeChart,
   showDistributionChart: state => state.distributionChart,
+  showSeverityChart: state => state.severityChart,
   showScoresPanel: state => state.scoresPanel,
   nextScoreActive: (state, getters, rootState, rootGetters) => {
     return state.score < (rootGetters['models/modelNumScores'] - 1)
@@ -57,6 +59,10 @@ const actions = {
     commit(types.DISPLAY_DISTRIBUTIONCHART)
   },
 
+  displaySeverityChart ({ commit }) {
+    commit(types.DISPLAY_SEVERITYCHART)
+  },
+
   displayScoresPanel ({ commit }) {
     commit(types.DISPLAY_SCORESPANEL)
   }
@@ -83,18 +89,28 @@ const mutations = {
   [types.DISPLAY_TIMECHART] (state) {
     state.distributionChart = false
     state.scoresPanel = false
+    state.severityChart = false
     state.timeChart = true
   },
 
   [types.DISPLAY_DISTRIBUTIONCHART] (state) {
     state.timeChart = false
     state.scoresPanel = false
+    state.severityChart = false
     state.distributionChart = true
+  },
+
+  [types.DISPLAY_SEVERITYCHART] (state) {
+    state.timeChart = false
+    state.scoresPanel = false
+    state.distributionChart = false
+    state.severityChart = true
   },
 
   [types.DISPLAY_SCORESPANEL] (state) {
     state.timeChart = false
     state.distributionChart = false
+    state.severityChart = false
     state.scoresPanel = true
   }
 }

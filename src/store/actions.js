@@ -151,6 +151,10 @@ export const initChoropleth = ({ commit }, val) => {
   commit(types.SET_CHOROPLETH, val)
 }
 
+export const initSeverityChart = ({ commit }, val) => {
+  commit(types.SET_SEVERITYCHART, val)
+}
+
 export const initDistributionChart = ({ commit, getters, dispatch }, divSelector) => {
   let distributionChartConfig = {
     axes: {
@@ -207,6 +211,17 @@ export const plotDistributionChart = ({ getters }) => {
 }
 
 /**
+ * Plot severity chart
+ */
+export const plotSeverityChart = ({ dispatch, getters }) => {
+  if (getters.severityChart) {
+    getters.severityChart.plot(getters.severityChartData)
+    dispatch('weeks/readjustSelectedWeek')
+    dispatch('updateSeverityChart')
+  }
+}
+
+/**
  * Plot (update) choropleth with currently selected data
  */
 export const plotChoropleth = ({ commit, dispatch, getters }) => {
@@ -220,6 +235,15 @@ export const plotChoropleth = ({ commit, dispatch, getters }) => {
 export const updateTimeChart = ({ getters }) => {
   if (getters.timeChart) {
     getters.timeChart.update(getters['weeks/selectedWeekIdx'])
+  }
+}
+
+/**
+ * Tell severity chart to move to weekIdx
+ */
+export const updateSeverityChart = ({ getters }) => {
+  if (getters.severityChart) {
+    getters.severityChart.update(getters['weeks/selectedWeekIdx'])
   }
 }
 
@@ -247,4 +271,11 @@ export const clearTimeChart = ({ commit }) => {
  */
 export const clearDistributionChart = ({ commit }) => {
   commit(types.SET_DISTRIBUTIONCHART, null)
+}
+
+/**
+ * Clear severityChart
+ */
+export const clearSeverityChart = ({ commit }) => {
+  commit(types.SET_SEVERITYCHART, null)
 }

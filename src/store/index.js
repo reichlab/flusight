@@ -18,6 +18,7 @@ const state = {
   timeChart: null,
   choropleth: null,
   distributionChart: null,
+  severityChart: null,
   seasonData: [], // Container for season data
   distData: [], // Container for dist data
   history: null,
@@ -65,6 +66,10 @@ const mutations = {
 
   [types.SET_DISTRIBUTIONCHART] (state, val) {
     state.distributionChart = val
+  },
+
+  [types.SET_SEVERITYCHART] (state, val) {
+    state.severityChart = val
   },
 
   [types.SET_BRAND_LOGO] (state, val) {

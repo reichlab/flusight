@@ -47,6 +47,8 @@ div
         a Time Chart
       li(v-bind:class="[showDistributionChart ? 'is-active' : '']" v-on:click="displayDistributionChart") 
         a Distribution Chart
+      li(v-bind:class="[showSeverityChart ? 'is-active' : '']" v-on:click="displaySeverityChart") 
+        a Severity Chart
       li(v-bind:class="[showScoresPanel ? 'is-active' : '']" v-on:click="displayScoresPanel")
         a Scores
 
@@ -82,6 +84,7 @@ div
 </template>
 
 <script>
+import SeverityChart from '../../severity'
 import { mapActions, mapGetters } from 'vuex'
 import nprogress from 'nprogress'
 import tablesort from 'tablesort'
@@ -95,6 +98,7 @@ export default {
     ...mapGetters('switches', [
       'showTimeChart',
       'showDistributionChart',
+      'showSeverityChart',
       'showScoresPanel',
       'nextScoreActive',
       'prevScoreActive'
@@ -112,16 +116,20 @@ export default {
       'importLatestChunk',
       'initTimeChart',
       'initDistributionChart',
+      'initSeverityChart',
       'plotTimeChart',
       'plotDistributionChart',
+      'plotSeverityChart',
       'clearTimeChart',
       'clearDistributionChart',
+      'clearSeverityChart',
       'downloadSeasonData',
       'downloadDistData'
     ]),
     ...mapActions('switches', [
       'displayTimeChart',
       'displayDistributionChart',
+      'displaySeverityChart',
       'displayScoresPanel',
       'selectNextScore',
       'selectPrevScore'
@@ -178,6 +186,25 @@ export default {
         })
       } else {
         this.clearDistributionChart()
+      }
+    },
+    showSeverityChart: function () {
+      this.readjustSelectedWeek()
+      if (this.showSeverityChart) {
+        // Check if we need to download chunks
+        nprogress.start()
+        this.downloadSeasonData({
+          http: this.$http,
+          id: this.selectedSeasonId,
+          success: () => {
+            this.initSeverityChart(new SeverityChart('#chart-right'))
+            this.plotSeverityChart()
+            nprogress.done()
+          },
+          fail: err => console.log(err)
+        })
+      } else {
+        this.clearSeverityChart()
       }
     }
   }
