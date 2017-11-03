@@ -94,7 +94,7 @@ export class ColorBar {
 export default class Choropleth {
   constructor (elementId, regionHook) {
     let footBB = d3.select('.footer').node().getBoundingClientRect()
-    let chartBB = d3.select(elementId).node().getBoundingClientRect()
+    let chartBB = d3.select('#' + elementId).node().getBoundingClientRect()
 
     let divWidth = chartBB.width
     let divHeight = window.innerHeight - chartBB.top - footBB.height

@@ -258,7 +258,7 @@ export default {
       this.updateSelectedSeason(this.seasons.length - 1)
 
       // Setup map
-      this.initChoropleth(new Choropleth('#choropleth', regionIdx => {
+      this.initChoropleth(new Choropleth('choropleth', regionIdx => {
         if (this.showDistributionChart) {
           // If on distribution chart, check and request for dist data
           let regionId = this.metadata.regionData[regionIdx].id
