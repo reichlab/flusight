@@ -50,6 +50,11 @@ export default class SeverityChart {
    *                ]
    *   thresholds: Array of 3 numbers (increasing) specifying the threshold
    *               values for wILI%
+   *   models: Array of model predictions. Each item corresponds to a model Object
+   *           and has many properties. The important ones are id (string; model id)
+   *           and predictions (array of 52/53 predictions). Its easier to console.log
+   *           it out or inspect via the Vue browser addon's Vuex tab
+   *           (look for `severityChartData` in getters section).
    * }
    */
   plot (data) {
