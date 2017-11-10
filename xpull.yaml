@@ -20,3 +20,6 @@ reichlab/2017-2018-cdc-flu-contest:
   - ["inst/submissions/sarima_seasonal_difference_TRUE-region/*.csv",
      "data/2017-2018/SARIMA2",
      "csv"]
+  - ["inst/submissions/KoT-region/*.csv",
+     "data/2017-2018/Ensemble",
+     "csv"]
