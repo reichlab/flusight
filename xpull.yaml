@@ -2,7 +2,7 @@
 
 transformers:
   csv: |
-    (f) => {
+    f => {
       let splits = path.basename(f).split('-')
       return splits[1] + splits[0].slice(2) + '.csv'
     }
