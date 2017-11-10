@@ -3,9 +3,8 @@
 transformers:
   csv: |
     (f) => {
-      let d = path.dirname(f)
       let splits = path.basename(f).split('-')
-      return path.join(d, splits[1] + splits[0].slice(2) + '.csv')
+      return splits[1] + splits[0].slice(2) + '.csv'
     }
 
 reichlab/2017-2018-cdc-flu-contest:
