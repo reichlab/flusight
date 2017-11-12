@@ -70,24 +70,18 @@ const parseSeries = series => {
     }
   }
 
+  let point = binRows[maxIdx][1]
   if (matches === (len - 1)) {
-    // No actual prediction, skip these
-    return {
-      low: [-1, -1],
-      high: [-1, -1],
-      point: -1,
-      bins: null
-    }
-  } else {
-    // Overwrite point prediction if it was explicitly specified
-    let point = pointRows.length !== 0 ? pointRows[0][3] : binRows[maxIdx][1]
+    // This is a uniform prediction, maxIdx is not going to work here
+    point = binRows[Math.floor(binRows.length / 2)][1]
+  }
 
-    return {
-      low: range.low,
-      high: range.high,
-      point: point,
-      bins: binRows.map(row => [row[1], row[2], row[3]])
-    }
+  // Overwrite point prediction if it was explicitly specified
+  return {
+    low: range.low,
+    high: range.high,
+    point: pointRows.length !== 0 ? pointRows[0][3] : point,
+    bins: binRows.map(row => [row[1], row[2], row[3]])
   }
 }
 
