@@ -6,6 +6,24 @@ const Papa = require('papaparse')
 const d3 = require('d3')
 
 /**
+ * Comparator function for percentage bins
+ */
+const comparePercentage = (a, b) => a - b
+
+/**
+ * Comparator function for week bins
+ */
+const compareWeeks = (a, b) => {
+  if ((a >= 30) && (b < 30)) {
+    return -1
+  } else if ((a < 30) && (b >= 30)) {
+    return 1
+  } else {
+    return a - b
+  }
+}
+
+/**
  * Return confidence ranges and point prediction for given series
  * @param {Array} series an array of (unit type, bin start, bin end, value)
  * @returns {Object} object with keys 'low', 'high' and 'point'
@@ -19,6 +37,14 @@ const parseSeries = series => {
 
   // Skip 'none' bin for season onset
   binRows = binRows.filter(row => row[1] !== 'none')
+
+  // Sort bins based on week thing
+  if (Math.max(...binRows.map(row => row[1])) >= 52) {
+    // This is a seasonal target
+    binRows = binRows.sort(compareWeeks)
+  } else {
+    binRows = binRows.sort(comparePercentage)
+  }
 
   let len = binRows.length
 
