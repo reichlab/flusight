@@ -52,5 +52,15 @@ export const choroplethDataRange = (seasonsData, relativeToggle) => {
     })
   })
 
-  return [Math.min(...minVals), Math.max(...maxVals)]
+  let range = [Math.min(...minVals), Math.max(...maxVals)]
+
+  // Patch range to work for new season data
+  if (relativeToggle) {
+    // Fix the range as -150 to 150% in worst case
+    let clipped = Math.max(...range.map(Math.abs), 150)
+    return [-clipped, clipped]
+  } else {
+    // Fix the range as 0 to 10 in worst case
+    return [range[0], Math.max(10, range[1])]
+  }
 }
