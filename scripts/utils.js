@@ -7,6 +7,10 @@ const path = require('path')
 const yaml = require('js-yaml')
 const mmwr = require('mmwr-week')
 
+const readYaml = filePath => {
+  return yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
+}
+
 /**
  * Return list of weekStamps in given mmwr season
  */
@@ -158,7 +162,7 @@ const getModelMeta = submissionDir => {
   for (let i = 0; i < metaFiles.length; i++) {
     try {
       let filePath = path.join(submissionDir, metaFiles[i])
-      meta = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
+      meta = readYaml(filePath)
     } catch (e) {
       continue
     }
@@ -219,6 +223,7 @@ const deleteDistributions = seasonData => {
   return seasonData
 }
 
+exports.readYaml = readYaml
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
