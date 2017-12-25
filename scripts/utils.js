@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 const mmwr = require('mmwr-week')
+const fct = require('flusight-csv-tools')
 
 const readYaml = filePath => {
   return yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
@@ -75,25 +76,15 @@ const getWeekFiles = directory => {
 /**
  * Group bins for display
  */
-const groupTargetBins = values => {
-  const groupSum = (array, groupSize) => {
-    return array.reduce((acc, val, idx) => {
-      acc[Math.floor(idx / groupSize)] += val
-      return acc
-    }, Array(array.length / groupSize).fill(0))
-  }
-
-  if (values.length === 131) {
+const groupTargetBins = bins => {
+  if (bins.length === 131) {
     // newer format bin values
-    return groupSum(values.slice(0, values.length - 1), 5)
-  } else if (values.length === 27) {
-    // older format bin values
-    return groupSum(values.slice(0, values.length - 1), 2)
-  } else if (values.length < 40) {
+    return fct.binUtils.sliceSumBins(bins.slice(0, bins.length - 1), 5)
+  } else if (bins.length < 40) {
     // week values
-    return groupSum(values, 1)
+    return bins
   } else {
-    throw new RangeError('Unknown length of bins : ' + values.length)
+    throw new RangeError(`Unknown length of bins : ${bins.length}`)
   }
 }
 
@@ -119,23 +110,23 @@ const regionFilter = (data, region) => {
   data.filter(d => d.region === region).forEach(d => {
     let wAIdx = weekAheadTargets.indexOf(d.target)
 
-    let parsedBins = null
+    let parsedProbs = null
     if (d.bins) {
-      parsedBins = groupTargetBins(d.bins.map(b => b[2]))
+      parsedProbs = groupTargetBins(d.bins).map(b => b[2])
     }
     if (wAIdx > -1) {
       filtered.series[wAIdx] = {
         point: d.point,
         low: d.low,
         high: d.high,
-        bins: parsedBins
+        bins: parsedProbs
       }
     } else {
       filtered[d.target] = {
         point: d.point,
         low: d.low,
         high: d.high,
-        bins: parsedBins
+        bins: parsedProbs
       }
     }
   })
