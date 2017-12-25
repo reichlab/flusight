@@ -2,7 +2,7 @@
  * Download and save historical data
  */
 
-const delphiAPI = require('./assets/delphi_epidata.min')
+const delphiAPI = require('./assets/delphi_epidata')
 const region = require('./modules/region')
 const fs = require('fs')
 
