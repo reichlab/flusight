@@ -11,7 +11,3 @@ branding:
   tweetUrl: "https://twitter.com/intent/tweet?text=Flusight.%20\
              Real-time%20Influenza%20Forecasts.%20https%3A%2F%2Freichlab\
              .github.io%2Fflusight%2F%20%40reichlab&source=webclient"
-
-# Items required by backend script for generating data.json
-scripts:
-  baselineUrl: "https://raw.githubusercontent.com/cdcepi/FluSight-forecasts/master/wILI_Baseline.csv"
