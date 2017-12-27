@@ -34,7 +34,7 @@ function parseHistoryData (seasonData) {
   return output
 }
 
-fct.truth.getSeasonsDataLatestLag(seasonIds).then(d => {
+fct.truth.getSeasonsData(seasonIds).then(d => {
   fs.writeFileSync(historyFile, JSON.stringify(parseHistoryData(d), null, 2))
   console.log(` Output written at ${historyFile}`)
 }).catch(e => {
