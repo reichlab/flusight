@@ -21,7 +21,7 @@ const regionData = [
   {
     id: 'nat',
     subId: 'US National',
-    states: [...Array(states.length).keys()].map(i => states[i])
+    states: states
   },
   {
     id: 'hhs1',
