@@ -2,88 +2,42 @@
  * Download and save historical data
  */
 
-const delphiAPI = require('./assets/delphi_epidata')
-const region = require('./modules/region')
-const fs = require('fs')
+const fct = require('flusight-csv-tools')
+const fs = require('fs-extra')
 
-const regionIdentifiers = region.regionData.map(r => r.id)
 const historyFile = './scripts/assets/history.json'
 
-/**
- * Function mapping week number (201523) to season string
- * @param {number} week week number identifier
- * @returns {string} string season like 2014-2015
- */
-const weekToSeason = (week) => {
-  let weekNum = week % 100
-  let year = parseInt(week / 100)
-  if (weekNum > 29) {
-    return [year, year + 1].join('-')
-  } else {
-    return [year - 1, year].join('-')
-  }
-}
+// Download history for seasons 2003 to 2014
+let seasonIds = [...Array(12).keys()].map(i => 2003 + i)
+
+console.log(` Downloading historical data for the following seasons\n${seasonIds.join(', ')}`)
 
 /**
- * Return a list of seasons for given range
+ * Convert data returned from fct to the structure used by flusight
+ * TODO Make the fct structure standard
  */
-const getSeasons = (start, end) => {
-  let seasons = []
-
-  for (let w = start; w < end; w += 100) {
-    seasons.push(weekToSeason(w))
-  }
-
-  return seasons
-}
-
-/**
- * Function to request delphi API for a given range
- */
-const requestAPI = (range, container, callback) => {
-  // Request API
-  delphiAPI.Epidata.fluview((res, message, data) => {
-    data.forEach(d => {
-      let formatted = {
-        week: d['epiweek'],
-        data: d['wili']
+function parseHistoryData (seasonData) {
+  let output = {}
+  fct.meta.regionIds.forEach(rid => {
+    output[rid] = seasonIds.map((sid, idx) => {
+      return {
+        season: `${sid}-${sid + 1}`,
+        data: seasonData[idx][rid].map(({ epiweek, wili }) => {
+          return {
+            week: epiweek,
+            data: wili
+          }
+        })
       }
-      let season = weekToSeason(d['epiweek'])
-      let seasonIndex = container[d['region']].map(d => d.season).indexOf(season)
-      container[d['region']][seasonIndex].data.push(formatted)
     })
-
-    callback()
-  }, regionIdentifiers, [delphiAPI.Epidata.range(range[0], range[1])])
+  })
+  return output
 }
 
-// Download history
-// from 200330 ro 201529
-let start = 200330
-let end = 201529
-let breakPoint = 200929 // API allows a max of 3650 results per request
-
-let seasons = getSeasons(start, end)
-
-// Setup container
-let historyData = {}
-regionIdentifiers.forEach(id => {
-  historyData[id] = []
-  seasons.map(season => {
-    historyData[id].push({
-      season: season,
-      data: []
-    })
-  })
-})
-
-console.log(' Downloading historical data from ' + start + ' to ' + end)
-
-requestAPI([start, breakPoint], historyData, () => {
-  requestAPI([breakPoint + 1, end], historyData, () => {
-    fs.writeFile(historyFile, JSON.stringify(historyData, null, 2), err => {
-      if (err) return console.log(err)
-      else return null
-    })
-  })
+fct.truth.getSeasonsDataLatestLag(seasonIds).then(d => {
+  fs.writeFileSync(historyFile, JSON.stringify(parseHistoryData(d), null, 2))
+  console.log(` Output written at ${historyFile}`)
+}).catch(e => {
+  console.log(e)
+  process.exit(1)
 })
