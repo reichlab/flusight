@@ -3,10 +3,10 @@
  * Files are kept in ./scripts/assets/<season-id>-actual.json
  */
 
-const actual = require('./modules/actual')
 const utils = require('./utils')
 const path = require('path')
 const fs = require('fs')
+const fct = require('flusight-csv-tools')
 
 // Variables and paths
 const dataDir = './data'
@@ -30,11 +30,36 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
+function getActual(season, callback) {
+  fct.truth.getSeasonDataAllLags(parseInt(season.split('-')[0]))
+    .then(d => {
+      // Transfor data for the format used in flusight
+      // TODO: Use the standard format set in fct
+      fct.meta.regionIds.forEach(rid => {
+        d[rid].forEach(({ epiweek, wili, lagData }, idx) => {
+          d[rid][idx] = {
+            week: epiweek,
+            actual: wili,
+            lagData: lagData.map(ld => {
+              return { lag: ld.lag, value: ld.wili }
+            })
+          }
+        })
+      })
+      callback(d)
+    })
+    .catch(e => {
+      console.log(`Error while processing ${season}`)
+      console.log(e)
+      process.exit(1)
+    })
+}
+
 seasons.forEach((seasonId, seasonIdx) => {
   let seasonOutFile = path.join(outputDir, `${seasonId}-actual.json`)
 
   console.log(` Downloading data for ${seasonId}`)
-  actual.getActual(seasonId, actualData => {
+  getActual(seasonId, actualData => {
     fs.writeFile(seasonOutFile, JSON.stringify(actualData), (err) => {
       if (err) throw err
       console.log(` ✓ File written at ${seasonOutFile}`)
