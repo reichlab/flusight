@@ -20,28 +20,12 @@ const arange = (a, b) => [...Array(b - a).keys()].map(i => i + a)
 /**
  * Return list of weekStamps in given mmwr season
  */
-const seasonToWeekStamps = season => {
-  let first = parseInt(season.split('-')[0])
-  let second = parseInt(season.split('-')[1])
-
-  // Check the number of weeks in first year
-  let firstYear = new mmwr.MMWRDate(first)
-  let firstMaxWeek = firstYear.nWeeks
-
-  let weeks = []
-  // Weeks for first year
-  for (let i = 30; i <= firstMaxWeek; i++) {
-    weeks.push(parseInt(first + '' + i))
-  }
-
-  // Weeks for second year
-  for (let i = 1; i < 30; i++) {
-    let week
-    if (i < 10) week = parseInt(second + '0' + i)
-    else week = parseInt(second + '' + i)
-    weeks.push(week)
-  }
-  return weeks
+const seasonIdToWeekStamps = seasonId => {
+  let maxWeek = (new mmwr.MMWRDate(seasonId, 30)).nWeeks
+  return [
+    ...arange(100 * seasonId + 30, 100 * seasonId + maxWeek + 1),
+    ...arange(100 * (seasonId + 1) + 1, 100 * (seasonId + 1) + 30)
+  ]
 }
 
 /**
@@ -79,69 +63,6 @@ const getWeekFiles = directory => {
 }
 
 /**
- * Group bins for display
- */
-const groupTargetBins = bins => {
-  if (bins.length === 131) {
-    // newer format bin values
-    return fct.binUtils.sliceSumBins(bins.slice(0, bins.length - 1), 5)
-  } else if (bins.length < 40) {
-    // week values
-    return bins
-  } else {
-    throw new RangeError(`Unknown length of bins : ${bins.length}`)
-  }
-}
-
-/**
- * Filter data returned from tranform.csvToJson according to region
- * @param {Array} data data returned from csvToJson
- * @param {string} region region identifier to filter on
- * @returns {Object} an object with output for the region
- */
-const regionFilter = (data, region) => {
-  // Exploiting the fact that we know the structure of prediction at each week,
-  // we generate the optimal structure for foresight
-  let filtered = {
-    series: [null, null, null, null],
-    peakTime: null,
-    peakValue: null,
-    onsetTime: null
-  }
-
-  // Convert week ahead targets to simple series
-  let weekAheadTargets = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-
-  data.filter(d => d.region === region).forEach(d => {
-    let wAIdx = weekAheadTargets.indexOf(d.target)
-
-    let parsedProbs = null
-    if (d.bins) {
-      parsedProbs = groupTargetBins(d.bins).map(b => b[2])
-    }
-    if (wAIdx > -1) {
-      filtered.series[wAIdx] = {
-        point: d.point,
-        low: d.low,
-        high: d.high,
-        bins: parsedProbs
-      }
-    } else {
-      filtered[d.target] = {
-        point: d.point,
-        low: d.low,
-        high: d.high,
-        bins: parsedProbs
-      }
-    }
-  })
-
-  // Assuming all the predictions are not present when one wk isn't
-  if (filtered.series[0].point > -1) return filtered
-  else return -1
-}
-
-/**
  * Get model metadata
  * @param {string} submissionDir path to the submission directory
  * @returns {Object} metadata object
@@ -165,6 +86,56 @@ const getModelMeta = submissionDir => {
   }
 
   return meta
+}
+
+/**
+ * Filter data csv according to region
+ * @param {Array} csv from fct
+ * @param {string} region region identifier to filter on
+ */
+const regionFilterCsv = (csv, regionId, weekStamps) => {
+  let filtered = {
+    series: [null, null, null, null],
+    peakTime: null,
+    peakValue: null,
+    onsetTime: null
+  }
+
+  function getTargetData (target, binBatch) {
+    let cis = [90, 50]
+    let point = csv.getPoint(target, regionId)
+    let bins = csv.getBins(target, regionId)
+    let ranges = cis.map(c => {
+      return csv.getConfidenceRange(target, regionId, c)
+    })
+
+    return {
+      point,
+      low: ranges.map(r => r[0]),
+      high: ranges.map(r => r[1]),
+      bins: fct.binUtils.sliceSumBins(bins, binBatch).map(b => b[2])
+    }
+  }
+
+  [1, 2, 3, 4].map((t, idx) => {
+    filtered.series[idx] = getTargetData(t, 5)
+  })
+  filtered.peakValue = getTargetData('peak', 5)
+  filtered.peakTime = getTargetData('peak-wk', 1)
+  filtered.onsetTime = getTargetData('onset-wk', 1)
+
+  // Assuming all the predictions are not present when one wk isn't
+  if (filtered.series[0].point > -1) {
+    // Transform weeks predictions to season indices
+    ['peakTime', 'onsetTime'].forEach(t => {
+      filtered[t].point = weekToIndex(filtered[t].point, weekStamps)
+      filtered[t].high = filtered[t].high.map(d => weekToIndex(d, weekStamps))
+      filtered[t].low = filtered[t].low.map(d => weekToIndex(d, weekStamps))
+    })
+    return filtered
+  } else {
+    return null
+  }
 }
 
 // Get rid of point values from a prediction object
@@ -222,10 +193,10 @@ const deleteDistributions = seasonData => {
 exports.readYaml = readYaml
 exports.arange = arange
 exports.getSubDirectories = getSubDirectories
-exports.regionFilter = regionFilter
+exports.regionFilterCsv = regionFilterCsv
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
-exports.seasonToWeekStamps = seasonToWeekStamps
+exports.seasonIdToWeekStamps = seasonIdToWeekStamps
 exports.weekToIndex = weekToIndex
 exports.extractDistributions = extractDistributions
 exports.deleteDistributions = deleteDistributions

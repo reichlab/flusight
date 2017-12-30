@@ -31,14 +31,6 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
-function seasonWeeks (seasonId) {
-  let maxWeek = (new mmwr.MMWRDate(seasonId, 30)).nWeeks
-  return [
-    ...utils.arange(100 * seasonId + 30, 100 * seasonId + maxWeek + 1),
-    ...utils.arange(100 * (seasonId + 1) + 1, 100 * (seasonId + 1) + 30)
-  ]
-}
-
 function getActual (season, callback) {
   let seasonId = parseInt(season.split('-')[0])
   fct.truth.getSeasonDataAllLags(seasonId)
@@ -58,7 +50,7 @@ function getActual (season, callback) {
       })
 
       // Fill in nulls for weeks not present in the data
-      let weeks = seasonWeeks(seasonId)
+      let weeks = utils.seasonIdToWeekStamps(seasonId)
       fct.meta.regionIds.forEach(rid => {
         let availableWeeks = d[rid].map(({ week }) => week)
         weeks.forEach(ew => {
@@ -81,11 +73,11 @@ function getActual (season, callback) {
     })
 }
 
-seasons.forEach((seasonId, seasonIdx) => {
-  let seasonOutFile = path.join(outputDir, `${seasonId}-actual.json`)
+seasons.forEach(season => {
+  let seasonOutFile = path.join(outputDir, `${season}-actual.json`)
 
-  console.log(` Downloading data for ${seasonId}`)
-  getActual(seasonId, actualData => {
+  console.log(` Downloading data for ${season}`)
+  getActual(season, actualData => {
     fs.writeFile(seasonOutFile, JSON.stringify(actualData), (err) => {
       if (err) throw err
       console.log(` ✓ File written at ${seasonOutFile}`)

@@ -41,7 +41,7 @@ let seasons = utils.getSubDirectories(dataDir)
 // M E T A D A T A . J S O N
 fs.writeFileSync(metaOutFile, JSON.stringify({
   regionData: region.regionData,
-  seasonIds: seasons,
+  seasonIds: seasons, // NOTE: These seasonIds are full xxxx-yyyy type ids
   updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
 }))
 console.log(' ✓ Wrote metadata.json')
@@ -51,21 +51,21 @@ console.log(' ✓ Wrote metadata.json')
 /**
  * Run a node subprocess to parse season
  */
-function parseSeason (seasonId, callback) {
-  let seasonActualFile = path.join(actualDataDir, `${seasonId}-actual.json`)
+function parseSeason (season, callback) {
+  let seasonActualFile = path.join(actualDataDir, `${season}-actual.json`)
   exec(`node scripts/parse-season.js ${seasonActualFile}`, (err) => {
     if (err) throw err
     callback()
   })
 }
 
-function parseSeasons (seasonIds) {
-  if (seasonIds.length === 0) {
+function parseSeasons (seasons) {
+  if (seasons.length === 0) {
     console.log('All done')
   } else {
-    console.log(` Running parse-season for ${seasonIds[0]}`)
-    parseSeason(seasonIds[0], () => {
-      parseSeasons(seasonIds.slice(1))
+    console.log(` Running parse-season for ${seasons[0]}`)
+    parseSeason(seasons[0], () => {
+      parseSeasons(seasons.slice(1))
     })
   }
 }
