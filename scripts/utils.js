@@ -113,7 +113,7 @@ const regionFilterCsv = (csv, regionId, weekStamps) => {
       point,
       low: ranges.map(r => r[0]),
       high: ranges.map(r => r[1]),
-      bins: fct.binUtils.sliceSumBins(bins, binBatch).map(b => b[2])
+      bins: fct.utils.bins.sliceSumBins(bins, binBatch).map(b => b[2])
     }
   }
 
