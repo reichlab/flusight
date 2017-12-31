@@ -46,25 +46,22 @@ fs.writeFileSync(metaOutFile, JSON.stringify({
 }))
 console.log(' ✓ Wrote metadata.json')
 
-// S E A S O N - X X X X - X X X X . J S O N
+// S E A S O N files
+// - season-*.json
+// - distributions/season-*-*.json
+// - scores-season-*.json
 
 /**
- * Run a node subprocess to parse season
+ * Run node subprocesses to parse seasons
  */
-function parseSeason (season, callback) {
-  let seasonActualFile = path.join(actualDataDir, `${season}-actual.json`)
-  exec(`node scripts/parse-season.js ${seasonActualFile}`, (err) => {
-    if (err) throw err
-    callback()
-  })
-}
-
 function parseSeasons (seasons) {
   if (seasons.length === 0) {
     console.log('All done')
   } else {
     console.log(` Running parse-season for ${seasons[0]}`)
-    parseSeason(seasons[0], () => {
+    let seasonActualFile = path.join(actualDataDir, `${seasons[0]}-actual.json`)
+    exec(`node scripts/parse-season.js ${seasonActualFile}`, err => {
+      if (err) throw err
       parseSeasons(seasons.slice(1))
     })
   }
