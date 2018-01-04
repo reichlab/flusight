@@ -13,11 +13,6 @@ const readYaml = filePath => {
 }
 
 /**
- * Arange [a, b)
- */
-const arange = (a, b) => [...Array(b - a).keys()].map(i => i + a)
-
-/**
  * Return list of weekStamps in given mmwr season
  */
 const seasonToWeekStamps = season => {
@@ -220,7 +215,6 @@ const deleteDistributions = seasonData => {
 }
 
 exports.readYaml = readYaml
-exports.arange = arange
 exports.getSubDirectories = getSubDirectories
 exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles

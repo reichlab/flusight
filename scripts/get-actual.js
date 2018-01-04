@@ -7,7 +7,6 @@ const utils = require('./utils')
 const path = require('path')
 const fs = require('fs')
 const fct = require('flusight-csv-tools')
-const mmwr = require('mmwr-week')
 
 // Variables and paths
 const dataDir = './data'
@@ -31,19 +30,10 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
-function seasonWeeks(seasonId) {
-  let maxWeek = (new mmwr.MMWRDate(seasonId, 30)).nWeeks
-  return [
-    ...utils.arange(100 * seasonId + 30, 100 * seasonId + maxWeek + 1),
-    ...utils.arange(100 * (seasonId + 1) + 1, 100 * (seasonId + 1) + 30)
-  ]
-}
-
 function getActual(season, callback) {
-  let seasonId = parseInt(season.split('-')[0])
-  fct.truth.getSeasonDataAllLags(seasonId)
+  fct.truth.getSeasonDataAllLags(parseInt(season.split('-')[0]))
     .then(d => {
-      // Transfer data for the format used in flusight
+      // Transfor data for the format used in flusight
       // TODO: Use the standard format set in fct
       fct.meta.regionIds.forEach(rid => {
         d[rid].forEach(({ epiweek, wili, lagData }, idx) => {
@@ -56,22 +46,6 @@ function getActual(season, callback) {
           }
         })
       })
-
-      // Fill in nulls for weeks not present in the data
-      let weeks = seasonWeeks(seasonId)
-      fct.meta.regionIds.forEach(rid => {
-        let availableWeeks = d[rid].map(({ week }) => week)
-        weeks.forEach(ew => {
-          if (availableWeeks.indexOf(ew) === -1) {
-            d[rid].push({
-              week: ew,
-              actual: null,
-              lagData: []
-            })
-          }
-        })
-      })
-
       callback(d)
     })
     .catch(e => {
