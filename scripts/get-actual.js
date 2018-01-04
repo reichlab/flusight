@@ -31,7 +31,7 @@ console.log(` Found ${seasons.length} seasons:`)
 seasons.forEach(s => console.log(' ' + s))
 console.log('')
 
-function seasonWeeks (seasonId) {
+function seasonWeeks(seasonId) {
   let maxWeek = (new mmwr.MMWRDate(seasonId, 30)).nWeeks
   return [
     ...utils.arange(100 * seasonId + 30, 100 * seasonId + maxWeek + 1),
@@ -39,7 +39,7 @@ function seasonWeeks (seasonId) {
   ]
 }
 
-function getActual (season, callback) {
+function getActual(season, callback) {
   let seasonId = parseInt(season.split('-')[0])
   fct.truth.getSeasonDataAllLags(seasonId)
     .then(d => {
