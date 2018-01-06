@@ -2,7 +2,7 @@
  * Common utility functions
  */
 
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const yaml = require('js-yaml')
 const mmwr = require('mmwr-week')
@@ -10,6 +10,10 @@ const fct = require('flusight-csv-tools')
 
 const readYaml = filePath => {
   return yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
+}
+
+async function writeJSON (filePath, data) {
+  return await fs.writeFile(filePath, JSON.stringify(data))
 }
 
 /**
@@ -191,6 +195,7 @@ const deleteDistributions = seasonData => {
 }
 
 exports.readYaml = readYaml
+exports.writeJSON = writeJSON
 exports.arange = arange
 exports.getSubDirectories = getSubDirectories
 exports.regionFilterCsv = regionFilterCsv
