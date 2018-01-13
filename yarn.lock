@@ -2647,9 +2647,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flusight-csv-tools@0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/flusight-csv-tools/-/flusight-csv-tools-0.0.10.tgz#13b7767baad184fc6d0a38cb55abfecdaf5a5a75"
+flusight-csv-tools@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/flusight-csv-tools/-/flusight-csv-tools-0.0.11.tgz#3d8e6a6d4b06e871c1d7d37219dcd698e9db0845"
   dependencies:
     "@types/d3-collection" "^1.0.5"
     "@types/moment" "^2.13.0"
@@ -2661,9 +2661,9 @@ flusight-csv-tools@0.0.10:
     build-url "^1.0.10"
     d3-collection "^1.0.4"
     download "^6.2.5"
-    fast-memoize "^2.2.8"
     fs-extra "^4.0.2"
     mmwr-week "^1.2.1"
+    moize "^4.0.4"
     moment "^2.20.1"
     papaparse "^4.3.6"
     request "^2.83.0"
