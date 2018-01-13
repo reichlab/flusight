@@ -6,135 +6,296 @@
 const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
-const region = require('./modules/region')
-const stats = require('./modules/stats')
-const baseline = require('./modules/baseline')
 const fct = require('flusight-csv-tools')
 
-// Variables and paths
-const dataDir = './data'
-const outDir = './src/assets/data'
-const baselineFile = './scripts/assets/wILI_Baseline.csv'
-
-// Get baseline data
-let baselineData = baseline.getBaselines(baselineFile)
-
+// Directory with CSVs
+const DATA_DIR = './data'
+// Directory for output JSONs
+const OUT_DIR = './src/assets/data'
 // Look for seasons in the data directory
-let seasons = utils.getSubDirectories(dataDir)
+const SEASONS = utils.getSubDirectories(DATA_DIR)
+// Take input season from command line argument
+const SEASON_ID = process.argv[2]
+const SEASON = `${SEASON_ID}-${SEASON_ID + 1}`
+const MODELS_DIR = utils.getSubDirectories(path.join(DATA_DIR, SEASON))
 
-// Take input file from command line argument
-let seasonInFile = process.argv[2]
-// Season actual files are named <season-id>-actual.json
-let season = path.basename(seasonInFile).slice(0, -12)
-let seasonId = parseInt(season.split('-')[0])
+// Cache for csv objects
+// This is needed since the nesting in output (season, region, model)
+// is not similar to whats in the input (season, model, region)
+let CACHED_CSVS = {}
 
-// Create cache for file data
-let cachedCSVs = {}
-
-let seasonOutFile
-if (seasons.indexOf(season) === seasons.length - 1) {
-  seasonOutFile = path.join(outDir, 'season-latest.json')
-} else {
-  seasonOutFile = path.join(outDir, `season-${season}.json`)
+/**
+ * Return season name for writing files
+ */
+function getSeasonName() {
+  if (SEASONS.indexOf(SEASON) === SEASONS.length - 1) {
+    return 'latest'
+  } else {
+    return SEASON
+  }
 }
 
-fs.readFile(seasonInFile, 'utf8', (err, fileData) => {
-  if (err) throw err
-  let actualData = JSON.parse(fileData)
-  console.log(`\n Parsing data for season ${season}...`)
-  let output = {
-    seasonId: season, // NOTE: This id is full xxxx-yyyy type id
+async function writeSeasonFile(data) {
+  await utils.writeJSON(path.join(DATA_DIR, `season-${getSeasonName()}.json`), data)
+}
+
+async function writeScoresFile(data) {
+  await utils.writeJSON(path.join(DATA_DIR, `scores-${getSeasonName()}.json`, data))
+}
+
+async function writeDistsFile(data, regionId) {
+  let distsDir = path.join(DATA_DIR, 'distributions')
+  await fs.ensureDir(distsDir)
+
+  let outputFile
+  if (regionId === 'nat') {
+    // We only use latest identifier in the latest AND nat data
+    outputFile = path.join(distsDir, `season-${getSeasonName()}-nat.json`)
+  } else {
+    outputFile = path.join(distsDir, `season-${SEASON}-${regionId}.json`)
+  }
+
+  await utils.writeJSON(outputFile, data)
+}
+
+/**
+ * Return region data with nulls filled in for missing epiweeks
+ */
+function parseRegionActual(seasonData, regionId) {
+  let regionSubset = seasonData[regionId]
+
+  let epiweeks = fct.utils.epiweek.seasonEpiweeks(SEASON_ID)
+  return epiweeks.map(ew => {
+    let { epiweek, wili, lagData } = regionSubset.find(({ epiweek }) => epiweek === ew)
+    // Rename keys to match the expectations of flusight
+    // and extend by filling in missing epiweeks
+    if (epiweek) {
+      return {
+        week: epiweek,
+        actual: wili,
+        lagData: lagData.map(({ lag, wili }) => { return { lag, value: wili } })
+      }
+    } else {
+      return {
+        week: ew,
+        actual: null,
+        lagData: []
+      }
+    }
+  })
+}
+
+/**
+ * Return fct csv object for given specifications using the cache
+ */
+function getCsv (modelPath, epiweek) {
+  let modelId = path.basename(modelPath)
+  if (epiweek in CACHED_CSVS[modelId]) {
+    return CACHED_CSVS[modelId][epiweek]
+  } else {
+    let csvFile = path.join(modelPath, epiweek + '.csv')
+    let csv = new fct.Csv(csvFile, epiweek, modelId)
+    CACHED_CSVS[modelId][epiweek] = csv
+    return csv
+  }
+}
+
+/**
+ * Return formatted point data for the region using the cvs object
+ */
+function parsePointData (csv, regionId) {
+  let seasonEpiweeks = fct.utils.epiweek.seasonEpiweeks(SEASON_ID)
+
+  function getTargetData (target) {
+    let cis = [90, 50]
+    let point = csv.getPoint(target, regionId)
+    let ranges = cis.map(c => csv.getConfidenceRange(target, regionId, c))
+    let low = ranges.map(r => r[0])
+    let high = ranges.map(r => r[1])
+
+    if (['peak-wk', 'onset-wk'].indexOf(target) > -1) {
+      // Return indices for time based targets
+      point = utils.weekToIndex(point, seasonEpiweeks)
+      high = high.map(d => utils.weekToIndex(d, seasonEpiweeks))
+      low = low.map(d => utils.weekToIndex(d, seasonEpiweeks))
+    }
+
+    return { point, low, high }
+  }
+
+  return {
+    series: [1, 2, 3, 4].map(getTargetData),
+    peakValue: getTargetData('peak'),
+    peakTime: getTargetData('peak-wk'),
+    onsetTime: getTargetData('onset-wk')
+  }
+}
+
+/**
+ * Return bin data for the given region using the csv object
+ */
+function parseBinData (csv, regionId) {
+  function getTargetData (target, binBatch) {
+    let bins = csv.getBins(target, regionId)
+    return {
+      bins: fct.utils.bins.sliceSumBins(bins, binBatch).map(b => b[2])
+    }
+  }
+
+  return {
+    series: [1, 2, 3, 4].map(t => getTargetData(t, 5)),
+    peakValue: getTargetData('peak', 5),
+    peakTime: getTargetData('peak-wk', 1),
+    onsetTime: getTargetData('onset-wk', 1)
+  }
+}
+
+/**
+ * Return formatted score data from the csv for a region
+ */
+function parseScoreData (csv, regionId, regionTruth) {
+  return {
+    series: [1, 2, 3, 4].map(t => getTargetData(t)),
+    peakValue: getTargetData('peak'),
+    peakTime: getTargetData('peak-wk'),
+    onsetTime: getTargetData('onset-wk')
+  }
+}
+
+/**
+ * Return formatted data from the csv for a region
+ * Each value (point, bin, score) is in the following structure
+ * - series: [{}, {}, {}, {}]
+ * - peakValue: {}
+ * - peakTime: {}
+ * - onsetTime: {}
+ */
+function parseCsv (csv, regionId, regionTruth) {
+  return {
+    pointData: parsePointData(csv, regionId),
+    binData: parseBinData(csv, regionId),
+    scoreData: parseScoreData(csv, regionId, regionTruth)
+  }
+}
+
+/**
+ * Aggregate the scores by taking average
+ */
+function aggregateScores (scores) {
+  // TODO
+  return scores[0]
+}
+
+/**
+ * Return formatted data for the complete model with given region
+ */
+async function parseModelDir (modelPath, regionId, regionTruth) {
+  let modelId = path.basename(modelPath)
+  // Bootstrap cache
+  if (!(modelId in CACHED_CSVS)) {
+    CACHED_CSVS[modelId] = {}
+  }
+
+  let availableEpiweeks = utils.getWeekFiles(modelPath)
+  let modelMeta = utils.getModelMeta(modelPath)
+
+  let pointPredictions = []
+  let binPredictions = []
+  let scores = []
+
+  for (let epiweek of fct.utils.epiweek.seasonEpiweeks(SEASON_ID)) {
+    if (availableEpiweeks.indexOf(epiweek) === -1) {
+      // Prediction not available for this week, return null
+      pointPredictions.push(null)
+      binPredictions.push(null)
+    } else {
+      let { pointData, binData, scoreData } = utils.parseCsv(
+        getCsv(modelPath, epiweek), regionId, regionTruth
+      )
+      pointPredictions.push(pointData)
+      binPredictions.push(binData)
+      scores.push(scoreData)
+    }
+  }
+
+  return {
+    pointData: {
+      id: modelId,
+      meta: modelMeta,
+      predictions: pointPredictions
+    },
+    distsData: {
+      id: modelId,
+      predictions: binPredictions
+    },
+    scoresData: {
+      id: modelId,
+      scores: aggregateScores(scores)
+    }
+  }
+}
+
+/**
+ * Generate data files for the provided seasonData and using the
+ * submission files in dataDir
+ */
+async function generateFiles(seasonData) {
+  // Output to be written in file season-{season}.json
+  let seasonOut = {
+    seasonId: SEASON, // NOTE: This id is full xxxx-yyyy type id
     regions: []
   }
 
-  output.regions = region.regionData.map(reg => {
-    // Get models for each season
-    let modelsDir = utils.getSubDirectories(path.join(dataDir, season))
-    let models = modelsDir.map(model => {
-      // Bootstrap cache
-      if (!(model in cachedCSVs)) {
-        cachedCSVs[model] = {}
-      }
+  // Output to be written in file scores-{season}.json
+  let scoresOut = {
+    seasonId: SEASON,
+    regions: []
+  }
 
-      // Get prediction weeks for each model
-      let weekStamps = utils.getWeekFiles(path.join(dataDir, season, model))
-      let modelMeta = utils.getModelMeta(path.join(dataDir, season, model))
-      let seasonWeekStamps = utils.seasonIdToWeekStamps(seasonId)
+  // Output to be written in file distributions/season-{season}-{region}.json
+  let distsOut = []
 
-      let modelPredictions = seasonWeekStamps.map((sweek, index) => {
-        if (weekStamps.indexOf(sweek) === -1) {
-          // Prediction not available for this week, return null
-          return null
-        }
+  let regionPointData, regionDistsData, regionScoresData
 
-        let fileName = path.join(dataDir, season, model, sweek + '.csv')
-        let csv = null
-        // Take from cache to avoid file reads
-        if (sweek in cachedCSVs[model]) {
-          csv = cachedCSVs[model][sweek]
-        } else {
-          csv = new fct.Csv(fileName, sweek, model)
-          cachedCSVs[model][sweek] = csv
-        }
+  for (let regionId of fct.meta.regionIds) {
+    let regionTruth = seasonData[regionId].map(({ epiweek, wili }) => { return { epiweek, wili } })
+    regionPointData = []
+    regionDistsData = []
+    regionScoresData = []
 
-        return utils.regionFilterCsv(csv, reg.id, seasonWeekStamps)
-      })
-
-      return {
-        id: model,
-        meta: modelMeta,
-        predictions: modelPredictions
-      }
-    })
-    return {
-      id: reg.id,
-      actual: actualData[reg.id],
-      models: models,
-      baseline: baselineData[reg.subId][season]
-    }
-  })
-
-  // Add model metadata
-  console.log('\n Calculating model statistics')
-
-  console.log(output)
-  process.exit(1)
-
-  region.regionData.forEach((reg, regionIndex) => {
-    output.regions[regionIndex].models.forEach(model => {
-      model.stats = stats.getModelStats(
-        cachedCSVs[model.id],
-        actualData[reg.id].map(weekData => {
-          return {
-            week: weekData.week,
-            data: weekData.actual
-          }
-        }),
-        reg.subId
+    for (let model of MODELS_DIR) {
+      let modelPath = path.join(DATA_DIR, SEASON, model)
+      let { pointData, distsData, scoresData } = await parseModelDir(
+        modelPath, regionId, regionTruth
       )
-    })
-  })
-
-  // Separate distributions data from the models.
-  // NOTE: This should happen somewhere above, but meh!
-  utils.extractDistributions(output).forEach(regionData => {
-    // If the season is latest and region is nat, save as `latest-nat`.
-    // This chunk will get loaded directly with the main app.
-    let outDir = './src/assets/data/distributions'
-    let outputFile
-    if ((seasons.indexOf(regionData.seasonId) === seasons.length - 1) && (regionData.regionId === 'nat')) {
-      outputFile = path.join(outDir, 'season-latest-nat.json')
-    } else {
-      outputFile = path.join(outDir, `season-${regionData.seasonId}-${regionData.regionId}.json`)
+      regionPointData.push(pointData)
+      regionDistsData.push(distsData)
+      regionScoresData.push(scoresData)
     }
-    fs.writeFile(outputFile, JSON.stringify(regionData), err => {
-      if (err) throw err
-      console.log(` Distributions file written at ${outputFile}`)
-    })
-  })
 
-  fs.writeFile(seasonOutFile, JSON.stringify(utils.deleteDistributions(output)), (err) => {
-    if (err) throw err
-    console.log('\n ✓ .json saved at ' + seasonOutFile)
-  })
-})
+    seasonOut.regions.push({
+      id: regionId,
+      actual: parseRegionActual(seasonData, regionId),
+      models: regionPointData,
+      baseline: await fct.truth.getBaseline(regionId, SEASON_ID)
+    })
+
+    distsOut.push({
+      seasonId: SEASON,
+      regionId: regionId,
+      models: regionDistsData
+    })
+
+    scoresOut.regions.push({
+      id: regionId,
+      models: regionScoresData
+    })
+  }
+
+  await Promise.all([
+    writeSeasonFile(seasonOut),
+    writeScoresFile(scoresOut),
+    ...distsOut.map(d => writeDistsFile(d, d.regionId))
+  ])
+  console.log(` Data files for season ${SEASON} written.`)
+}
