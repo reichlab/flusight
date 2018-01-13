@@ -50,10 +50,10 @@ function getActual (season, callback) {
       })
 
       // Fill in nulls for weeks not present in the data
-      let weeks = utils.seasonIdToWeekStamps(seasonId)
+      let epiweeks = fct.utils.epiweek.seasonEpiweeks(seasonId)
       fct.meta.regionIds.forEach(rid => {
         let availableWeeks = d[rid].map(({ week }) => week)
-        weeks.forEach(ew => {
+        epiweeks.forEach(ew => {
           if (availableWeeks.indexOf(ew) === -1) {
             d[rid].push({
               week: ew,

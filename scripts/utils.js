@@ -17,22 +17,6 @@ async function writeJSON (filePath, data) {
 }
 
 /**
- * Arange [a, b)
- */
-const arange = (a, b) => [...Array(b - a).keys()].map(i => i + a)
-
-/**
- * Return list of weekStamps in given mmwr season
- */
-const seasonIdToWeekStamps = seasonId => {
-  let maxWeek = (new mmwr.MMWRDate(seasonId, 30)).nWeeks
-  return [
-    ...arange(100 * seasonId + 30, 100 * seasonId + maxWeek + 1),
-    ...arange(100 * (seasonId + 1) + 1, 100 * (seasonId + 1) + 30)
-  ]
-}
-
-/**
  * Convert given weekstamp to index depending on the season
  */
 const weekToIndex = (week, seasonWeekStamps) => {
@@ -196,12 +180,10 @@ const deleteDistributions = seasonData => {
 
 exports.readYaml = readYaml
 exports.writeJSON = writeJSON
-exports.arange = arange
 exports.getSubDirectories = getSubDirectories
 exports.regionFilterCsv = regionFilterCsv
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
-exports.seasonIdToWeekStamps = seasonIdToWeekStamps
 exports.weekToIndex = weekToIndex
 exports.extractDistributions = extractDistributions
 exports.deleteDistributions = deleteDistributions
