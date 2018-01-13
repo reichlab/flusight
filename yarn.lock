@@ -4122,6 +4122,10 @@ mocha@^3.2.0:
     mkdirp "0.5.1"
     supports-color "3.1.2"
 
+moize@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/moize/-/moize-4.0.4.tgz#f58ce63439f73f8f3014fb92129dec615160a8d6"
+
 moment@*, moment@^2.20.1:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"

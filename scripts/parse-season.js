@@ -3,26 +3,27 @@
  * This is supposed to be called in child processes via the main parse script
  */
 
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const utils = require('./utils')
 const fct = require('flusight-csv-tools')
+const moize = require('moize')
 
 // Directory with CSVs
 const DATA_DIR = './data'
+
 // Directory for output JSONs
 const OUT_DIR = './src/assets/data'
+
 // Look for seasons in the data directory
 const SEASONS = utils.getSubDirectories(DATA_DIR)
+
 // Take input season from command line argument
-const SEASON_ID = process.argv[2]
+const SEASON_ID = parseInt(process.argv[2])
 const SEASON = `${SEASON_ID}-${SEASON_ID + 1}`
 const MODELS_DIR = utils.getSubDirectories(path.join(DATA_DIR, SEASON))
 
-// Cache for csv objects
-// This is needed since the nesting in output (season, region, model)
-// is not similar to whats in the input (season, model, region)
-let CACHED_CSVS = {}
+let CACHED_CSV_SCORES = {}
 
 /**
  * Return season name for writing files
@@ -36,15 +37,15 @@ function getSeasonName() {
 }
 
 async function writeSeasonFile(data) {
-  await utils.writeJSON(path.join(DATA_DIR, `season-${getSeasonName()}.json`), data)
+  await utils.writeJSON(path.join(OUT_DIR, `season-${getSeasonName()}.json`), data)
 }
 
 async function writeScoresFile(data) {
-  await utils.writeJSON(path.join(DATA_DIR, `scores-${getSeasonName()}.json`, data))
+  await utils.writeJSON(path.join(OUT_DIR, `scores-${getSeasonName()}.json`), data)
 }
 
 async function writeDistsFile(data, regionId) {
-  let distsDir = path.join(DATA_DIR, 'distributions')
+  let distsDir = path.join(OUT_DIR, 'distributions')
   await fs.ensureDir(distsDir)
 
   let outputFile
@@ -88,17 +89,17 @@ function parseRegionActual(seasonData, regionId) {
 /**
  * Return fct csv object for given specifications using the cache
  */
-function getCsv (modelPath, epiweek) {
+const getCsv = moize(function (modelPath, epiweek) {
   let modelId = path.basename(modelPath)
-  if (epiweek in CACHED_CSVS[modelId]) {
-    return CACHED_CSVS[modelId][epiweek]
-  } else {
-    let csvFile = path.join(modelPath, epiweek + '.csv')
-    let csv = new fct.Csv(csvFile, epiweek, modelId)
-    CACHED_CSVS[modelId][epiweek] = csv
-    return csv
-  }
-}
+  return new fct.Csv(path.join(modelPath, epiweek + '.csv'), epiweek, modelId)
+})
+
+/**
+ * Return csv score using cache
+ */
+const getCsvScore = moize(async function (csv) {
+  return await fct.score.score(csv)
+}, { isPromise: true })
 
 /**
  * Return formatted point data for the region using the cvs object
@@ -124,7 +125,7 @@ function parsePointData (csv, regionId) {
   }
 
   return {
-    series: [1, 2, 3, 4].map(getTargetData),
+    series: ['1-ahead', '2-ahead', '3-ahead', '4-ahead'].map(getTargetData),
     peakValue: getTargetData('peak'),
     peakTime: getTargetData('peak-wk'),
     onsetTime: getTargetData('onset-wk')
@@ -143,22 +144,10 @@ function parseBinData (csv, regionId) {
   }
 
   return {
-    series: [1, 2, 3, 4].map(t => getTargetData(t, 5)),
+    series: ['1-ahead', '2-ahead', '3-ahead', '4-ahead'].map(t => getTargetData(t, 5)),
     peakValue: getTargetData('peak', 5),
     peakTime: getTargetData('peak-wk', 1),
     onsetTime: getTargetData('onset-wk', 1)
-  }
-}
-
-/**
- * Return formatted score data from the csv for a region
- */
-function parseScoreData (csv, regionId, regionTruth) {
-  return {
-    series: [1, 2, 3, 4].map(t => getTargetData(t)),
-    peakValue: getTargetData('peak'),
-    peakTime: getTargetData('peak-wk'),
-    onsetTime: getTargetData('onset-wk')
   }
 }
 
@@ -170,32 +159,38 @@ function parseScoreData (csv, regionId, regionTruth) {
  * - peakTime: {}
  * - onsetTime: {}
  */
-function parseCsv (csv, regionId, regionTruth) {
+async function parseCsv (csv, regionId) {
   return {
     pointData: parsePointData(csv, regionId),
     binData: parseBinData(csv, regionId),
-    scoreData: parseScoreData(csv, regionId, regionTruth)
+    scoreData: (await getCsvScore(csv))[regionId]
   }
 }
 
 /**
- * Aggregate the scores by taking average
+ * Aggregate the scores by taking mean
  */
 function aggregateScores (scores) {
-  // TODO
-  return scores[0]
+  let targets = fct.meta.targetIds
+  let scoreIds = ['logScore', 'error']
+  let meanScores = {}
+
+  for (let target of targets) {
+    meanScores[target] = {}
+    for (let scoreId of scoreIds) {
+      meanScores[target][scoreId] = scores.map(s => s[target][scoreId]).reduce((a, b) => a + b, 0)
+      meanScores[target][scoreId] /= scores.length
+    }
+  }
+
+  return meanScores
 }
 
 /**
  * Return formatted data for the complete model with given region
  */
-async function parseModelDir (modelPath, regionId, regionTruth) {
+async function parseModelDir (modelPath, regionId) {
   let modelId = path.basename(modelPath)
-  // Bootstrap cache
-  if (!(modelId in CACHED_CSVS)) {
-    CACHED_CSVS[modelId] = {}
-  }
-
   let availableEpiweeks = utils.getWeekFiles(modelPath)
   let modelMeta = utils.getModelMeta(modelPath)
 
@@ -209,9 +204,7 @@ async function parseModelDir (modelPath, regionId, regionTruth) {
       pointPredictions.push(null)
       binPredictions.push(null)
     } else {
-      let { pointData, binData, scoreData } = utils.parseCsv(
-        getCsv(modelPath, epiweek), regionId, regionTruth
-      )
+      let { pointData, binData, scoreData } = await parseCsv(getCsv(modelPath, epiweek), regionId)
       pointPredictions.push(pointData)
       binPredictions.push(binData)
       scores.push(scoreData)
@@ -258,16 +251,13 @@ async function generateFiles(seasonData) {
   let regionPointData, regionDistsData, regionScoresData
 
   for (let regionId of fct.meta.regionIds) {
-    let regionTruth = seasonData[regionId].map(({ epiweek, wili }) => { return { epiweek, wili } })
     regionPointData = []
     regionDistsData = []
     regionScoresData = []
 
     for (let model of MODELS_DIR) {
       let modelPath = path.join(DATA_DIR, SEASON, model)
-      let { pointData, distsData, scoresData } = await parseModelDir(
-        modelPath, regionId, regionTruth
-      )
+      let { pointData, distsData, scoresData } = await parseModelDir(modelPath, regionId)
       regionPointData.push(pointData)
       regionDistsData.push(distsData)
       regionScoresData.push(scoresData)
@@ -299,3 +289,9 @@ async function generateFiles(seasonData) {
   ])
   console.log(` Data files for season ${SEASON} written.`)
 }
+
+// Entry point
+fct.truth.getSeasonDataAllLags(SEASON_ID)
+  .then(sd => generateFiles(sd))
+  .then(() => { console.log('All done') })
+  .catch(e => { throw e })
