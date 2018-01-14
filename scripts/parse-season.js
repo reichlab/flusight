@@ -116,9 +116,9 @@ function parsePointData (csv, regionId) {
 
     if (['peak-wk', 'onset-wk'].indexOf(target) > -1) {
       // Return indices for time based targets
-      point = utils.weekToIndex(point, seasonEpiweeks)
-      high = high.map(d => utils.weekToIndex(d, seasonEpiweeks))
-      low = low.map(d => utils.weekToIndex(d, seasonEpiweeks))
+      point = seasonEpiweeks.indexOf(point)
+      high = high.map(d => seasonEpiweeks.indexOf(d))
+      low = low.map(d => seasonEpiweeks.indexOf(d))
     }
 
     return { point, low, high }
@@ -168,25 +168,6 @@ async function parseCsv (csv, regionId) {
 }
 
 /**
- * Aggregate the scores by taking mean
- */
-function aggregateScores (scores) {
-  let targets = fct.meta.targetIds
-  let scoreIds = ['logScore', 'error']
-  let meanScores = {}
-
-  for (let target of targets) {
-    meanScores[target] = {}
-    for (let scoreId of scoreIds) {
-      meanScores[target][scoreId] = scores.map(s => s[target][scoreId]).reduce((a, b) => a + b, 0)
-      meanScores[target][scoreId] /= scores.length
-    }
-  }
-
-  return meanScores
-}
-
-/**
  * Return formatted data for the complete model with given region
  */
 async function parseModelDir (modelPath, regionId) {
@@ -223,7 +204,7 @@ async function parseModelDir (modelPath, regionId) {
     },
     scoresData: {
       id: modelId,
-      scores: aggregateScores(scores)
+      scores: utils.aggregateScores(scores)
     }
   }
 }

@@ -8,9 +8,9 @@
  * - distributions/season-*-*.json :: file with distribution data
  */
 
-const region = require('./modules/region')
 const utils = require('./utils')
 const fs = require('fs-extra')
+const fct = require('flusight-csv-tools')
 const path = require('path')
 const { exec } = require('child-process-promise')
 
@@ -40,9 +40,16 @@ async function writeHistory() {
  * Write metadata.json
  */
 async function writeMetaData() {
+  let regionData = fct.meta.regionIds.map(regionId => {
+    return {
+      id: regionId,
+      subId: fct.meta.regionFullName[regionId],
+      states: fct.meta.regionStates[regionId]
+    }
+  })
+
   await fs.writeFile(METADATA_OUT_FILE, JSON.stringify({
-    // TODO use fct metadata here
-    regionData: region.regionData,
+    regionData,
     seasonIds: SEASONS, // NOTE: These seasonIds are full xxxx-yyyy type ids
     updateTime: (new Date()).toUTCString()
   }))
