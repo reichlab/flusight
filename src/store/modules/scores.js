@@ -10,7 +10,7 @@ const state = {
     'peak',
     'peak-wk'
   ],
-  headers: {
+  headersMap: {
     '1-ahead': '1 wk ahead',
     '2-ahead': '2 wk ahead',
     '3-ahead': '3 wk ahead',
@@ -35,7 +35,8 @@ const state = {
 // getters
 const getters = {
   scoresMeta: state => state.meta,
-  scoresHeaders: state => state.headers,
+  scoresHeadersMap: state => state.headersMap,
+  scoresHeaders: state => state.targets.map(t => state.headersMap[t]),
   scoresTargets: state => state.targets
 }
 

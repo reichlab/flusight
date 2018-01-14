@@ -64,19 +64,19 @@ div
             span.icon.is-small
               i.fa.fa-arrow-right
         span.score-title
-          a(v-bind:href="modelSelectedScoreMeta.url" target="_blank") {{ modelSelectedScoreMeta.name }}
+          a(v-bind:href="selectedScoresMeta.url" target="_blank") {{ selectedScoresMeta.name }}
       .score-body
         table.table.is-striped.is-bordered#score-table
           thead
             tr
               th Model
-              th(v-for="hd in modelSelectedScoreMeta.header") {{ hd }}
+              th(v-for="hd in scoresHeaders") {{ hd }}
           tbody
             tr(v-for="(i, id) in modelIds")
               td
                 a(v-bind:href="modelMeta[i].url" target="_blank") {{ id }}
-              td(v-for="(j, scr) in modelScores[i]" v-bind:class="[modelBestIndices[j] == i ? 'bold' : '']" track-by="$index")
-                | {{  scr === null ? 'NA' : parseInt(scr * 1000) / 1000 }}
+        //       td(v-for="(j, scr) in modelScores[i]" v-bind:class="[modelBestIndices[j] == i ? 'bold' : '']" track-by="$index")
+        //         | {{  scr === null ? 'NA' : parseInt(scr * 1000) / 1000 }}
       .score-footer
         | Calculated using the most recently updated data. Final values may differ.
 </template>
@@ -90,7 +90,9 @@ export default {
   computed: {
     ...mapGetters([
       'selectedRegionId',
-      'selectedSeasonId'
+      'selectedSeasonId',
+      'selectedScoresData',
+      'selectedScoresMeta'
     ]),
     ...mapGetters('switches', [
       'showTimeChart',
@@ -100,11 +102,11 @@ export default {
       'prevScoreActive'
     ]),
     ...mapGetters('models', [
-      'modelSelectedScoreMeta',
       'modelIds',
-      'modelMeta',
-      'modelScores',
-      'modelBestIndices'
+      'modelMeta'
+    ]),
+    ...mapGetters('scores', [
+      'scoresHeaders'
     ])
   },
   methods: {
