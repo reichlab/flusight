@@ -63,8 +63,9 @@ export const selectedData = (state, getters) => {
  * Return scores data for current selection
  */
 export const selectedScoresData = (state, getters) => {
-  let dataIdx = getters.downloadedScores.indexOf(getters.selectedSeasonId)
-  return state.scoresData[dataIdx]
+  let idx = getters.downloadedScores.indexOf(getters.selectedSeasonId)
+  return state.scoresData[idx].regions
+    .find(({ id }) => id === getters.selectedRegionId).models
 }
 
 /**
