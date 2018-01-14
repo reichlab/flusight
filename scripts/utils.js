@@ -5,7 +5,6 @@
 const fs = require('fs-extra')
 const path = require('path')
 const yaml = require('js-yaml')
-const mmwr = require('mmwr-week')
 const fct = require('flusight-csv-tools')
 
 const readYaml = filePath => {

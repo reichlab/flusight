@@ -10,7 +10,6 @@ const region = require('./modules/region')
 const utils = require('./utils')
 const fs = require('fs-extra')
 const path = require('path')
-const moment = require('moment')
 const { exec } = require('child_process')
 
 // Setup variables
@@ -42,7 +41,7 @@ let seasons = utils.getSubDirectories(dataDir)
 fs.writeFileSync(metaOutFile, JSON.stringify({
   regionData: region.regionData,
   seasonIds: seasons, // NOTE: These seasonIds are full xxxx-yyyy type ids
-  updateTime: moment.utc(new Date()).format('MMMM Do YYYY, hh:mm:ss')
+  updateTime: (new Date()).toUTCString()
 }))
 console.log(' ✓ Wrote metadata.json')
 
