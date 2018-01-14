@@ -14,6 +14,7 @@ export const importLatestChunk = (context, dataChunk) => {
   initScoresDataUrls(context, dataChunk.scoresDataUrls)
   initDistDataUrls(context, dataChunk.distDataUrls)
   addSeasonData(context, dataChunk.latestSeasonData)
+  addScoresData(context, dataChunk.latestScoresData)
   addDistData(context, dataChunk.latestDistData)
   initMetadata(context, dataChunk.metadata)
   initHistory(context, dataChunk.history)
@@ -48,7 +49,7 @@ export const downloadScoresData = (context, reqData) => {
   let seasonId = reqData.id
 
   if (getters.downloadedScores.indexOf(seasonId) === -1) {
-    let dataUrl = getters.seasonDataUrls[seasonId]
+    let dataUrl = getters.scoresDataUrls[seasonId]
     reqData.http.get(dataUrl).then(response => {
       let data = util.parseDataResponse(response)
       addScoresData(context, data)
