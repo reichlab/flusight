@@ -180,7 +180,7 @@ export default {
       } else {
         this.clearDistributionChart()
       }
-    }
+    },
     showScoresPanel: function () {
       if (this.showScoresPanel) {
         // Check if we need to download chunks
