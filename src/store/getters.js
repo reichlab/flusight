@@ -60,6 +60,14 @@ export const selectedData = (state, getters) => {
 }
 
 /**
+ * Return scores data for current selection
+ */
+export const selectedScoresData = (state, getters) => {
+  let dataIdx = getters.downloadedScores.indexOf(getters.selectedSeasonId)
+  return state.scoresData[dataIdx]
+}
+
+/**
  * Return list of seasons available for us
  */
 export const seasons = (state, getters) => {
