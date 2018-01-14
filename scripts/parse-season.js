@@ -67,14 +67,14 @@ function parseRegionActual(seasonData, regionId) {
 
   let epiweeks = fct.utils.epiweek.seasonEpiweeks(SEASON_ID)
   return epiweeks.map(ew => {
-    let { epiweek, wili, lagData } = regionSubset.find(({ epiweek }) => epiweek === ew)
+    let ewData = regionSubset.find(({ epiweek }) => epiweek === ew)
     // Rename keys to match the expectations of flusight
     // and extend by filling in missing epiweeks
-    if (epiweek) {
+    if (ewData) {
       return {
-        week: epiweek,
-        actual: wili,
-        lagData: lagData.map(({ lag, wili }) => { return { lag, value: wili } })
+        week: ewData.epiweek,
+        actual: ewData.wili,
+        lagData: ewData.lagData.map(({ lag, wili }) => { return { lag, value: wili } })
       }
     } else {
       return {
@@ -294,4 +294,7 @@ async function generateFiles(seasonData) {
 fct.truth.getSeasonDataAllLags(SEASON_ID)
   .then(sd => generateFiles(sd))
   .then(() => { console.log('All done') })
-  .catch(e => { throw e })
+  .catch(e => {
+    console.log(e)
+    process.exit(1)
+  })

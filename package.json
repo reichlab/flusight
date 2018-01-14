@@ -7,7 +7,6 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "get-history": "node scripts/get-history.js",
     "parse": "node scripts/parse.js",
     "test": "standard \"./**/*.vue\" \"./**/*.js\" && mocha",
     "build": "node build/build.js",
@@ -26,6 +25,7 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "bulma": "^0.2.1",
+    "child-process-promise": "^2.2.1",
     "colormap": "^2.2.0",
     "d3": "^4.4.0",
     "d3-foresight": "0.5.2",

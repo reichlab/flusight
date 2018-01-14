@@ -3,67 +3,69 @@
  * Generate following data files in ./src/assets/data/
  * - history.json :: historical data for regions
  * - metadata.json :: metadata for regions with season prediction availability
- * - season-XXXX.json :: main data for season XXXX
+ * - season-*.json :: file with main season data
+ * - scores-*.json :: file with model scores
+ * - distributions/season-*-*.json :: file with distribution data
  */
 
 const region = require('./modules/region')
 const utils = require('./utils')
 const fs = require('fs-extra')
 const path = require('path')
-const { exec } = require('child_process')
+const { exec } = require('child-process-promise')
 
 // Setup variables
-const dataDir = './data' // Place with the CSVs
-const actualDataDir = './scripts/assets'
-const historyInFile = './scripts/assets/history.json'
-const historyOutFile = './src/assets/data/history.json'
-const metaOutFile = './src/assets/data/metadata.json'
+const DATA_DIR = './data' // Place with the CSVs
+const HISTORY_IN_FILE = './scripts/assets/history.json'
+const HISTORY_OUT_FILE = './src/assets/data/history.json'
+const METADATA_OUT_FILE = './src/assets/data/metadata.json'
+const SEASONS = utils.getSubDirectories(DATA_DIR)
 
-console.log('\n ----------------------------------')
 console.log(' Generating data files for flusight')
 console.log(' ----------------------------------\n')
-console.log(' Messages overlap due to concurrency. Don\'t read too much.\n')
 
-// H I S T O R Y . J S O N
-if (!fs.existsSync(historyInFile)) {
-  // TODO: A-U-T-O-M-A-T-E
-  console.log(' ✕ History file not found. Run `yarn run get-history` to fetch it')
-  process.exit(1)
-} else {
-  fs.copySync(historyInFile, historyOutFile)
+/**
+ * Write history.json
+ */
+async function writeHistory() {
+  if (!(await fs.exists(HISTORY_IN_FILE))) {
+    console.log(' ✕ History file not found. Downloading...')
+    await exec('node scripts/get-history.js')
+  }
+  await fs.copy(HISTORY_IN_FILE, HISTORY_OUT_FILE)
   console.log(' ✓ Wrote history.json\n')
 }
 
-// Look for seasons in the data directory
-let seasons = utils.getSubDirectories(dataDir)
-
-// M E T A D A T A . J S O N
-fs.writeFileSync(metaOutFile, JSON.stringify({
-  regionData: region.regionData,
-  seasonIds: seasons, // NOTE: These seasonIds are full xxxx-yyyy type ids
-  updateTime: (new Date()).toUTCString()
-}))
-console.log(' ✓ Wrote metadata.json')
-
-// S E A S O N files
-// - season-*.json
-// - distributions/season-*-*.json
-// - scores-season-*.json
+/**
+ * Write metadata.json
+ */
+async function writeMetaData() {
+  await fs.writeFile(METADATA_OUT_FILE, JSON.stringify({
+    // TODO use fct metadata here
+    regionData: region.regionData,
+    seasonIds: SEASONS, // NOTE: These seasonIds are full xxxx-yyyy type ids
+    updateTime: (new Date()).toUTCString()
+  }))
+  console.log(' ✓ Wrote metadata.json\n')
+}
 
 /**
  * Run node subprocesses to parse seasons
  */
-function parseSeasons (seasons) {
+async function parseSeasons (seasons) {
   if (seasons.length === 0) {
-    console.log('All done')
+    console.log('\n ✓ All done')
   } else {
-    console.log(` Running parse-season for ${seasons[0]}`)
-    let seasonActualFile = path.join(actualDataDir, `${seasons[0]}-actual.json`)
-    exec(`node scripts/parse-season.js ${seasonActualFile}`, err => {
-      if (err) throw err
-      parseSeasons(seasons.slice(1))
-    })
+    console.log(`   Running parse-season for ${seasons[0]}`)
+    await exec(`node scripts/parse-season.js ${seasons[0]}`)
+    await parseSeasons(seasons.slice(1))
   }
 }
 
-parseSeasons(seasons)
+writeHistory()
+  .then(() => writeMetaData())
+  .then(() => parseSeasons(SEASONS))
+  .catch(e => {
+    console.log(e)
+    process.exit(1)
+  })
