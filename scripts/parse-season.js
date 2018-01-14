@@ -23,12 +23,10 @@ const SEASON_ID = parseInt(process.argv[2])
 const SEASON = `${SEASON_ID}-${SEASON_ID + 1}`
 const MODELS_DIR = utils.getSubDirectories(path.join(DATA_DIR, SEASON))
 
-let CACHED_CSV_SCORES = {}
-
 /**
  * Return season name for writing files
  */
-function getSeasonName() {
+function getSeasonName () {
   if (SEASONS.indexOf(SEASON) === SEASONS.length - 1) {
     return 'latest'
   } else {
@@ -36,15 +34,15 @@ function getSeasonName() {
   }
 }
 
-async function writeSeasonFile(data) {
+async function writeSeasonFile (data) {
   await utils.writeJSON(path.join(OUT_DIR, `season-${getSeasonName()}.json`), data)
 }
 
-async function writeScoresFile(data) {
+async function writeScoresFile (data) {
   await utils.writeJSON(path.join(OUT_DIR, `scores-${getSeasonName()}.json`), data)
 }
 
-async function writeDistsFile(data, regionId) {
+async function writeDistsFile (data, regionId) {
   let distsDir = path.join(OUT_DIR, 'distributions')
   await fs.ensureDir(distsDir)
 
@@ -62,7 +60,7 @@ async function writeDistsFile(data, regionId) {
 /**
  * Return region data with nulls filled in for missing epiweeks
  */
-function parseRegionActual(seasonData, regionId) {
+function parseRegionActual (seasonData, regionId) {
   let regionSubset = seasonData[regionId]
 
   let epiweeks = fct.utils.epiweek.seasonEpiweeks(SEASON_ID)
@@ -213,7 +211,7 @@ async function parseModelDir (modelPath, regionId) {
  * Generate data files for the provided seasonData and using the
  * submission files in dataDir
  */
-async function generateFiles(seasonData) {
+async function generateFiles (seasonData) {
   // Output to be written in file season-{season}.json
   let seasonOut = {
     seasonId: SEASON, // NOTE: This id is full xxxx-yyyy type id

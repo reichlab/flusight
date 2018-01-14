@@ -36,6 +36,21 @@ describe('Season data files should be generated', function () {
   })
 })
 
+describe('Score files should be generated', function () {
+  // Get a list of seasons from the ./data directory
+  let seasons = fs.readdirSync('./data').filter(file => {
+    return fs.statSync(path.join('./data', file)).isDirectory()
+  })
+  seasons[seasons.length - 1] = 'latest'
+
+  seasons.forEach(season => {
+    let fileName = `scores-${season}.json`
+    it(fileName, function () {
+      fs.existsSync(`./src/assets/data/${fileName}`).should.be.true
+    })
+  })
+})
+
 describe('Distribution data files should be generated', function () {
   // Get a list of seasons from the ./data directory
   let seasons = fs.readdirSync('./data').filter(file => {

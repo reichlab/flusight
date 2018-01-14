@@ -11,7 +11,6 @@
 const utils = require('./utils')
 const fs = require('fs-extra')
 const fct = require('flusight-csv-tools')
-const path = require('path')
 const { exec } = require('child-process-promise')
 
 // Setup variables
@@ -27,7 +26,7 @@ console.log(' ----------------------------------\n')
 /**
  * Write history.json
  */
-async function writeHistory() {
+async function writeHistory () {
   if (!(await fs.exists(HISTORY_IN_FILE))) {
     console.log(' ✕ History file not found. Downloading...')
     await exec('node scripts/get-history.js')
@@ -39,7 +38,7 @@ async function writeHistory() {
 /**
  * Write metadata.json
  */
-async function writeMetaData() {
+async function writeMetaData () {
   let regionData = fct.meta.regionIds.map(regionId => {
     return {
       id: regionId,
