@@ -117,6 +117,7 @@ export default {
       'clearTimeChart',
       'clearDistributionChart',
       'downloadSeasonData',
+      'downloadScoresData',
       'downloadDistData'
     ]),
     ...mapActions('switches', [
@@ -178,6 +179,18 @@ export default {
         })
       } else {
         this.clearDistributionChart()
+      }
+    }
+    showScoresPanel: function () {
+      if (this.showScoresPanel) {
+        // Check if we need to download chunks
+        nprogress.start()
+        this.downloadScoresData({
+          http: this.$http,
+          id: this.selectedSeasonId,
+          success: () => { nprogress.done() },
+          fail: err => console.log(err)
+        })
       }
     }
   }

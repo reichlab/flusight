@@ -141,6 +141,7 @@ export default {
       'selectedRegion',
       'choroplethRelative',
       'showTimeChart',
+      'showScoresPanel',
       'showDistributionChart'
     ]),
     ...mapGetters('weeks', [
@@ -153,26 +154,34 @@ export default {
       set (val) {
         // Check if we need to download the season
         nprogress.start()
+
+        let setSeason = () => {
+          this.updateSelectedSeason(this.seasons.indexOf(val))
+          nprogress.done()
+        }
+
         this.downloadSeasonData({
           http: this.$http,
           id: val,
           success: () => {
             if (this.showDistributionChart) {
               // Check if we need to download dist data
-              let distId = `${val}-${this.selectedRegionId}`
-              nprogress.start()
               this.downloadDistData({
                 http: this.$http,
-                id: distId,
-                success: () => {
-                  this.updateSelectedSeason(this.seasons.indexOf(val))
-                  nprogress.done()
-                },
+                id: `${val}-${this.selectedRegionId}`,
+                success: setSeason,
+                fail: err => console.log(err)
+              })
+            } else if (this.showScoresPanel) {
+              // Check if we need to download scores data
+              this.downloadScoresData({
+                http: this.$http,
+                id: val,
+                success: setSeason,
                 fail: err => console.log(err)
               })
             } else {
-              this.updateSelectedSeason(this.seasons.indexOf(val))
-              nprogress.done()
+              setSeason()
             }
           },
           fail: err => console.log(err)
@@ -212,6 +221,7 @@ export default {
       'plotChoropleth',
       'updateChoropleth',
       'downloadSeasonData',
+      'downloadScoresData',
       'downloadDistData'
     ]),
     ...mapActions('switches', [
