@@ -19,10 +19,12 @@ const state = {
   choropleth: null,
   distributionChart: null,
   seasonData: [], // Container for season data
+  scoresData: [], // Container for score data
   distData: [], // Container for dist data
   history: null,
   metadata: null,
   seasonDataUrls: null,
+  scoresDataUrls: null,
   distDataUrls: null,
   branding: Object.assign({logo: ''}, configYaml.branding)
 }
@@ -34,6 +36,11 @@ const mutations = {
     // TODO: Remove data if short on memory
   },
 
+  [types.ADD_SCORES_DATA] (state, val) {
+    state.scoresData.push(val)
+    // TODO: Remove data if short on memory
+  },
+
   [types.ADD_DIST_DATA] (state, val) {
     state.distData.push(val)
     // TODO: Remove data if short on memory
@@ -41,6 +48,10 @@ const mutations = {
 
   [types.SET_SEASON_DATA_URLS] (state, val) {
     state.seasonDataUrls = val
+  },
+
+  [types.SET_SCORES_DATA_URLS] (state, val) {
+    state.scoresDataUrls = val
   },
 
   [types.SET_DIST_DATA_URLS] (state, val) {
