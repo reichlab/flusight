@@ -39,6 +39,10 @@ export const selectedRegionId = (state, getters) => {
   return getters.metadata.regionData[getters['switches/selectedRegion']].id
 }
 
+export const selectedScoresMeta = (state, getters) => {
+  return getters['scores/scoresMeta'][getters['switches/selectedScore']]
+}
+
 /**
  * Return distributions data for the current selection
  */
@@ -64,8 +68,20 @@ export const selectedData = (state, getters) => {
  */
 export const selectedScoresData = (state, getters) => {
   let idx = getters.downloadedScores.indexOf(getters.selectedSeasonId)
-  return state.scoresData[idx].regions
-    .find(({ id }) => id === getters.selectedRegionId).models
+  let subset = state.scoresData[idx].regions
+      .find(({ id }) => id === getters.selectedRegionId).models
+
+  // Filter out the currently selected score now
+  let scoreId = getters.selectedScoresMeta.id
+  return subset.map(({ id, scores }) => {
+    let filteredScores = {}
+    for (let target of getters['scores/scoresTargets']) {
+      filteredScores[target] = scores[target][scoreId]
+    }
+    return {
+      id, scores: filteredScores
+    }
+  })
 }
 
 /**

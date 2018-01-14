@@ -8,6 +8,7 @@ import intro from './modules/intro'
 import weeks from './modules/weeks'
 import switches from './modules/switches'
 import models from './modules/models'
+import scores from './modules/scores'
 import * as types from './mutation-types'
 import configYaml from 'json!yaml!../../config.yaml'
 
@@ -92,6 +93,7 @@ export default new Vuex.Store({
     intro,
     weeks,
     switches,
-    models
+    models,
+    scores
   }
 })
