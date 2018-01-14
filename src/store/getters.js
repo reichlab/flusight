@@ -4,6 +4,7 @@ export const branding = state => state.branding
 export const metadata = state => state.metadata
 export const history = state => state.history
 export const seasonDataUrls = state => state.seasonDataUrls
+export const scoresDataUrls = state => state.scoresDataUrls
 export const distDataUrls = state => state.distDataUrls
 export const updateTime = state => {
   return state.metadata ? state.metadata.updateTime : 'NA'
@@ -14,6 +15,13 @@ export const updateTime = state => {
  */
 export const downloadedSeasons = state => {
   return state.seasonData.map(d => d.seasonId)
+}
+
+/**
+ * Return seasons for which we have downloaded the data
+ */
+export const downloadedScores = state => {
+  return state.scoresData.map(d => d.seasonId)
 }
 
 /**
