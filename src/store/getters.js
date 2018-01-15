@@ -78,7 +78,7 @@ export const selectedScoresData = (state, getters) => {
   let scoresArray = modelIds.map(mid => {
     let modelScores = subset.find(({ id }) => id === mid)
     return getters['scores/scoresTargets'].map(target => {
-      return { best: false, value: modelScores.scores[target][scoreId]}
+      return { best: false, value: modelScores.scores[target][scoreId] }
     })
   })
 
