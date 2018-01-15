@@ -73,15 +73,26 @@ export const selectedScoresData = (state, getters) => {
 
   // Filter out the currently selected score now
   let scoreId = getters.selectedScoresMeta.id
-  return subset.map(({ id, scores }) => {
-    let filteredScores = {}
-    for (let target of getters['scores/scoresTargets']) {
-      filteredScores[target] = scores[target][scoreId]
-    }
-    return {
-      id, scores: filteredScores
+  let modelIds = getters['models/modelIds']
+
+  let scoresArray = modelIds.map(mid => {
+    let modelScores = subset.find(({ id }) => id === mid)
+    return getters['scores/scoresTargets'].map(target => {
+      return { best: false, value: modelScores.scores[target][scoreId]}
+    })
+  })
+
+  // Find the best value
+  let bestFunc = getters.selectedScoresMeta.bestFunc
+  getters['scores/scoresTargets'].forEach((target, targetIdx) => {
+    let targetValues = scoresArray.map(model => model[targetIdx].value)
+    let bestIdx = targetValues.indexOf(bestFunc(targetValues))
+    if (bestIdx > -1) {
+      scoresArray[bestIdx][targetIdx].best = true
     }
   })
+
+  return scoresArray
 }
 
 /**
