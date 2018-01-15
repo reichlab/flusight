@@ -12,13 +12,15 @@ entities needed for visualization and generates a minified webpage ready for
 static hosting. The visualizer uses an intermediate file, summarizing the
 predictions, which can be generated either by the set of scripts in the
 repository (which uses CDC's prediction format) or by the user. Visualizations
-are implemented using the [d3-foresight npm package](https://www.npmjs.com/package/d3-foresight).
+are implemented using the [d3-foresight npm
+package](https://www.npmjs.com/package/d3-foresight).
 
-The live version associated with this github
-repository
-at [http://reichlab.io/flusight/](http://reichlab.io/flusight/)
-displays predictions for CDC FluSight Challenge
-by [Reich Lab](http://reichlab.io/) at UMass Amherst. To know more about it, go to the [about](https://github.com/reichlab/flusight/wiki/About) page in the [wiki](https://github.com/reichlab/flusight/wiki).
+The live version associated with this github repository at
+[http://reichlab.io/flusight/](http://reichlab.io/flusight/) displays
+predictions for CDC FluSight Challenge by [Reich Lab](http://reichlab.io/) at
+UMass Amherst. To know more about it, go to the
+[about](https://github.com/reichlab/flusight/wiki/About) page in the
+[wiki](https://github.com/reichlab/flusight/wiki).
 
 [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
@@ -30,38 +32,31 @@ by [Reich Lab](http://reichlab.io/) at UMass Amherst. To know more about it, go 
 
 ## Quickstart
 
-For submitting weekly predictions on
-this [repository](https://github.com/reichlab/flusight) the recommended method
-is to create a pull request on the master branch. Fork this project and add your
-`.csv` files in `./data/` directory as described in the project’s
-workflow [wiki](https://github.com/reichlab/flusight/wiki/Workflow). The pull
-requests will be automatically built and once merged to master, will be deployed
-to the website.
+For submitting weekly predictions on this
+[repository](https://github.com/reichlab/flusight) the recommended method is to
+create a pull request on the master branch. Fork this project and add your
+`.csv` files in `./data/` directory as described in the project’s workflow
+[wiki](https://github.com/reichlab/flusight/wiki/Workflow). The pull requests
+will be automatically built and once merged to master, will be deployed to the
+website.
 
 ## Build it yourself
 
 Flusight works as a static webpage and needs a static hosting service (like
-github’s). Building the project and bundling data files
-requires [node.js](https://nodejs.org/en/download/)
-and [yarn](https://yarnpkg.com/en/docs/install) (you could
-use [npm](https://www.npmjs.com/) too).
+github’s). Building the project and bundling data files requires
+[node.js](https://nodejs.org/en/download/) and
+[yarn](https://yarnpkg.com/en/docs/install) (or [npm](https://www.npmjs.com/)).
 
 + Clone this repository
 
   `git clone git@github.com:reichlab/flusight.git && cd ./flusight`
 
-+ Install dependencies (you only need to run this when first installing the app)
++ Install dependencies
 
   `yarn`
   
 + Put prediction submission files in `./data` as described in
   the [wiki](https://github.com/reichlab/flusight/wiki/Workflow)
-
-+ Collect actual data from
-  [delphi-epidata](https://github.com/cmu-delphi/delphi-epidata) API for
-  involved seasons.
-
-  `yarn run get-actual`
 
 + Parse prediction files to generate data files in `./src/assets/data/`
 
@@ -104,14 +99,11 @@ yarn run dev
 yarn run build
 ```
 
-Go to the
-development [wiki](https://github.com/reichlab/flusight/wiki/Development) for
-more details.
+Go to the development
+[wiki](https://github.com/reichlab/flusight/wiki/Development) for more details.
 
 ## Contributing
 
-Contributions are welcome. Use
-the github [issue tracker](https://github.com/reichlab/flusight/issues) to
-submit issues. Submit pull
-requests [here](https://github.com/reichlab/flusight/pulls).
-
+Contributions are welcome. Use the github [issue
+tracker](https://github.com/reichlab/flusight/issues) to submit issues. Submit
+pull requests [here](https://github.com/reichlab/flusight/pulls).
