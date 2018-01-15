@@ -11,8 +11,10 @@ import { TimeChart, DistributionChart } from 'd3-foresight'
  */
 export const importLatestChunk = (context, dataChunk) => {
   initSeasonDataUrls(context, dataChunk.seasonDataUrls)
+  initScoresDataUrls(context, dataChunk.scoresDataUrls)
   initDistDataUrls(context, dataChunk.distDataUrls)
   addSeasonData(context, dataChunk.latestSeasonData)
+  addScoresData(context, dataChunk.latestScoresData)
   addDistData(context, dataChunk.latestDistData)
   initMetadata(context, dataChunk.metadata)
   initHistory(context, dataChunk.history)
@@ -30,6 +32,27 @@ export const downloadSeasonData = (context, reqData) => {
     reqData.http.get(dataUrl).then(response => {
       let data = util.parseDataResponse(response)
       addSeasonData(context, data)
+      reqData.success()
+    }, response => {
+      reqData.fail(response)
+    })
+  } else {
+    reqData.success()
+  }
+}
+
+/**
+ * Check for scores data corresponding to asked id and fetch if necessary
+ */
+export const downloadScoresData = (context, reqData) => {
+  let getters = context.getters
+  let seasonId = reqData.id
+
+  if (getters.downloadedScores.indexOf(seasonId) === -1) {
+    let dataUrl = getters.scoresDataUrls[seasonId]
+    reqData.http.get(dataUrl).then(response => {
+      let data = util.parseDataResponse(response)
+      addScoresData(context, data)
       reqData.success()
     }, response => {
       reqData.fail(response)
@@ -66,6 +89,12 @@ export const addSeasonData = ({ commit, getters }, val) => {
   }
 }
 
+export const addScoresData = ({ commit, getters }, val) => {
+  if (getters.downloadedScores.indexOf(val.seasonId) === -1) {
+    commit(types.ADD_SCORES_DATA, val)
+  }
+}
+
 export const addDistData = ({ commit, getters }, val) => {
   if (getters.downloadedDists.indexOf(`${val.seasonId}-${val.regionId}`) === -1) {
     commit(types.ADD_DIST_DATA, val)
@@ -81,6 +110,12 @@ export const initMetadata = ({ commit, getters }, val) => {
 export const initSeasonDataUrls = ({ commit, getters }, val) => {
   if (!getters.seasonDataUrls) {
     commit(types.SET_SEASON_DATA_URLS, val)
+  }
+}
+
+export const initScoresDataUrls = ({ commit, getters }, val) => {
+  if (!getters.scoresDataUrls) {
+    commit(types.SET_SCORES_DATA_URLS, val)
   }
 }
 

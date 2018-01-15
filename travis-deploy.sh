@@ -4,7 +4,6 @@ set -e # Exit with nonzero exit code if anything fails
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
 if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]; then
     echo "Skipping deploy; just doing a build."
-    yarn run get-actual
     yarn run parse
     yarn run test
     yarn run build
@@ -20,7 +19,6 @@ SHA=`git rev-parse --verify HEAD`
 git checkout gh-pages || git checkout --orphan gh-pages
 rm -rf ./dist/* || exit 0
 
-yarn run get-actual
 yarn run parse
 yarn run test
 yarn run build

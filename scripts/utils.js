@@ -2,53 +2,17 @@
  * Common utility functions
  */
 
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const yaml = require('js-yaml')
-const mmwr = require('mmwr-week')
 const fct = require('flusight-csv-tools')
 
 const readYaml = filePath => {
   return yaml.safeLoad(fs.readFileSync(filePath, 'utf8'))
 }
 
-/**
- * Return list of weekStamps in given mmwr season
- */
-const seasonToWeekStamps = season => {
-  let first = parseInt(season.split('-')[0])
-  let second = parseInt(season.split('-')[1])
-
-  // Check the number of weeks in first year
-  let firstYear = new mmwr.MMWRDate(first)
-  let firstMaxWeek = firstYear.nWeeks
-
-  let weeks = []
-  // Weeks for first year
-  for (let i = 30; i <= firstMaxWeek; i++) {
-    weeks.push(parseInt(first + '' + i))
-  }
-
-  // Weeks for second year
-  for (let i = 1; i < 30; i++) {
-    let week
-    if (i < 10) week = parseInt(second + '0' + i)
-    else week = parseInt(second + '' + i)
-    weeks.push(week)
-  }
-  return weeks
-}
-
-/**
- * Convert given weekstamp to index depending on the season
- */
-const weekToIndex = (week, seasonWeekStamps) => {
-  let seasonWeeks = seasonWeekStamps.map(st => st % 100)
-  let wInt = Math.floor(week)
-  if (wInt === 0) wInt = Math.max(...seasonWeeks)
-  // TODO: Is this going to be right for 2014-2015?
-  if (wInt === 53) wInt = 1
-  return seasonWeeks.indexOf(wInt)
+async function writeJSON (filePath, data) {
+  return await fs.writeFile(filePath, JSON.stringify(data))
 }
 
 /**
@@ -71,69 +35,6 @@ const getWeekFiles = directory => {
   let newFiles = fs.readdirSync(directory)
       .filter(f => f.endsWith('.csv'))
   return newFiles.map(file => parseInt(file.split()[0]))
-}
-
-/**
- * Group bins for display
- */
-const groupTargetBins = bins => {
-  if (bins.length === 131) {
-    // newer format bin values
-    return fct.binUtils.sliceSumBins(bins.slice(0, bins.length - 1), 5)
-  } else if (bins.length < 40) {
-    // week values
-    return bins
-  } else {
-    throw new RangeError(`Unknown length of bins : ${bins.length}`)
-  }
-}
-
-/**
- * Filter data returned from tranform.csvToJson according to region
- * @param {Array} data data returned from csvToJson
- * @param {string} region region identifier to filter on
- * @returns {Object} an object with output for the region
- */
-const regionFilter = (data, region) => {
-  // Exploiting the fact that we know the structure of prediction at each week,
-  // we generate the optimal structure for foresight
-  let filtered = {
-    series: [null, null, null, null],
-    peakTime: null,
-    peakValue: null,
-    onsetTime: null
-  }
-
-  // Convert week ahead targets to simple series
-  let weekAheadTargets = ['oneWk', 'twoWk', 'threeWk', 'fourWk']
-
-  data.filter(d => d.region === region).forEach(d => {
-    let wAIdx = weekAheadTargets.indexOf(d.target)
-
-    let parsedProbs = null
-    if (d.bins) {
-      parsedProbs = groupTargetBins(d.bins).map(b => b[2])
-    }
-    if (wAIdx > -1) {
-      filtered.series[wAIdx] = {
-        point: d.point,
-        low: d.low,
-        high: d.high,
-        bins: parsedProbs
-      }
-    } else {
-      filtered[d.target] = {
-        point: d.point,
-        low: d.low,
-        high: d.high,
-        bins: parsedProbs
-      }
-    }
-  })
-
-  // Assuming all the predictions are not present when one wk isn't
-  if (filtered.series[0].point > -1) return filtered
-  else return -1
 }
 
 /**
@@ -162,64 +63,29 @@ const getModelMeta = submissionDir => {
   return meta
 }
 
-// Get rid of point values from a prediction object
-const filterPrediction = prediction => {
-  const takeOnlyBins = p => {
-    return {
-      bins: p.bins
+/**
+ * Aggregate the scores for a region by taking mean
+ */
+function aggregateScores (scores) {
+  let targets = fct.meta.targetIds
+  let scoreIds = ['logScore', 'absError'] // We use only these two errors in flusight
+  let meanScores = {}
+
+  for (let target of targets) {
+    meanScores[target] = {}
+    for (let scoreId of scoreIds) {
+      let scoreValues = scores.map(s => s[target][scoreId]).filter(s => s !== null)
+      meanScores[target][scoreId] = scoreValues.reduce((a, b) => a + b, 0)
+      meanScores[target][scoreId] /= scoreValues.length
     }
   }
-  if (prediction) {
-    return {
-      series: prediction.series.map(takeOnlyBins),
-      peakTime: takeOnlyBins(prediction.peakTime),
-      onsetTime: takeOnlyBins(prediction.onsetTime),
-      peakValue: takeOnlyBins(prediction.peakValue)
-    }
-  } else {
-    return null
-  }
-}
 
-// Extract bin data for all regions in given season data
-const extractDistributions = seasonData => {
-  return seasonData.regions.map(reg => {
-    return {
-      seasonId: seasonData.seasonId,
-      regionId: reg.id,
-      models: reg.models.map(mod => {
-        return {
-          id: mod.id,
-          predictions: mod.predictions.map(filterPrediction)
-        }
-      })
-    }
-  })
-}
-
-// Delete bins from seasonData
-const deleteDistributions = seasonData => {
-  seasonData.regions.forEach(reg => {
-    reg.models.forEach(mod => {
-      mod.predictions.forEach(pred => {
-        if (pred) {
-          delete pred.peakTime.bins
-          delete pred.onsetTime.bins
-          delete pred.peakValue.bins
-          pred.series.forEach(s => delete s.bins)
-        }
-      })
-    })
-  })
-  return seasonData
+  return meanScores
 }
 
 exports.readYaml = readYaml
+exports.writeJSON = writeJSON
 exports.getSubDirectories = getSubDirectories
-exports.regionFilter = regionFilter
 exports.getWeekFiles = getWeekFiles
 exports.getModelMeta = getModelMeta
-exports.seasonToWeekStamps = seasonToWeekStamps
-exports.weekToIndex = weekToIndex
-exports.extractDistributions = extractDistributions
-exports.deleteDistributions = deleteDistributions
+exports.aggregateScores = aggregateScores

@@ -5,7 +5,7 @@
 const fct = require('flusight-csv-tools')
 const fs = require('fs-extra')
 
-const historyFile = './scripts/assets/history.json'
+const OUTPUT_FILE = './scripts/assets/history.json'
 
 // Download history for seasons 2003 to 2014
 let seasonIds = [...Array(12).keys()].map(i => 2003 + i)
@@ -35,8 +35,8 @@ function parseHistoryData (seasonData) {
 }
 
 fct.truth.getSeasonsData(seasonIds).then(d => {
-  fs.writeFileSync(historyFile, JSON.stringify(parseHistoryData(d), null, 2))
-  console.log(` Output written at ${historyFile}`)
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(parseHistoryData(d)))
+  console.log(` Output written at ${OUTPUT_FILE}`)
 }).catch(e => {
   console.log(e)
   process.exit(1)

@@ -20,7 +20,7 @@ const getters = {
   showDistributionChart: state => state.distributionChart,
   showScoresPanel: state => state.scoresPanel,
   nextScoreActive: (state, getters, rootState, rootGetters) => {
-    return state.score < (rootGetters['models/modelNumScores'] - 1)
+    return state.score < (rootGetters['scores/scoresMeta'].length - 1)
   },
   prevScoreActive: state => state.score > 0
 }

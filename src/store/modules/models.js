@@ -1,18 +1,4 @@
 const state = {
-  scoreMeta: [{
-    id: 'mae',
-    name: 'Mean Absolute Error',
-    header: ['1 wk', '2 wk', '3 wk', '4 wk'],
-    url: 'https://en.wikipedia.org/wiki/Mean_absolute_error',
-    bestFunc: items => Math.min(...items.filter(d => d !== 'NA'))
-  }, {
-    id: 'log',
-    name: 'Mean Log Score',
-    header: ['1 wk', '2 wk', '3 wk', '4 wk'],
-    url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
-    bestFunc: items => Math.max(...items.filter(d => d !== 'NA'))
-  }],
-
   confidenceIntervals: ['90%', '50%'],
 
   curveNames: [
@@ -107,32 +93,7 @@ const getters = {
   },
 
   modelIds: (state, getters) => getters.models.map(m => m.id),
-
   modelMeta: (state, getters) => getters.models.map(m => m.meta),
-
-  modelSelectedScoreMeta: (state, getters, rootState, rootGetters) => {
-    return state.scoreMeta[rootGetters['switches/selectedScore']]
-  },
-
-  modelNumScores: (state) => state.scoreMeta.length,
-
-  modelBestIndices: (state, getters) => {
-    // Find best model in each columns
-    let bestIndices = Array(getters.modelSelectedScoreMeta.header.length).fill(0)
-    let bestFunc = getters.modelSelectedScoreMeta.bestFunc
-    let scoreId = getters.modelSelectedScoreMeta.id
-
-    for (let i = 0; i < bestIndices.length; i++) {
-      let col = getters.models.map(m => m.stats[scoreId][i])
-      bestIndices[i] = col.indexOf(bestFunc(col.filter(d => d !== null)))
-    }
-    return bestIndices
-  },
-
-  modelScores: (state, getters) => {
-    return getters.models.map(m => m.stats[getters.modelSelectedScoreMeta.id])
-  },
-
   modelCIs: (state, getters) => state.confidenceIntervals
 }
 

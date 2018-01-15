@@ -30,7 +30,7 @@
 footer.footer
   .container
     .content.has-text-centered
-      | Data last updated on <strong>{{ updateTime }} (UTC)</strong>.
+      | Data last updated on <strong>{{ updateTime }}</strong>.
       br
       | Visualizations use <a href="https://github.com/d3/d3">D3</a>,
       | see the supported browsers
