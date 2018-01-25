@@ -79,8 +79,14 @@ export class ColorBar {
   update (range) {
     this.scale.domain(range)
 
-    let axis = d3.axisTop(this.scale)
-        .ticks(5)
+    let nticks = 5
+    // Setup custom ticks
+    if (range[0] < 0) {
+      // Relative values
+      nticks = 3
+    }
+
+    let axis = d3.axisTop(this.scale).ticks(nticks)
 
     this.svg.select('.axis-color')
       .transition()
