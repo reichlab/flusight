@@ -11,6 +11,10 @@
     padding-top: 10px;
     text-align: left;
     font-size: 12px;
+
+    a {
+      color: #4a4a4a;
+    }
   }
 
   #relative-button {
@@ -44,7 +48,7 @@
   }
 }
 
-#switch-tooltip {
+#switch-tooltip, #wili-tooltip {
   padding: 5px 10px;
   ul {
     list-style: disc inside none;
@@ -80,6 +84,13 @@ div
   )
     | {{{ tooltips.switch.text }}}
 
+  // Tooltip over wili text
+  #wili-tooltip.tooltip(
+    v-show="tooltips.wili.show"
+    v-bind:style="tooltips.wili.pos"
+  )
+    | {{{ tooltips.wili.text }}}
+
   // Tooltip for map hover
   #choropleth-tooltip.tooltip
     .value
@@ -105,8 +116,12 @@ div
 
   // Main plotting div
   #choropleth
-    #relative-button-title
-      span Weighted ILI (%)
+    #relative-button-title(
+      v-on:mouseover="showWiliTooltip"
+      v-on:mouseout="hideWiliTooltip"
+      v-on:mousemove="moveWiliTooltip"
+    )
+      a(href="https://www.cdc.gov/flu/weekly/overview.htm" target="_blank") Weighted ILI (%)
     #relative-button(
       v-on:click="toggleRelative"
       v-on:mouseover="showSwitchTooltip"
@@ -240,6 +255,18 @@ export default {
 
       obj.pos.top = (event.clientY + 15) + 'px'
       obj.pos.left = (event.clientX + 15) + 'px'
+    },
+    showWiliTooltip () {
+      this.tooltips.wili.show = true
+    },
+    hideWiliTooltip () {
+      this.tooltips.wili.show = false
+    },
+    moveWiliTooltip (event) {
+      let obj = this.tooltips.wili
+
+      obj.pos.top = (event.clientY + 15) + 'px'
+      obj.pos.left = (event.clientX + 15) + 'px'
     }
   },
   data () {
@@ -250,9 +277,18 @@ export default {
           text: `Choose between
                  <ul>
                  <li><b>Absolute</b> weighted ILI % values or</li>
-                 <li><b>Relative</b> values as the percent above/below the<br>
-                 regional CDC baseline
+                 <li><b>Relative</b> values as the percent above/below the regional CDC baseline</li>
                  </ul>`,
+          pos: {
+            top: '0px',
+            left: '0px'
+          }
+        },
+        wili: {
+          show: false,
+          text: `Percentage of outpatient doctor visits for influenza-like illness,
+                 weighed by state population.<br><br>
+                 <em>Click to know more</em>`,
           pos: {
             top: '0px',
             left: '0px'

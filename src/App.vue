@@ -22,6 +22,7 @@ body {
 
 .tooltip {
   position: fixed;
+  max-width: 250px;
   z-index: 100;
   box-shadow: 0px 0px 2px;
   border-radius: 1px;
