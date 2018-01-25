@@ -116,12 +116,13 @@ div
 
   // Main plotting div
   #choropleth
-    #relative-button-title(
+    #relative-button-title
+      a(
+      href="https://www.cdc.gov/flu/weekly/overview.htm" target="_blank"
       v-on:mouseover="showWiliTooltip"
       v-on:mouseout="hideWiliTooltip"
       v-on:mousemove="moveWiliTooltip"
-    )
-      a(href="https://www.cdc.gov/flu/weekly/overview.htm" target="_blank") Weighted ILI (%)
+    ) Weighted ILI (%)
     #relative-button(
       v-on:click="toggleRelative"
       v-on:mouseover="showSwitchTooltip"
