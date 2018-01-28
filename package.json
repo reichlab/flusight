@@ -27,7 +27,7 @@
     "child-process-promise": "^2.2.1",
     "colormap": "^2.2.0",
     "d3": "^4.4.0",
-    "d3-foresight": "0.5.4",
+    "d3-foresight": "0.5.5",
     "datamaps": "^0.5.8",
     "flusight-csv-tools": "^0.0.15",
     "font-awesome": "^4.6.3",
