@@ -134,18 +134,32 @@ function parsePointData (csv, regionId) {
  * Return bin data for the given region using the csv object
  */
 function parseBinData (csv, regionId) {
-  function getTargetData (target, binBatch) {
+  function getTargetData (target) {
     let bins = csv.getBins(target, regionId)
-    return {
-      bins: fct.utils.bins.sliceSumBins(bins, binBatch).map(b => b[2])
+
+    // There are different types of bins that we need to consider
+    if (bins.length === 131) {
+      // These are regular, new style, wili bins with last one being
+      // [13, 100] which we skip
+      bins = fct.utils.bins.sliceSumBins(bins.slice(0, -1), 5).map(b => b[2])
+    } else if (bins.length === 27) {
+      // These are old style wili bins with last one being [13, 100] which
+      // we skip
+      bins = bins.slice(0, -1).map(b => b[2])
+    } else if ((bins.length === 33) && (target === 'peak-wk')) {
+      bins = bins.map(b => b[2])
+    } else if ((bins.length === 34) && (target === 'onset-wk')) {
+      // We skip the none bin
+      bins = bins.slice(0, -1).map(b => b[2])
     }
+    return { bins }
   }
 
   return {
-    series: ['1-ahead', '2-ahead', '3-ahead', '4-ahead'].map(t => getTargetData(t, 5)),
-    peakValue: getTargetData('peak', 5),
-    peakTime: getTargetData('peak-wk', 1),
-    onsetTime: getTargetData('onset-wk', 1)
+    series: ['1-ahead', '2-ahead', '3-ahead', '4-ahead'].map(getTargetData),
+    peakValue: getTargetData('peak'),
+    peakTime: getTargetData('peak-wk'),
+    onsetTime: getTargetData('onset-wk')
   }
 }
 

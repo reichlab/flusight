@@ -113,7 +113,6 @@ div
               select(v-model="currentSeason")
                 option(v-for="season in seasons") {{ season }}
 
-
   // Main plotting div
   #choropleth
     #relative-button-title
