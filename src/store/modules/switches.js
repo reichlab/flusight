@@ -6,7 +6,7 @@ const state = {
   choroplethRelative: false,
   timeChart: false,
   distributionChart: false,
-  score: 1,
+  score: 2, // Default to mutibin log scores
   scoresPanel: false
 }
 

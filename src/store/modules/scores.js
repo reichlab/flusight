@@ -26,7 +26,12 @@ const state = {
     bestFunc: items => Math.min(...items.filter(d => d !== null))
   }, {
     id: 'logScore',
-    name: 'Mean Log Score',
+    name: 'Mean Log Score (single bin)',
+    url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
+    bestFunc: items => Math.max(...items.filter(d => d !== null))
+  }, {
+    id: 'logScoreMultiBin',
+    name: 'Mean Log Score (multi bin)',
     url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
     bestFunc: items => Math.max(...items.filter(d => d !== null))
   }]

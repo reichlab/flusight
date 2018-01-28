@@ -68,7 +68,7 @@ const getModelMeta = submissionDir => {
  */
 function aggregateScores (scores) {
   let targets = fct.meta.targetIds
-  let scoreIds = ['logScore', 'absError'] // We use only these two errors in flusight
+  let scoreIds = ['logScore', 'logScoreMultiBin', 'absError'] // We use only these scores in flusight
   let meanScores = {}
 
   for (let target of targets) {
