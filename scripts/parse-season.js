@@ -146,13 +146,13 @@ function parseBinData (csv, regionId) {
       // These are old style wili bins with last one being [13, 100] which
       // we skip
       return { bins: bins.slice(0, -1).map(b => b[2]) }
-    } else if ((bins.length === 33) && (target === 'peak-wk')) {
+    } else if (target === 'peak-wk') {
       return { bins: bins.map(b => b[2]) }
-    } else if ((bins.length === 34) && (target === 'onset-wk')) {
+    } else if (target === 'onset-wk') {
       // We skip the none bin
       return { bins: bins.slice(0, -1).map(b => b[2]) }
     } else {
-      throw new Error('Unknown bin length in parseBinData')
+      throw new Error('Unknown bin size ${bins.length} in parseBinData for ${target}, ${region}')
     }
   }
 
