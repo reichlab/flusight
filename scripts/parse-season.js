@@ -141,18 +141,19 @@ function parseBinData (csv, regionId) {
     if (bins.length === 131) {
       // These are regular, new style, wili bins with last one being
       // [13, 100] which we skip
-      bins = fct.utils.bins.sliceSumBins(bins.slice(0, -1), 5).map(b => b[2])
+      return { bins : fct.utils.bins.sliceSumBins(bins.slice(0, -1), 5).map(b => b[2]) }
     } else if (bins.length === 27) {
       // These are old style wili bins with last one being [13, 100] which
       // we skip
-      bins = bins.slice(0, -1).map(b => b[2])
+      return { bins: bins.slice(0, -1).map(b => b[2]) }
     } else if ((bins.length === 33) && (target === 'peak-wk')) {
-      bins = bins.map(b => b[2])
+      return { bins: bins.map(b => b[2]) }
     } else if ((bins.length === 34) && (target === 'onset-wk')) {
       // We skip the none bin
-      bins = bins.slice(0, -1).map(b => b[2])
+      return { bins: bins.slice(0, -1).map(b => b[2]) }
+    } else {
+      throw new Error('Unknown bin length in parseBinData')
     }
-    return { bins }
   }
 
   return {
