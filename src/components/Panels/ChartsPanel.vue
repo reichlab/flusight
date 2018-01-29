@@ -79,7 +79,7 @@ div
               td(v-for="(j, scr) in selectedScoresData[i]" v-bind:class="[scr.best ? 'bold' : '']" track-by="$index")
                 | {{  scr.value === null ? 'NA' : parseInt(scr.value * 1000) / 1000 }}
       .score-footer
-        | {{{ selectedScoresMeta.desc }}}. Scores for the current season are calculated using the most recently
+        | {{{ selectedScoresMeta.desc }}} Scores for the current season are calculated using the most recently
         | updated data. Final values may differ.
 </template>
 
