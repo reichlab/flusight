@@ -37,11 +37,7 @@ const getters = {
     return models.map((m, idx) => {
       let currentPreds = modelDistData[idx].predictions[currentWeekIdx]
       m.curves = state.curveNames.map(cn => {
-        return {
-          name: cn,
-          data: null,
-          actual: null
-        }
+        return { name: cn, data: null, actual: null }
       })
       if (currentPreds) {
         // Predictions are present
@@ -60,7 +56,7 @@ const getters = {
           if (state.curveCache[curveIdentifier]) {
             paddedArray = state.curveCache[curveIdentifier]
           } else {
-            if (curves[i].length === 33) {
+            if ([33, 34].indexOf(curves[i].length) > -1) {
               // These are week values
               let startAt = 9
               paddedArray = timePoints.map((tp, idx) => {
