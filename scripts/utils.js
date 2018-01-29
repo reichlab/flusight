@@ -74,7 +74,9 @@ function aggregateScores (scores) {
   for (let target of targets) {
     meanScores[target] = {}
     for (let scoreId of scoreIds) {
-      let scoreValues = scores.map(s => s[target][scoreId]).filter(s => s !== null)
+      let scoreValues = scores.map(s => s[target][scoreId])
+          .filter(s => s !== null)
+          .map(s => s === -Infinity ? -999 : s) // Convert -Infinity to -999
       meanScores[target][scoreId] = scoreValues.reduce((a, b) => a + b, 0)
       meanScores[target][scoreId] /= scoreValues.length
     }
