@@ -152,7 +152,7 @@ function parseBinData (csv, regionId) {
       // We skip the none bin
       return { bins: bins.slice(0, -1).map(b => b[2]) }
     } else {
-      throw new Error(`Unknown bin size ${bins.length} in parseBinData for ${target}, ${region}`)
+      throw new Error(`Unknown bin size ${bins.length} in parseBinData for ${target}, ${regionId}`)
     }
   }
 
