@@ -141,7 +141,7 @@ function parseBinData (csv, regionId) {
     if (bins.length === 131) {
       // These are regular, new style, wili bins with last one being
       // [13, 100] which we skip
-      return { bins : fct.utils.bins.sliceSumBins(bins.slice(0, -1), 5).map(b => b[2]) }
+      return { bins: fct.utils.bins.sliceSumBins(bins.slice(0, -1), 5).map(b => b[2]) }
     } else if (bins.length === 27) {
       // These are old style wili bins with last one being [13, 100] which
       // we skip
