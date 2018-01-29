@@ -22,18 +22,28 @@ const state = {
   meta: [{
     id: 'absError',
     name: 'Mean Absolute Error',
-    url: 'https://en.wikipedia.org/wiki/Mean_absolute_error',
-    bestFunc: items => Math.min(...items.filter(d => d !== null))
+    url: 'https://github.com/reichlab/flusight/wiki/Scoring#1-absolute-error',
+    bestFunc: items => Math.min(...items.filter(d => d !== null)),
+    desc: `Absolute error is the absolute value of difference between the eventually
+           observe value and point prediction.`
   }, {
     id: 'logScore',
     name: 'Mean Log Score (single bin)',
-    url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
-    bestFunc: items => Math.max(...items.filter(d => d !== null))
+    url: 'https://github.com/reichlab/flusight/wiki/Scoring#2-log-score-single-bin',
+    bestFunc: items => Math.max(...items.filter(d => d !== null)),
+    desc: `Single bin log-scores are computed by taking natural log of predicted probability
+           for the eventually observed value.`
   }, {
     id: 'logScoreMultiBin',
     name: 'Mean Log Score (multi bin)',
-    url: 'https://en.wikipedia.org/wiki/Scoring_rule#Logarithmic_scoring_rule',
-    bestFunc: items => Math.max(...items.filter(d => d !== null))
+    url: 'https://github.com/reichlab/flusight/wiki/Scoring#3-log-score-multi-bin',
+    bestFunc: items => Math.max(...items.filter(d => d !== null)),
+    desc: `Multi bin log-scores are computed by summing the predicted probabilities around
+           a window of the eventually observed values. For the k-week-ahead
+           targets, predictions within +/- 0.5 percentage points of the
+           eventually observed value are considered accurate. For the targets on
+           the scale of weeks, predictions within +/- 1 week of the eventually
+           observed value are considered accurate.`
   }]
 }
 
