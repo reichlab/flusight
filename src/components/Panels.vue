@@ -9,7 +9,7 @@ h1 a {
   }
 }
 
-#choropleth-container, #timechart-container {
+#choropleth-container, #chart-container {
   background: white;
 }
 
@@ -27,19 +27,19 @@ h1 a {
 
     #choropleth-container
       choropleth
-  #timechart-container.column.is-8
-    time-chart
+  #chart-container.column.is-8
+    charts-panel
 </template>
 
 <script>
 import Choropleth from './Panels/Choropleth'
-import TimeChart from './Panels/TimeChart'
+import ChartsPanel from './Panels/ChartsPanel'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     Choropleth,
-    TimeChart
+    ChartsPanel
   },
   computed: {
     ...mapGetters('switches', [

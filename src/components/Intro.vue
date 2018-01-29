@@ -175,7 +175,7 @@ export default {
                   next four weeks is shown, as is the time and height of the
                   peak week and the time of season onset.</p>`,
         direction: 'left',
-        element: '#timechart-container',
+        element: '#chart-container',
         hook: this.displayTimeChart
       },
       {
@@ -184,7 +184,7 @@ export default {
                   targets can be seen by switching to the <em>Distribution
                   Chart</em> tab here`,
         direction: 'left',
-        element: '#timechart-container',
+        element: '#chart-container',
         hook: this.displayDistributionChart
       },
       {
@@ -192,7 +192,7 @@ export default {
         content: `Performance of the models on currently selected season and
                   region can be seen in the tab <em>Scores</em> tab`,
         direction: 'left',
-        element: '#timechart-container',
+        element: '#chart-container',
         hook: this.displayScoresPanel
       },
       {
