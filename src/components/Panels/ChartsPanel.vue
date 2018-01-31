@@ -23,6 +23,13 @@
     margin-top: 20px;
     color: gray;
     font-size: 14px;
+    a {
+      color: gray;
+      text-decoration: underline;
+      &:hover {
+        color: #333;
+      }
+    }
   }
 
   .score-header {
