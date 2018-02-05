@@ -58,9 +58,9 @@ const getters = {
           } else {
             if ([33, 34].indexOf(curves[i].length) > -1) {
               // These are week values
-              let startAt = 9
+              let startAt = 10
               paddedArray = timePoints.map((tp, idx) => {
-                if ((idx > startAt) && (idx < (startAt + curves[i].length))) {
+                if ((idx >= startAt) && (idx < (startAt + curves[i].length))) {
                   return [tp, curves[i][idx - startAt]]
                 } else {
                   return [tp, 0]
