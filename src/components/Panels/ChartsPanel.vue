@@ -161,8 +161,8 @@ export default {
       this.displayTimeChart()
 
       tablesort.extend('number', function (item) {
-        return item.match(/^-?(\d)*-?([,\.]){0,1}-?(\d)+([E,e][\-+][\d]+)?%?$/)
-      }, function(a, b) {
+        return true // Don't care
+      }, function (a, b) {
         a = cleanNumber(a)
         b = cleanNumber(b)
         return compareNumber(b, a)
