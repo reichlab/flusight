@@ -95,6 +95,16 @@ import { mapActions, mapGetters } from 'vuex'
 import nprogress from 'nprogress'
 import tablesort from 'tablesort'
 
+const cleanNumber = i => i.replace(/[^\-?0-9.]/g, '')
+
+const compareNumber = (a, b) => {
+  a = parseFloat(a)
+  b = parseFloat(b)
+  a = isNaN(a) ? 0 : a
+  b = isNaN(b) ? 0 : b
+  return a - b
+}
+
 export default {
   computed: {
     ...mapGetters([
@@ -149,6 +159,15 @@ export default {
 
       this.resetToFirstIdx()
       this.displayTimeChart()
+
+      tablesort.extend('number', function (item) {
+        return item.match(/^-?(\d)*-?([,\.]){0,1}-?(\d)+([E,e][\-+][\d]+)?%?$/)
+      }, function(a, b) {
+        a = cleanNumber(a)
+        b = cleanNumber(b)
+        return compareNumber(b, a)
+      })
+
       tablesort(document.getElementById('score-table'))
 
       window.loading_screen.finish()
