@@ -1,3 +1,11 @@
 {
-  "zoltar-root": "http://www.zoltardata.com/"
+  "zoltar-root": "http://www.zoltardata.com/",
+  "project": "zoltar-project",
+  "models": {
+    "zoltar-name": "../data/2017-2018/Ensemble",
+    "zoltar-name": "../data/2017-2018/KCDE",
+    "zoltar-name": "../data/2017-2018/KDE",
+    "zoltar-name": "../data/2017-2018/SARIMA1",
+    "zoltar-name": "../data/2017-2018/SARIMA2"
+  }
 }

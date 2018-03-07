@@ -18,7 +18,8 @@
       "vue"
     ],
     "ignore": [
-      "./src/assets/analytics.js"
+      "./src/assets/analytics.js",
+      "./zoltar/*.js"
     ]
   },
   "dependencies": {
