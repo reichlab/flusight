@@ -1,11 +1,11 @@
 {
-  "zoltar-root": "http://www.zoltardata.com/",
-  "project": "zoltar-project",
+  "api-root": "http://www.zoltardata.com/api",
+  "project": "2017-2018 CDC Flu contest",
   "models": {
-    "zoltar-name": "../data/2017-2018/Ensemble",
-    "zoltar-name": "../data/2017-2018/KCDE",
-    "zoltar-name": "../data/2017-2018/KDE",
-    "zoltar-name": "../data/2017-2018/SARIMA1",
-    "zoltar-name": "../data/2017-2018/SARIMA2"
+    "Kernel of Truth Weighted Ensemble": "../data/2017-2018/Ensemble",
+    "Kernel Conditional Density Estimation": "../data/2017-2018/KCDE",
+    "Kernel Density Estimation": "../data/2017-2018/KDE",
+    "SARIMA model without seasonal differencing": "../data/2017-2018/SARIMA1",
+    "SARIMA model with seasonal differencing": "../data/2017-2018/SARIMA2"
   }
 }
