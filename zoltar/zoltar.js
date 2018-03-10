@@ -11,58 +11,32 @@ async function gets (url) {
   return rp(url, { json: false })
 }
 
-class Zoltar {
-  constructor (rootUrl) {
-    this.root = rootUrl
+function proxifyObject (obj, root) {
+  let handler = {
+    get(target, propKey, receiver) {
+      let value = target[propKey]
+
+      if (typeof value === 'string' && (value.toString()).startsWith(root)) {
+        return (async () => {
+          let resp = await get(value)
+          return proxifyObject(resp, root)
+        })()
+      } else if (typeof value === 'object') {
+        return proxifyObject(value, root)
+      } else  {
+        return value
+      }
+    }
   }
 
-  get projects () {
-    return (async () => {
-      let resp = await get(buildUrl(this.root, { path: 'projects' }))
-      return resp.map(projectData => new ZProject(projectData))
-    })()
-  }
+  return new Proxy(obj, handler)
 }
 
-class ZProject {
-  constructor (projectData) {
-    this.name = projectData.name
-    this.data = projectData
+function zoltar (rootUrl) {
+  let baseObject = {
+    projects: `${rootUrl}/projects`
   }
-
-  get models () {
-    return (async () => {
-      let resp = await Promise.all(this.data.models.map(m => get(m)))
-      return resp.map(modelData => new ZModel(modelData))
-    })()
-  }
+  return proxifyObject(baseObject, rootUrl)
 }
 
-class ZModel {
-  constructor (modelData) {
-    this.name = modelData.name
-    this.data = modelData
-  }
-
-  get forecasts () {
-    return (async () => {
-      let resp = await Promise.all(this.data.forecasts.map(f => get(f.forecast)))
-      return resp.map(forecastData => new ZForecast(forecastData))
-    })()
-  }
-}
-
-class ZForecast {
-  constructor (forecastData) {
-    this.data = forecastData
-  }
-
-  get csv () {
-    return (async () => {
-      let resp = await gets(this.data.forecast_data)
-      return resp
-    })()
-  }
-}
-
-module.exports.Zoltar = Zoltar
+module.exports.zoltar = zoltar
