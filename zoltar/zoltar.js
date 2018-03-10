@@ -7,8 +7,20 @@ async function get (url) {
   return rp(url, { json: true })
 }
 
-async function gets (url) {
-  return rp(url, { json: false })
+function jsonToCsv (json) {
+  let lines = ['Location,Target,Type,Unit,Bin_start_incl,Bin_end_notincl,Value']
+
+  for (let ldata of json.locations) {
+    let location = ldata.name
+    for (let tdata of ldata.targets) {
+      let target = tdata.name
+      lines.push(`${location},${target},Point,${tdata.unit},NA,NA,${tdata.point}`)
+      for (let bin of tdata.bins) {
+        lines.push(`${location},${target},Bin,${tdata.unit},${bin[0]},${bin[1]},${bin[2]}`)
+      }
+    }
+  }
+  return lines.join('\n')
 }
 
 function proxifyObject (obj, root) {
@@ -23,8 +35,8 @@ function proxifyObject (obj, root) {
         {
           if ('forecast_data' in target) {
             return (async () => {
-              let resp = await gets(`${target['forecast_data']}?format=csv`)
-              return resp
+              let csvString = jsonToCsv(await get(target['forecast_data']))
+              return csvString
             })()
           } else {
             throw new Error('This is not a forecast object')
