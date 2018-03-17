@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import * as d3 from 'd3'
 import * as util from '../util'
-import { TimeChart, DistributionChart } from 'd3-foresight'
+import { TimeChart, DistributionChart, events } from 'd3-foresight'
 
 // Initializations
 // ---------------
@@ -166,15 +166,15 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
   d3.select(divSelector).selectAll('*').remove()
   let timeChart = new TimeChart(divSelector, timeChartOptions)
 
-  timeChart.addHook('forward-index', () => {
+  timeChart.addHook(events.FORWARD_INDEX, () => {
     dispatch('weeks/forwardSelectedWeek')
   })
 
-  timeChart.addHook('backward-index', () => {
+  timeChart.addHook(events.BACKWARD_INDEX, () => {
     dispatch('weeks/backwardSelectedWeek')
   })
 
-  timeChart.addHook('jump-to-index', (index) => {
+  timeChart.addHook(events.JUMP_TO_INDEX, (index) => {
     dispatch('weeks/updateSelectedWeek', index)
     dispatch('weeks/readjustSelectedWeek')
   })
@@ -202,15 +202,15 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
   d3.select(divSelector).selectAll('*').remove()
   let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
 
-  distributionChart.addHook('forward-index', () => {
+  distributionChart.addHook(events.FORWARD_INDEX, () => {
     dispatch('weeks/forwardSelectedWeek')
   })
 
-  distributionChart.addHook('backward-index', () => {
+  distributionChart.addHook(events.BACKWARD_INDEX, () => {
     dispatch('weeks/backwardSelectedWeek')
   })
 
-  distributionChart.addHook('jump-to-index', (index) => {
+  distributionChart.addHook(events.JUMP_TO_INDEX, (index) => {
     dispatch('weeks/updateSelectedWeek', index)
     dispatch('weeks/readjustSelectedWeek')
   })
