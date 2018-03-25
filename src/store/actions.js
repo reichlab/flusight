@@ -155,7 +155,8 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
         description: `Percentage of outpatient doctor visits for
                       influenza-like illness, weighted by state population.
                       <br><br><em>Click to know more</em>`,
-        url: 'http://www.cdc.gov/flu/weekly/overview.htm'
+        url: 'http://www.cdc.gov/flu/weekly/overview.htm',
+        domain: [0, 13]
       }
     },
     pointType: 'mmwr-week',
