@@ -160,7 +160,8 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
       }
     },
     pointType: 'mmwr-week',
-    confidenceIntervals: getters['models/modelCIs']
+    confidenceIntervals: getters['models/modelCIs'],
+    onset: true
   }
 
   // Clear div
