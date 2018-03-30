@@ -168,14 +168,6 @@ export const initTimeChart = ({ commit, getters, dispatch }, divSelector) => {
   d3.select(divSelector).selectAll('*').remove()
   let timeChart = new TimeChart(divSelector, timeChartOptions)
 
-  timeChart.addHook(events.FORWARD_INDEX, () => {
-    dispatch('weeks/forwardSelectedWeek')
-  })
-
-  timeChart.addHook(events.BACKWARD_INDEX, () => {
-    dispatch('weeks/backwardSelectedWeek')
-  })
-
   timeChart.addHook(events.JUMP_TO_INDEX, (index) => {
     dispatch('weeks/updateSelectedWeek', index)
     dispatch('weeks/readjustSelectedWeek')
@@ -203,14 +195,6 @@ export const initDistributionChart = ({ commit, getters, dispatch }, divSelector
   // Clear div
   d3.select(divSelector).selectAll('*').remove()
   let distributionChart = new DistributionChart(divSelector, distributionChartConfig)
-
-  distributionChart.addHook(events.FORWARD_INDEX, () => {
-    dispatch('weeks/forwardSelectedWeek')
-  })
-
-  distributionChart.addHook(events.BACKWARD_INDEX, () => {
-    dispatch('weeks/backwardSelectedWeek')
-  })
 
   distributionChart.addHook(events.JUMP_TO_INDEX, (index) => {
     dispatch('weeks/updateSelectedWeek', index)
