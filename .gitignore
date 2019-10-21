@@ -10,3 +10,5 @@ deploy_private
 .Rhistory
 
 src/assets/data.json
+
+yarn.lock
