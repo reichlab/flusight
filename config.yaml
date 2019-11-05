@@ -1,0 +1,13 @@
+# Items used for branding
+branding:
+  title: "flusight"
+  parent: "reichlab"
+  description: "Real-time influenza forecasts from Reich Lab @ UMass Amherst"
+  imageUrl: "https://cdn.rawgit.com/reichlab/flusight/master/screen.png"
+  aboutUrl: "https://github.com/reichlab/flusight/wiki/About"
+  appUrl: "http://reichlab.io/flusight"
+  sourceUrl: "https://github.com/reichlab/flusight"
+  parentUrl: "http://reichlab.io"
+  tweetUrl: "https://twitter.com/intent/tweet?text=Flusight.%20\
+             Real-time%20Influenza%20Forecasts.%20https%3A%2F%2Freichlab\
+             .github.io%2Fflusight%2F%20%40reichlab&source=webclient"
