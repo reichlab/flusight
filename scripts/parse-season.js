@@ -89,6 +89,7 @@ function parseRegionActual (seasonData, regionId) {
  */
 const getCsv = moize(function (modelPath, epiweek) {
   let modelId = path.basename(modelPath)
+  console.log(path.join(modelPath, epiweek + '.csv'))
   return new fct.Csv(path.join(modelPath, epiweek + '.csv'), epiweek, modelId)
 })
 
