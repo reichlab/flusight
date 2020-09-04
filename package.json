@@ -73,7 +73,7 @@
     "json-loader": "^0.5.4",
     "json-schema-generator": "^2.0.3",
     "mocha": "^3.2.0",
-    "node-sass": "^3.10.1",
+    "node-sass": "^4.13.1",
     "ora": "^0.3.0",
     "pug": "^2.0.0-beta6",
     "sass-loader": "^4.0.2",
